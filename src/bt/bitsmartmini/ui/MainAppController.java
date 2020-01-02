@@ -622,6 +622,21 @@ public class MainAppController implements Initializable {
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
     }
+    
+    @FXML
+    private void addUomSet(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddUomSet.fxml"));
+        Parent parent = (Parent) fxmlLoader.load();
+        Scene scene = new Scene(parent);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setMaximized(true);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(parent.getScene().getWindow());
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.show();
+    }
 
     @FXML
     private void addcustomer(ActionEvent event) throws IOException {

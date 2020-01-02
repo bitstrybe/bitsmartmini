@@ -10,7 +10,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.LinearGradient?>
@@ -18,26 +17,29 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane styleClass="popupbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.AddUomController">
+<StackPane styleClass="popupbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.AddUomController">
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="700.0" styleClass="form_background">
          <children>
-            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="700.0">
+            <HBox alignment="CENTER" prefHeight="53.0" prefWidth="700.0">
                <children>
-                  <Pane prefHeight="56.0" prefWidth="700.0" style="-fx-background-color: #eee;" stylesheets="@style.css">
+                  <StackPane alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label layoutX="14.0" layoutY="23.0" text="Add Unit of pricing" textFill="#544848">
+                        <Label text="Unit of Measurement" textFill="#544848">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
+                           <StackPane.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </StackPane.margin>
                         </Label>
-                        <Button fx:id="closebtn" layoutX="660.0" layoutY="22.0" mnemonicParsing="false" onAction="#closefrom" styleClass="closeform">
-                           <graphic>
-                              <FontAwesomeIcon glyphName="CLOSE" />
-                           </graphic>
-                        </Button>
                      </children>
-                  </Pane>
+                  </StackPane>
+                  <Button fx:id="closebtn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#closefrom" styleClass="closeform">
+                     <graphic>
+                        <FontAwesomeIcon glyphName="CLOSE" />
+                     </graphic>
+                  </Button>
                </children>
             </HBox>
             <Line endX="599.5" startX="-100.0" stroke="#bfbfbf" />
@@ -45,22 +47,16 @@
                <children>
                   <VBox prefHeight="200.0" prefWidth="300.0" styleClass="form_background">
                      <children>
-                        <JFXTextField fx:id="uomtextfield" labelFloat="true" opacity="0.93" prefHeight="32.0" prefWidth="278.0" promptText="Unit of Pricing" styleClass="form_field">
+                        <JFXTextField fx:id="uomtextfield" focusColor="#616161" labelFloat="true" opacity="0.93" prefHeight="32.0" prefWidth="278.0" promptText="Measurements" styleClass="form_field" unFocusColor="#868686">
                            <font>
                               <Font name="Open Sans" size="13.0" />
                            </font>
                            <VBox.margin>
                               <Insets top="20.0" />
                            </VBox.margin>
-                           <focusColor>
-                              <LinearGradient endX="1.0" endY="0.7380952380952381">
-                                 <stops>
-                                    <Stop color="#0a8e90" />
-                                    <Stop color="#0a8e90" offset="0.007662835249042145" />
-                                    <Stop color="#8e203d" offset="1.0" />
-                                 </stops>
-                              </LinearGradient>
-                           </focusColor>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
                         </JFXTextField>
                         <HBox alignment="CENTER" prefHeight="53.0" prefWidth="281.0">
                            <children>
@@ -102,7 +98,7 @@
                         </JFXTextField>
                         <TableView fx:id="uomtable" prefHeight="297.0" prefWidth="289.0" styleClass="table-cell" stylesheets="@style.css">
                            <columns>
-                              <TableColumn fx:id="uomtb" maxWidth="1.7976931348623157E308" prefWidth="291.0" resizable="false" styleClass="align_table_left" text="Unit of pricing" />
+                              <TableColumn fx:id="uomtb" maxWidth="1.7976931348623157E308" prefWidth="291.0" resizable="false" styleClass="align_table_left" text="Measurements" />
                               <TableColumn fx:id="action" maxWidth="1.7976931348623157E308" prefWidth="95.0" resizable="false" text="Action" />
                            </columns>
                         </TableView>

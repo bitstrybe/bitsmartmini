@@ -6,12 +6,15 @@
 package bt.bitsmartmini.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -30,6 +33,10 @@ public class Uom implements Serializable {
     @Basic(optional = false)
     @Column(name = "uom_desc", nullable = false, length = 50)
     private String uomDesc;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "measure1")
+    private Collection<UomSet> uomSetCollection;
+    @OneToMany(mappedBy = "measure2")
+    private Collection<UomSet> uomSetCollection1;
 
     public Uom() {
     }
@@ -44,6 +51,22 @@ public class Uom implements Serializable {
 
     public void setUomDesc(String uomDesc) {
         this.uomDesc = uomDesc;
+    }
+
+    public Collection<UomSet> getUomSetCollection() {
+        return uomSetCollection;
+    }
+
+    public void setUomSetCollection(Collection<UomSet> uomSetCollection) {
+        this.uomSetCollection = uomSetCollection;
+    }
+
+    public Collection<UomSet> getUomSetCollection1() {
+        return uomSetCollection1;
+    }
+
+    public void setUomSetCollection1(Collection<UomSet> uomSetCollection1) {
+        this.uomSetCollection1 = uomSetCollection1;
     }
 
     @Override

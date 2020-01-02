@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -25,8 +27,8 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "UomSet.findAll", query = "SELECT u FROM UomSet u"),
     @NamedQuery(name = "UomSet.findByUomSetCode", query = "SELECT u FROM UomSet u WHERE u.uomSetCode = :uomSetCode"),
-    @NamedQuery(name = "UomSet.findByUnit", query = "SELECT u FROM UomSet u WHERE u.unit = :unit"),
-    @NamedQuery(name = "UomSet.findByMeasure", query = "SELECT u FROM UomSet u WHERE u.measure = :measure")})
+    @NamedQuery(name = "UomSet.findByUnit1", query = "SELECT u FROM UomSet u WHERE u.unit1 = :unit1"),
+    @NamedQuery(name = "UomSet.findByUnit2", query = "SELECT u FROM UomSet u WHERE u.unit2 = :unit2")})
 public class UomSet implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,11 +37,16 @@ public class UomSet implements Serializable {
     @Column(name = "uom_set_code", nullable = false, length = 45)
     private String uomSetCode;
     @Basic(optional = false)
-    @Column(name = "unit", nullable = false)
-    private int unit;
-    @Basic(optional = false)
-    @Column(name = "measure", nullable = false)
-    private int measure;
+    @Column(name = "unit_1", nullable = false)
+    private int unit1;
+    @Column(name = "unit_2")
+    private Integer unit2;
+    @JoinColumn(name = "measure_1", referencedColumnName = "uom_desc", nullable = false)
+    @ManyToOne(optional = false)
+    private Uom measure1;
+    @JoinColumn(name = "measure_2", referencedColumnName = "uom_desc")
+    @ManyToOne
+    private Uom measure2;
     @OneToMany(mappedBy = "uomset")
     private Collection<Items> itemsCollection;
 
@@ -50,10 +57,9 @@ public class UomSet implements Serializable {
         this.uomSetCode = uomSetCode;
     }
 
-    public UomSet(String uomSetCode, int unit, int measure) {
+    public UomSet(String uomSetCode, int unit1) {
         this.uomSetCode = uomSetCode;
-        this.unit = unit;
-        this.measure = measure;
+        this.unit1 = unit1;
     }
 
     public String getUomSetCode() {
@@ -64,20 +70,36 @@ public class UomSet implements Serializable {
         this.uomSetCode = uomSetCode;
     }
 
-    public int getUnit() {
-        return unit;
+    public int getUnit1() {
+        return unit1;
     }
 
-    public void setUnit(int unit) {
-        this.unit = unit;
+    public void setUnit1(int unit1) {
+        this.unit1 = unit1;
     }
 
-    public int getMeasure() {
-        return measure;
+    public Integer getUnit2() {
+        return unit2;
     }
 
-    public void setMeasure(int measure) {
-        this.measure = measure;
+    public void setUnit2(Integer unit2) {
+        this.unit2 = unit2;
+    }
+
+    public Uom getMeasure1() {
+        return measure1;
+    }
+
+    public void setMeasure1(Uom measure1) {
+        this.measure1 = measure1;
+    }
+
+    public Uom getMeasure2() {
+        return measure2;
+    }
+
+    public void setMeasure2(Uom measure2) {
+        this.measure2 = measure2;
     }
 
     public Collection<Items> getItemsCollection() {

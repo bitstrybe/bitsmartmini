@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="boarderpane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.MainAppController">
+<BorderPane fx:id="boarderpane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.MainAppController">
    <top>
       <VBox>
          <children>
@@ -41,11 +41,16 @@
                                     <MenuItem mnemonicParsing="false" onAction="#additems" text="New Item" />
                                     <MenuItem mnemonicParsing="false" onAction="#addcategory" text="Category" />
                                     <MenuItem mnemonicParsing="false" onAction="#addbrand" text="Brands" />
-                                    <MenuItem mnemonicParsing="false" onAction="#addUom" text="Unit Of Pricing" />
                                     <MenuItem mnemonicParsing="false" onAction="#refundPolicyView" text="Refund Policy" />
                                 </items>
                               </Menu>
                               <MenuItem mnemonicParsing="false" onAction="#addUsers" text="Manage Users" />
+                              <Menu mnemonicParsing="false" text="Unit Measure">
+                                <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#addUom" text="Measures" />
+                                  <MenuItem mnemonicParsing="false" onAction="#addUomSet" text="UOM Set" />
+                                </items>
+                              </Menu>
                            </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Reports">
