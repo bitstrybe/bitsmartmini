@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<StackPane prefHeight="186.0" prefWidth="487.0" styleClass="popupbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.SalesReceiptReportController">
+   <children>
+      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="522.0" spacing="3.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="13.0" prefWidth="345.0">
+               <children>
+                  <Label contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="21.0" prefWidth="481.0" text="Refund Policy Terms" textFill="#807e7e" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Open Sans" size="14.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="closebtn" mnemonicParsing="false" onAction="#closeForm" prefHeight="25.0" prefWidth="23.0" styleClass="closeform" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <FontAwesomeIcon glyphName="CLOSE" />
+                     </graphic>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox>
+               <children>
+                  <Line endX="422.29290771484375" endY="0.2928932309150696" startX="-100.0" stroke="#c5c5c5" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Line>
+               </children>
+            </HBox>
+            <VBox>
+               <children>
+                  <TextFlow lineSpacing="1.0" prefHeight="12.0" prefWidth="520.0" textAlignment="JUSTIFY">
+                     <children>
+                        <Text fill="#141313" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NOTE:" wrappingWidth="428.646484375">
+                           <font>
+                              <Font name="Open Sans" size="13.0" />
+                           </font>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </TextFlow>
+                  <TextFlow lineSpacing="3.0" textAlignment="JUSTIFY">
+                     <children>
+                        <Text fill="#727171" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Use the form below to specify your refund policy terms based on your business concept." textAlignment="JUSTIFY" wrappingWidth="428.646484375">
+                           <font>
+                              <Font name="Open Sans" size="12.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#727171" strokeType="OUTSIDE" strokeWidth="0.0" text=" &quot;Use  the box to write a " textAlignment="JUSTIFY">
+                           <font>
+                              <Font name="Open Sans" size="12.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#d10202" layoutX="20.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #e80606;" text="custom refund policy message " textAlignment="JUSTIFY" wrappingWidth="428.646484375">
+                           <font>
+                              <Font name="Open Sans Italic" size="12.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#727171" layoutX="20.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="for your cherished customers&quot;." textAlignment="JUSTIFY">
+                           <font>
+                              <Font name="Open Sans" size="12.0" />
+                           </font>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                     </padding>
+                  </TextFlow>
+               </children>
+            </VBox>
+            <HBox alignment="BOTTOM_CENTER" layoutX="26.0" layoutY="244.0">
+               <children>
+                  <Line endX="425.0" startX="-82.5" styleClass="linecolor-dark" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="59.0" prefWidth="480.0" VBox.vgrow="NEVER">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" right="20.0" />
+               </VBox.margin>
+               <children>
+                  <Text fill="#f80303" strokeType="OUTSIDE" strokeWidth="0.0" text="? = ">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Text>
+                  <Spinner fx:id="duration_val" prefHeight="39.0" prefWidth="88.0" />
+                  <ChoiceBox prefHeight="39.0" prefWidth="335.0" />
+               </children>
+            </HBox>
+            <VBox>
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" top="5.0" />
+               </VBox.margin>
+               <children>
+                  <JFXTextArea focusColor="#7c7a7a" labelFloat="true" prefHeight="108.0" prefWidth="480.0" promptText="Write your custom refund policy message" style="-fx-background-color: #eee;" unFocusColor="#c6c2c2" wrapText="true">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </JFXTextArea>
+               </children>
+            </VBox>
+            <TextFlow lineSpacing="3.0">
+               <children>
+                  <Text fill="#726f6f" layoutX="10.0" layoutY="66.0" lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Like in the default sample text provided, specify a question mark">
+                     <font>
+                        <Font name="Open Sans" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#eb0909" layoutX="30.0" layoutY="20.0" lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" ?">
+                     <font>
+                        <Font name="Open Sans Bold" size="13.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#726f6f" layoutX="30.0" layoutY="41.0" lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" in place of the duration or period in your message.">
+                     <font>
+                        <Font name="Open Sans" size="12.0" />
+                     </font>
+                  </Text>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+               </padding>
+            </TextFlow>
+            <HBox alignment="CENTER">
+               <children>
+                  <Button id="action-btn" fx:id="discountbtn1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#salesReceiptReport" prefHeight="34.0" prefWidth="117.0" styleClass="butt" text="Apply Changes" HBox.hgrow="ALWAYS" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="BOTTOM_CENTER" layoutX="11.0" layoutY="140.0">
+               <children>
+                  <Line endX="425.0" startX="-82.5" styleClass="linecolor-dark" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+         </children>
+         <styleClass>
+            <String fx:value="form_border_color" />
+            <String fx:value="form_background" />
+         </styleClass>
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+      </VBox>
+   </children>
+</StackPane>

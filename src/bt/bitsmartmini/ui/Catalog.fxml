@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane id="homebackground" fitToHeight="true" fitToWidth="true" styleClass="edge-to-edge" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.CatalogController">
+   <content>
+      <VBox alignment="CENTER" spacing="10.0">
+         <children>
+            <HBox alignment="CENTER" styleClass="window-title">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="29.0" prefWidth="348.0" text="Catalog">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <ButtonBar prefHeight="34.0" prefWidth="501.0">
+                     <buttons>
+                        <FontAwesomeIcon fill="#ababab" glyphName="SEARCH" size="2em" wrappingWidth="25.142857551574707" />
+                        <JFXTextField fx:id="itemsearch" focusColor="#313132" labelFloat="true" prefHeight="34.0" prefWidth="464.0" promptText="Search for an item" unFocusColor="#a8a5a5">
+                           <font>
+                              <Font name="Open Sans" size="16.0" />
+                           </font>
+                        </JFXTextField>
+                     </buttons>
+                  </ButtonBar>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Line endX="2.7347412109375" endY="0.29289400577545166" startX="-1009.5581665039062" startY="0.2928932309150696" styleClass="linecolor" />
+               </children>
+            </HBox>
+            <ScrollPane prefHeight="600.0" prefWidth="1085.0" style="-fx-background-color: transparent;">
+               <content>
+                  <FlowPane fx:id="displaypane" alignment="CENTER" columnHalignment="CENTER" prefHeight="611.0" prefWidth="1080.0" />
+               </content>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="50.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </content>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</ScrollPane>

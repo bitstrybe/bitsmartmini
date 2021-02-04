@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXSpinner?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<StackPane styleClass="popupbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.UsersController">
+   <children>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="844.0" styleClass="form_background">
+         <children>
+            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="844.0">
+               <children>
+                  <Pane prefHeight="68.0" prefWidth="845.0" style="-fx-background-color: #eee;" stylesheets="@style.css">
+                     <children>
+                        <Label layoutX="14.0" layoutY="24.0" text="Add Users" textFill="#544848">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="closebtn" layoutX="794.0" layoutY="22.0" mnemonicParsing="false" onAction="#closefrom" styleClass="closeform">
+                           <graphic>
+                              <FontAwesomeIcon glyphName="CLOSE" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <Line endX="744.2929077148438" startX="-100.0" stroke="#bfbfbf" />
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="418.0" prefWidth="844.0">
+               <children>
+                  <VBox prefHeight="310.0" prefWidth="533.0" styleClass="form_background">
+                     <children>
+                        <HBox layoutX="10.0" layoutY="20.0">
+                           <children>
+                              <Label prefHeight="17.0" prefWidth="25.0" text="Title">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="17.0" prefWidth="52.0" text="*" textFill="#f20303">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="58.0" text="First name">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="77.0" layoutY="10.0" prefHeight="17.0" prefWidth="118.0" text="*" textFill="#f20303">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="86.0" layoutY="10.0" prefHeight="17.0" prefWidth="58.0" text="Last name">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="154.0" layoutY="10.0" text="*" textFill="#f20303">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                           <children>
+                              <ComboBox fx:id="titlechoickbox" prefHeight="35.0" prefWidth="100.0">
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                              <JFXTextField fx:id="fnametextfield" opacity="0.93" prefHeight="32.0" prefWidth="200.0" styleClass="form_field">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                                 <focusColor>
+                                    <LinearGradient endX="1.0" endY="0.7380952380952381">
+                                       <stops>
+                                          <Stop color="#0a8e90" />
+                                          <Stop color="#902121" offset="1.0" />
+                                       </stops>
+                                    </LinearGradient>
+                                 </focusColor>
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </JFXTextField>
+                              <JFXTextField fx:id="lnametextfield" layoutX="10.0" layoutY="10.0" opacity="0.93" prefHeight="32.0" prefWidth="200.0" styleClass="form_field">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                                 <focusColor>
+                                    <LinearGradient endX="1.0" endY="0.7380952380952381">
+                                       <stops>
+                                          <Stop color="#0a8e90" />
+                                          <Stop color="#902121" offset="1.0" />
+                                       </stops>
+                                    </LinearGradient>
+                                 </focusColor>
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </JFXTextField>
+                           </children>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="69.0">
+                           <children>
+                              <Label prefHeight="17.0" prefWidth="44.0" text="Mobile">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="17.0" prefWidth="169.0" text="*" textFill="#f20303">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="33.0" text="Email">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="77.0" layoutY="10.0" text="*" textFill="#f20303">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="91.0">
+                           <children>
+                              <JFXTextField fx:id="mobiletextfield" opacity="0.93" prefHeight="32.0" prefWidth="278.0" styleClass="form_field">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                                 <focusColor>
+                                    <LinearGradient endX="1.0" endY="0.7380952380952381">
+                                       <stops>
+                                          <Stop color="#0a8e90" />
+                                          <Stop color="#902121" offset="1.0" />
+                                       </stops>
+                                    </LinearGradient>
+                                 </focusColor>
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </JFXTextField>
+                              <JFXTextField fx:id="emailtextfield" layoutX="10.0" layoutY="10.0" opacity="0.93" prefHeight="32.0" prefWidth="278.0" styleClass="form_field">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                                 <focusColor>
+                                    <LinearGradient endX="1.0" endY="0.7380952380952381">
+                                       <stops>
+                                          <Stop color="#0a8e90" />
+                                          <Stop color="#902121" offset="1.0" />
+                                       </stops>
+                                    </LinearGradient>
+                                 </focusColor>
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </JFXTextField>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="123.0">
+                           <children>
+                              <Label prefHeight="17.0" prefWidth="60.0" text="Username">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="17.0" prefWidth="151.0" text="*" textFill="#f20303">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="55.0" text="Password">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="77.0" layoutY="10.0" text="*" textFill="#f20303">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="140.0">
+                           <children>
+                              <JFXTextField fx:id="usernametextfield" opacity="0.93" prefHeight="32.0" prefWidth="278.0" styleClass="form_field">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                                 <focusColor>
+                                    <LinearGradient endX="1.0" endY="0.7380952380952381">
+                                       <stops>
+                                          <Stop color="#0a8e90" />
+                                          <Stop color="#902121" offset="1.0" />
+                                       </stops>
+                                    </LinearGradient>
+                                 </focusColor>
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </JFXTextField>
+                              <JFXTextField fx:id="pswtextfield" layoutX="10.0" layoutY="10.0" opacity="0.93" prefHeight="32.0" prefWidth="278.0" styleClass="form_field">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                                 <focusColor>
+                                    <LinearGradient endX="1.0" endY="0.7380952380952381">
+                                       <stops>
+                                          <Stop color="#0a8e90" />
+                                          <Stop color="#902121" offset="1.0" />
+                                       </stops>
+                                    </LinearGradient>
+                                 </focusColor>
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </JFXTextField>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="172.0">
+                           <children>
+                              <Label prefHeight="17.0" prefWidth="31.0" text="Roles">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="17.0" prefWidth="182.0" text="*" textFill="#f20303">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="79.0" text="Account status">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="77.0" layoutY="10.0" text="*" textFill="#f20303">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="189.0">
+                           <children>
+                              <ComboBox fx:id="roleschoicebox" prefHeight="29.0" prefWidth="296.0">
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                              <ComboBox fx:id="accstuchoicebox" layoutX="10.0" layoutY="15.0" prefHeight="29.0" prefWidth="288.0" />
+                           </children>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="53.0" prefWidth="281.0">
+                           <children>
+                              <JFXButton id="action-btn" fx:id="save" onAction="#saveAction" prefHeight="30.0" prefWidth="110.0" stylesheets="@style.css" text="Save" textFill="#323232">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                              <JFXButton contentDisplay="CENTER" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #cccccc;" text="Clear">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="25.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <Line endX="10.828721046447754" endY="416.29290771484375" startX="10.0" stroke="#bfbfbf" />
+                  <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="310.0" prefWidth="511.0">
+                     <children>
+                        <JFXTextField fx:id="searchbtn" prefHeight="25.0" prefWidth="217.0" promptText="Search Users">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                           <focusColor>
+                              <LinearGradient endX="1.0" endY="0.7380952380952381">
+                                 <stops>
+                                    <Stop color="#0a8e90" />
+                                    <Stop color="#902121" offset="1.0" />
+                                 </stops>
+                              </LinearGradient>
+                           </focusColor>
+                        </JFXTextField>
+                        <TableView fx:id="userstable" prefHeight="378.0" prefWidth="390.0" styleClass="table-cell" stylesheets="@style.css">
+                           <columns>
+                              <TableColumn fx:id="fullnametb" maxWidth="1.7976931348623157E308" prefWidth="269.0" resizable="false" style="-fx-alignment: CENTER_LEFT;" text="Full name" />
+                              <TableColumn fx:id="mobiletb" maxWidth="1.7976931348623157E308" prefWidth="115.00006103515625" resizable="false" text="Mobile" />
+                              <TableColumn fx:id="emailtb" maxWidth="1.7976931348623157E308" prefWidth="169.0" resizable="false" text="Email" />
+                              <TableColumn fx:id="usernametb" maxWidth="1.7976931348623157E308" prefWidth="184.0" resizable="false" text="Username" />
+                              <TableColumn fx:id="rolestb" maxWidth="1.7976931348623157E308" prefWidth="184.0" resizable="false" text="Roles" />
+                              <TableColumn fx:id="statustb" maxWidth="1.7976931348623157E308" prefWidth="184.0" resizable="false" text="Status" />
+                              <TableColumn fx:id="action" maxWidth="100.0" prefWidth="204.00006103515625" resizable="false" text="Action" />
+                           </columns>
+                        </TableView>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+            <Line endX="744.2929077148438" layoutX="111.0" layoutY="76.0" startX="-100.0" stroke="#bfbfbf" />
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="displayinfo" prefHeight="26.0" prefWidth="266.0">
+                     <graphic>
+                        <StackPane>
+                           <children>
+                              <FontAwesomeIcon fx:id="check" fill="#389751" glyphName="CHECK" size="2em" visible="false" />
+                              <FontAwesomeIcon fx:id="duplicatelock" glyphName="LOCK" size="2em" visible="false" />
+                              <JFXSpinner fx:id="spinner" prefHeight="5.0" prefWidth="5.0" visible="false" />
+                           </children>
+                        </StackPane>
+                     </graphic>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</StackPane>

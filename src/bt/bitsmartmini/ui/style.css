@@ -1,0 +1,469 @@
+/* 
+    Created on : Feb 9, 2020, 8:04:47 PM
+    Author     : Bitstrybe Inc www.bitstrybe.com
+*/
+#rootPane{
+    -fx-background-image:url(phamabitretail-background.jpg);
+    -fx-background-size: cover;
+}
+#sidebackground {
+    -fx-background-image:url(phamabitretail-home.png);
+    -fx-background-size: cover;
+}
+#homebackground {
+    -fx-background-image:url(home-background.jpg);
+    -fx-background-size: cover;
+}
+.homebtn{
+    -fx-background-color: transparent;
+}
+.homebtn:hover{
+    -fx-background-color: #f3f3f3;
+}
+.homebtnnew{
+    -fx-background-color: #f3f3f3;
+}
+
+.closeform{
+    -fx-background-color: transparent;
+}
+
+.closeform:hover{
+    -fx-background-color: #666666;
+}
+.addtocartbutton{
+    -fx-background-color: #ff3333;
+}
+.addtocartbutton:hover{
+    -fx-background-color: #cccccc;
+}
+
+.addtocartbuttonReverse{
+    -fx-background-color: #ffffff;
+}
+.addtocartbuttonReverse:hover{
+    -fx-background-color: #ccc;
+}
+
+
+.scroll-background{
+    -fx-background-color: transparent;
+}
+/*.actionbtn{
+    -fx-background-color: ;
+}
+
+
+.table-row-cell .table-cell {
+    -fx-padding: 2 0 2 10; 
+    -fx-background-color: transparent;
+    -fx-border-color:  #cccccc -fx-table-cell-border-color  #cccccc  #cccccc;
+    -fx-border-width: 0.04333em; 
+    -fx-cell-size: 40px; 
+    -fx-text-fill: -fx-text-inner-color;
+    -fx-font-size: 14px;
+    -fx-background-color: #FFFFFF;
+    -fx-alignment: CENTER_LEFT;
+}
+*/
+
+
+.savebtn{
+    -fx-background-color: #6699ff;
+    -fx-text-fill:#ffffff;
+}
+.main-title{
+    -fx-text-fill: #ccccff;
+    -fx-font-family: 'Raleway',sans-serif; 
+    -fx-font-size: 24px;
+    -fx-font-weight: 800; 
+    -fx-line-height: 72px; 
+    -fx-margin: 0 0 24px; 
+    -fx-text-align: center; 
+    -fx-text-transform: uppercase;
+}
+
+.menu-b .label {
+    -fx-text-fill: #ffffff;
+}
+
+
+.menu-item .label {
+    -fx-text-fill: #000000;
+}
+.menu-item :focused {
+    -fx-background-color: #ffffff;
+}
+
+.menu-item:focused {
+    -fx-background-color: #000000;
+}
+
+.menu-item:focused .label {
+    -fx-text-fill: #cccccc;
+}
+.context-menu {
+    -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
+    -fx-background-color: white;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
+    /*    -fx-padding: 0.666667em 0.083333em 0.666667em 0.083333em;  8 1 8 1 */
+    -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em; /* 4 1 8 1 */
+}
+
+.list-cell{
+    -fx-background-color:  #F4F4F4;
+    -fx-text-fill: #000000;
+}
+
+.default-color0.chart-series-line{-fx-stroke: #000;}
+.default-color0.chart-line-symbol{-fx-background-color: #000, #ffffff;}
+
+.form_background{
+    -fx-background-color: #E1E1E1;
+}
+.form_field{
+    -fx-background-color: #F0F0F0;
+
+}
+.form_header{
+    -fx-background-color: #ddddff;
+    -fx-border-color : #cccccc;
+}
+.closebtn{
+    -fx-background-color: #cccccc;
+}
+/*.button{
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-family:"Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 1.2em;
+    -fx-text-fill: #000000;
+}
+.button:focused {
+    -fx-border-color: transparent, black;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid, segments(1, 2);
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.button:pressed {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}*/
+.top-menu{
+    -fx-text-fill: #ffffff;
+}
+.dashboard-color{
+    -fx-text-fill: #999999;
+    -fx-fill: #999999;
+}
+
+.dashboard-label{
+    -fx-font-family: 'Open Sans';
+    -fx-font-size: 34px;
+}
+
+.sidebar-color{
+    -fx-fill: #dddee0;
+
+}
+.form_border_color{
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1;
+}
+
+.login-button {
+    -fx-font: 16px "Open Sans";
+    -fx-padding: 10;
+    -fx-background-color: #fafafa;
+}
+
+
+#action-btn {
+    -fx-background-color: #090a0c;
+        /*,
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));*/
+    /*-fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;*/
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-font-family: "Arial";
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    -fx-font-size: 11px;
+    -fx-padding: 10 15 10 15;
+}
+
+#cart-btn {
+    -fx-background-color:#ebf5f0;
+    -fx-text-fill: #000;
+    -fx-font-family: "Arial";
+    -fx-font-size: 12px;
+    -fx-padding: 10 20 10 20;
+    -fx-border-color:#ccc;
+    -fx-border-width:1;
+}
+
+#action-btn Text {
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
+}
+
+#acart-btn Text {
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
+}
+
+
+.modal-dialog {
+    -fx-effect: dropshadow(three-pass-box, derive(#cccccc, -20%), 7, 0, 1, 1); 
+    -fx-background-color: derive(white, 0%); 
+    -fx-background-insets: 12; 
+    -fx-background-radius: 0;
+}
+
+.scroll-pane > .viewport { 
+    -fx-background-color: transparent;
+}
+
+#my-table .table-column {
+    -fx-alignment: CENTER;
+}
+
+.popupbackground{
+    -fx-background-color:  #00000099;
+}
+
+.alldefaultbtn {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0, 0, 0);
+    -fx-background-color: #ff3333;
+    -fx-padding: 5;
+}
+
+.linecolor{
+    -fx-stroke:#E1E1E1 ;
+}
+
+.linecolor-dark{
+    -fx-stroke:#ccc;
+}
+
+.dashbord-card-color {
+    -fx-background-color: #f7f7f7;
+}
+
+add-to-cart-btn{
+    -fx-background-color: #090a0c;
+    -fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-font-family: "Arial";
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    -fx-font-size: 12px;
+    -fx-padding: 10 20 10 20;
+}
+
+.menu-button > .arrow-button {
+    -fx-padding: 0;
+}
+.menu-button > .arrow-button > .arrow {
+    -fx-padding: 0;
+}
+
+.error-label{
+    -fx-text-fill: #ff3333;
+}
+
+
+.table-view{
+    -fx-background-color: #ffffff;
+    -fx-table-cell-border-color: transparent;
+}
+
+.table-view:focused{
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler{
+    -fx-background-color: transparent;
+    -fx-border-width:0.1;
+    -fx-size:45;
+} 
+
+.table-view .column-header-background{
+    /*-fx-background-color: linear-gradient(#888888 0.0%, #cccccc 100.0%);*/
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent; 
+    -fx-font-weight:bold;
+    /*-fx-text-fill: white;*/
+}
+
+.table-view .table-column{
+    -fx-alignment:center;
+}
+
+/* .table-row-cell */
+
+.table-row-cell:disabled{
+    -fx-opacity:0.5;
+    -fx-background-color:darkgray;    
+}
+
+.table-row-cell:disabled .text{
+    /*-fx-strikethrough:  true ;*/
+} 
+
+.table-row-cell .text{
+    -fx-font-weight:bold;
+    -fx-fill: #333333;
+} 
+
+/*.table-row-cell:focused .text {
+     -fx-fill: white ;
+} */
+
+.table-view .table-row-cell:hover .text , .table-row-cell:selected .text{
+    -fx-fill: #777777; 
+}
+
+.table-view .table-row-cell:hover:selected .text,.table-row-cell:focused:selected .text{
+    -fx-fill:rgb(0,0,0);
+}
+
+.table-view .table-row-cell {
+    -fx-background-color:white;
+    -fx-size:50;
+    -fx-table-cell-border-color: transparent;
+    -fx-border-width: 1;
+
+}
+
+.table-view .table-row-cell:focused:disabled{ 
+    -fx-background-color:darkgray;
+}
+
+
+.table-view .table-row-cell:hover , .table-view .table-row-cell:selected{
+    /*-fx-background-color:rgb(0.0,191.0,255.0);*/
+    -fx-background-color:#f3f3f3;
+}
+
+.align_table_center{
+    -fx-alignment: CENTER;
+}
+
+.table-view .align_table_left{
+    -fx-alignment: CENTER_LEFT;
+}
+
+.table-view .align_table_right{
+    -fx-alignment: CENTER_RIGHT;
+}
+
+.table-view .table-row-small{
+    -fx-fixed-cell-size: 30;
+}
+
+.table-view .table-row-norm{
+    -fx-fixed-cell-size: 40;
+}
+
+.table-view .table-row-large{
+    -fx-fixed-cell-size: 50;
+}
+
+.table-view .table-row-xlarge{
+    -fx-fixed-cell-size: 60;
+}
+
+#carttable .table-row-cell:filled:hover {
+    -fx-size:50;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: center;
+}
+
+/*#carttable:row-selection {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-fixed-cell-size: 50;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: center;
+
+}*/
+
+#carttable .table-column{
+    -fx-text-alignment: center;
+    -fx-alignment: CENTER 
+}
+.sidepane-background{
+    -fx-background-color:#cbd0d4;
+}
+
+
+.window-title{
+    -fx-text-fill: #38424b;
+    -fx-padding: 10px;
+}
+
+.window-title Label{
+    -fx-font-size: 24px;
+    -fx-text-fill: #666666;
+    -fx-alignment: center-left;
+}
+
+.window-title-line{
+    
+}
+
+/*Flat button example */
+.jfx-button {
+     -jfx-button-type: FLAT;
+}
+
+.jfx-checkout-button {
+     -jfx-button-type: RAISED;
+     -fx-background-color: #1faa00;
+     -fx-text-fill: white;
+}
+
+/*Raised button example 
+.jfx-button {
+     -jfx-button-type: RAISED;
+     -fx-background-color: blue;
+     -fx-text-fill: white;
+}
+*/
+
+.scrollpane-view{
+    -fx-pref-width: 1700px;
+    -fx-pref-width: 800px;
+    -fx-background-color: transparent;
+}
+
+.anchor-pane-view{
+    -fx-pref-width: 1200px;
+    -fx-pref-width: 800px;
+}
+
+.sidebar-option .hbox{
+    -fx-pref-width: 175;
+    -fx-pref-width: 80;
+}
+
+.sidebar-line{
+   -fx-stroke: #303030;
+   -fx-stroke-width:1px;
+   -fx-padding: 0;
+}
+
+.login-text-fill{
+    -fx-text-fill: #FFFFFF;
+}

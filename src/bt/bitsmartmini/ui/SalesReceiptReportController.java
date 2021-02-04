@@ -1,0 +1,66 @@
+package bt.bitsmartmini.ui;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Spinner;
+import javafx.stage.Stage;
+import bt.bitsmartmini.utils.PrintReport;
+import bt.bitsmartmini.utils.Utilities;
+import net.sf.jasperreports.engine.JRException;
+
+/**
+ * FXML Controller class
+ *
+ * @author scarface
+ */
+public class SalesReceiptReportController implements Initializable {
+
+    @FXML
+    private Button closebtn;
+    private DatePicker startdate;
+    private DatePicker enddate;
+    @FXML
+    private Spinner<?> duration_val;
+    @FXML
+    private Button discountbtn1;
+
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }
+
+    @FXML
+    private void closeForm(ActionEvent event) {
+        Stage stage = (Stage) closebtn.getScene().getWindow();
+        stage.close();
+    }
+    
+
+    @FXML
+    private void salesReceiptReport(ActionEvent event) {
+        try {
+            new PrintReport().showSalesReceipteport(Utilities.convertToDateViaSqlDate(startdate.getValue()), Utilities.convertToDateViaSqlDate(enddate.getValue()));
+        } catch (JRException ex) {
+            Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+}

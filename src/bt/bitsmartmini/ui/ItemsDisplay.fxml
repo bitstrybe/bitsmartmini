@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<HBox spacing="1.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.ItemsDisplayController">
+   <children>
+      <VBox style="-fx-background-color: #FFFFFE;" styleClass="form_border_color">
+         <children>
+            <StackPane prefHeight="177.0" prefWidth="245.0">
+               <children>
+                  <ImageView fx:id="itemsimage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
+                  <Pane StackPane.alignment="CENTER">
+                     <children>
+                        <ImageView fx:id="outofstockshape" fitHeight="138.0" fitWidth="154.0" layoutX="57.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@soldout.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </StackPane>
+            <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <Label fx:id="medsname" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="235.0" text="Label" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Open Sans Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" spacing="1.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <Label fx:id="man" alignment="CENTER" prefHeight="15.0" prefWidth="229.0" text="Label" textFill="#838282" wrapText="true" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <Label fx:id="uom" text="Label" textFill="#828282" wrapText="true" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="5.0" />
+               </padding>
+            </HBox>
+            <HBox>
+               <children>
+                  <Line endX="143.2928924560547" endY="0.2928932309150696" fill="#e1dcdc" opacity="0.13" startX="-100.0" stroke="#4a4848" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="245.0">
+               <children>
+                  <Label fx:id="curr" alignment="BOTTOM_CENTER" contentDisplay="CENTER" graphicTextGap="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.47" prefHeight="18.0" prefWidth="27.0" text="c" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Open Sans Semibold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="exp" layoutX="17.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="118.0" text="Label" textFill="#fc0303">
+                     <font>
+                        <Font name="Open Sans Semibold" size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox fx:id="catalogstaus" alignment="CENTER" prefHeight="33.0" prefWidth="67.0" spacing="2.0">
+                     <children>
+                        <Button fx:id="adminstockin" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="15.0" prefWidth="15.0" styleClass="addtocartbutton" HBox.hgrow="ALWAYS">
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="PLUS_SQUARE" size="2.0em" />
+                           </graphic>
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="adminstockout" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="15.0" prefWidth="15.0" styleClass="addtocartbutton" HBox.hgrow="ALWAYS">
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="MINUS_SQUARE" size="2.0em" />
+                           </graphic>
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="addtocart" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="5.0" prefWidth="5.0" styleClass="addtocartbuttonReverse" HBox.hgrow="ALWAYS">
+                           <graphic>
+                              <FontAwesomeIcon fill="RED" glyphName="CART_PLUS" size="1.5em" styleClass="addtocartbuttonReverse" />
+                           </graphic>
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+               </padding>
+            </HBox>
+         </children>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <effect>
+            <DropShadow color="#7a797967" />
+         </effect>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</HBox>

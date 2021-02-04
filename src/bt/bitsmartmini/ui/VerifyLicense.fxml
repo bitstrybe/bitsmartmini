@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="rootPane" prefHeight="428.0" prefWidth="623.0" styleClass="button" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.VerifyLicenseController">
+   <children>
+      <JFXButton fx:id="licenseAction" buttonType="RAISED" defaultButton="true" layoutX="219.0" layoutY="262.0" onAction="#validateLicense" prefHeight="44.0" prefWidth="203.0" styleClass="login-button" text="Next &gt;&gt;&gt;">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <Label alignment="CENTER" layoutX="219.0" layoutY="38.0" opacity="0.51" prefHeight="28.0" prefWidth="203.0" text="Pharmabits" textFill="#f6f6f6">
+         <font>
+            <Font name="Open Sans" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="statusL" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="327.0" opacity="0.76" prefHeight="17.0" prefWidth="573.0" textFill="#fcfcfc">
+         <font>
+            <Font name="Open Sans Italic" size="10.0" />
+         </font>
+      </Label>
+      <Button fx:id="closebtn" layoutX="568.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeform" prefHeight="9.0" prefWidth="9.0" styleClass="homebtn" stylesheets="@style.css">
+         <graphic>
+            <FontAwesomeIcon fill="#f8f6f6" glyphName="CLOSE" />
+         </graphic>
+      </Button>
+      <Label alignment="CENTER" layoutX="276.0" layoutY="63.0" opacity="0.6" prefHeight="17.0" prefWidth="146.0" text="Mini Retail" textFill="#e0eb38">
+         <font>
+            <Font name="Open Sans" size="10.0" />
+         </font>
+      </Label>
+      <Hyperlink fx:id="hyperlink" layoutX="402.0" layoutY="461.0" text="www.bitstrybe.com" textFill="WHITE">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Hyperlink>
+      <Text fill="#727171" layoutX="156.0" layoutY="475.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Copyright @ 2020 Bitstrybe Inc. All Rights Reserved." textAlignment="CENTER" wrappingWidth="259.22900390625">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="23.0" fitWidth="65.0" layoutX="22.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../resources/bitstrybe_social_white.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="89.0" layoutY="18.0" text="\@bitstrybe" textFill="WHITE" />
+      <JFXTextField fx:id="licensetextfield" alignment="CENTER" focusColor="WHITE" labelFloat="true" layoutX="119.0" layoutY="187.0" prefHeight="44.0" prefWidth="412.0" promptText="Provide license key or click next for a free 30 days trial" styleClass="login-text-fill">
+         <font>
+            <Font name="Open Sans" size="13.0" />
+         </font>
+      </JFXTextField>
+   </children>
+</AnchorPane>

@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4878c760-466e-47da-a970-5839a57c75c7">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="TableHeader" mode="Opaque" backcolor="#CCCCCC"/>
+	<style name="linecolorlight"/>
+	<style name="tableHead" mode="Opaque" forecolor="#666666" backcolor="#EBEBEB" fontSize="10"/>
+	<style name="linecolorLight">
+		<pen lineColor="#CCCCCC"/>
+	</style>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<parameter name="BNAME" class="java.lang.String"/>
+	<parameter name="BADDR" class="java.lang.String"/>
+	<parameter name="BCURR" class="java.lang.String"/>
+	<parameter name="BEMAIL" class="java.lang.String"/>
+	<parameter name="BMOBIELE" class="java.lang.String"/>
+	<parameter name="BCTRY" class="java.lang.String"/>
+	<parameter name="SD" class="java.lang.String"/>
+	<parameter name="ED" class="java.lang.String"/>
+	<field name="COLUMN_0" class="java.lang.String"/>
+	<field name="COLUMN_1" class="java.lang.String"/>
+	<field name="COLUMN_2" class="java.lang.String"/>
+	<field name="COLUMN_3" class="java.lang.Double"/>
+	<variable name="TOTALAMOUNTPAID" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="TOTALBALANCE" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="ROW_COUNT" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{COLUMN_0}]]></variableExpression>
+	</variable>
+	<variable name="GTOTAL" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{COLUMN_3}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="3" y="7" width="52" height="50" uuid="1b0d3a1d-b3cf-4ee3-944a-da901548d288"/>
+				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="56" y="20" width="439" height="12" forecolor="#666666" uuid="05f95a7b-3406-46a2-86ef-c05cbdcbd529"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="none">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{BADDR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="56" y="32" width="439" height="25" uuid="a2c38c55-a4dc-4d1b-bfe6-719e27f5acd8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[SALES RECEIPT REPORT]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="56" y="0" width="439" height="20" forecolor="#666666" uuid="e25beadd-67c3-4954-96ec-200786cfcb65"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{BNAME}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement style="linecolorLight" x="0" y="72" width="554" height="1" uuid="95b527d5-98fa-4dcb-b05b-04f160c97d00"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="56" y="57" width="439" height="12" uuid="7b5d0a8f-79c3-4f00-9892-2bcb8bed672a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="7" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["FROM "+$P{SD}+" TO "+$P{ED}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement style="tableHead" x="33" y="1" width="129" height="25" uuid="5e1e5a07-b142-4a22-9609-48f8f26db480"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Receipt #]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="b8e2de27-1f3d-4e4d-8ac2-e69db22bb4c0"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="1" width="1" height="25" uuid="250724af-4988-4f4f-b1be-49ecf2008705"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="162" y="1" width="1" height="25" uuid="59a6058a-cdfb-4e93-aecc-c61b0c824213"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="26" width="556" height="1" uuid="6e222954-9b52-43e7-90f9-1311588744d2"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="555" y="1" width="1" height="25" uuid="4e952139-944f-4535-b94e-d6458f49bb7f"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="32" y="0" width="1" height="26" uuid="ab3bc2ac-9589-4ae8-8d7c-07ee0ca9a7c1"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="tableHead" x="1" y="1" width="31" height="25" uuid="e6175214-fa84-40d3-8507-512490694df2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
+			<line>
+				<reportElement x="293" y="1" width="1" height="25" uuid="e84a7a3f-5253-4852-ae0c-312dce722a0d"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="tableHead" x="163" y="1" width="130" height="25" uuid="69723841-ec85-4efd-9963-a3ba7a8ed576"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Receipt Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="tableHead" x="425" y="1" width="130" height="25" uuid="9cb7e674-b0fc-459a-a254-c850990c6855"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Total Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="tableHead" x="294" y="1" width="130" height="25" uuid="23e7feda-fec9-4ea7-ae5d-dd197778ceef"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Pay Mode]]></text>
+			</staticText>
+			<line>
+				<reportElement x="424" y="1" width="1" height="25" uuid="9488c5d9-bcc6-41e7-b9d6-6e5c48445a8f"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement x="33" y="0" width="129" height="15" uuid="104ebc8b-b557-4895-bd3d-15a107485fb1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COLUMN_0}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement style="TableHeader" x="0" y="0" width="1" height="15" uuid="2270be06-3c1d-4003-a451-c59f7e42a538"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement style="TableHeader" x="0" y="15" width="556" height="1" uuid="4f35aeb3-9a0e-481e-b05b-240b54603171"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement style="TableHeader" x="555" y="0" width="1" height="15" uuid="2f68d67b-90cf-4bd5-a12d-695b5a23bafc"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement style="TableHeader" x="293" y="0" width="1" height="15" uuid="c5b5d287-7d9a-49b2-adef-1e24d1ba99a7"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement style="TableHeader" x="32" y="0" width="1" height="15" uuid="ceb18595-421b-4146-8c80-cd26ac9b33cc"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="1" y="0" width="31" height="15" uuid="28a59cc6-994f-44b5-beee-e535827d84a2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{ROW_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="294" y="0" width="130" height="15" uuid="ddf08eb9-d06c-49ef-8fe6-0cc4e17a1e18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COLUMN_2}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement style="TableHeader" x="424" y="0" width="1" height="15" uuid="8b36c2bd-43da-4dbc-bb70-d1565f6a958a"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0.00">
+				<reportElement x="425" y="0" width="130" height="15" uuid="43e78617-d29a-4f4d-8d72-e4071e74c40a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COLUMN_3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="163" y="0" width="130" height="15" uuid="57fdaac8-eee1-45e0-8d21-a6efa04c3f4d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COLUMN_1}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement style="TableHeader" x="162" y="0" width="1" height="15" uuid="23d8402a-e8ab-4840-b346-2ab216ab15fe"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="18" width="402" height="13" uuid="668b56b4-af9f-4277-8865-ff4284700443"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Generated from Pharambits | www.bitstrybe.com/pharamits "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="402" y="18" width="152" height="13" uuid="0a9a1f63-b0b6-4a5e-89d5-02c9672c4439"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font size="6"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["printed @: "+ new SimpleDateFormat("dd-MM-yyyy HH:mm:ss z").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<summary>
+		<band height="17" splitType="Stretch">
+			<line>
+				<reportElement style="TableHeader" x="0" y="15" width="556" height="1" uuid="4ca8c6ca-c320-4d9b-9863-3ee270248478"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement style="TableHeader" x="555" y="0" width="1" height="15" uuid="7b02279c-b066-46f7-a47b-d84783e1581d"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="tableHead" x="1" y="0" width="423" height="15" uuid="531dccff-2206-4f68-bd87-37b96a296cf4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total :]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="425" y="0" width="130" height="15" uuid="fc24e008-f9fb-40c1-b0d5-689711397603"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{GTOTAL}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement style="TableHeader" x="0" y="0" width="1" height="15" uuid="f3420b5d-decf-468d-a297-ae2768c92d89"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement style="TableHeader" x="424" y="0" width="1" height="15" uuid="c8cf3eac-1aa4-4684-aad1-8212b3945547"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

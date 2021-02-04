@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane id="homebackground" fitToHeight="true" fitToWidth="true" styleClass="edge-to-edge" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.SalesController">
+   <content>
+      <VBox alignment="TOP_CENTER" prefHeight="635.0" prefWidth="1086.0" spacing="10.0">
+         <children>
+            <HBox alignment="TOP_CENTER" prefHeight="65.0" prefWidth="1104.0" styleClass="window-title">
+               <children>
+                  <Label prefHeight="45.0" prefWidth="1076.0" styleClass="window-title-text" text="Sales Details">
+                     <font>
+                        <Font name="Arial" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Line endX="100.0" startX="-1009.5581665039062" startY="0.2928932309150696" styleClass="linecolor" />
+               </children>
+               <padding>
+                  <Insets bottom="20.0" />
+               </padding>
+            </HBox>
+            <VBox alignment="TOP_CENTER">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="51.0" prefWidth="1232.0" spacing="10.0">
+                     <children>
+                        <JFXTextField labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="27.0" prefWidth="456.0" promptText="Sales Search">
+                           <focusColor>
+                              <LinearGradient endX="1.0" endY="1.0">
+                                 <stops>
+                                    <Stop color="#0a8e90" />
+                                    <Stop color="#8e203d" offset="1.0" />
+                                 </stops>
+                              </LinearGradient>
+                           </focusColor></JFXTextField>
+                        <DatePicker fx:id="startdate" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="27.0" prefWidth="180.0" promptText="Start Date" />
+                        <DatePicker fx:id="enddate" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="180.0" promptText="End Date" />
+                        <ButtonBar maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="55.0" prefWidth="157.0">
+                           <buttons>
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minWidth="51.0" mnemonicParsing="false" onAction="#filterdate" prefHeight="26.0">
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="SEARCH" />
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="salespdfbtn" minWidth="54.0" mnemonicParsing="false" onAction="#salesPDF" prefHeight="27.0" text="PDF">
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="PRINT" />
+                                 </graphic>
+                              </Button>
+                           </buttons>
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </ButtonBar>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" />
+                     </padding>
+                  </HBox>
+                  <VBox alignment="TOP_CENTER">
+                     <children>
+                        <TableView fx:id="salestable" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="300.0" prefWidth="1130.0" styleClass="table-cell">
+                           <columns>
+                              <TableColumn fx:id="salescodetb" prefWidth="74.0" text="Sales Code" />
+                              <TableColumn fx:id="saledatetb" prefWidth="136.0" text="Date" />
+                              <TableColumn fx:id="customertb" prefWidth="361.0" styleClass="align_table_left" text="Customer" />
+                              <TableColumn fx:id="salespricetb" prefWidth="134.0" text="Expectd Sales" />
+                              <TableColumn fx:id="saleamountpaidtb" prefWidth="170.0" text="Amount Received" />
+                              <TableColumn fx:id="balancetb" prefWidth="119.0" text="Outstandings" />
+                              <TableColumn fx:id="refunds" prefWidth="119.0" text="Refunds" />
+                              <TableColumn fx:id="actuals" prefWidth="119.0" text="Actuals" />
+                              <TableColumn fx:id="action" prefWidth="111.0" text="Action" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="350.0" text="Sales Details" textFill="#686868">
+                     <font>
+                        <Font name="Arial" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="350.0" text="Receipts" textFill="#686868">
+                     <font>
+                        <Font name="Arial" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="184.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="350.0" text="Returns" textFill="#686868">
+                     <font>
+                        <Font name="Arial" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="2.0" right="2.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="208.0" prefWidth="1149.0" spacing="10.0">
+               <children>
+                  <TableView fx:id="salesdetailstable" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="208.0" prefWidth="383.0" styleClass="table-cell">
+                     <columns>
+                        <TableColumn fx:id="salesdetailsdate" prefWidth="132.0" resizable="false" text="Date" />
+                        <TableColumn fx:id="itemnametb" prefWidth="300.0" resizable="false" styleClass="align_table_left" text="Items name" />
+                        <TableColumn fx:id="salesdetailsquantitytb" prefWidth="66.0" resizable="false" text="Qty" />
+                        <TableColumn fx:id="returned" prefWidth="66.0" resizable="false" text="RTD" />
+                        <TableColumn fx:id="itemcosttb" prefWidth="72.0" resizable="false" text="cost" />
+                        <TableColumn fx:id="itemspricetb" prefWidth="84.0" resizable="false" text="price" />
+                        <TableColumn fx:id="salesdetailsdiscount" prefWidth="97.0" resizable="false" text="Disc(%)" />
+                        <TableColumn fx:id="raction" maxWidth="99.0" minWidth="0.0" prefWidth="76.0" resizable="false" text="Refunds" />
+                     </columns>
+                  </TableView>
+                  <TableView fx:id="paymenttable" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="208.0" prefWidth="383.0" styleClass="table-cell">
+                     <columns>
+                        <TableColumn fx:id="paymentcodetb" prefWidth="97.0" resizable="false" text="Receipt #" />
+                        <TableColumn fx:id="paymentdatetb" prefWidth="85.0" resizable="false" text="Date" />
+                        <TableColumn fx:id="amountpaidtb" prefWidth="91.0" resizable="false" text="Amount" />
+                        <TableColumn fx:id="mode" prefWidth="75.0" text="Mode" />
+                        <TableColumn fx:id="preview" prefWidth="100.0" text="Preview" />
+                        <TableColumn fx:id="action1" prefWidth="123.0" text="Action" />
+                     </columns>
+                  </TableView>
+                  <TableView fx:id="returnstable" prefHeight="200.0" prefWidth="383.0">
+                    <columns>
+                      <TableColumn fx:id="rdate" prefWidth="91.0" text="Returned Date" />
+                      <TableColumn fx:id="rqty" prefWidth="56.0" text="Qty" />
+                        <TableColumn fx:id="ramnt" prefWidth="73.0" text="Unit Price" />
+                        <TableColumn fx:id="refunded" prefWidth="117.0" text="Refunded" />
+                    </columns>
+                  </TableView>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </content>
+   <padding>
+      <Insets bottom="50.0" left="50.0" right="50.0" top="20.0" />
+   </padding>
+</ScrollPane>
