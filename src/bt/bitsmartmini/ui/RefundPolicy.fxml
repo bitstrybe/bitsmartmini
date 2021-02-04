@@ -105,7 +105,7 @@
                      </font>
                   </Text>
                   <Spinner fx:id="duration_val" editable="true" prefHeight="39.0" prefWidth="88.0" />
-                  <ChoiceBox prefHeight="39.0" prefWidth="335.0" />
+                  <ChoiceBox fx:id="duration_choicbox" prefHeight="39.0" prefWidth="335.0" />
                </children>
             </HBox>
             <VBox>

@@ -192,12 +192,12 @@ public class MainAppController implements Initializable {
                 stocks.setStyle("-fx-background-color:#cbd0d4");
                 stockawesome.setFill(Color.BLACK);
                 stocktext.setFill(Color.BLACK);
-                dashawesome.setFill(Color.valueOf("#dddee0"));
-                dashtext.setFill(Color.valueOf("#dddee0"));
-                catalogawesome.setFill(Color.valueOf("#dddee0"));
-                catalogtext.setFill(Color.valueOf("#dddee0"));
-                salesawesome.setFill(Color.valueOf("#dddee0"));
-                salestext.setFill(Color.valueOf("#dddee0"));
+                dashawesome.setFill(Color.valueOf("#000000"));
+                dashtext.setFill(Color.valueOf("#000000"));
+                catalogawesome.setFill(Color.valueOf("#000000"));
+                catalogtext.setFill(Color.valueOf("#000000"));
+                salesawesome.setFill(Color.valueOf("#000000"));
+                salestext.setFill(Color.valueOf("#000000"));
                 sales.setStyle("-fx-background-color:  transparent");
                 dashboard.setStyle("-fx-background-color: transparent");
                 catalog.setStyle("-fx-background-color: transparent");

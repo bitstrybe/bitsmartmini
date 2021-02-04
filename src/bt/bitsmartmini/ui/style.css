@@ -7,11 +7,11 @@
     -fx-background-size: cover;
 }
 #sidebackground {
-    -fx-background-image:url(phamabitretail-home.png);
+    -fx-background-image:url(bitmartsmini-yellow.jpg);
     -fx-background-size: cover;
 }
 #homebackground {
-    -fx-background-image:url(home-background.jpg);
+    -fx-background-image:url(bitmartsmini-home.jpg);
     -fx-background-size: cover;
 }
 .homebtn{
@@ -465,5 +465,8 @@ add-to-cart-btn{
 }
 
 .login-text-fill{
+    -fx-text-fill: #000000;
+}
+.sidemenu-text-color{
     -fx-text-fill: #000000;
 }

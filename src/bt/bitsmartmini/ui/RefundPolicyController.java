@@ -5,10 +5,12 @@ import bt.bitsmartmini.entity.RefundPolicy;
 import com.jfoenix.controls.JFXTextArea;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.stage.Stage;
@@ -35,6 +37,8 @@ public class RefundPolicyController implements Initializable {
 
     @FXML
     private Spinner<Integer> duration_val;
+    @FXML
+    private ChoiceBox<String> duration_choicbox;
 
 //    
     /**
@@ -42,28 +46,8 @@ public class RefundPolicyController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        duration_val = new Spinner<>(0, 100, 0, 1);
-        SpinnerValueFactory<Integer> intFactory = duration_val.getValueFactory();
-        //int imin = intFactory.setValue(Integer.MIN_VALUE); // 0
-        //int imax = intFactory.getMax(); // 10
-        //int istep = intFactory.getAmountToStepBy(); // 1
-//        System.out.println("msg: " + f.getRefundCustomMsg());
-//        System.out.println("msg: " + imin);
-//        System.out.println("msg: " + imax);
-//        System.out.println("msg: " + istep);
-        refundmsg.setText(f.getRefundCustomMsg());
-        // SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 5, 0);
-
-        duration_val.setValueFactory(intFactory);
-
-//        duration_val.valueProperty().addListener((obs, oldValue, newValue) -> {
-//            if (oldValue.intValue() == 59 && newValue.intValue() == 0) {
-//                duration_val.increment();
-//            }
-//            if (oldValue.intValue() == 0 && newValue.intValue() == 59) {
-//                duration_val.decrement();
-//            }
-//        });
+        getDuration();
+        getDurationValue();
     }
 
     @FXML
@@ -75,27 +59,28 @@ public class RefundPolicyController implements Initializable {
     @FXML
     private void salesReceiptReport(ActionEvent event) {
     }
-    
-//     @FXML
-//    public void IncrementValue(ActionEvent event) {
-//        //StockinBL s = new StockinBL();
-//        //Qty = s.getStockBalance(itemnamelabel.getText());
-//        //Qty = itemqty.getText()//s.getStockBalance(itemnamelabel.getText());
-//        //System.out.println("itemname: " + itemnamelabel.getText());
-//        //System.out.println("qty: " + itemqty.getText());
-//        if (rowCounter.get() < Integer.valueOf(itemqty.getText())) {
-//            qnttextfield.setText(Integer.toString(rowCounter.incrementAndGet()));
-//        }
-//    }
-//
-//    @FXML
-//    public void DecrementValue(ActionEvent event) {
-//        if (rowCounter.get() > 0) {
-//            qnttextfield.setText(Integer.toString(rowCounter.decrementAndGet()));
-//        } else {
-//            rowCounter.set(0);
-//        }
-//
-//    }
+
+    public void getDuration() {
+        duration_choicbox.getItems().add("MINUTES");
+        duration_choicbox.getItems().add("HOURS");
+        duration_choicbox.getItems().add("DAYS");
+        duration_choicbox.getItems().add("MONTHS");
+        duration_choicbox.getSelectionModel().select(1);
+    }
+
+    public void getDurationValue() {
+        SpinnerValueFactory<Integer> factoryValue = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 24);
+        duration_val.setValueFactory(factoryValue);
+//        duration_choicbox.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+//            if(newValue.equals("MINUTES")){
+//                System.out.println("na mintues we they");
+//               
+//            }else if(newValue.equals("HOURS")){
+//                System.out.println("na hours we they");
+//                SpinnerValueFactory<Integer> factoryValue = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 24, 1);
+//                duration_val.setValueFactory(factoryValue);
+//            }
+//        });
+    }
 
 }

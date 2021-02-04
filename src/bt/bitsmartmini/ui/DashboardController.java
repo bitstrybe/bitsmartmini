@@ -178,6 +178,7 @@ public class DashboardController implements Initializable {
         } catch (Exception ex) {
             expirylist.getItems();
         }
+        yearchoicbox.getSelectionModel().select(1);
     }
 
     public void getExiryList() {
