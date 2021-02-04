@@ -25,7 +25,7 @@
                <children>
                   <ImageView fitHeight="23.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../resources/bitstrybe_social_white.png" />
+                        <Image url="@../../resources/bitstrybe_social_white.png" />
                      </image>
                   </ImageView>
                   <Label layoutX="65.0" layoutY="2.0" text="\@bitstrybe" textFill="WHITE" />
@@ -45,7 +45,7 @@
          <children>
             <ImageView fitHeight="60.0" fitWidth="65.0" opacity="0.88" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../resources/bitstrybe-final-white.png" />
+                  <Image url="@../../resources/bitstrybe-final-white.png" />
                </image>
             </ImageView>
             <VBox alignment="CENTER" VBox.vgrow="NEVER">
