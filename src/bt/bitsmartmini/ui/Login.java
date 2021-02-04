@@ -24,7 +24,7 @@ public class Login extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().addAll(getClass().getResource("style.css").toExternalForm());
-        Image icon = new Image(getClass().getResourceAsStream("..bt/resources/meds_logo.png"));
+        Image icon = new Image(getClass().getResourceAsStream("/bt/resources/meds_logo.png"));
         stage.getIcons().add(icon);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
