@@ -8,7 +8,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -21,7 +20,7 @@
     <children>
       <HBox layoutX="22.0" layoutY="14.0" prefHeight="26.0" prefWidth="573.0">
          <children>
-            <AnchorPane opacity="0.66" prefHeight="26.0" prefWidth="575.0">
+            <AnchorPane prefHeight="26.0" prefWidth="575.0">
                <children>
                   <ImageView fitHeight="23.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -43,7 +42,7 @@
       </HBox>
       <VBox alignment="TOP_CENTER" layoutX="22.0" layoutY="41.0" prefHeight="442.0" prefWidth="573.0" spacing="10.0">
          <children>
-            <ImageView fitHeight="60.0" fitWidth="65.0" opacity="0.71" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="60.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../resources/bitstrybe-final-black.png" />
                </image>
@@ -52,18 +51,15 @@
                <children>
                   <AnchorPane VBox.vgrow="NEVER">
                      <children>
-                          <Label alignment="CENTER" layoutX="-2.0" opacity="0.71" prefHeight="40.0" prefWidth="575.0" text="BitsmartMini">
+                          <Label alignment="CENTER" layoutX="-2.0" prefHeight="40.0" prefWidth="575.0" text="BitsmartMini">
                               <font>
                                   <Font name="Open Sans" size="28.0" />
                               </font>
                           </Label>
-                          <Label alignment="CENTER" layoutX="270.0" layoutY="31.0" opacity="0.91" prefHeight="17.0" prefWidth="146.0" text="Mini Retail" textFill="#281dbf">
+                          <Label alignment="CENTER" layoutX="270.0" layoutY="31.0" prefHeight="17.0" prefWidth="146.0" text="Mini Retail" textFill="WHITE">
                               <font>
                                   <Font name="Open Sans" size="10.0" />
                               </font>
-                           <effect>
-                              <Glow level="0.61" />
-                           </effect>
                           </Label>
                      </children>
                   </AnchorPane>
@@ -72,7 +68,7 @@
                   <Insets bottom="20.0" />
                </padding>
             </VBox>
-              <JFXTextField fx:id="username" focusColor="BLACK" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#resetElem" prefHeight="28.0" prefWidth="200.0" promptText="Username" styleClass="login-text-fill" unFocusColor="#9a9999">
+              <JFXTextField fx:id="username" focusColor="BLACK" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#resetElem" prefHeight="28.0" prefWidth="200.0" promptText="Username" styleClass="login-text-fill" unFocusColor="#868686">
                   <font>
                       <Font size="14.0" />
                   </font>
@@ -80,7 +76,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
               </JFXTextField>
-              <JFXPasswordField fx:id="password" focusColor="BLACK" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#resetElem" prefHeight="28.0" prefWidth="200.0" promptText="Password" styleClass="login-text-fill" unFocusColor="#9a9999">
+              <JFXPasswordField fx:id="password" focusColor="BLACK" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#resetElem" prefHeight="28.0" prefWidth="200.0" promptText="Password" styleClass="login-text-fill" unFocusColor="#686868">
                   <font>
                       <Font size="14.0" />
                   </font>
@@ -88,7 +84,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
               </JFXPasswordField>
-              <JFXButton fx:id="login" buttonType="RAISED" defaultButton="true" onAction="#dolog" opacity="0.84" prefHeight="44.0" prefWidth="203.0" styleClass="login-button" text="Sign In" textFill="WHITE">
+              <JFXButton fx:id="login" buttonType="RAISED" defaultButton="true" onAction="#dolog" prefHeight="44.0" prefWidth="203.0" styleClass="login-button" text="Sign In" textFill="WHITE">
                   <font>
                       <Font size="15.0" />
                   </font>
@@ -96,7 +92,7 @@
                   <Insets bottom="20.0" top="20.0" />
                </VBox.margin>
               </JFXButton>
-            <Label fx:id="statusL" alignment="CENTER" contentDisplay="CENTER" opacity="0.76" prefHeight="17.0" prefWidth="573.0" text="Label">
+            <Label fx:id="statusL" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="573.0" text="Label">
                <font>
                   <Font name="Open Sans Italic" size="11.0" />
                </font>
@@ -106,12 +102,12 @@
             </Label>
             <AnchorPane stylesheets="@style.css">
                <children>
-                  <Hyperlink fx:id="hyperlink" layoutX="471.0" layoutY="10.0" opacity="0.8" text="www.bitstrybe.com">
+                  <Hyperlink fx:id="hyperlink" layoutX="471.0" layoutY="10.0" text="www.bitstrybe.com">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </Hyperlink>
-                      <Text layoutY="29.0" opacity="0.63" strokeType="OUTSIDE" strokeWidth="0.0" text=" Copyright @ 2020 Bitstrybe Inc. All Rights Reserved." wrappingWidth="259.22900390625">
+                      <Text layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Copyright @ 2020 Bitstrybe Inc. All Rights Reserved." wrappingWidth="259.22900390625">
                      <font>
                         <Font name="Open Sans" size="10.0" />
                      </font>
