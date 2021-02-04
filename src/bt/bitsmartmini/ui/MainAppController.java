@@ -289,7 +289,7 @@ public class MainAppController implements Initializable {
                 Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
-                Image icon = new Image(getClass().getResourceAsStream("/resources/meds_logo.png"));
+                Image icon = new Image(getClass().getResourceAsStream("/bt/resources/meds_logo.png"));
                 stage.getIcons().add(icon);
                 stage.initStyle(StageStyle.UNDECORATED);
                 stage.show();

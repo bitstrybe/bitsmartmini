@@ -3,7 +3,7 @@
     Author     : Bitstrybe Inc www.bitstrybe.com
 */
 #rootPane{
-    -fx-background-image:url(phamabitretail-background.jpg);
+    -fx-background-image:url(bitmartsmini.jpg);
     -fx-background-size: cover;
 }
 #sidebackground {
@@ -179,7 +179,7 @@
 .login-button {
     -fx-font: 16px "Open Sans";
     -fx-padding: 10;
-    -fx-background-color: #fafafa;
+    -fx-background-color: #000000;
 }
 
 
@@ -465,5 +465,5 @@ add-to-cart-btn{
 }
 
 .login-text-fill{
-    -fx-text-fill: #FFFFFF;
+    -fx-text-fill: #666666;
 }
