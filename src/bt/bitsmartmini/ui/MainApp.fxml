@@ -25,7 +25,7 @@
          <children>
             <MenuBar prefHeight="50.0" prefWidth="800.0" style="-fx-background-color: transparent;" styleClass="menu-b" stylesheets="@style.css">
                <menus>
-                  <Menu fx:id="pharmabits" mnemonicParsing="false" text="Pharmabits">
+                  <Menu fx:id="pharmabits" mnemonicParsing="false" text="BitsmartMini">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#getbusiness" text="License" />
                     </items>
@@ -133,9 +133,9 @@
          <children>
             <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="79.0" prefWidth="109.0" spacing="5.0">
                <children>
-                  <Label prefHeight="28.0" prefWidth="95.0" text="Pharmabits" textFill="WHITE">
+                  <Label opacity="0.78" prefHeight="28.0" prefWidth="95.0" text="BitsmartMini" textFill="WHITE">
                      <font>
-                        <Font size="19.0" />
+                        <Font size="18.0" />
                      </font>
                   </Label>
                   <Label fx:id="user" alignment="CENTER" prefHeight="18.0" prefWidth="180.0" text="Label" textFill="WHITE">

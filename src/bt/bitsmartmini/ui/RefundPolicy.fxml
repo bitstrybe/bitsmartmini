@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<StackPane prefHeight="186.0" prefWidth="487.0" styleClass="popupbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.SalesReceiptReportController">
+<StackPane prefHeight="186.0" prefWidth="487.0" styleClass="popupbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.RefundPolicyController">
    <children>
       <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="522.0" spacing="3.0">
          <children>
@@ -104,7 +104,7 @@
                         <Font size="28.0" />
                      </font>
                   </Text>
-                  <Spinner fx:id="duration_val" prefHeight="39.0" prefWidth="88.0" />
+                  <Spinner fx:id="duration_val" editable="true" prefHeight="39.0" prefWidth="88.0" />
                   <ChoiceBox prefHeight="39.0" prefWidth="335.0" />
                </children>
             </HBox>
@@ -113,9 +113,9 @@
                   <Insets left="20.0" right="20.0" top="5.0" />
                </VBox.margin>
                <children>
-                  <JFXTextArea focusColor="#7c7a7a" labelFloat="true" prefHeight="108.0" prefWidth="480.0" promptText="Write your custom refund policy message" style="-fx-background-color: #eee;" unFocusColor="#c6c2c2" wrapText="true">
+                  <JFXTextArea fx:id="refundmsg" focusColor="#7c7a7a" labelFloat="true" prefHeight="108.0" prefWidth="480.0" promptText="Write your custom refund policy message" style="-fx-background-color: #eee;" unFocusColor="#c6c2c2" wrapText="true">
                      <font>
-                        <Font name="Calibri" size="16.0" />
+                        <Font name="Open Sans" size="14.0" />
                      </font>
                      <VBox.margin>
                         <Insets top="10.0" />

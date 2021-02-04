@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bt.bitsmartmini.bl;
 
+import bt.bitsmartmini.entity.RefundPolicy;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.NoResultException;
@@ -157,5 +153,11 @@ public class ReturnBL extends DdsBL {
         } catch (NullPointerException ex) {
             return 0.00;
         }
+    }
+
+    public RefundPolicy findRefundPolicy() {
+        TypedQuery<RefundPolicy> q = em.createQuery("SELECT f FROM RefundPolicy f", RefundPolicy.class);
+        q.setMaxResults(1);
+        return q.getResultList().get(0);
     }
 }
