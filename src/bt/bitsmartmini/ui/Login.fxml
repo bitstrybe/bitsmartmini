@@ -56,7 +56,7 @@
                                   <Font name="Open Sans" size="28.0" />
                               </font>
                           </Label>
-                          <Label alignment="CENTER" layoutX="270.0" layoutY="31.0" prefHeight="17.0" prefWidth="146.0" text="Mini Retail" textFill="WHITE">
+                          <Label alignment="CENTER" layoutX="267.0" layoutY="31.0" prefHeight="17.0" prefWidth="146.0" text="Mini Retail" textFill="#e4e2e2">
                               <font>
                                   <Font name="Open Sans" size="10.0" />
                               </font>
@@ -68,7 +68,7 @@
                   <Insets bottom="20.0" />
                </padding>
             </VBox>
-              <JFXTextField fx:id="username" focusColor="BLACK" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#resetElem" prefHeight="28.0" prefWidth="200.0" promptText="Username" styleClass="login-text-fill" unFocusColor="#868686">
+              <JFXTextField fx:id="username" focusColor="BLACK" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#resetElem" prefHeight="28.0" prefWidth="200.0" promptText="Username" styleClass="login-text-fill" unFocusColor="#2e2e2e">
                   <font>
                       <Font size="14.0" />
                   </font>
@@ -76,7 +76,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
               </JFXTextField>
-              <JFXPasswordField fx:id="password" focusColor="BLACK" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#resetElem" prefHeight="28.0" prefWidth="200.0" promptText="Password" styleClass="login-text-fill" unFocusColor="#686868">
+              <JFXPasswordField fx:id="password" focusColor="BLACK" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#resetElem" prefHeight="28.0" prefWidth="200.0" promptText="Password" styleClass="login-text-fill" unFocusColor="#2e2e2e">
                   <font>
                       <Font size="14.0" />
                   </font>
