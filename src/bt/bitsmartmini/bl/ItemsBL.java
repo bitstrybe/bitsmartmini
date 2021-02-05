@@ -96,9 +96,13 @@ public class ItemsBL extends DdsBL {
     }
 
     public Items getImageItembyCode(String u) {
+        try{
         TypedQuery<Items> q = em.createQuery("SELECT i FROM Items i WHERE i.upc = :u", Items.class);
         q.setParameter("u", u);
         return q.getSingleResult();
+        }catch(Exception ex){
+            return null;
+        }
     }
     
 //    public ItemsPrice getItemsPriceByItemDesc(String itemdesc){

@@ -57,6 +57,7 @@ public class CatalogController extends MainAppController implements Initializabl
     ReceiptBL rec = new ReceiptBL();
     StockinBL sk = new StockinBL();
     double totalp;
+    StockinBL st = new StockinBL();
 
     static int bal = 0;
     static int qntval1 = 0;
@@ -117,7 +118,7 @@ public class CatalogController extends MainAppController implements Initializabl
                             childController.itemsimage.setFitWidth(150);
                             if (bal > 0) {
                                 childController.outofstockbackground.setVisible(false);
-                            }else{
+                            } else {
                                 childController.outofstockbackground.setVisible(true);
                             }
                             displaypane.getChildren().add(parent);
@@ -128,11 +129,16 @@ public class CatalogController extends MainAppController implements Initializabl
                                     Parent parentsk = (Parent) fxmlLoadersk.load();
                                     AdminStockinController childControllersk = fxmlLoadersk.getController();
                                     childControllersk.itemname.setText(items.getItemDesc());
-                                    Items its = new ItemsBL().getImageItembyCode(items.getUpc());
+                                    childControllersk.itembarcode.setText(childController.itembcode.getText());
+                                    childControllersk.itemname.setText(childController.medsname.getText());
+                                    childControllersk.itembrand.setText(childController.brand.getText());
+                                    long qty = st.getStockBalance(childController.itembcode.getText());
+                                    childControllersk.itemqty.setText(Long.valueOf(qty).toString() + " Remaining");
+                                    childControllersk.itemsp.setText(MainAppController.B.getBCurrency() + " " + childController.qty.getText());
+                                    Items its = new ItemsBL().getImageItembyCode(childController.itembcode.getText());
                                     FileInputStream input;
                                     input = new FileInputStream(its.getItemImg());
                                     Image imagesk = new Image(input);
-                                    childControllersk.itemimage.setImage(image);
                                     childControllersk.itemimage.setImage(image);
                                     childControllersk.save.setDisable(false);
                                     childControllersk.save.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {

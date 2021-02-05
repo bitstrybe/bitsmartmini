@@ -62,17 +62,13 @@ public class AdminStockinController implements Initializable {
 
     AtomicInteger rowCounter = new AtomicInteger(0);
     @FXML
-    private ImageView itemimage1;
+    public Label itembarcode;
     @FXML
-    private Label itembarcode;
+    public Label itembrand;
     @FXML
-    private Label itemname1;
+    public Label itemqty;
     @FXML
-    private Label itembrand;
-    @FXML
-    private Label itemqty;
-    @FXML
-    private Label itemsp;
+    public Label itemsp;
 
     //ItemsBL ib = new ItemsBL();
     StockinBL sb = new StockinBL();
@@ -82,30 +78,29 @@ public class AdminStockinController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            // TODO
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ItemsDisplay.fxml"));
-            Parent parent = (Parent) fxmlLoader.load();
-            ItemsDisplayController childController = fxmlLoader.getController();
-            itembarcode.setText(childController.itembcode.getText());
-            itemname.setText(childController.medsname.getText());
-            itembrand.setText(childController.brand.getText());
-            long qty = sb.getStockBalance(childController.itembcode.getText());
-            itemqty.setText(Long.valueOf(qty).toString() + " Remaining");
-            itemsp.setText(MainAppController.B.getBCurrency() + " " + childController.qty.getText());
-            Items its = new ItemsBL().getImageItembyCode(childController.itembcode.getText());
-            FileInputStream input;
-            try {
-                input = new FileInputStream(its.getItemImg());
-                Image image = new Image(input);
-                itemimage.setImage(image);
-                save.setDisable(false);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(AddStockInController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(AdminStockinController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ItemsDisplay.fxml"));
+//            Parent parent = (Parent) fxmlLoader.load();
+//            ItemsDisplayController childController = fxmlLoader.getController();
+//            itembarcode.setText(childController.itembcode.getText());
+//            itemname.setText(childController.medsname.getText());
+//            itembrand.setText(childController.brand.getText());
+//            long qty = sb.getStockBalance(childController.itembcode.getText());
+//            itemqty.setText(Long.valueOf(qty).toString() + " Remaining");
+//            itemsp.setText(MainAppController.B.getBCurrency() + " " + childController.qty.getText());
+//            Items its = new ItemsBL().getImageItembyCode(childController.itembcode.getText());
+//            FileInputStream input;
+//            try {
+//                input = new FileInputStream(its.getItemImg());
+//                Image image = new Image(input);
+//                itemimage.setImage(image);
+//                save.setDisable(false);
+//            } catch (FileNotFoundException ex) {
+//                Logger.getLogger(AddStockInController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        } catch (IOException ex) {
+//            Logger.getLogger(AdminStockinController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     @FXML
@@ -119,12 +114,12 @@ public class AdminStockinController implements Initializable {
     private void saveAction(ActionEvent event) {
     }
 
-    private void clearAllForms() {
-        qnttextfield.clear();
-        costtextfield.clear();
-        salestextfield.clear();
-        itemimage.setImage(null);
-    }
+//    private void clearAllForms() {
+//        qnttextfield.clear();
+//        costtextfield.clear();
+//        salestextfield.clear();
+//        itemimage.setImage(null);
+//    }
 
     private void refreshView() {
         qnttextfield.setText("1");
@@ -138,10 +133,9 @@ public class AdminStockinController implements Initializable {
 
     private void closeTransition() {
         displayinfo.setText("SUCCESSFULLY SAVED");
-        itemname.setText(null);
         spinner.setVisible(false);
         check.setVisible(true);
-        clearAllForms();
+        refreshView();
         PauseTransition delay = new PauseTransition(Duration.seconds(3));
         delay.setOnFinished(closevnt -> {
             displayinfo.setText("");
@@ -188,10 +182,10 @@ public class AdminStockinController implements Initializable {
 
     @FXML
     private void minusqnty(ActionEvent event) {
-        if (rowCounter.get() > 0) {
+        if (rowCounter.get() > 1) {
             qnttextfield.setText(Integer.toString(rowCounter.decrementAndGet()));
         } else {
-            rowCounter.set(0);
+            rowCounter.set(1);
         }
     }
 

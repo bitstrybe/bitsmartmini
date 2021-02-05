@@ -73,7 +73,7 @@
                         <FontAwesomeIcon glyphName="MINUS" />
                      </graphic>
                   </Button>
-                  <JFXTextField fx:id="qnttextfield" alignment="CENTER" prefHeight="75.0" prefWidth="201.0" promptText="0" styleClass="form_field">
+                  <JFXTextField fx:id="qnttextfield" alignment="CENTER" prefHeight="75.0" prefWidth="201.0" promptText="1" styleClass="form_field">
                      <font>
                         <Font size="31.0" />
                      </font>
