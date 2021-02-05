@@ -92,17 +92,7 @@ public class AddItemsController implements Initializable {
     @FXML
     private TableColumn<ItemTableModel, String> category;
     @FXML
-    private TableColumn<ItemTableModel, String> manufacturer;
-    @FXML
-    private TableColumn<ItemTableModel, String> uomtb;
-    @FXML
-    private TableColumn<ItemTableModel, String> vomtb;
-
-    @FXML
     private TableColumn<ItemTableModel, Number> rol;
-    @FXML
-    private TableColumn<ItemTableModel, String> dose_value;
-
     @FXML
     private TableColumn<ItemTableModel, Number> costpricetb;
     @FXML
@@ -139,6 +129,12 @@ public class AddItemsController implements Initializable {
     private FontAwesomeIcon duplicatelock;
     @FXML
     private JFXTextField roltextfield;
+    @FXML
+    private JFXTextField itmtextfield1;
+    @FXML
+    private TableColumn<ItemTableModel, String> brand;
+    @FXML
+    private TableColumn<ItemTableModel, String> barcode;
 
     public void getBrands() {
         List<Brands> list = new BrandBL().getAllBrands();
@@ -305,13 +301,9 @@ public class AddItemsController implements Initializable {
 
             }
         });
-
         itemname.setCellValueFactory(cell -> cell.getValue().getItemNameProperty());
         category.setCellValueFactory(cell -> cell.getValue().getCategoryProperty());
-        manufacturer.setCellValueFactory(cell -> cell.getValue().getManufacturerProperty());
-        uomtb.setCellValueFactory(cell -> cell.getValue().getUomProperty());
-        vomtb.setCellValueFactory(cell -> cell.getValue().getVomProperty());
-        dose_value.setCellValueFactory(cell -> cell.getValue().getDoseProperty());
+        brand.setCellValueFactory(cell -> cell.getValue().getBrandProperty());
         rol.setCellValueFactory(cell -> cell.getValue().getRolProperty());
         costpricetb.setCellValueFactory(cell -> cell.getValue().getCostPriceProperty());
         salespricetb.setCellValueFactory(cell -> cell.getValue().getSalePriceProperty());
@@ -357,11 +349,10 @@ public class AddItemsController implements Initializable {
 
             }
         });
+        barcode.setCellValueFactory(cell -> cell.getValue().getBarcodeProperty());
         itemname.setCellValueFactory(cell -> cell.getValue().getItemNameProperty());
         category.setCellValueFactory(cell -> cell.getValue().getCategoryProperty());
-        manufacturer.setCellValueFactory(cell -> cell.getValue().getManufacturerProperty());
-        vomtb.setCellValueFactory(cell -> cell.getValue().getUomProperty());
-        dose_value.setCellValueFactory(cell -> cell.getValue().getDoseProperty());
+        brand.setCellValueFactory(cell -> cell.getValue().getBrandProperty());
         rol.setCellValueFactory(cell -> cell.getValue().getRolProperty());
         costpricetb.setCellValueFactory(cell -> cell.getValue().getCostPriceProperty());
         salespricetb.setCellValueFactory(cell -> cell.getValue().getSalePriceProperty());

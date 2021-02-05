@@ -13,7 +13,7 @@ import javafx.scene.image.ImageView;
 public class ItemTableModel {
 
     //private SimpleIntegerProperty itemCode;
-    private SimpleStringProperty itemCodeName;
+    private SimpleStringProperty barcode;
     private SimpleStringProperty itemName;
     private SimpleStringProperty category;
     private SimpleStringProperty brand;
@@ -30,16 +30,11 @@ public class ItemTableModel {
     public ItemTableModel() {
     }
 
-    public ItemTableModel(String itemcodename, String itemName, String category, String brand, long rol,Double costprice, Double saleprice, ImageView img) {
-       // this.itemCode = new SimpleIntegerProperty(itemCode);
-        this.itemCodeName = new SimpleStringProperty(itemcodename);
+    public ItemTableModel(String barcode, String itemName, String category, String brand, long rol,Double costprice, Double saleprice, ImageView img) {
+        this.barcode = new SimpleStringProperty(barcode);
         this.itemName = new SimpleStringProperty(itemName);
         this.category = new SimpleStringProperty(category);
         this.brand = new SimpleStringProperty(brand);
-        //this.uom = new SimpleStringProperty(uom);
-        //this.uomitem = new SimpleIntegerProperty(uomitem);
-        //this.vom_val = new SimpleStringProperty(vom_val);
-        //this.dose_val = new SimpleStringProperty(dose_val);
         this.rol = new SimpleLongProperty(rol);
         this.costprice = new SimpleDoubleProperty(costprice);
         this.saleprice = new SimpleDoubleProperty(saleprice);
@@ -47,28 +42,16 @@ public class ItemTableModel {
 
     }
 
-//    public Integer getItemCode() {
-//        return itemCode.get();
-//    }
-//
-//    public SimpleIntegerProperty getItemCodeProperty() {
-//        return itemCode;
-//    }
-//
-//    public void setItemCodeProperty(Integer itemCode) {
-//        this.itemCode = new SimpleIntegerProperty(itemCode);
-//    }
-
-    public String getItemCodeName() {
-        return itemCodeName.get();
+    public String getBarcode() {
+        return barcode.get();
     }
 
-    public SimpleStringProperty getItemCodeNameProperty() {
-        return itemCodeName;
+    public SimpleStringProperty getBarcodeProperty() {
+        return barcode;
     }
 
-    public void setItemCodeNameProperty(String itemCode) {
-        this.itemCodeName = new SimpleStringProperty(itemCode);
+    public void setBarcodeProperty(String barcode) {
+        this.barcode = new SimpleStringProperty(barcode);
     }
 
     public String getItemName() {
@@ -95,15 +78,15 @@ public class ItemTableModel {
         this.category = new SimpleStringProperty(category);
     }
 
-    public String getManufacturer() {
+    public String getBrand() {
         return brand.get();
     }
 
-    public SimpleStringProperty getManufacturerProperty() {
+    public SimpleStringProperty getBrandProperty() {
         return brand;
     }
 
-    public void setManufacturerProperty(String brand) {
+    public void setBrandProperty(String brand) {
         this.brand = new SimpleStringProperty(brand);
     }
 
@@ -118,20 +101,7 @@ public class ItemTableModel {
     public void setUomProperty(String uom) {
         this.uom = new SimpleStringProperty(uom);
     }
-    
-//    public Integer getUomItem() {
-//        return uomitem.get();
-//    }
-//
-//    public SimpleIntegerProperty getUomItemProperty() {
-//        return uomitem;
-//    }
-//
-//    public void setUomItemProperty(Integer uomitem) {
-//        this.uomitem = new SimpleIntegerProperty(uomitem);
-//    }
-
-
+   
     public String getVmo() {
         return vom_val.get();
     }

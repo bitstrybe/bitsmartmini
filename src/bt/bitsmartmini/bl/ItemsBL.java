@@ -47,7 +47,7 @@ public class ItemsBL extends DdsBL {
     }
 
     public List<Items> searchAllItems(String p) {
-        TypedQuery<Items> q = em.createQuery("SELECT s FROM Items s WHERE s.itemDesc LIKE :p OR s.itemName LIKE :p1 ", Items.class);
+        TypedQuery<Items> q = em.createQuery("SELECT s FROM Items s WHERE s.upc LIKE :p OR s.itemDesc LIKE :p1 ", Items.class);
         q.setParameter("p", "%" + p + "%");
         q.setParameter("p1", "%" + p + "%");
         //q.setParameter("p2", "%" + p + "%");
@@ -56,7 +56,7 @@ public class ItemsBL extends DdsBL {
     }
 
     public List<String> searchItemsNames(String param) {
-        TypedQuery<String> q = em.createQuery("SELECT i.itemDesc FROM Items i WHERE i.itemName LIKE :p1 OR i.itemDesc LIKE :p2", String.class);
+        TypedQuery<String> q = em.createQuery("SELECT i.itemDesc FROM Items i WHERE i.upc LIKE :p1 OR i.itemDesc LIKE :p2", String.class);
         q.setParameter("p1", "%" + param + "%");
         q.setParameter("p2", "%" + param + "%");
         return q.getResultList();
@@ -64,7 +64,7 @@ public class ItemsBL extends DdsBL {
 
     public List getItemsFromForm(String catid) {
         try {
-            TypedQuery<String> q = em.createQuery("SELECT r.form.formName FROM Items r WHERE r.form.formName = :catid", String.class);
+            TypedQuery<String> q = em.createQuery("SELECT r FROM Items r WHERE r.category.categoryName = :catid", String.class);
             q.setParameter("catid", catid);
 //        System.out.println(q.getResultList());
             q.setMaxResults(1);
