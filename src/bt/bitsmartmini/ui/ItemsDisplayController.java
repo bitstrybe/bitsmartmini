@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -21,9 +21,7 @@ public class ItemsDisplayController implements Initializable {
     public ImageView itemsimage;
     @FXML
     public Label medsname;
-    @FXML
     public Label uom;
-    @FXML
     public Label man;
     @FXML
     public Label exp;
@@ -41,6 +39,12 @@ public class ItemsDisplayController implements Initializable {
     public HBox catalogstaus;
     @FXML
     public HBox outofstockbackground;
+    @FXML
+    public Label brand;
+    @FXML
+    public Text qty;
+    @FXML
+    public Label itembcode;
 
     /**
      * Initializes the controller class.

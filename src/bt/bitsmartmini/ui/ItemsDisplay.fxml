@@ -11,6 +11,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
 <HBox prefHeight="341.0" prefWidth="256.0" spacing="1.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.ItemsDisplayController">
    <children>
@@ -18,17 +20,17 @@
          <children>
             <StackPane>
                <children>
-                  <ImageView fx:id="itemsimage" fitHeight="150.0" fitWidth="207.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="itemsimage" fitHeight="140.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
                   <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <HBox fx:id="outofstockbackground" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="62.0" style="-fx-background-color: RED;" HBox.hgrow="NEVER">
+                        <HBox fx:id="outofstockbackground" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.78" prefHeight="18.0" prefWidth="62.0" style="-fx-background-color: RED;" HBox.hgrow="NEVER">
                            <children>
                               <Label fx:id="outofstocklabel" text="out of stock" textFill="WHITE">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="CLOSE" />
                                  </graphic>
                                  <font>
-                                    <Font size="8.0" />
+                                    <Font name="Open Sans Bold" size="8.0" />
                                  </font>
                               </Label>
                            </children>
@@ -37,9 +39,24 @@
                   </HBox>
                </children>
                <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                  <Insets left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
             </StackPane>
+            <HBox alignment="CENTER" layoutX="11.0" layoutY="201.0" prefHeight="25.0" prefWidth="247.0">
+               <children>
+                  <Label fx:id="itembcode" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" prefHeight="22.0" prefWidth="227.0" style="-fx-border-color: #eee; -fx-border-width: 1;" text="Label" textAlignment="CENTER" textFill="#797878" wrapText="true" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Open Sans Bold" size="12.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="40.0" right="40.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
             <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="247.0" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets />
@@ -60,7 +77,7 @@
                   <Insets />
                </VBox.margin>
                <children>
-                  <Label fx:id="man" alignment="CENTER" prefHeight="15.0" prefWidth="229.0" text="Label" textFill="#838282" wrapText="true" HBox.hgrow="ALWAYS">
+                  <Label fx:id="brand" alignment="CENTER" prefHeight="15.0" prefWidth="229.0" text="Label" textFill="#838282" wrapText="true" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="Arial Bold" size="12.0" />
                      </font>
@@ -70,21 +87,19 @@
                   <Insets bottom="5.0" top="5.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
+            <TextFlow prefHeight="13.0" prefWidth="247.0" textAlignment="CENTER">
                <children>
-                  <Label fx:id="uom" text="Label" textFill="#828282" wrapText="true" HBox.hgrow="ALWAYS">
+                  <Text fx:id="qty" strokeType="OUTSIDE" strokeWidth="0.0" text=" CURR ">
                      <font>
-                        <Font name="Arial Bold" size="12.0" />
+                        <Font name="Open Sans" size="13.0" />
                      </font>
-                  </Label>
+                  </Text>
+                  <Text fill="#9e9c9c" strokeType="OUTSIDE" strokeWidth="0.0" text="Remaining" wrappingWidth="70.22900390625" />
                </children>
-               <padding>
-                  <Insets bottom="10.0" top="5.0" />
-               </padding>
-            </HBox>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </TextFlow>
             <HBox>
                <children>
                   <Line endX="143.2928924560547" endY="0.2928932309150696" fill="#e1dcdc" opacity="0.13" startX="-100.0" stroke="#4a4848" />

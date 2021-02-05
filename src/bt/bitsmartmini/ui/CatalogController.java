@@ -1,6 +1,5 @@
 package bt.bitsmartmini.ui;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -19,10 +18,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
@@ -60,6 +55,7 @@ public class CatalogController extends MainAppController implements Initializabl
     DecimalFormat df = new DecimalFormat("0.00");
     SalesBL sb = new SalesBL();
     ReceiptBL rec = new ReceiptBL();
+    StockinBL sk = new StockinBL();
     double totalp;
 
     static int bal = 0;
@@ -105,8 +101,12 @@ public class CatalogController extends MainAppController implements Initializabl
                                     childController.catalogstaus.getChildren().add(childController.addtocart);
                                 }
                             }
+                            childController.itembcode.setText(items.getUpc());
                             childController.medsname.setText(items.getItemDesc());
-                            childController.man.setText(items.getBrand().getBrandName());
+                            childController.brand.setText(items.getBrand().getBrandName());
+                            //childController.qty.setText(items.getBrand().getBrandName());
+                            Long bal = sk.getStockBalance(items.getUpc());
+                            childController.qty.setText(bal.toString());
                             double prices = items.getSp();
                             childController.exp.setText(DecimalUtil.format2(prices));
                             childController.curr.setText(MainAppController.B.getBCurrency());
@@ -115,8 +115,12 @@ public class CatalogController extends MainAppController implements Initializabl
                             childController.itemsimage.setImage(image);
                             childController.itemsimage.setFitHeight(150);
                             childController.itemsimage.setFitWidth(150);
+                            if (bal > 0) {
+                                childController.outofstockbackground.setVisible(false);
+                            }else{
+                                childController.outofstockbackground.setVisible(true);
+                            }
                             displaypane.getChildren().add(parent);
-                            //Catalog Administrator Stockin starts
                             childController.adminstockin.setOnAction(v -> {
                                 try {
                                     Stage stage = new Stage();
@@ -124,9 +128,7 @@ public class CatalogController extends MainAppController implements Initializabl
                                     Parent parentsk = (Parent) fxmlLoadersk.load();
                                     AdminStockinController childControllersk = fxmlLoadersk.getController();
                                     childControllersk.itemname.setText(items.getItemDesc());
-                                    //UomDef ud = new UomBL().getUombyItemId(itemlist.getSelectionModel().getSelectedItem());
-                                    Items its = new ItemsBL().getImageItembyCode(items.getItemDesc());
-                                    //uomitem.setText(ud.getUomCode().getUomDesc() + " " + ud.getUomNm() + " X " + ud.getUomDm());
+                                    Items its = new ItemsBL().getImageItembyCode(items.getUpc());
                                     FileInputStream input;
                                     input = new FileInputStream(its.getItemImg());
                                     Image imagesk = new Image(input);
@@ -174,15 +176,12 @@ public class CatalogController extends MainAppController implements Initializabl
                                     Parent parentsk = (Parent) fxmlLoadersk.load();
                                     AdminStockoutController childControllersk = fxmlLoadersk.getController();
                                     childControllersk.itemname.setText(items.getItemDesc());
-                                    //UomDef ud = new UomBL().getUombyItemId(itemlist.getSelectionModel().getSelectedItem());
                                     Items its = new ItemsBL().getImageItembyCode(items.getItemDesc());
-                                    //uomitem.setText(ud.getUomCode().getUomDesc() + " " + ud.getUomNm() + " X " + ud.getUomDm());
                                     FileInputStream input;
                                     input = new FileInputStream(its.getItemImg());
                                     Image imagesk = new Image(input);
                                     childControllersk.itemimage.setImage(image);
                                     childControllersk.save.setDisable(false);
-
                                     childControllersk.save.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
                                         childControllersk.save.setDisable(true);
                                         Task<Void> task = new Task<Void>() {

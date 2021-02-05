@@ -224,7 +224,7 @@ public class SalesBL extends DdsBL {
     
 
     public List<Sales> getSalesDateRange(Date startdate, Date enddate) {
-        TypedQuery q = em.createQuery("SELECT s FROM Sales s WHERE s.dateS BETWEEN :date1 AND :date2", Sales.class);
+        TypedQuery q = em.createQuery("SELECT s FROM Sales s WHERE s.salesDate BETWEEN :date1 AND :date2", Sales.class);
         q.setParameter("date1", startdate);
         q.setParameter("date2", enddate);
         q.setHint("org.hibernate.cacheMode", "IGNORE");
@@ -242,12 +242,6 @@ public class SalesBL extends DdsBL {
         q.setMaxResults(1);
         return q.getResultList();
     }
-//     public List<Integer> getSalesDetailsCount(){
-//        TypedQuery<Integer> q = em.createQuery("SELECT s.salesDetailsId FROM SalesDetails s ORDER BY s.salesDetailsId DESC", Integer.class);
-//        q.setMaxResults(1);
-//        return q.getResultList();
-//        
-//    }
 
     public List<SalesDetails> getSalesDetailsbySalesId(int salesid) {
         TypedQuery q = em.createQuery("SELECT s FROM SalesDetails s WHERE s.saleId.salesId = :salesid", List.class);
@@ -260,18 +254,6 @@ public class SalesBL extends DdsBL {
         q.setParameter("i", salesid);
         return q.getSingleResult();
     }
-//    public long getDailySales(Date today){
-//        TypedQuery<Long> q = em.createQuery("SELECT COUNT(s) FROM Sales s WHERE s.date = :date", Long.class);
-//        q.setParameter("date", today);
-//        return q.getSingleResult();
-//    }
-//    public long getDurationSales(Date week, Date today){
-//        TypedQuery<Long> q = em.createQuery("SELECT COUNT(s) FROM Sales s WHERE s.date BETWEEN :week AND :date1", Long.class);
-//        q.setParameter("week", week);
-//        q.setParameter("date1", today);
-//        return q.getSingleResult();
-//    }
-
     public List getUsersFromSales(int userscode) {
         TypedQuery<Sales> q = em.createQuery("SELECT s FROM Sales s WHERE s.users.userid = :userid", Sales.class);
         q.setParameter("userid", userscode);

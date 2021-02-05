@@ -120,7 +120,7 @@ public class AddStockOutController implements Initializable {
             itemname.setText(itemlist.getSelectionModel().getSelectedItem().split(":")[1]);
             itembrand.setText(itemlist.getSelectionModel().getSelectedItem().split(":")[2]);
             long qty = sb.getStockBalance(itemlist.getSelectionModel().getSelectedItem().split(":")[0]);
-            itemqty.setText(Long.valueOf(qty).toString() + " Remaining");
+            itemqty.setText(Long.toString(qty) + " Remaining");
             itemsp.setText(MainAppController.B.getBCurrency() + " " + itemlist.getSelectionModel().getSelectedItem().split(":")[4]);
             Items its = new ItemsBL().getImageItembyCode(itemlist.getSelectionModel().getSelectedItem().split(":")[0]);
             FileInputStream input;
@@ -131,6 +131,11 @@ public class AddStockOutController implements Initializable {
                 save.setDisable(false);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(AddStockInController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(qty > 0){
+                save.setDisable(false);
+            }else{
+                save.setDisable(true);
             }
         });
     }
