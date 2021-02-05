@@ -99,9 +99,7 @@ public class AddItemsController implements Initializable {
     private TableColumn<ItemTableModel, Number> salespricetb;
     @FXML
     private TableColumn<ItemTableModel, Boolean> action;
-    @FXML
     private JFXTextField costtextfield;
-    @FXML
     private JFXTextField selltextfield;
     @FXML
     private Button closebtn;
@@ -117,7 +115,6 @@ public class AddItemsController implements Initializable {
     UomBL uombl = new UomBL();
     File ifile;
     BufferedImage resizeImage;
-    @FXML
     private JFXTextField itmtextfield;
     @FXML
     private Label displayinfo;
@@ -128,13 +125,19 @@ public class AddItemsController implements Initializable {
     @FXML
     private FontAwesomeIcon duplicatelock;
     @FXML
-    private JFXTextField roltextfield;
-    @FXML
-    private JFXTextField itmtextfield1;
-    @FXML
     private TableColumn<ItemTableModel, String> brand;
     @FXML
     private TableColumn<ItemTableModel, String> barcode;
+    @FXML
+    private JFXTextField barcodetxt;
+    @FXML
+    private JFXTextField cptxt;
+    @FXML
+    private JFXTextField sptxt;
+    @FXML
+    private JFXTextField roltxt;
+    @FXML
+    private JFXTextField itemdesctxt;
 
     public void getBrands() {
         List<Brands> list = new BrandBL().getAllBrands();
@@ -152,27 +155,6 @@ public class AddItemsController implements Initializable {
         });
     }
 
-//    public void getUOM() {
-//        List<Uom> list = new VomBL().getAllUom();
-//        ObservableList<Uom> result = FXCollections.observableArrayList(list);
-//        result.forEach((cat) -> {
-//            uomcombo.getItems().add(WordUtils.capitalizeFully(cat.getUomDesc()));
-//        });
-//    }
-//
-//    public void getVolumeValue() {
-//        dose.getItems().add("g");
-//        dose.getItems().add("mg");
-//        dose.getItems().add("l");
-//        dose.getItems().add("ml");
-//        dose.getItems().add("mega");
-//        dose.getItems().add("%");
-//        dose.getItems().add("others");
-//
-//        vom.getItems().add("g");
-//        vom.getItems().add("ml");
-//
-//    }
     /**
      * Initializes the controller class.
      *
@@ -185,18 +167,15 @@ public class AddItemsController implements Initializable {
         getBrands();
 //        getVolumeValue();
 //        getUOM();
-        TableData();
+        TableData(searchbtn.getText());
         ifile = new File("./img/DEFAULT.png");
 //        Image itim = new Image(ifile);
 //        itemimages.setImage(itim);
 
         searchbtn.textProperty().addListener((e, oldValue, newValue) -> {
             //searchbtn.setText(newValue.toUpperCase());
-            if (searchbtn.getText().length() > 4) {
-                TableData(searchbtn.getText().toUpperCase());
-            } else {
-                TableData();
-            }
+            TableData(searchbtn.getText());
+
         });
         brandscombo.setOnKeyReleased((KeyEvent event) -> {
             String s = FilterComboBox.jumpTo(event.getText(), brandscombo.getValue(), brandscombo.getItems());
@@ -272,16 +251,16 @@ public class AddItemsController implements Initializable {
         d.start();
     }
 
-    public void TableData() {
-        List<Items> c = itembl.getItemsPerPage(10);
+    public void TableData(String p) {
+        List<Items> c;
+        if (p.length() > 0) {
+            c = itembl.searchAllItems(p);
+        } else {
+            c = itembl.getAllItems();
+        }
+        //List<Items> c = itembl.getItemsPerPage(10);
         data = FXCollections.observableArrayList();
         c.forEach((item) -> {
-            //UomDef domf = new UomBL().getUombyItemId(item.getItemDesc());
-            //int uomitem = domf.getUomItem();
-            //String uom_val = String.valueOf(item.getUomDef().getUomDesc());
-            //String vom_value = String.valueOf(item.getVomDef()) + item.getVom();
-            //String dose_value = String.valueOf(item.getDosageDef()) + item.getDosage();
-            //ItemsPrice iprice = new ItemsBL().getItemsPriceByItemDesc(item.getItemDesc());
             try {
                 ImageView imageitems = new ImageView();
                 File file = new File(item.getItemImg());
@@ -298,9 +277,9 @@ public class AddItemsController implements Initializable {
 //                System.out.println(item.getItemCodeFullname() + " " + item.getItemName() + " " + item.getCategory().getCategoryName() + "" + item.getManufacturer().getManufacturer() + " " + uom_value + " " + item.getRol());
             } catch (Exception ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
-
             }
         });
+        barcode.setCellValueFactory(cell -> cell.getValue().getBarcodeProperty());
         itemname.setCellValueFactory(cell -> cell.getValue().getItemNameProperty());
         category.setCellValueFactory(cell -> cell.getValue().getCategoryProperty());
         brand.setCellValueFactory(cell -> cell.getValue().getBrandProperty());
@@ -311,54 +290,6 @@ public class AddItemsController implements Initializable {
         itemimage.setPrefWidth(65);
         action.setSortable(false);
         //action.setMaxWidth(480);
-
-        action.setCellValueFactory((TableColumn.CellDataFeatures<ItemTableModel, Boolean> features) -> new SimpleBooleanProperty(features.getValue() != null));
-        action.setCellFactory((TableColumn<ItemTableModel, Boolean> personBooleanTableColumn) -> new AddPersonCell());
-        itemtableview.setItems(data);
-//        clientTable.getColumns().add(action);
-        itemtableview.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
-
-    }
-
-    public void TableData(String p) {
-        List<Items> c = itembl.searchAllItems(p);
-        data = FXCollections.observableArrayList();
-        //UomDef domf = new UomDef();
-        c.forEach((item) -> {
-            //Uom domf = uombl.getUombyItemId(item.getItemDesc());
-            //int uomitem = domf.getUomItem();
-//            String uom_val = String.valueOf(item.getUomDef().getUomDesc());
-//            String vom_value = String.valueOf(item.getVomDef()) + item.getVom();
-//            String dose_value = String.valueOf(item.getDosageDef()) + item.getDosage();
-            try {
-
-                ImageView imageitems = new ImageView();
-                File file = new File(item.getItemImg());
-                Image image = new Image(file.toURI().toString());
-                imageitems.setImage(image);
-                imageitems.setFitWidth(70);
-                imageitems.setFitHeight(70);
-                imageitems.setPreserveRatio(true);
-                imageitems.scaleXProperty();
-                imageitems.scaleYProperty();
-                imageitems.setSmooth(true);
-                imageitems.setCache(true);
-                data.add(new ItemTableModel(item.getUpc(), item.getItemDesc(), item.getCategory().getCategoryName(), item.getBrand().getBrandName(), item.getRol(), item.getCp(), item.getSp(), imageitems));
-            } catch (Exception ex) {
-                Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
-
-            }
-        });
-        barcode.setCellValueFactory(cell -> cell.getValue().getBarcodeProperty());
-        itemname.setCellValueFactory(cell -> cell.getValue().getItemNameProperty());
-        category.setCellValueFactory(cell -> cell.getValue().getCategoryProperty());
-        brand.setCellValueFactory(cell -> cell.getValue().getBrandProperty());
-        rol.setCellValueFactory(cell -> cell.getValue().getRolProperty());
-        costpricetb.setCellValueFactory(cell -> cell.getValue().getCostPriceProperty());
-        salespricetb.setCellValueFactory(cell -> cell.getValue().getSalePriceProperty());
-
-        action.setSortable(false);
-        action.setMaxWidth(480);
 
         action.setCellValueFactory((TableColumn.CellDataFeatures<ItemTableModel, Boolean> features) -> new SimpleBooleanProperty(features.getValue() != null));
         action.setCellFactory((TableColumn<ItemTableModel, Boolean> personBooleanTableColumn) -> new AddPersonCell());
@@ -416,37 +347,6 @@ public class AddItemsController implements Initializable {
                         childController.displayinfo.textProperty().bind(task.messageProperty());
                         task.setOnSucceeded(f -> {
                             childController.displayinfo.textProperty().unbind();
-//                                List ls = new StockinBL().getStockinFromItems(selectedRecord.getItemCodeName());
-//                                if (ls.isEmpty()) {
-                            //int uom_result = new UomBL().removeData(selectedRecord.getUomItem());
-//                            if (uom_result == 1) {
-//                                int itemprice_result = new ItemspriceBL().removeData(selectedRecord.getItemCodeName());
-//                                if (itemprice_result == 1) {
-//                                    int result = new ItemsBL().removeData(selectedRecord.getItemCodeName());
-//                                    switch (result) {
-//                                        case 1:
-//                                            childController.displayinfo.setText("SUCCESSFULLY DELETED");
-//                                            childController.spinner.setVisible(false);
-//                                            childController.check.setVisible(true);
-//                                            TableData();
-//
-//                                            stage.close();
-//                                            break;
-//                                        default:
-//                                            childController.displayinfo.setText("NOTICE! AN ERROR OCCURED");
-//                                            childController.spinner.setVisible(false);
-//                                            childController.check.setVisible(false);
-//                                            break;
-//
-//                                    }
-//                                }
-
-                            // }
-//                                } else {
-//                                    childController.displayinfo.setText("UNABLE TO DELETE RECORD");
-//                                    childController.spinner.setVisible(false);
-//                                    childController.check.setVisible(false);
-//                                }
                         });
                         Thread d = new Thread(task);
                         d.setDaemon(true);
@@ -495,14 +395,14 @@ public class AddItemsController implements Initializable {
         brandscombo.getSelectionModel().clearSelection();
         costtextfield.clear();
         selltextfield.clear();
-        roltextfield.clear();
+        roltxt.clear();
     }
 
     private void closeTransition() {
-        displayinfo.setText("SUCCESSFULLY SAVED");
+        displayinfo.setText("Successfully Saved");
         spinner.setVisible(false);
         check.setVisible(true);
-        TableData();
+        TableData(searchbtn.getText());
         clearAllCategory();
         PauseTransition delay = new PauseTransition(Duration.seconds(3));
         delay.setOnFinished(closevnt -> {
@@ -511,72 +411,39 @@ public class AddItemsController implements Initializable {
             check.setVisible(false);
         });
         delay.play();
-
     }
 
     private void saveTemplate() {
         displayinfo.textProperty().unbind();
-        Items cat = new Items();
-        String itemdesc = "";
-        itemdesc += itmtextfield.getText() + " " + categorycombo.getValue();
-
-//        if (!dose_val.getText().isEmpty()) {
-//            itemdesc += ", " + dose_val.getText() + dose.getSelectionModel().getSelectedItem();
-//        }
-//
-//        if (dose_val.getText().isEmpty() && !vom_val.getText().isEmpty()) {
-//            itemdesc += ", " + vom_val.getText() + vom.getSelectionModel().getSelectedItem();
-//        } else if (!dose_val.getText().isEmpty() && !vom_val.getText().isEmpty()) {
-//            itemdesc += "/" + vom_val.getText() + vom.getSelectionModel().getSelectedItem();
-//        }
-        itemdesc += " (" + brandscombo.getValue() + ")";
-
         try {
-            cat.setItemDesc(WordUtils.capitalizeFully(itemdesc));
-            //cat.setItemName(WordUtils.capitalizeFully(itmtextfield.getText()));
+            Items cat = new Items();
+            cat.setUpc(barcodetxt.getText());
+            cat.setItemDesc(itemdesctxt.getText());
             cat.setCategory(new Category(categorycombo.getValue()));
             cat.setBrand(new Brands(brandscombo.getValue()));
-//            if (!vom_val.getText().isEmpty()) {
-//                cat.setVomDef(Double.parseDouble(vom_val.getText().trim()));
-//                cat.setVom(vom.getSelectionModel().getSelectedItem());
-//            }
-//            if (!dose_val.getText().isEmpty()) {
-//                cat.setDosageDef(Double.parseDouble(dose_val.getText()));
-//                cat.setDosage(dose.getSelectionModel().getSelectedItem());
-//            }
-            cat.setRol(Integer.parseInt(roltextfield.getText()));
-            //cat.setUomDef(new Uom(uomcombo.getSelectionModel().getSelectedItem()));
+            cat.setRol(Integer.parseInt(roltxt.getText()));
             cat.setUsers(new Users(LoginController.u.getUserid()));
             cat.setEntryLog(new Date());
             cat.setLastModified(new Date());
-            cat.setCp(0);
-            cat.setSp(0);
+            cat.setCp(Double.parseDouble(cptxt.getText()));
+            cat.setSp(Double.parseDouble(sptxt.getText()));
             //adding image file to directory
             initialStream = new FileInputStream(ifile);
-            // System.out.println("FILE 1: " + ifile.getName());
-            //BufferedImage originalImage = ImageIO.read(new File("./img/" + itemdesc.replace("/", "-") + "." + FilenameUtils.getExtension(ifile.getName())));//change path to where file is located
-            //int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
-
-            //BufferedImage resizeImageJpg = resizeImage(originalImage, type, 100, 100);
-            //File targetFile = new File("./img/" + itemdesc.replace("/", "-") + "." + FilenameUtils.getExtension(ifile.getName()));
             if (!ifile.getName().equals("DEFAULT.png")) {
-                cat.setItemImg("./img/" + itemdesc.replace("/", "-") + "." + FilenameUtils.getExtension(ifile.getName()));
+                cat.setItemImg("./img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
             } else {
                 cat.setItemImg("./img/DEFAULT.png");
             }
             int result = new InsertUpdateBL().insertData(cat);
-            //System.out.println("result: " + result);
-            switch (result) {
-                case 1:
-                    if (!ifile.getName().equals("DEFAULT.png")) {
-                        ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File("./img/" + itemdesc.replace("/", "-") + "." + FilenameUtils.getExtension(ifile.getName())));
-                        //java.nio.file.Files.copy(initialStream, targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                    }
-                default:
-                    displayinfo.setText("NOTICE! AN ERROR OCCURED");
-                    spinner.setVisible(false);
-                    check.setVisible(false);
-                    break;
+            if (result == 1) {
+                if (!ifile.getName().equals("DEFAULT.png")) {
+                    ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File("./img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName())));
+                }
+                closeTransition();
+            } else {
+                displayinfo.setText(" There is an error please check and try again");
+                spinner.setVisible(false);
+                check.setVisible(false);
             }
         } catch (NumberFormatException ex) {
             spinner.setVisible(false);

@@ -21,7 +21,7 @@
 
 <StackPane prefHeight="592.0" prefWidth="700.0" styleClass="popupbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.AddItemsController">
    <children>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="701.0" styleClass="form_background">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="701.0" styleClass="form_background">
          <children>
             <HBox alignment="CENTER" prefHeight="32.0" prefWidth="701.0">
                <children>
@@ -74,7 +74,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                            <children>
-                              <JFXTextField fx:id="itmtextfield" focusColor="#5e5d5d" labelFloat="true" opacity="0.93" prefHeight="35.0" prefWidth="391.0" promptText="Barcode*" styleClass="form_field" unFocusColor="#cccaca" HBox.hgrow="ALWAYS">
+                              <JFXTextField fx:id="barcodetxt" focusColor="#5e5d5d" labelFloat="true" opacity="0.93" prefHeight="35.0" prefWidth="391.0" promptText="Barcode*" styleClass="form_field" unFocusColor="#cccaca" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Open Sans" size="12.0" />
                                  </font>
@@ -86,7 +86,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" VBox.vgrow="NEVER">
                            <children>
-                              <JFXTextField fx:id="itmtextfield1" focusColor="#5e5d5d" labelFloat="true" opacity="0.93" prefHeight="35.0" prefWidth="380.0" promptText="Item Description *" styleClass="form_field" unFocusColor="#cccaca" HBox.hgrow="ALWAYS">
+                              <JFXTextField fx:id="itemdesctxt" focusColor="#5e5d5d" labelFloat="true" opacity="0.93" prefHeight="35.0" prefWidth="380.0" promptText="Item Description *" styleClass="form_field" unFocusColor="#cccaca" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Open Sans" size="12.0" />
                                  </font>
@@ -101,7 +101,7 @@
                         </HBox>
                         <HBox spacing="10.0" VBox.vgrow="NEVER">
                            <children>
-                              <JFXTextField fx:id="costtextfield" focusColor="#5e5d5d" labelFloat="true" opacity="0.93" prefHeight="35.0" prefWidth="266.0" promptText="Cost Price *" styleClass="form_field" unFocusColor="#cccaca">
+                              <JFXTextField fx:id="cptxt" focusColor="#5e5d5d" labelFloat="true" opacity="0.93" prefHeight="35.0" prefWidth="266.0" promptText="Cost Price *" styleClass="form_field" text="0.00" unFocusColor="#cccaca">
                                  <font>
                                     <Font name="Open Sans" size="12.0" />
                                  </font>
@@ -109,7 +109,7 @@
                                     <Insets />
                                  </HBox.margin>
                               </JFXTextField>
-                              <JFXTextField fx:id="selltextfield" focusColor="#5e5d5d" labelFloat="true" layoutX="10.0" layoutY="10.0" opacity="0.93" prefHeight="35.0" prefWidth="266.0" promptText="Sales Price *" styleClass="form_field" unFocusColor="#cccaca">
+                              <JFXTextField fx:id="sptxt" focusColor="#5e5d5d" labelFloat="true" layoutX="10.0" layoutY="10.0" opacity="0.93" prefHeight="35.0" prefWidth="266.0" promptText="Sales Price *" styleClass="form_field" text="0.00" unFocusColor="#cccaca">
                                  <font>
                                     <Font name="Open Sans" size="12.0" />
                                  </font>
@@ -117,7 +117,7 @@
                                     <Insets />
                                  </HBox.margin>
                               </JFXTextField>
-                              <JFXTextField fx:id="roltextfield" focusColor="#5e5d5d" labelFloat="true" layoutX="163.0" layoutY="10.0" opacity="0.93" prefHeight="35.0" prefWidth="266.0" promptText="ROL*" styleClass="form_field" unFocusColor="#cccaca">
+                              <JFXTextField fx:id="roltxt" focusColor="#5e5d5d" labelFloat="true" layoutX="163.0" layoutY="10.0" opacity="0.93" prefHeight="35.0" prefWidth="266.0" promptText="ROL*" styleClass="form_field" text="10" unFocusColor="#cccaca">
                                  <font>
                                     <Font name="Open Sans" size="12.0" />
                                  </font>
@@ -174,7 +174,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </HBox>
-            <HBox prefHeight="301.0" prefWidth="681.0">
+            <HBox prefHeight="205.0" prefWidth="681.0">
                <children>
                   <TableView fx:id="itemtableview" prefHeight="287.0" prefWidth="681.0" styleClass="table-cell" stylesheets="@style.css">
                      <columns>
@@ -204,21 +204,21 @@
             </HBox>
             <HBox>
                <VBox.margin>
-                  <Insets left="30.0" top="10.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
                <children>
                   <Label fx:id="displayinfo" prefHeight="26.0" prefWidth="266.0">
                      <graphic>
                         <StackPane>
                            <children>
-                              <FontAwesomeIcon fx:id="check" fill="#389751" glyphName="CHECK" size="2em" visible="false" />
-                              <FontAwesomeIcon fx:id="duplicatelock" glyphName="LOCK" size="2em" visible="false" />
+                              <FontAwesomeIcon fx:id="check" fill="#389751" glyphName="CHECK" size="1.7em" visible="false" />
+                              <FontAwesomeIcon fx:id="duplicatelock" glyphName="LOCK" size="1.7em" visible="false" />
                               <JFXSpinner fx:id="spinner" prefHeight="5.0" prefWidth="5.0" visible="false" />
                            </children>
                         </StackPane>
                      </graphic>
                      <font>
-                        <Font size="13.0" />
+                        <Font size="12.0" />
                      </font>
                   </Label>
                </children>
