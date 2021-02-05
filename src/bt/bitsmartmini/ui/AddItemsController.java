@@ -43,7 +43,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -56,12 +55,9 @@ import bt.bitsmartmini.bl.InsertUpdateBL;
 import bt.bitsmartmini.bl.ItemsBL;
 import bt.bitsmartmini.bl.BrandBL;
 import bt.bitsmartmini.bl.UomBL;
-import bt.bitsmartmini.bl.VomBL;
 import bt.bitsmartmini.entity.Brands;
 import bt.bitsmartmini.entity.Category;
 import bt.bitsmartmini.entity.Items;
-import bt.bitsmartmini.entity.Manufacturer;
-import bt.bitsmartmini.entity.Uom;
 import bt.bitsmartmini.entity.Users;
 import bt.bitsmartmini.tablemodel.ItemTableModel;
 import bt.bitsmartmini.utils.FilterComboBox;
@@ -84,9 +80,7 @@ public class AddItemsController implements Initializable {
     @FXML
     private ComboBox<String> categorycombo;
     @FXML
-    private ComboBox<String> manufacturercombo;
-    @FXML
-    private ComboBox<String> uomcombo;
+    private ComboBox<String> brandscombo;
     @FXML
     private JFXTextField searchbtn;
     @FXML
@@ -122,20 +116,6 @@ public class AddItemsController implements Initializable {
     @FXML
     private Button closebtn;
     @FXML
-    private JFXTextField uom_val1;
-    @FXML
-    private JFXTextField uom_val2;
-    @FXML
-    private ComboBox<String> dose;
-    @FXML
-    private ComboBox<String> vom;
-    @FXML
-    private JFXTextField vom_val;
-    @FXML
-    private JFXTextField dose_val;
-    @FXML
-    private JFXTextField roltextfield;
-    @FXML
     private Button browse;
     @FXML
     private ImageView itemimages;
@@ -148,8 +128,6 @@ public class AddItemsController implements Initializable {
     File ifile;
     BufferedImage resizeImage;
     @FXML
-    private Pane itemspane;
-    @FXML
     private JFXTextField itmtextfield;
     @FXML
     private Label displayinfo;
@@ -159,12 +137,14 @@ public class AddItemsController implements Initializable {
     private FontAwesomeIcon check;
     @FXML
     private FontAwesomeIcon duplicatelock;
+    @FXML
+    private JFXTextField roltextfield;
 
-    public void getManufacturer() {
+    public void getBrands() {
         List<Brands> list = new BrandBL().getAllBrands();
         ObservableList<Brands> result = FXCollections.observableArrayList(list);
         result.forEach((man) -> {
-            manufacturercombo.getItems().add(WordUtils.capitalizeFully(man.getBrandName()));
+            brandscombo.getItems().add(WordUtils.capitalizeFully(man.getBrandName()));
         });
     }
 
@@ -176,28 +156,27 @@ public class AddItemsController implements Initializable {
         });
     }
 
-    public void getUOM() {
-        List<Uom> list = new VomBL().getAllUom();
-        ObservableList<Uom> result = FXCollections.observableArrayList(list);
-        result.forEach((cat) -> {
-            uomcombo.getItems().add(WordUtils.capitalizeFully(cat.getUomDesc()));
-        });
-    }
-
-    public void getVolumeValue() {
-        dose.getItems().add("g");
-        dose.getItems().add("mg");
-        dose.getItems().add("l");
-        dose.getItems().add("ml");
-        dose.getItems().add("mega");
-        dose.getItems().add("%");
-        dose.getItems().add("others");
-
-        vom.getItems().add("g");
-        vom.getItems().add("ml");
-
-    }
-
+//    public void getUOM() {
+//        List<Uom> list = new VomBL().getAllUom();
+//        ObservableList<Uom> result = FXCollections.observableArrayList(list);
+//        result.forEach((cat) -> {
+//            uomcombo.getItems().add(WordUtils.capitalizeFully(cat.getUomDesc()));
+//        });
+//    }
+//
+//    public void getVolumeValue() {
+//        dose.getItems().add("g");
+//        dose.getItems().add("mg");
+//        dose.getItems().add("l");
+//        dose.getItems().add("ml");
+//        dose.getItems().add("mega");
+//        dose.getItems().add("%");
+//        dose.getItems().add("others");
+//
+//        vom.getItems().add("g");
+//        vom.getItems().add("ml");
+//
+//    }
     /**
      * Initializes the controller class.
      *
@@ -207,9 +186,9 @@ public class AddItemsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         getCategory();
-        getManufacturer();
-        getVolumeValue();
-        getUOM();
+        getBrands();
+//        getVolumeValue();
+//        getUOM();
         TableData();
         ifile = new File("./img/DEFAULT.png");
 //        Image itim = new Image(ifile);
@@ -223,10 +202,10 @@ public class AddItemsController implements Initializable {
                 TableData();
             }
         });
-        manufacturercombo.setOnKeyReleased((KeyEvent event) -> {
-            String s = FilterComboBox.jumpTo(event.getText(), manufacturercombo.getValue(), manufacturercombo.getItems());
+        brandscombo.setOnKeyReleased((KeyEvent event) -> {
+            String s = FilterComboBox.jumpTo(event.getText(), brandscombo.getValue(), brandscombo.getItems());
             if (s != null) {
-                manufacturercombo.setValue(s);
+                brandscombo.setValue(s);
             }
         });
 
@@ -237,12 +216,6 @@ public class AddItemsController implements Initializable {
             }
         });
 
-        uomcombo.setOnKeyReleased((KeyEvent event) -> {
-            String s = FilterComboBox.jumpTo(event.getText(), uomcombo.getValue(), uomcombo.getItems());
-            if (s != null) {
-                uomcombo.setValue(s);
-            }
-        });
         browse.setOnAction(new EventHandler<ActionEvent>() {
             Stage st = new Stage();
 
@@ -273,12 +246,6 @@ public class AddItemsController implements Initializable {
                 } catch (IOException | IllegalArgumentException ex) {
                     Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
-        });
-        vom.setOnKeyReleased((KeyEvent event) -> {
-            String s = FilterComboBox.jumpTo(event.getText(), vom.getValue(), vom.getItems());
-            if (s != null) {
-                vom.setValue(s);
             }
         });
     }
@@ -534,14 +501,7 @@ public class AddItemsController implements Initializable {
     private void clearAllCategory() {
         itmtextfield.clear();
         categorycombo.getSelectionModel().clearSelection();
-        manufacturercombo.getSelectionModel().clearSelection();
-        uomcombo.getSelectionModel().clearSelection();
-        uom_val1.clear();
-        uom_val2.clear();
-        dose_val.clear();
-        dose.getSelectionModel().clearSelection();
-        vom_val.clear();
-        vom.getSelectionModel().clearSelection();
+        brandscombo.getSelectionModel().clearSelection();
         costtextfield.clear();
         selltextfield.clear();
         roltextfield.clear();
@@ -569,22 +529,22 @@ public class AddItemsController implements Initializable {
         String itemdesc = "";
         itemdesc += itmtextfield.getText() + " " + categorycombo.getValue();
 
-        if (!dose_val.getText().isEmpty()) {
-            itemdesc += ", " + dose_val.getText() + dose.getSelectionModel().getSelectedItem();
-        }
-
-        if (dose_val.getText().isEmpty() && !vom_val.getText().isEmpty()) {
-            itemdesc += ", " + vom_val.getText() + vom.getSelectionModel().getSelectedItem();
-        } else if (!dose_val.getText().isEmpty() && !vom_val.getText().isEmpty()) {
-            itemdesc += "/" + vom_val.getText() + vom.getSelectionModel().getSelectedItem();
-        }
-        itemdesc += " (" + manufacturercombo.getValue() + ")";
+//        if (!dose_val.getText().isEmpty()) {
+//            itemdesc += ", " + dose_val.getText() + dose.getSelectionModel().getSelectedItem();
+//        }
+//
+//        if (dose_val.getText().isEmpty() && !vom_val.getText().isEmpty()) {
+//            itemdesc += ", " + vom_val.getText() + vom.getSelectionModel().getSelectedItem();
+//        } else if (!dose_val.getText().isEmpty() && !vom_val.getText().isEmpty()) {
+//            itemdesc += "/" + vom_val.getText() + vom.getSelectionModel().getSelectedItem();
+//        }
+        itemdesc += " (" + brandscombo.getValue() + ")";
 
         try {
             cat.setItemDesc(WordUtils.capitalizeFully(itemdesc));
             //cat.setItemName(WordUtils.capitalizeFully(itmtextfield.getText()));
             cat.setCategory(new Category(categorycombo.getValue()));
-            cat.setBrand(new Brands(manufacturercombo.getValue()));
+            cat.setBrand(new Brands(brandscombo.getValue()));
 //            if (!vom_val.getText().isEmpty()) {
 //                cat.setVomDef(Double.parseDouble(vom_val.getText().trim()));
 //                cat.setVom(vom.getSelectionModel().getSelectedItem());

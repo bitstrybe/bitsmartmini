@@ -20,23 +20,30 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="601.0" prefWidth="905.0" styleClass="popupbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.AddItemsController">
+<StackPane prefHeight="592.0" prefWidth="700.0" styleClass="popupbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.AddItemsController">
    <children>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="701.0" styleClass="form_background">
          <children>
-            <HBox prefHeight="70.0" prefWidth="361.0">
+            <HBox alignment="CENTER" prefHeight="32.0" prefWidth="701.0">
                <children>
-                  <Label text="CATALOG" textFill="#464444">
+                  <Label prefHeight="21.0" prefWidth="658.0" text="CATALOG" textFill="#464444">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Button fx:id="closebtn" mnemonicParsing="false" onAction="#closefrom" styleClass="closeform">
+                  <Button fx:id="closebtn" mnemonicParsing="false" onAction="#closefrom" prefHeight="24.0" prefWidth="18.0" styleClass="closeform">
                      <graphic>
                         <FontAwesomeIcon glyphName="CLOSE" />
                      </graphic>
                   </Button>
-                  <Line endX="856.0" startX="-130.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="2.0" prefWidth="1027.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Line endX="598.2929077148438" startX="-100.0" styleClass="linecolor-dark" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox prefHeight="214.0" prefWidth="985.0">
@@ -47,15 +54,18 @@
                            <children>
                               <Label text="Upload image">
                                  <HBox.margin>
-                                    <Insets left="50.0" />
+                                    <Insets bottom="5.0" />
                                  </HBox.margin>
+                                 <padding>
+                                    <Insets left="30.0" />
+                                 </padding>
                               </Label>
                            </children>
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="123.0" prefWidth="270.0">
+                        <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="123.0" prefWidth="287.0">
                            <children>
                               <ImageView fx:id="itemimages" fitHeight="123.0" fitWidth="217.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -75,12 +85,12 @@
                               <Insets />
                            </VBox.margin>
                         </HBox>
-                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="246.0">
+                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="288.0">
                            <VBox.margin>
-                              <Insets top="5.0" />
+                              <Insets top="10.0" />
                            </VBox.margin>
                            <children>
-                              <JFXTextField fx:id="itmtextfield" labelFloat="true" opacity="0.93" prefHeight="30.0" prefWidth="278.0" promptText="Item Description *" styleClass="form_field">
+                              <JFXTextField fx:id="itmtextfield" labelFloat="true" opacity="0.93" prefHeight="30.0" prefWidth="239.0" promptText="Item Description *" styleClass="form_field" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Open Sans" size="13.0" />
                                  </font>
@@ -100,10 +110,10 @@
                         <Insets />
                      </HBox.margin>
                      <padding>
-                        <Insets right="10.0" top="5.0" />
+                        <Insets left="20.0" top="5.0" />
                      </padding>
                   </VBox>
-                  <VBox alignment="TOP_CENTER" prefHeight="245.0" prefWidth="328.3" spacing="30.0">
+                  <VBox alignment="TOP_CENTER" prefHeight="245.0" prefWidth="328.3" spacing="20.0">
                      <children>
                         <HBox>
                            <VBox.margin>
@@ -118,31 +128,10 @@
                               <Insets top="5.0" />
                            </VBox.margin>
                            <children>
-                              <ComboBox fx:id="manufacturercombo" prefHeight="30.0" prefWidth="324.0" promptText="Brands*" />
+                              <ComboBox fx:id="brandscombo" prefHeight="30.0" prefWidth="324.0" promptText="Brands*" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="29.0" prefWidth="300.0" spacing="4.0">
-                           <VBox.margin>
-                              <Insets top="5.0" />
-                           </VBox.margin>
-                        </HBox>
-                     </children>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <padding>
-                        <Insets left="10.0" right="10.0" top="15.0" />
-                     </padding>
-                  </VBox>
-                  <VBox layoutX="291.0" layoutY="10.0" prefHeight="241.0" prefWidth="328.3" spacing="30.0">
-                     <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin>
-                     <children>
-                        <HBox>
-                           <VBox.margin>
-                              <Insets top="5.0" />
-                           </VBox.margin>
+                        <HBox spacing="15.0">
                            <children>
                               <JFXTextField fx:id="costtextfield" labelFloat="true" opacity="0.93" prefHeight="32.0" prefWidth="266.0" promptText="Cost Price *" styleClass="form_field">
                                  <font>
@@ -162,7 +151,7 @@
                                     <Font name="Open Sans" size="13.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="5.0" />
+                                    <Insets />
                                  </HBox.margin>
                                  <focusColor>
                                     <LinearGradient endX="1.0" endY="1.0">
@@ -173,12 +162,12 @@
                                     </LinearGradient>
                                  </focusColor>
                               </JFXTextField>
-                              <JFXTextField fx:id="roltextfield" labelFloat="true" layoutX="163.0" layoutY="10.0" opacity="0.93" prefHeight="32.0" prefWidth="266.0" promptText="Reorder level *" styleClass="form_field">
+                              <JFXTextField fx:id="roltextfield" labelFloat="true" layoutX="163.0" layoutY="10.0" opacity="0.93" prefHeight="32.0" prefWidth="266.0" promptText="ROL*" styleClass="form_field">
                                  <font>
                                     <Font name="Open Sans" size="13.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="5.0" />
+                                    <Insets />
                                  </HBox.margin>
                                  <focusColor>
                                     <LinearGradient endX="1.0" endY="1.0">
@@ -204,25 +193,28 @@
                                  </HBox.margin>
                               </JFXButton>
                            </children>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
                         </HBox>
                      </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
                      <padding>
-                        <Insets left="10.0" top="15.0" />
+                        <Insets left="10.0" right="10.0" top="5.0" />
                      </padding>
                   </VBox>
                </children>
             </HBox>
             <HBox>
                <children>
-                  <JFXTextField fx:id="searchbtn" prefHeight="25.0" prefWidth="217.0" promptText="Search Item" />
+                  <JFXTextField fx:id="searchbtn" prefHeight="25.0" prefWidth="217.0" promptText="Search Item" HBox.hgrow="ALWAYS" />
                </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
             </HBox>
-            <HBox>
+            <HBox prefHeight="261.0" prefWidth="673.0">
                <children>
-                  <TableView fx:id="itemtableview" prefHeight="270.0" prefWidth="950.0" styleClass="table-cell" stylesheets="@style.css">
+                  <TableView fx:id="itemtableview" prefHeight="261.0" prefWidth="695.0" styleClass="table-cell" stylesheets="@style.css">
                      <columns>
                         <TableColumn fx:id="itemimage" prefWidth="125.0" resizable="false" text="Image" />
                         <TableColumn fx:id="itemname" prefWidth="257.0" text="Item Name" />
@@ -236,12 +228,18 @@
                         <TableColumn fx:id="rol" prefWidth="62.0" text="ROL" />
                         <TableColumn fx:id="action" prefWidth="55.0" resizable="false" text="Action" />
                      </columns>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
                   </TableView>
                </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
             </HBox>
             <HBox>
                <children>
-                  <Line endX="882.5" startX="-100.0" stroke="#bfbfbf" />
+                  <Line endX="600.2929077148438" startX="-100.0" stroke="#bfbfbf" />
                </children>
             </HBox>
             <HBox>
