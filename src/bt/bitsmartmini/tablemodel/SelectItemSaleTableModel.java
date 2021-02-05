@@ -1,7 +1,5 @@
 package bt.bitsmartmini.tablemodel;
 
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.ImageView;
 
@@ -11,39 +9,54 @@ import javafx.scene.image.ImageView;
  */
 public class SelectItemSaleTableModel {
 
+    private SimpleStringProperty itemCode;
     private SimpleStringProperty itemName;
-    private SimpleIntegerProperty quantity;
-    private SimpleDoubleProperty cost;
-    private SimpleDoubleProperty price;
-    private SimpleDoubleProperty total;
-    private SimpleDoubleProperty discountval;
+    private SimpleStringProperty quantity;
+    private SimpleStringProperty cost;
+    private SimpleStringProperty price;
+    private SimpleStringProperty total;
+    private SimpleStringProperty discountval;
     private SimpleStringProperty uom;
     private ImageView image;
 
     public SelectItemSaleTableModel() {
     }
 
-    public SelectItemSaleTableModel(String itemName, int quantity, double cost, double price, double total, double discountval, ImageView img) {
+    public SelectItemSaleTableModel(String itemCode, String itemName, String quantity, String cost, String price, String total, String discountval, ImageView img) {
+        this.itemCode = new SimpleStringProperty(itemCode);
         this.itemName = new SimpleStringProperty(itemName);
-        this.quantity = new SimpleIntegerProperty(quantity);
-        this.cost = new SimpleDoubleProperty(cost);
-        this.price = new SimpleDoubleProperty(price);
-        this.total = new SimpleDoubleProperty(total);
-        this.discountval = new SimpleDoubleProperty(discountval);
+        this.quantity = new SimpleStringProperty(quantity);
+        this.cost = new SimpleStringProperty(cost);
+        this.price = new SimpleStringProperty(price);
+        this.total = new SimpleStringProperty(total);
+        this.discountval = new SimpleStringProperty(discountval);
         //this.uom = new SimpleStringProperty(uom);
         this.image = img;
 
     }
     
-    public SelectItemSaleTableModel(String itemName, int quantity, double cost, double price, double total, double discountval) {
+    public SelectItemSaleTableModel(String itemCode, String itemName, String quantity, String cost, String price, String total, String discountval) {
+        this.itemCode = new SimpleStringProperty(itemCode);
         this.itemName = new SimpleStringProperty(itemName);
-        this.quantity = new SimpleIntegerProperty(quantity);
-        this.cost = new SimpleDoubleProperty(cost);
-        this.price = new SimpleDoubleProperty(price);
-        this.total = new SimpleDoubleProperty(total);
-        this.discountval = new SimpleDoubleProperty(discountval);
+        this.quantity = new SimpleStringProperty(quantity);
+        this.cost = new SimpleStringProperty(cost);
+        this.price = new SimpleStringProperty(price);
+        this.total = new SimpleStringProperty(total);
+        this.discountval = new SimpleStringProperty(discountval);
         //this.uom = new SimpleStringProperty(uom);
 
+    }
+    
+    public String getItemCode() {
+        return itemCode.get();
+    }
+
+    public SimpleStringProperty getItemCodeProperty() {
+        return itemCode;
+    }
+
+    public void setItemCodeProperty(String itemCode) {
+        this.itemCode = new SimpleStringProperty(itemCode);
     }
 
     public String getItemName() {
@@ -58,64 +71,64 @@ public class SelectItemSaleTableModel {
         this.itemName = new SimpleStringProperty(itemName);
     }
 
-    public Integer getQuantity() {
+    public String getQuantity() {
         return quantity.get();
     }
 
-    public SimpleIntegerProperty getQuantityProperty() {
+    public SimpleStringProperty getQuantityProperty() {
         return quantity;
     }
 
-    public void setQuantityProperty(int quantity) {
-        this.quantity = new SimpleIntegerProperty(quantity);
+    public void setQuantityProperty(String quantity) {
+        this.quantity = new SimpleStringProperty(quantity);
     }
 
-    public double getCost() {
+    public String getCost() {
         return cost.get();
     }
 
-    public SimpleDoubleProperty getCostProperty() {
+    public SimpleStringProperty getCostProperty() {
         return cost;
     }
 
-    public void setCostProperty(double cost) {
-        this.cost = new SimpleDoubleProperty(cost);
+    public void setCostProperty(String cost) {
+        this.cost = new SimpleStringProperty(cost);
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price.get();
     }
 
-    public SimpleDoubleProperty getPriceProperty() {
+    public SimpleStringProperty getPriceProperty() {
         return price;
     }
 
-    public void setPriceProperty(double price) {
-        this.price = new SimpleDoubleProperty(price);
+    public void setPriceProperty(String price) {
+        this.price = new SimpleStringProperty(price);
     }
 
-    public double getTotal() {
+    public String getTotal() {
         return total.get();
     }
 
-    public SimpleDoubleProperty getTotalProperty() {
+    public SimpleStringProperty getTotalProperty() {
         return total;
     }
 
-    public void setTotalProperty(double total) {
-        this.total = new SimpleDoubleProperty(total);
+    public void setTotalProperty(String total) {
+        this.total = new SimpleStringProperty(total);
     }
 
-    public Double getDiscountValue() {
+    public String getDiscountValue() {
         return discountval.get();
     }
 
-    public SimpleDoubleProperty getDiscountValueProperty() {
+    public SimpleStringProperty getDiscountValueProperty() {
         return discountval;
     }
 
-    public void setDiscountValueProperty(Double discountval) {
-        this.discountval = new SimpleDoubleProperty(discountval);
+    public void setDiscountValueProperty(String discountval) {
+        this.discountval = new SimpleStringProperty(discountval);
     }
 
     public String getUom() {

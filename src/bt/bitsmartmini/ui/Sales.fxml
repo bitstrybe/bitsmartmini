@@ -123,14 +123,16 @@
                <children>
                   <TableView fx:id="salesdetailstable" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="208.0" prefWidth="383.0" styleClass="table-cell">
                      <columns>
-                        <TableColumn fx:id="salesdetailsdate" prefWidth="132.0" resizable="false" text="Date" />
-                        <TableColumn fx:id="itemnametb" prefWidth="300.0" resizable="false" styleClass="align_table_left" text="Items name" />
-                        <TableColumn fx:id="salesdetailsquantitytb" prefWidth="66.0" resizable="false" text="Qty" />
-                        <TableColumn fx:id="returned" prefWidth="66.0" resizable="false" text="RTD" />
-                        <TableColumn fx:id="itemspricetb" prefWidth="84.0" resizable="false" text="price" />
-                        <TableColumn fx:id="salesdetailsdiscount" prefWidth="97.0" resizable="false" text="Disc(%)" />
+                        <TableColumn fx:id="salesdetailsdate" resizable="false" text="Date" />
+                        <TableColumn fx:id="sditemcode" minWidth="30.0" prefWidth="100.0" resizable="false" styleClass="align_table_left" text="Barcode" />
+                        <TableColumn fx:id="sditemname" prefWidth="300.0" resizable="false" styleClass="align_table_left" text="Items Desc" />
+                        <TableColumn fx:id="sdqtyCol" prefWidth="66.0" resizable="false" text="Qty" />
+                        <TableColumn fx:id="sdrtdCol" prefWidth="66.0" resizable="false" text="RTD" />
+                        <TableColumn fx:id="sdpriceCol" prefWidth="70.0" resizable="false" text="price" />
+                        <TableColumn fx:id="sddiscCol" prefWidth="70.0" resizable="false" text="Disc" />
                         <TableColumn fx:id="refundsCol" maxWidth="99.0" minWidth="0.0" prefWidth="76.0" resizable="false" text="Refunds" />
                         <TableColumn fx:id="actualsCol" maxWidth="99.0" minWidth="0.0" prefWidth="76.0" resizable="false" text="Actual" />
+                        <TableColumn fx:id="actionCol" maxWidth="99.0" minWidth="0.0" prefWidth="76.0" resizable="false" text="Action" />
                      </columns>
                   </TableView>
                   <TableView fx:id="paymenttable" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="208.0" prefWidth="383.0" styleClass="table-cell">

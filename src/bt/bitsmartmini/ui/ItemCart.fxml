@@ -45,11 +45,12 @@
                   <TableView fx:id="carttable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1054.0" styleClass="table-cell" stylesheets="@style.css">
                      <columns>
                         <TableColumn fx:id="itemimage" prefWidth="125.0" resizable="false" text="Item Image" />
-                        <TableColumn fx:id="itemname" minWidth="0.0" prefWidth="391.0" resizable="false" text="Items" />
-                        <TableColumn fx:id="quantity" prefWidth="108.0" resizable="false" styleClass="align-table" text="Quantity" />
-                        <TableColumn fx:id="itemprice" prefWidth="89.0" resizable="false" styleClass="align-table" text="Item Price" />
-                        <TableColumn fx:id="total" prefWidth="96.0" resizable="false" text="Total" />
-                        <TableColumn fx:id="Discount" prefWidth="107.0" resizable="false" text="Discount" />
+                        <TableColumn fx:id="itemcode" minWidth="0.0" prefWidth="140.0" resizable="false" text="Barcode" />
+                        <TableColumn fx:id="itemname" minWidth="0.0" prefWidth="369.0" resizable="false" text="Items" />
+                        <TableColumn fx:id="quantity" prefWidth="100.0" resizable="false" styleClass="align-table" text="Quantity" />
+                        <TableColumn fx:id="itemprice" prefWidth="100.0" resizable="false" styleClass="align-table" text="Item Price" />
+                        <TableColumn fx:id="total" prefWidth="100.0" resizable="false" text="Total" />
+                        <TableColumn fx:id="Discount" prefWidth="77.0" resizable="false" text="Discount" />
                         <TableColumn fx:id="Discountcent" prefWidth="107.0" resizable="false" text="Discount(%)" />
                         <TableColumn fx:id="action" prefWidth="107.0" resizable="false" text="Action" />
                      </columns>

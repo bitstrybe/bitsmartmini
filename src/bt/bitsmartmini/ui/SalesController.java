@@ -72,14 +72,11 @@ import net.sf.jasperreports.engine.JRException;
  */
 public class SalesController implements Initializable {
 
-    //private final ObservableList<SelectItemSaleTableModel> data = FXCollections.observableArrayList();
     ObservableList<String> search;
     ObservableList<SalesTableModel> salesdata;
     ObservableList<SalesDetailsTableModel> salesdetailsdata;
     ObservableList<ReceiptTableModel> receiptdata;
     ObservableList<ReturnTableModel> rtddata;
-//    private final ObservableList<Person> data
-//            = FXCollections.observableArrayList();
 
     DecimalFormat df = new DecimalFormat("0.00");
     SalesBL sb = new SalesBL();
@@ -120,15 +117,6 @@ public class SalesController implements Initializable {
     @FXML
     private TableView<SalesDetailsTableModel> salesdetailstable;
     @FXML
-    private TableColumn<SalesDetailsTableModel, String> itemnametb;
-    @FXML
-    private TableColumn<SalesDetailsTableModel, Number> salesdetailsquantitytb;
-    private TableColumn<SalesDetailsTableModel, String> itemcosttb;
-    @FXML
-    private TableColumn<SalesDetailsTableModel, String> itemspricetb;
-    @FXML
-    private TableColumn<SalesDetailsTableModel, Number> salesdetailsdiscount;
-    @FXML
     private TableColumn<SalesDetailsTableModel, String> salesdetailsdate;
     @FXML
     private TableView<ReceiptTableModel> paymenttable;
@@ -142,13 +130,7 @@ public class SalesController implements Initializable {
     private TableColumn<ReceiptTableModel, String> mode;
     @FXML
     private TableColumn<?, ?> action1;
-
-    ReceiptBL rb = new ReceiptBL();
-    ReturnBL rn = new ReturnBL();
-
     private TableColumn<SalesDetailsTableModel, Boolean> raction;
-    @FXML
-    private TableColumn<SalesDetailsTableModel, Number> returned;
     @FXML
     private TableColumn<ReturnTableModel, String> rdate;
     @FXML
@@ -164,9 +146,26 @@ public class SalesController implements Initializable {
     @FXML
     private TableColumn<SalesTableModel, String> refunds;
     @FXML
-    private TableColumn<SalesDetailsTableModel, Number> refundsCol;
+    private TableColumn<SalesDetailsTableModel, String> refundsCol;
     @FXML
     private TableColumn<SalesDetailsTableModel, Number> actualsCol;
+    @FXML
+    private TableColumn<SalesDetailsTableModel, String> sditemcode;
+    @FXML
+    private TableColumn<SalesDetailsTableModel, String> sditemname;
+    @FXML
+    private TableColumn<SalesDetailsTableModel, Number> sdqtyCol;
+    @FXML
+    private TableColumn<SalesDetailsTableModel, Number> sdrtdCol;
+    @FXML
+    private TableColumn<SalesDetailsTableModel, String> sdpriceCol;
+    @FXML
+    private TableColumn<SalesDetailsTableModel, String> sddiscCol;
+    @FXML
+    private TableColumn<SalesDetailsTableModel, String> actionCol;
+    
+    ReceiptBL rb = new ReceiptBL();
+    ReturnBL rn = new ReturnBL();
 
     /**
      * Initializes the controller class.
@@ -175,7 +174,6 @@ public class SalesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         getTodaysDate();
-
     }
 
     public void getTodaysDate() {
@@ -188,7 +186,6 @@ public class SalesController implements Initializable {
     @FXML
     private void salesPDF(ActionEvent event) {
         try {
-            //if (LoginController.u.getRoles().equals("Administrator")) {
             new PrintReport().showSalesDateRangeReport(Utilities.convertToDateViaSqlDate(startdate.getValue()), Utilities.convertToDateViaSqlDate(enddate.getValue()));
 
         } catch (JRException ex) {
@@ -209,13 +206,9 @@ public class SalesController implements Initializable {
     }
 
     private void clearall(ActionEvent event) {
-//        seleteditemtableview.getItems().clear();
-//        sellbtn.setText("SALES");
         salesdetailstable.getItems().clear();
-//        getStockingItemList();
         Date dd = new Date(System.currentTimeMillis());
         SalesTableData(dd, dd);
-//        totalprice.setText(null);
     }
 
     public void SalesTableData(Date startdate, Date enddate) {
@@ -225,7 +218,6 @@ public class SalesController implements Initializable {
             double totalpaid;
             try {
                 totalpaid = Double.parseDouble(df.format(rec.getTotalPaidbySalesCode(s.getSalesId())));
-                //totalpaid = Double.parseDouble(df.format(s.getAmountPaid()));
             } catch (IllegalArgumentException ex) {
                 totalpaid = 0;
             }
@@ -241,7 +233,6 @@ public class SalesController implements Initializable {
                 amountpaid = 0;
             }
             double totalsales = sb.getActualTotalDiscountedSales(s.getSalesId());
-            //System.out.println("Total sales|: "+totalsales);
             double totalRtd = rd.getTotalRtdBySalesCode(s.getSalesId());
             double newtotalsales = totalsales - totalRtd;
             double balanceval = totalsales - amountpaid;
@@ -297,7 +288,6 @@ public class SalesController implements Initializable {
         });
         //}
         salestable.setItems(salesdata);
-//        clientTable.getColumns().add(action);
         salestable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
         salestable.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             try {
@@ -306,22 +296,29 @@ public class SalesController implements Initializable {
                 salesdetailsdata = FXCollections.observableArrayList();
                 sd.forEach((sales) -> {
                     RtdItem rt = new ReturnBL().getRtdItemByID(sales.getSalesDetailsId(), startdate, enddate);
+                    //System.out.println("sc: "+sales.getUpc().getUpc());
                     if (rt != null) {
-                        salesdetailsdata.add(new SalesDetailsTableModel(sales.getSalesDetailsId(), sales.getUpc().getItemDesc(), sales.getQuantity(), DecimalUtil.format2(sales.getCostPrice()), DecimalUtil.format2(sales.getSalesPrice()), rt.getRtdQty(), sales.getDiscount(), Utilities.convertDateToString(sales.getEntryDate())));
+                        //System.out.println("sc: "+sales.getUpc().getUpc());
+                        String refunds1 = DecimalUtil.format2(rt.getRtdQty() * sales.getSalesPrice());
+                        String bals = DecimalUtil.format2((sales.getQuantity() * sales.getSalesPrice()) - (rt.getRtdQty() * sales.getSalesPrice()));
+                        salesdetailsdata.add(new SalesDetailsTableModel(sales.getUpc().getUpc(), sales.getUpc().getItemDesc(), sales.getQuantity(), DecimalUtil.format2(sales.getSalesPrice()), rt.getRtdQty(), DecimalUtil.format2(sales.getDiscount()), refunds1, bals, Utilities.convertDateToString(sales.getEntryDate())));
                     } else {
-                        salesdetailsdata.add(new SalesDetailsTableModel(sales.getSalesDetailsId(), sales.getUpc().getItemDesc(), sales.getQuantity(), DecimalUtil.format2(sales.getCostPrice()), DecimalUtil.format2(sales.getSalesPrice()), 0, sales.getDiscount(), Utilities.convertDateToString(sales.getEntryDate())));
+                        //System.out.println("fd: "+sales.getUpc().getUpc());
+                        String bals = DecimalUtil.format2((sales.getQuantity() * sales.getSalesPrice()));
+                        salesdetailsdata.add(new SalesDetailsTableModel(sales.getUpc().getUpc(), sales.getUpc().getItemDesc(), sales.getQuantity(), DecimalUtil.format2(sales.getSalesPrice()), 0, DecimalUtil.format2(sales.getDiscount()), "0", bals, Utilities.convertDateToString(sales.getEntryDate())));
                     }
+                    
                 });
-                itemnametb.setCellValueFactory(cell -> cell.getValue().getItemsnameProperty());
-                salesdetailsquantitytb.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
-                itemcosttb.setCellValueFactory(cell -> cell.getValue().getItemscostProperty());
-                itemspricetb.setCellValueFactory(cell -> cell.getValue().getItemsPriceProperty());
-                salesdetailsdiscount.setCellValueFactory(cell -> cell.getValue().getDiscountProperty());
+                sditemcode.setCellValueFactory(cell -> cell.getValue().getItemsCodeProperty());
+                sditemname.setCellValueFactory(cell -> cell.getValue().getItemsnameProperty());
+                sdqtyCol.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
+                refundsCol.setCellValueFactory(cell -> cell.getValue().getItemscostProperty());
+                sdpriceCol.setCellValueFactory(cell -> cell.getValue().getItemsPriceProperty());
+                sddiscCol.setCellValueFactory(cell -> cell.getValue().getDiscountProperty());
                 salesdetailsdate.setCellValueFactory(cell -> cell.getValue().getDateProperty());
-                returned.setCellValueFactory(cell -> cell.getValue().getItemsRtdProperty());
+                sdrtdCol.setCellValueFactory(cell -> cell.getValue().getItemsRtdProperty());
                 salesdetailstable.setItems(salesdetailsdata);
                 salesdetailstable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-                //if()
                 RtdItem rt = rn.getRtdItemByID(t.getSalescode(), startdate, enddate);
                 raction.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SalesDetailsTableModel, Boolean>, ObservableValue<Boolean>>() {
                     @Override
@@ -338,7 +335,6 @@ public class SalesController implements Initializable {
                         } else {
                             return new AddReturnPolicy(false);
                         }
-
                     }
                 });
 
@@ -358,7 +354,7 @@ public class SalesController implements Initializable {
                 List<RtdItem> returns = rd.getRtdBySalesCode(t.getSalescode());
                 rtddata = FXCollections.observableArrayList();
                 returns.forEach(r -> {
-                    System.out.println("r: " + r.getSalescode());
+                    //System.out.println("r: " + r.getSalescode());
                     double totalA = (r.getRtdQty() * r.getSalesDetails().getSalesPrice());
                     rtddata.add(new ReturnTableModel(r.getSalescode(), r.getSalesDetails().getRtdItem().getSalesDetails().getUpc().getItemDesc(), r.getRtdQty(), DecimalUtil.format2(r.getSalesDetails().getSalesPrice()), DecimalUtil.format2(totalA), r.getRemarks(), DateUtil.formatDate(r.getRtdDate(), "yyyy-MM-dd")));
                 });

@@ -53,7 +53,7 @@ public class ReceiptReportModel extends AbstractTableModel implements Runnable {
             totalsalestb = totalpv - (totalpv * (c.getDiscount() / 100));
             data[x][5] = Utilities.roundToTwoDecimalPlace(totalsalestb, 2);
             data[x][6] = Utilities.roundToTwoDecimalPlace(totalsalestb, 2);
-            List<Stockin> sk = stkibl.getItemStockinItemsDesc(c.getUpc().getItemDesc());
+            List<Stockin> sk = stkibl.getItemStockinByBarcode(c.getUpc().getUpc());
             data[x][7] = sk.get(0).getUpc().getItemDesc();
             double totalpaid;
             double bal;

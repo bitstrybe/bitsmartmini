@@ -97,7 +97,7 @@ public class StockinBL extends DdsBL {
         return q.getResultList();
     }
 
-    public List<Stockin> getItemStockinItemsDesc(String u) {
+    public List<Stockin> getItemStockinByBarcode(String u) {
         TypedQuery<Stockin> q = em.createQuery("SELECT i FROM Stockin i WHERE i.upc.upc = :u", Stockin.class);
         q.setParameter("u", u);
         return q.getResultList();

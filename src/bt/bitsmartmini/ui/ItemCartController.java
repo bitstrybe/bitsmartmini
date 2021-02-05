@@ -79,23 +79,23 @@ public class ItemCartController extends MainAppController implements Initializab
     @FXML
     private TableColumn<SelectItemSaleTableModel, String> itemname;
     @FXML
-    private TableColumn<SelectItemSaleTableModel, Number> quantity;
+    private TableColumn<SelectItemSaleTableModel, String> quantity;
     @FXML
-    private TableColumn<SelectItemSaleTableModel, Number> itemprice;
+    private TableColumn<SelectItemSaleTableModel, String> itemprice;
     @FXML
     private TableColumn<SelectItemSaleTableModel, Boolean> action;
     @FXML
     public ChoiceBox<String> customerdroplist;
     @FXML
-    private TableColumn<SelectItemSaleTableModel, Number> total;
+    private TableColumn<SelectItemSaleTableModel, String> total;
     @FXML
     private TableColumn<SelectItemSaleTableModel, Boolean> Discount;
     @FXML
-    private TableColumn<SelectItemSaleTableModel, Number> Discountcent;
+    private TableColumn<SelectItemSaleTableModel, String> Discountcent;
 
     double totalp;
     DecimalFormat df = new DecimalFormat("0.00");
-    
+
     @FXML
     private Label totalprice;
 
@@ -104,6 +104,8 @@ public class ItemCartController extends MainAppController implements Initializab
     private TableColumn<SelectItemSaleTableModel, ImageView> itemimage;
     @FXML
     private Label curr;
+    @FXML
+    private TableColumn<SelectItemSaleTableModel, String> itemcode;
 
     /**
      * Initializes the controller class.
@@ -128,7 +130,8 @@ public class ItemCartController extends MainAppController implements Initializab
     public void AllCartToTable() {
         data = FXCollections.observableArrayList();
         for (SelectItemSaleTableModel c : cart.values()) {
-            Items item = ib.getImageItembyCode(c.getItemName());
+            System.out.println("i: " + c.getItemCode());
+            Items item = ib.getImageItembyCode(c.getItemCode());
             ImageView imageitems = new ImageView();
             File file = new File(item.getItemImg());
             Image image = new Image(file.toURI().toString());
@@ -140,7 +143,10 @@ public class ItemCartController extends MainAppController implements Initializab
             imageitems.scaleYProperty();
             imageitems.setSmooth(true);
             imageitems.setCache(true);
-            data.add(new SelectItemSaleTableModel(c.getItemName(), c.getQuantity(), c.getCost(), c.getPrice(), c.getTotal(), c.getDiscountValue(), imageitems));
+            //System.out.println("i: " + c.getItemCode());
+            //System.out.println("i: " + c.getItemCode());
+            data.add(new SelectItemSaleTableModel(item.getUpc(), item.getItemDesc(), c.getQuantity(), c.getCost(), c.getPrice(), c.getTotal(), c.getDiscountValue(), imageitems));
+            itemcode.setCellValueFactory(cell -> cell.getValue().getItemCodeProperty());
             itemname.setCellValueFactory(cell -> cell.getValue().getItemNameProperty());
             quantity.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
             itemprice.setCellValueFactory(cell -> cell.getValue().getPriceProperty());
@@ -194,7 +200,7 @@ public class ItemCartController extends MainAppController implements Initializab
     public class AddPersonDiscountCell extends TableCell<SelectItemSaleTableModel, Boolean> {
 
         //Image img = new Image(getClass().getResourceAsStream("edit.png"));
-        Image img2 = new Image(getClass().getResourceAsStream("/resources/discount.png"));
+        Image img2 = new Image(getClass().getResourceAsStream("/bt/resources/discount.png"));
         // a button for adding a new person.
         Button discountButton = new Button();
         // pads and centers the add button in the cell.
@@ -230,11 +236,11 @@ public class ItemCartController extends MainAppController implements Initializab
                             int selectdIndex = getTableRow().getIndex();
                             //Create a new table show details of the selected item
                             SelectItemSaleTableModel selectedRecord = (SelectItemSaleTableModel) carttable.getItems().get(selectdIndex);
-                            selectedRecord.setDiscountValueProperty(Double.parseDouble(childController.discounttextfield.getText()));
+                            selectedRecord.setDiscountValueProperty(childController.discounttextfield.getText());
                             totalp = Float.parseFloat(df.format(Utilities.sumList(getPrice())));
                             totalprice.setText(DecimalUtil.format2(totalp));
                             curr.setText(MainAppController.B.getBCurrency());
-                            if (selectedRecord.getDiscountValue() >= 0) {
+                            if (Integer.parseInt(selectedRecord.getDiscountValue()) >= 0) {
                                 getTotalprice();
                                 stage.close();
                             }
@@ -269,6 +275,7 @@ public class ItemCartController extends MainAppController implements Initializab
     }
 
     public class AddPersonRemoveCell extends TableCell<SelectItemSaleTableModel, Boolean> {
+
         //Image img = new Image(getClass().getResourceAsStream("edit.png"));
         Image img2 = new Image(getClass().getResourceAsStream("delete.png"));
         // a button for adding a new person.
@@ -296,7 +303,7 @@ public class ItemCartController extends MainAppController implements Initializab
                 public void handle(ActionEvent event) {
                     int selectdIndex = getTableRow().getIndex();
                     SelectItemSaleTableModel selectedRecord = (SelectItemSaleTableModel) carttable.getItems().get(selectdIndex);
-                    cart.remove(selectedRecord.getItemName());
+                    cart.remove(selectedRecord.getItemCode());
                     static_label.setText(String.valueOf(cart.size()));
                     carttable.getItems().remove(selectedRecord);
                     AllCartToTable();
@@ -366,34 +373,26 @@ public class ItemCartController extends MainAppController implements Initializab
                         int slc = salescount.get(0);
                         sale.setSalesId(++slc);
                     }
-
                     sale.setSalesDate(new Date(System.currentTimeMillis()));
                     sale.setUsers(new Users(LoginController.u.getUserid()));
-//            customerdroplist.getSelectionModel().getSelectedItem();
-
                     sale.setCustomers(new Customers(Integer.valueOf(cusid)));
                     sale.setEntryDate(new Date(System.currentTimeMillis()));
                     List<SalesDetails> sds = new ArrayList<>();
                     ObservableList<SelectItemSaleTableModel> list = carttable.getItems();
                     list.forEach(v -> {
                         SalesDetails sd = new SalesDetails();
-                        sd.setUpc(new Items(v.getItemName()));
+                        sd.setUpc(new Items(v.getItemCode()));
                         sd.setSaleId(sale);
-                        sd.setSalesPrice(v.getPrice());
-                        sd.setQuantity(v.getQuantity());
-                        sd.setCostPrice(v.getCost());
-                        sd.setDiscount(v.getDiscountValue());
-                        //sd.setUomCode(new Uom(v.getUom()));
-                        //sd.setUsers(new Users(LoginController.u.getUserid()));
+                        sd.setSalesPrice(Double.valueOf(v.getPrice()));
+                        sd.setQuantity(Integer.valueOf(v.getQuantity()));
+                        sd.setCostPrice(Double.valueOf(v.getCost()));
+                        sd.setDiscount(Double.valueOf(v.getDiscountValue()));
                         sd.setEntryDate(new Date());
                         sd.setModifiedDate(new Date());
                         sds.add(sd);
-
                     });
                     sale.setSalesDetailsCollection(sds);
-//                    if (result == 1) {
                     JFXRadioButton jrb = (JFXRadioButton) childController.tg.getSelectedToggle();
-                    //System.out.println(jrb.getText());
                     List<Receipt> rds = new ArrayList<>();
                     Receipt receipt = new Receipt();
                     List<Integer> receiptcount = rb.getReceiptCount();
@@ -464,7 +463,7 @@ public class ItemCartController extends MainAppController implements Initializab
             });
             Thread th = new Thread(task);
             th.start();
-            
+
         });
 
         Scene scene = new Scene(parent);
@@ -517,10 +516,10 @@ public class ItemCartController extends MainAppController implements Initializab
     public List getPrice() {
         List<Number> columnData = new ArrayList<>();
         for (SelectItemSaleTableModel item : carttable.getItems()) {
-            Number qunt = quantity.getCellObservableValue(item).getValue();
+            String qunt = quantity.getCellObservableValue(item).getValue();
 //            Number nhisps = nhisvalprice.getCellObservableValue(item).getValue();
-            double actualprice = quantity.getCellObservableValue(item).getValue().doubleValue() * itemprice.getCellObservableValue(item).getValue().doubleValue();
-            double discount = Discountcent.getCellObservableValue(item).getValue().doubleValue();
+            double actualprice = Integer.valueOf(quantity.getCellObservableValue(item).getValue()) * Double.valueOf(itemprice.getCellObservableValue(item).getValue());
+            double discount = Double.valueOf(Discountcent.getCellObservableValue(item).getValue());
 //            double nhistopup = actualprice - qunt.intValue();
 
             if (discount > 0) {

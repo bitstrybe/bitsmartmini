@@ -85,7 +85,7 @@ public class CatalogController extends MainAppController implements Initializabl
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ItemsDisplay.fxml"));
                             Parent parent = (Parent) fxmlLoader.load();
                             ItemsDisplayController childController = fxmlLoader.getController();
-                            Long balance = new StockinBL().getStockBalance(items.getItemDesc());
+                            Long balance = new StockinBL().getStockBalance(items.getUpc());
                             if ("Supervisor".equals(LoginController.u.getRoles()) || "Administrator".equals(LoginController.u.getRoles())) {
                                 childController.catalogstaus.getChildren().add(childController.adminstockin);
                                 if (balance > 0) {
@@ -229,24 +229,24 @@ public class CatalogController extends MainAppController implements Initializabl
                                     FXMLLoader fxmlLoaderQnt = new FXMLLoader(getClass().getResource("AddToCart.fxml"));
                                     Parent parentQtn = (Parent) fxmlLoaderQnt.load();
                                     AddToCartController childControllerQnt = fxmlLoaderQnt.getController();
-                                    //ItemsPrice itprice = new ItemsBL().getItemsPriceByItemDesc(items.getItemDesc());
                                     childControllerQnt.itemnamelabel.setText(items.getItemDesc());
-
                                     childControllerQnt.itemqty.setText(balance.toString());
                                     childControllerQnt.addtocartbtn.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
                                         if (balance <= 0) {
                                             childControllerQnt.addtocartinfo.setText("Out of Stocks");
                                         } else {
                                             try {
-                                                long stockinqty = new StockinBL().getStockInTotal(items.getItemDesc());
+                                                long stockinqty = new StockinBL().getStockInTotal(items.getUpc());
                                                 long qntfield = Long.valueOf(childControllerQnt.qnttextfield.getText());
                                                 if (qntfield <= balance) {
                                                     double totalqnt = qntfield * items.getSp();
-                                                    //UomDef uom = new UomBL().getUombyItemId(items.getItemDesc());
-                                                    SelectItemSaleTableModel item = new SelectItemSaleTableModel(items.getItemDesc(), Integer.valueOf(childControllerQnt.qnttextfield.getText()), items.getCp(), items.getSp(), totalqnt, 0);
-                                                    cart.put(item.getItemName(), item);
+                                                    SelectItemSaleTableModel item = new SelectItemSaleTableModel(items.getUpc(), items.getItemDesc(), childControllerQnt.qnttextfield.getText(), DecimalUtil.format2(items.getCp()), DecimalUtil.format2(items.getSp()), DecimalUtil.format2(totalqnt), "0");
+                                                    System.out.println("item: "+items.getUpc());
+                                                    System.out.println("item1: "+item.getItemCode());
+                                                    System.out.println("qty: "+totalqnt);
+                                                    cart.put(items.getUpc(), item);
                                                     static_label.setText(String.valueOf(cart.size()));
-                                                    childControllerQnt.addtocartinfo.setText("added to cart");
+                                                    childControllerQnt.addtocartinfo.setText("item has been added to cart");
                                                 } else {
                                                     childControllerQnt.addtocartinfo.setText("Not enough Quantity");
                                                 }

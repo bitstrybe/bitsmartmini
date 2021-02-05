@@ -371,7 +371,7 @@ public class StockController implements Initializable {
         }
         stkoutdata = FXCollections.observableArrayList();
         v.forEach((out) -> {
-            List<Stockin> batchno = new StockinBL().getItemStockinItemsDesc(out.getUpc().getUpc());
+            List<Stockin> batchno = new StockinBL().getItemStockinByBarcode(out.getUpc().getUpc());
             stkoutdata.add(new StockoutTableModel(out.getStockoutId(), out.getUpc().getItemDesc(), out.getQuantity(), out.getRemarks(), Utilities.convertDateToString(out.getStkDate())));
         });
         stkoutitems.setCellValueFactory(cell -> cell.getValue().getItemProperty());
@@ -431,7 +431,7 @@ public class StockController implements Initializable {
         List<SalesDetails> s = salesbl.getAllSalesDetailsbyBarcode(itemsDesc, 10);
         salesdata = FXCollections.observableArrayList();
         s.forEach((sales) -> {
-            salesdata.add(new SalesDetailsTableModel(sales.getSalesDetailsId(), sales.getUpc().getItemDesc(), sales.getQuantity(), String.valueOf(sales.getCostPrice()), String.valueOf(sales.getSalesPrice()), sales.getRtdItem().getRtdQty(), sales.getDiscount(), Utilities.convertDateToString(sales.getEntryDate())));
+            salesdata.add(new SalesDetailsTableModel(sales.getUpc().getUpc(), sales.getUpc().getItemDesc(), sales.getQuantity(), DecimalUtil.format2(sales.getSalesPrice()), sales.getRtdItem().getRtdQty(), DecimalUtil.format2(sales.getDiscount()),"0","0", Utilities.convertDateToString(sales.getEntryDate())));
         });
         salesitemstb.setCellValueFactory(cell -> cell.getValue().getItemsnameProperty());
         salesqyttb.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
