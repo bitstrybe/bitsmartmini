@@ -21,7 +21,7 @@
 
 <StackPane prefHeight="592.0" prefWidth="700.0" styleClass="popupbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.AddItemsController">
    <children>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="747.0" prefWidth="701.0" styleClass="form_background">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="701.0" styleClass="form_background">
          <children>
             <HBox alignment="CENTER" prefHeight="32.0" prefWidth="701.0">
                <children>
