@@ -18,25 +18,21 @@
 
 <StackPane prefHeight="354.0" prefWidth="510.0" styleClass="popupbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.AdminStockinController">
    <children>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.0" prefWidth="512.0" styleClass="form_background" StackPane.alignment="CENTER">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="561.0" styleClass="form_background" StackPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="43.0" prefWidth="505.0" styleClass="form_background">
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="560.0" styleClass="form_background" VBox.vgrow="ALWAYS">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="439.0">
-                     <children>
-                        <Label text="STOCK IN" textFill="#544848">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding>
-                        </Label>
-                     </children>
-                  </HBox>
+                  <Label prefHeight="19.0" prefWidth="508.0" text="Stock In" textFill="#8a8888">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
                   <Button fx:id="closebtn" alignment="CENTER" mnemonicParsing="false" onAction="#closefrom" styleClass="closeform">
                      <graphic>
                         <FontAwesomeIcon glyphName="CLOSE" />
@@ -46,85 +42,85 @@
             </HBox>
             <HBox>
                <children>
-                  <Line endX="411.29290771484375" startX="-100.0" styleClass="linecolor-dark" />
+                  <Line endX="460.29290771484375" startX="-100.0" styleClass="linecolor-dark" />
                </children>
             </HBox>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0" styleClass="form_background">
+            <HBox prefHeight="219.0" prefWidth="561.0" style="-fx-background-color: #ffffff;">
                <children>
-                  <HBox prefHeight="112.0" prefWidth="444.0" style="-fx-background-color: #ffffff;">
+                  <HBox alignment="CENTER" prefHeight="234.0" prefWidth="195.0">
                      <children>
-                        <ImageView fx:id="itemimage" fitHeight="112.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
-                        <VBox prefHeight="112.0" prefWidth="286.0">
-                           <children>
-                              <Label fx:id="itemname" prefHeight="17.0" prefWidth="331.0" />
-                              <Label fx:id="uomitem" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="233.0" />
-                           </children>
-                           <padding>
-                              <Insets left="10.0" top="5.0" />
-                           </padding>
-                        </VBox>
+                        <ImageView fx:id="itemimage" fitHeight="208.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS" />
                      </children>
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </VBox.margin>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="62.0" prefWidth="467.0" spacing="10.0">
+                  <VBox alignment="CENTER" prefHeight="234.0" prefWidth="250.0" spacing="2.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#minusqnty" prefHeight="58.0" prefWidth="65.0">
-                           <graphic>
-                              <FontAwesomeIcon glyphName="MINUS" />
-                           </graphic>
-                        </Button>
-                        <JFXTextField fx:id="qnttextfield" alignment="CENTER" prefHeight="58.0" prefWidth="201.0" promptText="0" styleClass="form_field">
-                           <font>
-                              <Font size="31.0" />
-                           </font>
-                           <focusColor>
-                              <LinearGradient endX="1.0" endY="1.0">
-                                 <stops>
-                                    <Stop color="#0a8e90" />
-                                    <Stop color="#8e203d" offset="1.0" />
-                                 </stops>
-                              </LinearGradient>
-                           </focusColor>
-                        </JFXTextField>
-                        <Button mnemonicParsing="false" onAction="#plusqnty" prefHeight="70.0" prefWidth="56.0">
-                           <graphic>
-                              <FontAwesomeIcon glyphName="PLUS" />
-                           </graphic>
-                        </Button>
+                        <Label fx:id="itembarcode" layoutX="20.0" layoutY="32.0" prefHeight="30.0" prefWidth="300.0" VBox.vgrow="ALWAYS" />
+                        <Label fx:id="itemname" prefHeight="55.0" prefWidth="300.0" wrapText="true" VBox.vgrow="ALWAYS" />
+                        <Label fx:id="itembrand" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="300.0" />
+                        <Label fx:id="itemqty" layoutX="20.0" layoutY="49.0" prefHeight="27.0" prefWidth="300.0" />
+                        <Label fx:id="itemsp" layoutX="20.0" layoutY="66.0" prefHeight="27.0" prefWidth="300.0" textFill="#f20404" />
                      </children>
-                     <padding>
-                        <Insets top="5.0" />
-                     </padding>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="51.0" prefWidth="442.0">
-                     <children>
-                        <JFXButton id="action-btn" fx:id="save" onAction="#saveAction" prefHeight="30.0" prefWidth="110.0" stylesheets="@style.css" text="Save" textFill="#323232">
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </HBox.margin>
-                        </JFXButton>
-                        <JFXButton contentDisplay="CENTER" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #cccccc;" text="Clear">
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </HBox.margin>
-                        </JFXButton>
-                     </children>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </HBox>
+                  </VBox>
                </children>
-            </VBox>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="87.0" prefWidth="551.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#minusqnty" prefHeight="75.0" prefWidth="65.0">
+                     <graphic>
+                        <FontAwesomeIcon glyphName="MINUS" />
+                     </graphic>
+                  </Button>
+                  <JFXTextField fx:id="qnttextfield" alignment="CENTER" prefHeight="75.0" prefWidth="201.0" promptText="0" styleClass="form_field">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                     <focusColor>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="#0a8e90" />
+                              <Stop color="#8e203d" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </focusColor>
+                  </JFXTextField>
+                  <Button mnemonicParsing="false" onAction="#plusqnty" prefHeight="75.0" prefWidth="56.0">
+                     <graphic>
+                        <FontAwesomeIcon glyphName="PLUS" />
+                     </graphic>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="63.0" prefWidth="533.0">
+               <children>
+                  <JFXButton id="action-btn" fx:id="save" onAction="#saveAction" prefHeight="30.0" prefWidth="110.0" stylesheets="@style.css" text="Save" textFill="#323232">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton contentDisplay="CENTER" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #cccccc;" text="Clear">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
             <HBox>
                <children>
-                  <Line endX="411.29290771484375" endY="-4.3451786041259766E-5" startX="-100.0" stroke="#bfbfbf" />
+                  <Line endX="454.29290771484375" startX="-100.0" stroke="#bfbfbf" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="519.0" VBox.vgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="561.0" VBox.vgrow="NEVER">
                <children>
-                  <Label fx:id="displayinfo" prefHeight="26.0" prefWidth="266.0">
+                  <Label fx:id="displayinfo" prefHeight="26.0" prefWidth="266.0" HBox.hgrow="ALWAYS">
                      <graphic>
                         <StackPane>
                            <children>
@@ -138,7 +134,7 @@
                         <Font size="13.0" />
                      </font>
                      <HBox.margin>
-                        <Insets left="30.0" />
+                        <Insets />
                      </HBox.margin>
                   </Label>
                </children>

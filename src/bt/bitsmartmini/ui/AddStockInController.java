@@ -102,7 +102,6 @@ public class AddStockInController implements Initializable {
         getItemList(search.getText());
         search.textProperty().addListener(e -> {
             getItemList(search.getText());
-
         });
         itemlist.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             itembarcode.setText(itemlist.getSelectionModel().getSelectedItem().split(":")[0]);
@@ -207,7 +206,6 @@ public class AddStockInController implements Initializable {
                 check.setVisible(false);
                 break;
         }
-
     }
 
     @FXML

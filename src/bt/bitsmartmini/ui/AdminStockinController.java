@@ -23,8 +23,15 @@ import bt.bitsmartmini.bl.StockinBL;
 import bt.bitsmartmini.entity.Items;
 import bt.bitsmartmini.entity.Stockin;
 import bt.bitsmartmini.entity.Users;
-import bt.bitsmartmini.utils.Utilities;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.image.Image;
 
 /**
  * FXML Controller class
@@ -35,11 +42,8 @@ public class AdminStockinController implements Initializable {
 
     @FXML
     private Button closebtn;
-    @FXML
     public ImageView itemimage;
-    @FXML
     public Label itemname;
-    @FXML
     public Label uomitem;
     @FXML
     private JFXTextField qnttextfield;
@@ -57,13 +61,51 @@ public class AdminStockinController implements Initializable {
     public JFXSpinner spinner;
 
     AtomicInteger rowCounter = new AtomicInteger(0);
+    @FXML
+    private ImageView itemimage1;
+    @FXML
+    private Label itembarcode;
+    @FXML
+    private Label itemname1;
+    @FXML
+    private Label itembrand;
+    @FXML
+    private Label itemqty;
+    @FXML
+    private Label itemsp;
+
+    //ItemsBL ib = new ItemsBL();
+    StockinBL sb = new StockinBL();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try {
+            // TODO
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ItemsDisplay.fxml"));
+            Parent parent = (Parent) fxmlLoader.load();
+            ItemsDisplayController childController = fxmlLoader.getController();
+            itembarcode.setText(childController.itembcode.getText());
+            itemname.setText(childController.medsname.getText());
+            itembrand.setText(childController.brand.getText());
+            long qty = sb.getStockBalance(childController.itembcode.getText());
+            itemqty.setText(Long.valueOf(qty).toString() + " Remaining");
+            itemsp.setText(MainAppController.B.getBCurrency() + " " + childController.qty.getText());
+            Items its = new ItemsBL().getImageItembyCode(childController.itembcode.getText());
+            FileInputStream input;
+            try {
+                input = new FileInputStream(its.getItemImg());
+                Image image = new Image(input);
+                itemimage.setImage(image);
+                save.setDisable(false);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(AddStockInController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(AdminStockinController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -84,6 +126,16 @@ public class AdminStockinController implements Initializable {
         itemimage.setImage(null);
     }
 
+    private void refreshView() {
+        qnttextfield.setText("1");
+        //itemimage.setImage(null);
+        //itembarcode.setText(null);
+        //itemname.setText(null);
+        // itembrand.setText(null);
+        Long qty = sb.getStockBalance(itembarcode.getText());
+        itemqty.setText(qty.toString() + " Remainig");
+    }
+
     private void closeTransition() {
         displayinfo.setText("SUCCESSFULLY SAVED");
         itemname.setText(null);
@@ -101,7 +153,6 @@ public class AdminStockinController implements Initializable {
     }
 
     public void saveTemplate() {
-        ItemsBL ib = new ItemsBL();
         displayinfo.textProperty().unbind();
         Stockin cat = new Stockin();
         List<Integer> stcinid = new StockinBL().getStockinCount();
@@ -112,37 +163,25 @@ public class AdminStockinController implements Initializable {
             int stkval = stcinid.get(0);
             cat.setStockinId(++stkval);
         }
-
-        //cat.setBatchNo(childController.batchtextfield.getText());
-        // cat.setBatchNo(String.valueOf(cat.getStockinId()));
-        cat.setUpc(new Items(itemname.getText()));
+        cat.setUpc(new Items(itembarcode.getText()));
         cat.setQuantity(Integer.parseInt(qnttextfield.getText()));
-        //cat.set(Utilities.roundToTwoDecimalPlace(Double.parseDouble(costtextfield.getText()), 2));
-        //cat.setSalesPrice(Utilities.roundToTwoDecimalPlace(Double.parseDouble(salestextfield.getText()), 2));
-//                cat.setNhisPrice(Utilities.roundToTwoDecimalPlace(Double.parseDouble(childController.nhistextfield.getText()), 2));
         cat.setStockinDate(new Date());
         cat.setExpiryDate(new Date());
         cat.setUsers(new Users(LoginController.u.getUserid()));
         cat.setEntryLog(new Date());
         cat.setLastModified(new Date());
-//        ItemsPrice itprice = ib.getItemsPriceByItemDesc(cat.getItems().getItemDesc());
-//        //itprice.setItems(cat.getItems());
-//        itprice.setItemDesc(cat.getItems().getItemDesc());
-//        itprice.setCostPrice(Utilities.roundToTwoDecimalPlace(Double.parseDouble(costtextfield.getText()), 2));
-//        itprice.setSalesPrice(Utilities.roundToTwoDecimalPlace(Double.parseDouble(salestextfield.getText()), 2));
-//        itprice.setEntryLog(new Date());
-//        itprice.setLastModified(new Date());
-//        itprice.setItems(cat.getItems());
-//        cat.getItems().setItemsPrice(itprice);
         int result = new InsertUpdateBL().insertData(cat);
-        if (result == 1) {
-            // int i = new InsertUpdateBL().updateData(cat.getItems());
-            closeTransition();
-        } else {
-            displayinfo.setText("NOTICE! AN ERROR OCCURED");
-            spinner.setVisible(false);
-            check.setVisible(false);
-            //break;
+        switch (result) {
+            case 1:
+                if (result == 1) {
+                    closeTransition();
+                }
+                break;
+            default:
+                displayinfo.setText("There was an error, check and try again.");
+                spinner.setVisible(false);
+                check.setVisible(false);
+                break;
         }
 
     }

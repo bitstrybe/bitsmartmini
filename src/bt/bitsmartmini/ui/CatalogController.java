@@ -133,6 +133,7 @@ public class CatalogController extends MainAppController implements Initializabl
                                     input = new FileInputStream(its.getItemImg());
                                     Image imagesk = new Image(input);
                                     childControllersk.itemimage.setImage(image);
+                                    childControllersk.itemimage.setImage(image);
                                     childControllersk.save.setDisable(false);
                                     childControllersk.save.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
                                         childControllersk.save.setDisable(true);
