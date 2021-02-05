@@ -26,7 +26,7 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Button fx:id="closebtn1" mnemonicParsing="false" onAction="#closefrom" styleClass="closeform">
+                  <Button fx:id="closebtn" mnemonicParsing="false" onAction="#closefrom" styleClass="closeform">
                      <graphic>
                         <FontAwesomeIcon glyphName="CLOSE" />
                      </graphic>
@@ -43,7 +43,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="38.0" prefWidth="751.0">
                <children>
-                  <JFXTextField fx:id="search1" prefHeight="40.0" prefWidth="751.0" promptText="Search Items" HBox.hgrow="ALWAYS" />
+                  <JFXTextField fx:id="search" prefHeight="40.0" prefWidth="751.0" promptText="Search Items" HBox.hgrow="ALWAYS" />
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

@@ -53,17 +53,15 @@ public class AddStockOutController implements Initializable {
     public FontAwesomeIcon check;
     public FontAwesomeIcon duplicatelock;
     public Label itemname;
+    @FXML
     private Button closebtn;
+    @FXML
     private JFXTextField search;
     @FXML
     private JFXListView<String> itemlist;
     @FXML
     private ImageView itemimage;
     public TextArea remarks;
-    @FXML
-    private Button closebtn1;
-    @FXML
-    private JFXTextField search1;
     @FXML
     public Label itembarcode;
     @FXML
@@ -86,8 +84,8 @@ public class AddStockOutController implements Initializable {
     StockinBL sb = new StockinBL();
 
     public void getItemList(String p) {
-        List<String> item = new ItemsBL().getAllItemsForList();
-        if (p.length() > 0) {
+        List<String> item;
+        if (p!= null && p.length() > 0) {
             item = new ItemsBL().searchItemsForList(p);
         } else {
             item = new ItemsBL().getAllItemsForList();
@@ -115,7 +113,6 @@ public class AddStockOutController implements Initializable {
         getItemList(search.getText());
         search.textProperty().addListener(e -> {
             getItemList(search.getText());
-
         });
 
         itemlist.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {

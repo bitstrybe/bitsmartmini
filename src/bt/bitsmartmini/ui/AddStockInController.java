@@ -83,7 +83,7 @@ public class AddStockInController implements Initializable {
 
     public void getItemList(String p) {
         List<String> item = new ItemsBL().getAllItemsForList();
-        if (p.length() > 0) {
+        if (p != null && p.length() > 0) {
             item = new ItemsBL().searchItemsForList(p);
         } else {
             item = new ItemsBL().getAllItemsForList();
