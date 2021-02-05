@@ -162,22 +162,31 @@ public class MainAppController implements Initializable {
 
         try {
             setScene("Dashboard.fxml");
-            dashboard.getStyleClass().add("hoverVboxActive");
-            catalog.getStyleClass().clear();
-            catalog.getStyleClass().add("hoverVbox");
-            catalogawesome.getStyleClass().add("InactiveSideTextAndFont");
-            catalogtext.getStyleClass().add("InactiveSideTextAndFont");
-            sales.getStyleClass().clear();
-            sales.getStyleClass().add("hoverVbox");
-            salesawesome.getStyleClass().add("InactiveSideTextAndFont");
-            salestext.getStyleClass().add("InactiveSideTextAndFont");
-            stocks.getStyleClass().clear();
-            stocks.getStyleClass().add("hoverVbox");
-            stockawesome.getStyleClass().add("InactiveSideTextAndFont");
-            stocktext.getStyleClass().add("InactiveSideTextAndFont");
-            backup.getStyleClass().add("hoverVbox");
-            backupawesome.getStyleClass().add("InactiveSideTextAndFont");
-            backuptext.getStyleClass().add("InactiveSideTextAndFont");
+            //Dashboard is Active
+                dashboard.getStyleClass().add("hoverVboxActive");
+                dashawesome.getStyleClass().clear();
+                dashawesome.getStyleClass().add("ActiveSideTextAndFont");
+                dashtext.getStyleClass().clear();
+                dashtext.getStyleClass().add("ActiveSideTextAndFont");
+                //Catalog
+                catalog.getStyleClass().clear();
+                catalog.getStyleClass().add("hoverVbox");
+                catalogawesome.getStyleClass().add("InactiveSideTextAndFont");
+                catalogtext.getStyleClass().add("InactiveSideTextAndFont");
+                //Sales
+                sales.getStyleClass().clear();
+                sales.getStyleClass().add("hoverVbox");
+                salesawesome.getStyleClass().add("InactiveSideTextAndFont");
+                salestext.getStyleClass().add("InactiveSideTextAndFont");
+                //Stocks
+                stocks.getStyleClass().clear();
+                stocks.getStyleClass().add("hoverVbox");
+                stockawesome.getStyleClass().add("InactiveSideTextAndFont");
+                stocktext.getStyleClass().add("InactiveSideTextAndFont");
+                //Backup
+                backup.getStyleClass().add("hoverVbox");
+                backupawesome.getStyleClass().add("InactiveSideTextAndFont");
+                backuptext.getStyleClass().add("InactiveSideTextAndFont");
 
         } catch (IOException ex) {
             Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);

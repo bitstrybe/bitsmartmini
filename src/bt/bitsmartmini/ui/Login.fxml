@@ -22,18 +22,18 @@
          <children>
             <AnchorPane prefHeight="26.0" prefWidth="575.0">
                <children>
-                  <ImageView fitHeight="23.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="23.0" fitWidth="65.0" opacity="0.66" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../resources/bitstrybe_social_black.png" />
+                        <Image url="@../../resources/bitstrybe_social_white.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="65.0" layoutY="2.0" text="\@bitstrybe" />
+                  <Label layoutX="65.0" layoutY="2.0" opacity="0.66" text="\@bitstrybe" textFill="WHITE" />
                  
                                       <Button layoutX="546.0" layoutY="-2.0" mnemonicParsing="false" onAction="#exit" prefHeight="9.0" prefWidth="9.0" styleClass="homebtn" stylesheets="@style.css">
                         <graphic>
             </graphic>
                         <graphic>
-                            <FontAwesomeIcon glyphName="CLOSE" />
+                            <FontAwesomeIcon fill="WHITE" glyphName="CLOSE" />
                         </graphic>
                     </Button>
                </children>
@@ -44,19 +44,19 @@
          <children>
             <ImageView fitHeight="60.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../resources/bitstrybe-final-black.png" />
+                  <Image url="@../../resources/bitstrybe-final-white.png" />
                </image>
             </ImageView>
             <VBox alignment="CENTER" VBox.vgrow="NEVER">
                <children>
                   <AnchorPane VBox.vgrow="NEVER">
                      <children>
-                          <Label alignment="CENTER" layoutX="-2.0" prefHeight="40.0" prefWidth="575.0" text="BitsmartMini">
+                          <Label alignment="CENTER" layoutX="-2.0" opacity="0.66" prefHeight="40.0" prefWidth="575.0" text="BitsmartMini" textFill="WHITE">
                               <font>
                                   <Font name="Open Sans" size="28.0" />
                               </font>
                           </Label>
-                          <Label alignment="CENTER" layoutX="267.0" layoutY="31.0" prefHeight="17.0" prefWidth="146.0" text="Mini Retail" textFill="#e4e2e2">
+                          <Label alignment="CENTER" layoutX="267.0" layoutY="31.0" opacity="0.66" prefHeight="17.0" prefWidth="146.0" text="Mini Retail" textFill="#ff1209">
                               <font>
                                   <Font name="Open Sans" size="10.0" />
                               </font>
@@ -68,7 +68,7 @@
                   <Insets bottom="20.0" />
                </padding>
             </VBox>
-              <JFXTextField fx:id="username" focusColor="BLACK" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#resetElem" prefHeight="28.0" prefWidth="200.0" promptText="Username" styleClass="login-text-fill" unFocusColor="#2e2e2e">
+              <JFXTextField fx:id="username" focusColor="WHITE" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#resetElem" prefHeight="28.0" prefWidth="200.0" promptText="Username" styleClass="login-text-fill" unFocusColor="#3f3f3f">
                   <font>
                       <Font size="14.0" />
                   </font>
@@ -76,7 +76,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
               </JFXTextField>
-              <JFXPasswordField fx:id="password" focusColor="BLACK" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#resetElem" prefHeight="28.0" prefWidth="200.0" promptText="Password" styleClass="login-text-fill" unFocusColor="#2e2e2e">
+              <JFXPasswordField fx:id="password" focusColor="WHITE" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#resetElem" prefHeight="28.0" prefWidth="200.0" promptText="Password" styleClass="login-text-fill" unFocusColor="#3f3f3f">
                   <font>
                       <Font size="14.0" />
                   </font>
@@ -92,7 +92,7 @@
                   <Insets bottom="20.0" top="20.0" />
                </VBox.margin>
               </JFXButton>
-            <Label fx:id="statusL" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="573.0" text="Label">
+            <Label fx:id="statusL" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="573.0" text="Label" textFill="WHITE">
                <font>
                   <Font name="Open Sans Italic" size="11.0" />
                </font>
@@ -107,7 +107,7 @@
                         <Font size="10.0" />
                      </font>
                   </Hyperlink>
-                      <Text layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Copyright @ 2020 Bitstrybe Inc. All Rights Reserved." wrappingWidth="259.22900390625">
+                      <Text fill="WHITE" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Copyright @ 2020 Bitstrybe Inc. All Rights Reserved." wrappingWidth="259.22900390625">
                      <font>
                         <Font name="Open Sans" size="10.0" />
                      </font>
