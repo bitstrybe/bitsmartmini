@@ -133,7 +133,7 @@ public class ReturnBL extends DdsBL {
 
     public Long getTotalReturnsbyItemDesc(String itemDesc) {
         try {
-            TypedQuery<Long> q = em.createQuery("SELECT SUM(s.rtdQty) FROM RtdItem s WHERE s.salesDetails.item.itemDesc = :itemDesc", Long.class);
+            TypedQuery<Long> q = em.createQuery("SELECT SUM(s.rtdQty) FROM RtdItem s WHERE s.salesDetails.upc.itemDesc = :itemDesc", Long.class);
             q.setParameter("itemDesc", itemDesc);
             return q.getSingleResult();
         } catch (NoResultException ex) {

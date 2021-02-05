@@ -18,7 +18,7 @@
 
 <StackPane prefHeight="354.0" prefWidth="510.0" styleClass="popupbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.AdminStockinController">
    <children>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="354.0" prefWidth="512.0" styleClass="form_background" StackPane.alignment="CENTER">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.0" prefWidth="512.0" styleClass="form_background" StackPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="43.0" prefWidth="505.0" styleClass="form_background">
                <children>
@@ -44,6 +44,11 @@
                   </Button>
                </children>
             </HBox>
+            <HBox>
+               <children>
+                  <Line endX="411.29290771484375" startX="-100.0" styleClass="linecolor-dark" />
+               </children>
+            </HBox>
             <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0" styleClass="form_background">
                <children>
                   <HBox prefHeight="112.0" prefWidth="444.0" style="-fx-background-color: #ffffff;">
@@ -63,11 +68,16 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox prefHeight="36.0" prefWidth="467.0" spacing="10.0">
+                  <HBox alignment="CENTER" prefHeight="62.0" prefWidth="467.0" spacing="10.0">
                      <children>
-                        <JFXTextField fx:id="qnttextfield" labelFloat="true" prefHeight="36.0" prefWidth="201.0" promptText="Quantity *" styleClass="form_field">
+                        <Button mnemonicParsing="false" onAction="#minusqnty" prefHeight="58.0" prefWidth="65.0">
+                           <graphic>
+                              <FontAwesomeIcon glyphName="MINUS" />
+                           </graphic>
+                        </Button>
+                        <JFXTextField fx:id="qnttextfield" alignment="CENTER" prefHeight="58.0" prefWidth="201.0" promptText="0" styleClass="form_field">
                            <font>
-                              <Font size="13.0" />
+                              <Font size="31.0" />
                            </font>
                            <focusColor>
                               <LinearGradient endX="1.0" endY="1.0">
@@ -78,32 +88,11 @@
                               </LinearGradient>
                            </focusColor>
                         </JFXTextField>
-                        <JFXTextField fx:id="costtextfield" labelFloat="true" prefHeight="36.0" prefWidth="224.0" promptText="Cost Price" styleClass="form_field">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                           <focusColor>
-                              <LinearGradient endX="1.0" endY="1.0">
-                                 <stops>
-                                    <Stop color="#0a8e90" />
-                                    <Stop color="#8e203d" offset="1.0" />
-                                 </stops>
-                              </LinearGradient>
-                           </focusColor>
-                        </JFXTextField>
-                        <JFXTextField fx:id="salestextfield" labelFloat="true" prefHeight="36.0" prefWidth="196.0" promptText="Sales Price" styleClass="form_field">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                           <focusColor>
-                              <LinearGradient endX="1.0" endY="1.0">
-                                 <stops>
-                                    <Stop color="#0a8e90" />
-                                    <Stop color="#8e203d" offset="1.0" />
-                                 </stops>
-                              </LinearGradient>
-                           </focusColor>
-                        </JFXTextField>
+                        <Button mnemonicParsing="false" onAction="#plusqnty" prefHeight="70.0" prefWidth="56.0">
+                           <graphic>
+                              <FontAwesomeIcon glyphName="PLUS" />
+                           </graphic>
+                        </Button>
                      </children>
                      <padding>
                         <Insets top="5.0" />

@@ -34,6 +34,7 @@ import bt.bitsmartmini.bl.StockinBL;
 import bt.bitsmartmini.entity.Items;
 import bt.bitsmartmini.entity.Stockin;
 import bt.bitsmartmini.entity.Users;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * FXML Controller class
@@ -45,10 +46,10 @@ public class AddStockInController implements Initializable {
     public JFXTextField batchtextfield;
     @FXML
     public JFXTextField qnttextfield;
-    @FXML
-    public JFXTextField costtextfield;
-    @FXML
-    public JFXTextField salestextfield;
+//    @FXML
+//    public JFXTextField costtextfield;
+//    @FXML
+//    public JFXTextField salestextfield;
     @FXML
     public JFXButton save;
     @FXML
@@ -71,6 +72,8 @@ public class AddStockInController implements Initializable {
     private Label uomitem;
     @FXML
     private FontAwesomeIcon duplicatelock;
+
+    AtomicInteger rowCounter = new AtomicInteger(0);
 
     public void getItemList() {
         List<String> item = new ItemsBL().getAllItemsName();
@@ -119,22 +122,22 @@ public class AddStockInController implements Initializable {
             }
         });
 
-        costtextfield.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    costtextfield.setText(newValue.replaceAll("[^\\d\\.]", ""));
-                }
-            }
-        });
-        salestextfield.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    salestextfield.setText(newValue.replaceAll("[^\\d\\.]", ""));
-                }
-            }
-        });
+//        costtextfield.textProperty().addListener(new ChangeListener<String>() {
+//            @Override
+//            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+//                if (!newValue.matches("\\d*")) {
+//                    costtextfield.setText(newValue.replaceAll("[^\\d\\.]", ""));
+//                }
+//            }
+//        });
+//        salestextfield.textProperty().addListener(new ChangeListener<String>() {
+//            @Override
+//            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+//                if (!newValue.matches("\\d*")) {
+//                    salestextfield.setText(newValue.replaceAll("[^\\d\\.]", ""));
+//                }
+//            }
+//        });
         qnttextfield.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -220,8 +223,8 @@ public class AddStockInController implements Initializable {
 
     private void clearAllForms() {
         qnttextfield.clear();
-        costtextfield.clear();
-        salestextfield.clear();
+//        costtextfield.clear();
+//        salestextfield.clear();
         itemimage.setImage(null);
     }
 
@@ -289,5 +292,19 @@ public class AddStockInController implements Initializable {
 
         }
 
+    }
+
+    @FXML
+    private void minusqnty(ActionEvent event) {
+        if (rowCounter.get() > 0) {
+            qnttextfield.setText(Integer.toString(rowCounter.decrementAndGet()));
+        } else {
+            rowCounter.set(0);
+        }
+    }
+
+    @FXML
+    private void plusqnty(ActionEvent event) {
+        qnttextfield.setText(Integer.toString(rowCounter.incrementAndGet()));
     }
 }

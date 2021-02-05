@@ -24,6 +24,7 @@ import bt.bitsmartmini.entity.Items;
 import bt.bitsmartmini.entity.Stockin;
 import bt.bitsmartmini.entity.Users;
 import bt.bitsmartmini.utils.Utilities;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * FXML Controller class
@@ -42,9 +43,7 @@ public class AdminStockinController implements Initializable {
     public Label uomitem;
     @FXML
     private JFXTextField qnttextfield;
-    @FXML
     private JFXTextField costtextfield;
-    @FXML
     private JFXTextField salestextfield;
     @FXML
     public JFXButton save;
@@ -56,6 +55,8 @@ public class AdminStockinController implements Initializable {
     public FontAwesomeIcon duplicatelock;
     @FXML
     public JFXSpinner spinner;
+
+    AtomicInteger rowCounter = new AtomicInteger(0);
 
     /**
      * Initializes the controller class.
@@ -113,7 +114,7 @@ public class AdminStockinController implements Initializable {
         }
 
         //cat.setBatchNo(childController.batchtextfield.getText());
-       // cat.setBatchNo(String.valueOf(cat.getStockinId()));
+        // cat.setBatchNo(String.valueOf(cat.getStockinId()));
         cat.setUpc(new Items(itemname.getText()));
         cat.setQuantity(Integer.parseInt(qnttextfield.getText()));
         //cat.set(Utilities.roundToTwoDecimalPlace(Double.parseDouble(costtextfield.getText()), 2));
@@ -135,7 +136,7 @@ public class AdminStockinController implements Initializable {
 //        cat.getItems().setItemsPrice(itprice);
         int result = new InsertUpdateBL().insertData(cat);
         if (result == 1) {
-           // int i = new InsertUpdateBL().updateData(cat.getItems());
+            // int i = new InsertUpdateBL().updateData(cat.getItems());
             closeTransition();
         } else {
             displayinfo.setText("NOTICE! AN ERROR OCCURED");
@@ -144,5 +145,19 @@ public class AdminStockinController implements Initializable {
             //break;
         }
 
+    }
+
+    @FXML
+    private void minusqnty(ActionEvent event) {
+        if (rowCounter.get() > 0) {
+            qnttextfield.setText(Integer.toString(rowCounter.decrementAndGet()));
+        } else {
+            rowCounter.set(0);
+        }
+    }
+
+    @FXML
+    private void plusqnty(ActionEvent event) {
+        qnttextfield.setText(Integer.toString(rowCounter.incrementAndGet()));
     }
 }
