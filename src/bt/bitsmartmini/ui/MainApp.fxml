@@ -36,8 +36,8 @@
                         <Menu mnemonicParsing="false" text="Manage Item">
                           <items>
                               <MenuItem mnemonicParsing="false" onAction="#additems" text="New Item" />
-                              <MenuItem mnemonicParsing="false" onAction="#addcategory" text="Forms" />
-                              <MenuItem mnemonicParsing="false" onAction="#addmanufacturer" text="Manufacturer" />
+                              <MenuItem mnemonicParsing="false" onAction="#addcategory" text="Category" />
+                              <MenuItem mnemonicParsing="false" onAction="#addmanufacturer" text="Brands" />
                               <MenuItem mnemonicParsing="false" onAction="#addUom" text="Unit Of Pricing" />
                               <MenuItem mnemonicParsing="false" onAction="#refundPolicyView" text="Refund Policy" />
                           </items>

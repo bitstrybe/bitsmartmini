@@ -53,47 +53,9 @@ public class CatalogController extends MainAppController implements Initializabl
     ObservableList<String> search;
     ObservableList<SalesTableModel> salesdata;
     ObservableList<SalesDetailsTableModel> salesdetailsdata;
-//    private final ObservableList<Person> data
-//            = FXCollections.observableArrayList();
 
     @FXML
     private JFXTextField itemsearch;
-    private TableView<SelectItemSaleTableModel> seleteditemtableview;
-    private TableColumn<SelectItemSaleTableModel, String> batchcode;
-    private TableColumn<SelectItemSaleTableModel, String> itemname;
-    private TableColumn<SelectItemSaleTableModel, Number> qnt;
-    private TableColumn<SelectItemSaleTableModel, Number> price;
-    private TableColumn<SelectItemSaleTableModel, Number> total;
-
-    private TableColumn<SelectItemSaleTableModel, Number> nhisvalprice;
-    private TableColumn<SelectItemSaleTableModel, String> nhis;
-    private TableColumn<SelectItemSaleTableModel, Boolean> action;
-    private TableColumn<SelectItemSaleTableModel, Boolean> discount;
-    private TableColumn<SelectItemSaleTableModel, Number> discountval;
-    private JFXButton sellbtn;
-    private Label totalprice;
-    //Sales Table
-    private TableView<SalesTableModel> salestable;
-    private TableColumn<SalesTableModel, Number> salecode;
-    private TableColumn<SalesTableModel, Number> saleprice;
-    private TableColumn<SalesTableModel, String> date;
-    private TableColumn<SalesTableModel, Number> paidvalue;
-    private TableColumn<SalesTableModel, String> salesbalance;
-    private TableColumn<SalesTableModel, Boolean> action1;
-    private TableColumn<SalesTableModel, Boolean> action2;
-    private TableColumn<SalesTableModel, Boolean> actionsales;
-    //Sales Details Table
-    private TableView<SalesDetailsTableModel> salesdetailstable;
-    private TableColumn<SalesDetailsTableModel, String> batchno;
-    private TableColumn<SalesDetailsTableModel, Number> scode;
-    private TableColumn<SalesDetailsTableModel, Number> qty;
-    private TableColumn<SalesDetailsTableModel, Number> sp;
-    private TableColumn<SalesDetailsTableModel, Number> np;
-    private TableColumn<SalesDetailsTableModel, String> ns;
-    private TableColumn<SalesDetailsTableModel, Number> discountsalesdetails;
-    private DatePicker startdate;
-    private DatePicker enddate;
-    private Label totalsalesprice;
 
     DecimalFormat df = new DecimalFormat("0.00");
     SalesBL sb = new SalesBL();
@@ -108,7 +70,6 @@ public class CatalogController extends MainAppController implements Initializabl
     private FlowPane displaypane;
 
     public void getStockingItemList(String p) {
-        //displaypane.getChildren().clear();
         Task<Void> longRunningTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -119,9 +80,8 @@ public class CatalogController extends MainAppController implements Initializabl
                     if (p.length() > 0) {
                         list = new ItemsBL().searchAllItems(p);
                     } else {
-                        list = i.getItemsPerPage(12);
+                        list = i.getItemsPerPage(8);
                     }
-                    //ItemspriceBL itb = new ItemspriceBL();
                     ObservableList<Items> result = FXCollections.observableArrayList(list);
                     result.forEach((items) -> {
                         try {
@@ -130,42 +90,24 @@ public class CatalogController extends MainAppController implements Initializabl
                             ItemsDisplayController childController = fxmlLoader.getController();
                             Long balance = new StockinBL().getStockBalance(items.getItemDesc());
                             if ("Supervisor".equals(LoginController.u.getRoles()) || "Administrator".equals(LoginController.u.getRoles())) {
-                                // childController.catalogstaus.getChildren().remove(childController.adminstockout);
                                 childController.catalogstaus.getChildren().add(childController.adminstockin);
                                 if (balance > 0) {
                                     childController.outofstockshape.setVisible(false);
-                                    //childController.catalogstaus.getChildren().remove(childController.addtocart);
                                     childController.catalogstaus.getChildren().add(childController.adminstockout);
                                     childController.catalogstaus.getChildren().add(childController.addtocart);
-                                    //childController.adminstockout.setDisable(true);
                                 }
                             }
                             if ("Sales".equals(LoginController.u.getRoles())) {
-                                //childController.outofstockshape.setVisible(true);
-                                //childController.catalogstaus.getChildren().add(childController.addtocart);
-                                //childController.adminstockout.setDisable(true);
                                 if (balance > 0) {
                                     childController.outofstockshape.setVisible(false);
-                                    //childController.catalogstaus.getChildren().remove(childController.addtocart);
                                     childController.catalogstaus.getChildren().add(childController.addtocart);
-                                    //childController.adminstockout.setDisable(true);
                                 }
-
                             }
                             childController.medsname.setText(items.getItemDesc());
-                            // UomDef domf = new UomBL().getUombyItemId(items.getItemDesc());
-                            //int uomitem = domf.getUomItem();
-                            //String uom_val = String.valueOf(items.getUomDef().getUomDesc());
-                            //childController.uom.setText(balance + " " + uom_val + "(s) In Stock");
-                            //childController.cat.setText(stock.getItems().getForm().getFormName());
                             childController.man.setText(items.getBrand().getBrandName());
-                            //ItemsPrice itp = itb.getItemspricebyItemName(items.getItemDesc());
-                            //System.out.println("Item Price :" + itp.getSalesPrice());
                             double prices = items.getSp();
-                            //childController.curr.setText("GHC");
                             childController.exp.setText(DecimalUtil.format2(prices));
                             childController.curr.setText(MainAppController.B.getBCurrency());
-                            // childController.exp.setText(String.valueOf(stock.getExpiryDate()));
                             FileInputStream ifile = new FileInputStream(items.getItemImg());
                             Image image = new Image(ifile);
                             childController.itemsimage.setImage(image);
