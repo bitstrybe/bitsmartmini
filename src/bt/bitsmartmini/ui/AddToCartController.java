@@ -75,10 +75,10 @@ public class AddToCartController implements Initializable {
 
     @FXML
     public void DecrementValue(ActionEvent event) {
-        if (rowCounter.get() > 0) {
+        if (rowCounter.get() > 1) {
             qnttextfield.setText(Integer.toString(rowCounter.decrementAndGet()));
         } else {
-            rowCounter.set(0);
+            rowCounter.set(1);
         }
 
     }

@@ -142,7 +142,6 @@
                         <TableColumn fx:id="amountpaidtb" prefWidth="91.0" resizable="false" text="Amount" />
                         <TableColumn fx:id="mode" prefWidth="75.0" text="Mode" />
                         <TableColumn fx:id="preview" prefWidth="100.0" text="Preview" />
-                        <TableColumn fx:id="action1" prefWidth="123.0" text="Action" />
                      </columns>
                   </TableView>
                   <TableView fx:id="returnstable" prefHeight="200.0" prefWidth="383.0">

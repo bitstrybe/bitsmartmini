@@ -95,13 +95,15 @@ public class SalesController implements Initializable {
     private DatePicker startdate;
     @FXML
     private DatePicker enddate;
+    //Sales Starts
     @FXML
     private TableView<SalesTableModel> salestable;
     @FXML
     private TableColumn<SalesTableModel, Number> salescodetb;
     @FXML
+    private TableColumn<SalesTableModel, String> saledatetb;
+    @FXML
     private TableColumn<SalesTableModel, String> customertb;
-    private TableColumn<SalesTableModel, Boolean> makepaymenttb;
     @FXML
     private TableColumn<SalesTableModel, String> salespricetb;
     @FXML
@@ -109,42 +111,17 @@ public class SalesController implements Initializable {
     @FXML
     private TableColumn<SalesTableModel, String> balancetb;
     @FXML
-    private TableColumn<SalesTableModel, String> saledatetb;
+    private TableColumn<SalesTableModel, String> refunds;
     @FXML
-    private TableColumn<SalesTableModel, Boolean> preview;
+    private TableColumn<SalesTableModel, String> actuals;
     @FXML
     private TableColumn<SalesTableModel, Boolean> action;
+    
+    //SalesDetails Starts
     @FXML
     private TableView<SalesDetailsTableModel> salesdetailstable;
     @FXML
     private TableColumn<SalesDetailsTableModel, String> salesdetailsdate;
-    @FXML
-    private TableView<ReceiptTableModel> paymenttable;
-    @FXML
-    private TableColumn<ReceiptTableModel, String> amountpaidtb;
-    @FXML
-    private TableColumn<ReceiptTableModel, String> mode;
-    @FXML
-    private TableColumn<?, ?> action1;
-    private TableColumn<SalesDetailsTableModel, Boolean> raction;
-    @FXML
-    private TableColumn<ReturnTableModel, String> rdate;
-    @FXML
-    private TableColumn<ReturnTableModel, Number> rqty;
-    @FXML
-    private TableColumn<ReturnTableModel, String> ramnt;
-    @FXML
-    private TableView<ReturnTableModel> returnstable;
-    @FXML
-    private TableColumn<ReturnTableModel, String> refunded;
-    @FXML
-    private TableColumn<SalesTableModel, String> actuals;
-    @FXML
-    private TableColumn<SalesTableModel, String> refunds;
-    @FXML
-    private TableColumn<SalesDetailsTableModel, String> refundsCol;
-    @FXML
-    private TableColumn<SalesDetailsTableModel, Number> actualsCol;
     @FXML
     private TableColumn<SalesDetailsTableModel, String> sditemcode;
     @FXML
@@ -158,14 +135,42 @@ public class SalesController implements Initializable {
     @FXML
     private TableColumn<SalesDetailsTableModel, String> sddiscCol;
     @FXML
-    private TableColumn<SalesDetailsTableModel, String> actionCol;
+    private TableColumn<SalesDetailsTableModel, String> refundsCol;
+    @FXML
+    private TableColumn<SalesDetailsTableModel, Number> actualsCol;
+    @FXML
+    private TableColumn<SalesDetailsTableModel, Boolean> actionCol;
 
-    ReceiptBL rb = new ReceiptBL();
-    ReturnBL rn = new ReturnBL();
+    //Receipts Starts
+    @FXML
+    private TableView<ReceiptTableModel> paymenttable;
     @FXML
     private TableColumn<ReceiptTableModel, String> receiptno;
     @FXML
     private TableColumn<ReceiptTableModel, String> receiptdate;
+    @FXML
+    private TableColumn<ReceiptTableModel, String> amountpaidtb;
+    @FXML
+    private TableColumn<ReceiptTableModel, String> mode;
+    //
+    @FXML
+    private TableColumn<SalesTableModel, Boolean> preview;
+
+    //Refund starts
+    @FXML
+    private TableView<ReturnTableModel> returnstable;
+    @FXML
+    private TableColumn<ReturnTableModel, String> rdate;
+    @FXML
+    private TableColumn<ReturnTableModel, Number> rqty;
+    @FXML
+    private TableColumn<ReturnTableModel, String> ramnt;
+    @FXML
+    private TableColumn<ReturnTableModel, String> refunded;
+
+    ReceiptBL rb = new ReceiptBL();
+    ReturnBL rn = new ReturnBL();
+    
 
     /**
      * Initializes the controller class.
@@ -319,57 +324,67 @@ public class SalesController implements Initializable {
                 sdrtdCol.setCellValueFactory(cell -> cell.getValue().getItemsRtdProperty());
                 salesdetailstable.setItems(salesdetailsdata);
                 salesdetailstable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-                RtdItem rt = rn.getRtdItemByID(t.getSalescode(), startdate, enddate);
-                raction.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SalesDetailsTableModel, Boolean>, ObservableValue<Boolean>>() {
+//                RtdItem rt = rn.getRtdItemByID(t.getSalescode(), startdate, enddate);
+                actionCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SalesDetailsTableModel, Boolean>, ObservableValue<Boolean>>() {
                     @Override
                     public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<SalesDetailsTableModel, Boolean> features) {
                         return new SimpleBooleanProperty(features.getValue() != null);
                     }
                 });
-                raction.setCellFactory(new Callback<TableColumn<SalesDetailsTableModel, Boolean>, TableCell<SalesDetailsTableModel, Boolean>>() {
+                actionCol.setCellFactory(new Callback<TableColumn<SalesDetailsTableModel, Boolean>, TableCell<SalesDetailsTableModel, Boolean>>() {
                     //
                     @Override
                     public TableCell<SalesDetailsTableModel, Boolean> call(TableColumn<SalesDetailsTableModel, Boolean> personBooleanTableColumn) {
-                        if (rt != null) {
-                            return new AddReturnPolicy(true);
-                        } else {
-                            return new AddReturnPolicy(false);
-                        }
+//                        if (rt != null) {
+                        return new AddReturnPolicy(true);
+//                        } else {
+//                            return new AddReturnPolicy(false);
+//                        }
                     }
                 });
+                ReceiptTable(t.getSalescode());
+                ReturnTable(t.getSalescode());
 
-                List<Receipt> receipt = rec.getAllReciptbySalescode(t.getSalescode());
-                receiptdata = FXCollections.observableArrayList();
-                receipt.forEach(r -> {
-                    System.out.println("r: "+r.getReceiptId().toString());
-                    receiptdata.add(new ReceiptTableModel(r.getReceiptId().toString(), r.getSalesId().getSalesId().toString(), r.getPayMode(), DecimalUtil.format2(r.getAmountPaid()), Utilities.convertDateToString(r.getReceiptDate())));
-                });
-                receiptno.setCellValueFactory(cell -> cell.getValue().getReceiptIdProperty());
-                amountpaidtb.setCellValueFactory(cell -> cell.getValue().getAmountPaidProperty());
-                receiptdate.setCellValueFactory(cell -> cell.getValue().getDateProperty());
-                paymenttable.setItems(receiptdata);
-                paymenttable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-                mode.setCellValueFactory(cell -> cell.getValue().getPmodeProperty());
-                //returns table
-                List<RtdItem> returns = rd.getRtdBySalesCode(t.getSalescode());
-                rtddata = FXCollections.observableArrayList();
-                returns.forEach(r -> {
-                    //System.out.println("r: " + r.getSalescode());
-                    double totalA = (r.getRtdQty() * r.getSalesDetails().getSalesPrice());
-                    rtddata.add(new ReturnTableModel(r.getSalescode(), r.getSalesDetails().getRtdItem().getSalesDetails().getUpc().getItemDesc(), r.getRtdQty(), DecimalUtil.format2(r.getSalesDetails().getSalesPrice()), DecimalUtil.format2(totalA), r.getRemarks(), DateUtil.formatDate(r.getRtdDate(), "yyyy-MM-dd")));
-                });
-                rqty.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
-                ramnt.setCellValueFactory(cell -> cell.getValue().getUnitPriceProperty());
-                refunded.setCellValueFactory(cell -> cell.getValue().getAmountProperty());
-                rdate.setCellValueFactory(cell -> cell.getValue().getDateProperty());
-                returnstable.setItems(rtddata);
-                returnstable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
                 //mode.setCellValueFactory(cell -> cell.getValue().getPmodeProperty());
             } catch (Exception ex) {
-                System.out.println("null");
+                Logger.getLogger(SalesController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
 
+    }
+
+    public void ReceiptTable(int salescode) {
+
+        List<Receipt> receipt = rec.getAllReciptbySalescode(salescode);
+        receiptdata = FXCollections.observableArrayList();
+        receipt.forEach(r -> {
+            System.out.println("r: " + r.getReceiptId().toString());
+            receiptdata.add(new ReceiptTableModel(r.getReceiptId().toString(), r.getSalesId().getSalesId().toString(), r.getPayMode(), DecimalUtil.format2(r.getAmountPaid()), Utilities.convertDateToString(r.getReceiptDate())));
+        });
+        receiptno.setCellValueFactory(cell -> cell.getValue().getReceiptIdProperty());
+        amountpaidtb.setCellValueFactory(cell -> cell.getValue().getAmountPaidProperty());
+        receiptdate.setCellValueFactory(cell -> cell.getValue().getDateProperty());
+        paymenttable.setItems(receiptdata);
+        paymenttable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        mode.setCellValueFactory(cell -> cell.getValue().getPmodeProperty());
+        //returns table
+
+    }
+
+    public void ReturnTable(int salescode) {
+        List<RtdItem> returns = rd.getRtdBySalesCode(salescode);
+        rtddata = FXCollections.observableArrayList();
+        returns.forEach(r -> {
+            //System.out.println("r: " + r.getSalescode());
+            double totalA = (r.getRtdQty() * r.getSalesDetails().getSalesPrice());
+            rtddata.add(new ReturnTableModel(r.getSalescode(), r.getSalesDetails().getUpc().getItemDesc(), r.getRtdQty(), DecimalUtil.format2(r.getSalesDetails().getSalesPrice()), DecimalUtil.format2(totalA), r.getRemarks(), DateUtil.formatDate(r.getRtdDate(), "yyyy-MM-dd")));
+        });
+        rqty.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
+        ramnt.setCellValueFactory(cell -> cell.getValue().getUnitPriceProperty());
+        refunded.setCellValueFactory(cell -> cell.getValue().getAmountProperty());
+        rdate.setCellValueFactory(cell -> cell.getValue().getDateProperty());
+        returnstable.setItems(rtddata);
+        returnstable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     public class AddPersonCellPayment extends TableCell<SalesTableModel, Boolean> {
@@ -493,7 +508,7 @@ public class SalesController implements Initializable {
     public class AddPersonCellPreview extends TableCell<SalesTableModel, Boolean> {
 
         //Image img = new Image(getClass().getResourceAsStream("edit.png"));
-        Image preview = new Image(getClass().getResourceAsStream("/resources/eye.png"));
+        Image preview = new Image(getClass().getResourceAsStream("/bt/resources/eye.png"));
         // a button for adding a new person.
 //        JFXButton addButton = new JFXButton();
         // pads and centers the add button in the cell.
@@ -687,7 +702,7 @@ public class SalesController implements Initializable {
     public class AddReturnPolicy extends TableCell<SalesDetailsTableModel, Boolean> {
 
         //Image img = new Image(getClass().getResourceAsStream("edit.png"));
-        Image preview = new Image(getClass().getResourceAsStream("/resources/returns.png"));
+        Image preview = new Image(getClass().getResourceAsStream("/bt/resources/returns.png"));
         // a button for adding a new person.
 //        JFXButton addButton = new JFXButton();
         // pads and centers the add button in the cell.

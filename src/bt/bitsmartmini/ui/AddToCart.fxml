@@ -78,7 +78,7 @@
                         <FontAwesomeIcon glyphName="MINUS" size="1.5em" wrappingWidth="15.428571701049805" />
                      </graphic>
                   </Button>
-                  <TextField fx:id="qnttextfield" alignment="CENTER" editable="false" prefHeight="82.0" prefWidth="322.0" text="0" HBox.hgrow="ALWAYS">
+                  <TextField fx:id="qnttextfield" alignment="CENTER" editable="false" prefHeight="82.0" prefWidth="322.0" text="1" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="31.0" />
                      </font>
