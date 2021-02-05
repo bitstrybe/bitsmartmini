@@ -121,10 +121,6 @@ public class SalesController implements Initializable {
     @FXML
     private TableView<ReceiptTableModel> paymenttable;
     @FXML
-    private TableColumn<ReceiptTableModel, Number> paymentcodetb;
-    @FXML
-    private TableColumn<ReceiptTableModel, String> paymentdatetb;
-    @FXML
     private TableColumn<ReceiptTableModel, String> amountpaidtb;
     @FXML
     private TableColumn<ReceiptTableModel, String> mode;
@@ -163,9 +159,13 @@ public class SalesController implements Initializable {
     private TableColumn<SalesDetailsTableModel, String> sddiscCol;
     @FXML
     private TableColumn<SalesDetailsTableModel, String> actionCol;
-    
+
     ReceiptBL rb = new ReceiptBL();
     ReturnBL rn = new ReturnBL();
+    @FXML
+    private TableColumn<ReceiptTableModel, String> receiptno;
+    @FXML
+    private TableColumn<ReceiptTableModel, String> receiptdate;
 
     /**
      * Initializes the controller class.
@@ -307,7 +307,7 @@ public class SalesController implements Initializable {
                         String bals = DecimalUtil.format2((sales.getQuantity() * sales.getSalesPrice()));
                         salesdetailsdata.add(new SalesDetailsTableModel(sales.getUpc().getUpc(), sales.getUpc().getItemDesc(), sales.getQuantity(), DecimalUtil.format2(sales.getSalesPrice()), 0, DecimalUtil.format2(sales.getDiscount()), "0", bals, Utilities.convertDateToString(sales.getEntryDate())));
                     }
-                    
+
                 });
                 sditemcode.setCellValueFactory(cell -> cell.getValue().getItemsCodeProperty());
                 sditemname.setCellValueFactory(cell -> cell.getValue().getItemsnameProperty());
@@ -341,15 +341,15 @@ public class SalesController implements Initializable {
                 List<Receipt> receipt = rec.getAllReciptbySalescode(t.getSalescode());
                 receiptdata = FXCollections.observableArrayList();
                 receipt.forEach(r -> {
-                    receiptdata.add(new ReceiptTableModel(r.getReceiptId(), r.getSalesId().getSalesId(), r.getPayMode(), DecimalUtil.format2(r.getAmountPaid()), Utilities.convertDateToString(r.getReceiptDate())));
+                    System.out.println("r: "+r.getReceiptId().toString());
+                    receiptdata.add(new ReceiptTableModel(r.getReceiptId().toString(), r.getSalesId().getSalesId().toString(), r.getPayMode(), DecimalUtil.format2(r.getAmountPaid()), Utilities.convertDateToString(r.getReceiptDate())));
                 });
-                paymentcodetb.setCellValueFactory(cell -> cell.getValue().getReceiptIdProperty());
+                receiptno.setCellValueFactory(cell -> cell.getValue().getReceiptIdProperty());
                 amountpaidtb.setCellValueFactory(cell -> cell.getValue().getAmountPaidProperty());
-                paymentdatetb.setCellValueFactory(cell -> cell.getValue().getDateProperty());
+                receiptdate.setCellValueFactory(cell -> cell.getValue().getDateProperty());
                 paymenttable.setItems(receiptdata);
                 paymenttable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
                 mode.setCellValueFactory(cell -> cell.getValue().getPmodeProperty());
-
                 //returns table
                 List<RtdItem> returns = rd.getRtdBySalesCode(t.getSalescode());
                 rtddata = FXCollections.observableArrayList();
@@ -435,7 +435,7 @@ public class SalesController implements Initializable {
                                         receiptStage.close();
 
                                         try {
-                                            new PrintReport().showReceiptReport(selectedRecord.getSalescode());
+                                            new PrintReport().showReceiptReport(selectedRecord.getSalescode().toString());
                                         } catch (JRException ex) {
                                             Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
                                         } catch (ClassNotFoundException ex) {
@@ -702,7 +702,7 @@ public class SalesController implements Initializable {
             btn.setRipplerFill(Paint.valueOf("#6699ff"));
             btn.setGraphic(new ImageView(preview));
             //if (!b) {
-            System.out.println("b: "+b);
+            System.out.println("b: " + b);
             paddedButton.setDisable(b);
             //}
             btn.setOnAction(new EventHandler<ActionEvent>() {

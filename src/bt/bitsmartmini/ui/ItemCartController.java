@@ -432,7 +432,7 @@ public class ItemCartController extends MainAppController implements Initializab
                             childControllerReciptPopup.preview.setOnAction(p -> {
                                 receiptStage.close();
                                 try {
-                                    new PrintReport().showReceiptReport(sale.getSalesId());
+                                    new PrintReport().showReceiptReport(sale.getSalesId().toString());
                                 } catch (JRException ex) {
                                     Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
                                 } catch (ClassNotFoundException ex) {

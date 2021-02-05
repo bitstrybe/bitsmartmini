@@ -11,8 +11,8 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class ReceiptTableModel implements Serializable {
 
-    private SimpleIntegerProperty receiptId;
-    private SimpleIntegerProperty salesId;
+    private SimpleStringProperty receiptId;
+    private SimpleStringProperty salesId;
     private SimpleStringProperty amountPaid;
     private SimpleStringProperty date;
     private SimpleStringProperty pmode;
@@ -21,34 +21,34 @@ public class ReceiptTableModel implements Serializable {
     }
 
     
-    public ReceiptTableModel(Integer receiptId,Integer salesid, String mode, String amountPaid, String date) {
-        this.receiptId = new SimpleIntegerProperty(receiptId);
-        this.salesId = new SimpleIntegerProperty(salesid);
+    public ReceiptTableModel(String receiptId,String salesid, String mode, String amountPaid, String date) {
+        this.receiptId = new SimpleStringProperty(receiptId);
+        this.salesId = new SimpleStringProperty(salesid);
         this.amountPaid = new SimpleStringProperty(amountPaid);
         this.date = new SimpleStringProperty(date);
         this.pmode = new SimpleStringProperty(mode);
     }
 
-    public Integer getReceiptId() {
+    public String getReceiptId() {
         return receiptId.get();
     }
-    public SimpleIntegerProperty getReceiptIdProperty() {
+    public SimpleStringProperty getReceiptIdProperty() {
         return receiptId;
     }
 
-    public void setReceiptIdProperty(Integer receiptId) {
-        this.receiptId = new SimpleIntegerProperty(receiptId);
+    public void setReceiptIdProperty(String receiptId) {
+        this.receiptId = new SimpleStringProperty(receiptId);
     }
     
-     public Integer getSalesId() {
+     public String getSalesId() {
         return salesId.get();
     }
-    public SimpleIntegerProperty getSalesIdProperty() {
+    public SimpleStringProperty getSalesIdProperty() {
         return salesId;
     }
 
-    public void setSalesIdProperty(Integer salesId) {
-        this.salesId = new SimpleIntegerProperty(salesId);
+    public void setSalesIdProperty(String salesId) {
+        this.salesId = new SimpleStringProperty(salesId);
     }
 
     public String getAmountPaid() {

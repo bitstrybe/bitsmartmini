@@ -137,8 +137,8 @@
                   </TableView>
                   <TableView fx:id="paymenttable" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="208.0" prefWidth="383.0" styleClass="table-cell">
                      <columns>
-                        <TableColumn fx:id="paymentcodetb" prefWidth="97.0" resizable="false" text="Receipt #" />
-                        <TableColumn fx:id="paymentdatetb" prefWidth="85.0" resizable="false" text="Date" />
+                        <TableColumn fx:id="receiptno" prefWidth="97.0" resizable="false" text="Receipt #" />
+                        <TableColumn fx:id="receiptdate" prefWidth="85.0" resizable="false" text="Date" />
                         <TableColumn fx:id="amountpaidtb" prefWidth="91.0" resizable="false" text="Amount" />
                         <TableColumn fx:id="mode" prefWidth="75.0" text="Mode" />
                         <TableColumn fx:id="preview" prefWidth="100.0" text="Preview" />

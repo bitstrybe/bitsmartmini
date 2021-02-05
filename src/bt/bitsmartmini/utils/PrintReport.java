@@ -53,10 +53,10 @@ public class PrintReport extends JFrame {
         return param;
     }
 
-    public void showReceiptReport(int id) throws JRException, ClassNotFoundException, SQLException, IOException {
+    public void showReceiptReport(String id) throws JRException, ClassNotFoundException, SQLException, IOException {
         ReceiptBL rbl = new ReceiptBL();
         CustomerBL cb = new CustomerBL();
-        Receipt r = rbl.getReciptbyCode(id);
+        Receipt r = rbl.getReciptbyCode(Integer.parseInt(id));
         param = setBasiParam();
         Customers c = cb.getCustomersBySales(r.getSalesId().getSalesId());
         //String reportSrcFile = "data/Blank_A4.jrxml";
