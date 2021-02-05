@@ -65,7 +65,7 @@ public class AddStockOutController implements Initializable {
     @FXML
     private JFXTextField search1;
     @FXML
-    private Label itembarcode;
+    public Label itembarcode;
     @FXML
     private Label itembrand;
     @FXML
@@ -149,15 +149,16 @@ public class AddStockOutController implements Initializable {
     }
 
     private void clearAllForms() {
-        qnttextfield.clear();
-        remarks.clear();
-        stockoutdate.getEditor().clear();
+        qnttextfield.setText("1");
         itemimage.setImage(null);
+        itembarcode.setText(null);
+        itemname.setText(null);
+        itembrand.setText(null);
+        itemqty.setText(null);
     }
 
     private void closeTransition() {
         displayinfo.setText("SUCCESSFULLY SAVED");
-        itemname.setText(null);
         spinner.setVisible(false);
         check.setVisible(true);
         clearAllForms();

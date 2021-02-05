@@ -176,11 +176,7 @@ public class StockController implements Initializable {
 
         AllStockTableData("");
         stocksearch.textProperty().addListener(e -> {
-            if (stocksearch.getText().length() > 4) {
-                AllStockTableData(stocksearch.getText());
-            } else {
-                AllStockTableData("");
-            }
+            AllStockTableData(stocksearch.getText());
         });
 
         stock.addEventHandler(MouseEvent.MOUSE_CLICKED, v -> {
@@ -205,7 +201,7 @@ public class StockController implements Initializable {
 
     public void AllStockTableData(String p) {
         List<Items> stk;
-        if (p.length() > 0) {
+        if (p!= null && p.length() > 0) {
             stk = itembl.searchAllItems(p);
         } else {
             stk = new ItemsBL().getItemsPerPage(10);
@@ -238,7 +234,7 @@ public class StockController implements Initializable {
                 returnqty = 0;
             }
             long balance = new StockinBL().getStockBalance(e.getItemDesc());
-            double profit = e.getSp()- e.getCp();
+            double profit = e.getSp() - e.getCp();
             double expprofit = profit * balance;
 
             data.add(new StockTableModel(e.getUpc(), e.getItemDesc(), stockinqty, stockoutqty, returnqty, salesqty, balance, DecimalUtil.format2(e.getCp()), DecimalUtil.format2(e.getSp()), DecimalUtil.format2(expprofit)));
@@ -283,7 +279,7 @@ public class StockController implements Initializable {
                                 Items i = ib.getImageItembyCode(person.getItems());
                                 childController.iteminfoname.setText(person.getItems());
                                 childController.itemqty.setText(balance + " " + " In Stock");
-                                childController.itemccost.setText(MainAppController.B.getBCurrency()+" "+DecimalUtil.format2(i.getSp()));
+                                childController.itemccost.setText(MainAppController.B.getBCurrency() + " " + DecimalUtil.format2(i.getSp()));
                                 Items its = new ItemsBL().getImageItembyCode(person.getItems());
                                 FileInputStream input;
                                 input = new FileInputStream(its.getItemImg());
@@ -409,7 +405,7 @@ public class StockController implements Initializable {
         returndata = FXCollections.observableArrayList();
         v.forEach((out) -> {
             double totalA = (out.getRtdQty() * out.getSalesDetails().getSalesPrice());
-            returndata.add(new ReturnTableModel(out.getSalesDetails().getSalesDetailsId() , out.getSalesDetails().getUpc().getItemDesc(), out.getRtdQty(), DecimalUtil.format2(out.getSalesDetails().getSalesPrice()), DecimalUtil.format2(totalA), out.getRemarks(), Utilities.convertDateToString(out.getRtdDate())));
+            returndata.add(new ReturnTableModel(out.getSalesDetails().getSalesDetailsId(), out.getSalesDetails().getUpc().getItemDesc(), out.getRtdQty(), DecimalUtil.format2(out.getSalesDetails().getSalesPrice()), DecimalUtil.format2(totalA), out.getRemarks(), Utilities.convertDateToString(out.getRtdDate())));
         });
         returnitemstb.setCellValueFactory(cell -> cell.getValue().getItemProperty());
         returnqtytb.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
@@ -430,12 +426,12 @@ public class StockController implements Initializable {
             }
         });
     }
-    
+
     public void SalesTableData(String itemsDesc) {
         List<SalesDetails> s = salesbl.getAllSalesDetailsbyBarcode(itemsDesc, 10);
         salesdata = FXCollections.observableArrayList();
         s.forEach((sales) -> {
-            salesdata.add(new SalesDetailsTableModel(sales.getSalesDetailsId(), sales.getUpc().getItemDesc(), sales.getQuantity(), String.valueOf(sales.getCostPrice()) ,String.valueOf(sales.getSalesPrice()), sales.getRtdItem().getRtdQty() ,sales.getDiscount() ,Utilities.convertDateToString(sales.getEntryDate())));
+            salesdata.add(new SalesDetailsTableModel(sales.getSalesDetailsId(), sales.getUpc().getItemDesc(), sales.getQuantity(), String.valueOf(sales.getCostPrice()), String.valueOf(sales.getSalesPrice()), sales.getRtdItem().getRtdQty(), sales.getDiscount(), Utilities.convertDateToString(sales.getEntryDate())));
         });
         salesitemstb.setCellValueFactory(cell -> cell.getValue().getItemsnameProperty());
         salesqyttb.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
@@ -501,9 +497,10 @@ public class StockController implements Initializable {
             childController.displayinfo.textProperty().bind(task.messageProperty());
             task.setOnSucceeded(s -> {
                 childController.saveTemplate();
-                list = stock.getSelectionModel().getSelectedItem();
-                AllStockTableData(stocksearch.getText());
-                StockoutTableData(childController..getItemCode());
+                //list = stock.getSelectionModel().getSelectedItem();
+                AllStockTableData(childController.itembarcode.getText());
+                StockoutTableData(childController.itembarcode.getText());
+                stocksearch.setText(childController.itemname.getText());
             });
             Thread d = new Thread(task);
             d.setDaemon(true);
@@ -523,6 +520,7 @@ public class StockController implements Initializable {
 
     public class AddPersonCell extends TableCell<StockinTableModel, Boolean> {
 //        Image img = new Image(getClass().getResourceAsStream("edit.png"));
+
         Image img2 = new Image(getClass().getResourceAsStream("delete.png"));
         HBox paddedButton = new HBox();
         JFXButton delButton = new JFXButton();
@@ -722,6 +720,7 @@ public class StockController implements Initializable {
     }
 
     public class AddPersonCellStockout extends TableCell<StockoutTableModel, Boolean> {
+
         Image img2 = new Image(getClass().getResourceAsStream("delete.png"));
 
         // a button for adding a new person.

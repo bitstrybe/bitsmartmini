@@ -109,8 +109,8 @@ public class AddStockInController implements Initializable {
             itemname.setText(itemlist.getSelectionModel().getSelectedItem().split(":")[1]);
             itembrand.setText(itemlist.getSelectionModel().getSelectedItem().split(":")[2]);
             long qty = sb.getStockBalance(itemlist.getSelectionModel().getSelectedItem().split(":")[0]);
-            itemqty.setText(Long.valueOf(qty).toString()+" Remaining");
-            itemsp.setText(MainAppController.B.getBCurrency()+" "+itemlist.getSelectionModel().getSelectedItem().split(":")[4]);
+            itemqty.setText(Long.valueOf(qty).toString() + " Remaining");
+            itemsp.setText(MainAppController.B.getBCurrency() + " " + itemlist.getSelectionModel().getSelectedItem().split(":")[4]);
             Items its = new ItemsBL().getImageItembyCode(itemlist.getSelectionModel().getSelectedItem().split(":")[0]);
             FileInputStream input;
             try {
@@ -144,15 +144,28 @@ public class AddStockInController implements Initializable {
 
     private void clearAllForms() {
         qnttextfield.setText("1");
-        itemimage.setImage(null);
+        //itemimage.setImage(null);
+        //itembarcode.setText(null);
+        //itemname.setText(null);
+        // itembrand.setText(null);
+        //itemqty.setText(null);
+    }
+
+    private void refreshView() {
+        qnttextfield.setText("1");
+        //itemimage.setImage(null);
+        //itembarcode.setText(null);
+        //itemname.setText(null);
+        // itembrand.setText(null);
+        Long qty = sb.getStockBalance(itembarcode.getText());
+        itemqty.setText(qty.toString()+ " Remainig");
     }
 
     private void closeTransition() {
         displayinfo.setText("Transaction was successful");
-        itemname.setText(null);
         spinner.setVisible(false);
         check.setVisible(true);
-        clearAllForms();
+        refreshView();
         PauseTransition delay = new PauseTransition(Duration.seconds(3));
         delay.setOnFinished(closevnt -> {
             displayinfo.setText("");
