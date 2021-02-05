@@ -73,47 +73,41 @@ public class StockinBL extends DdsBL {
 //    }
 
     public List<String> getAllStockinGroupCode() {
-        TypedQuery<String> q = em.createQuery("SELECT CONCAT(s.items.itemdesc,SUM(s.quantity))AS title FROM Stockin s GROUP BY s.items.itemDesc", String.class);
+        TypedQuery<String> q = em.createQuery("SELECT CONCAT(s.upc.itemDesc,SUM(s.quantity))AS title FROM Stockin s GROUP BY s.upc.itemDesc", String.class);
         return q.getResultList();
     }
 
     public List getStockinbyItem(String stockin) {
-        TypedQuery<Stockin> q = em.createQuery("SELECT s FROM Stockin s WHERE s.items.itemDesc = :item", Stockin.class);
+        TypedQuery<Stockin> q = em.createQuery("SELECT s FROM Stockin s WHERE s.upc.itemDesc = :item", Stockin.class);
         q.setParameter("item", stockin);
         return q.getResultList();
     }
 
     public List<Stockin> getStockinBatchNobyItem(String stockin) {
-        TypedQuery<Stockin> q = em.createQuery("SELECT s FROM Stockin s GROUP BY s.batchNo WHERE s.items.itemDesc = :item", Stockin.class);
+        TypedQuery<Stockin> q = em.createQuery("SELECT s FROM Stockin s GROUP BY s.upc.itemDesc WHERE s.upc.itemDesc = :item", Stockin.class);
         q.setParameter("item", stockin);
+        return q.getResultList();
+    }
+    
+    public List<Stockin> getItemStockinByUpc(String u) {
+        TypedQuery<Stockin> q = em.createQuery("SELECT i FROM Stockin i WHERE i.upc.upc = :u", Stockin.class);
+        q.setParameter("u", u);
         return q.getResultList();
     }
 
     public List<Stockin> getItemStockinItemsDesc(String itemDesc) {
-        TypedQuery<Stockin> q = em.createQuery("SELECT i FROM Stockin i WHERE i.items.itemDesc = :itemDesc", Stockin.class);
+        TypedQuery<Stockin> q = em.createQuery("SELECT i FROM Stockin i WHERE i.upc.itemDesc = :itemDesc", Stockin.class);
         q.setParameter("itemDesc", itemDesc);
         return q.getResultList();
     }
 
-    public Stockin getStockinbyBatchNo(String batchNo) {
-        TypedQuery<Stockin> q = em.createQuery("SELECT i FROM Stockin i WHERE i.batchNo = :batchNo", Stockin.class);
-        q.setParameter("batchNo", batchNo);
-        return q.getSingleResult();
-    }
-
-    public List<Stockin> getStockinListbyBatchNo(String batchNo) {
-        TypedQuery<Stockin> q = em.createQuery("SELECT i FROM Stockin i WHERE i.batchNo = :batchNo", Stockin.class);
-        q.setParameter("batchNo", batchNo);
-        q.setMaxResults(1);
-        return q.getResultList();
-    }
 
 //    public float getStockBalance(){
 //        
 //    }
     public long getStockInTotal(String itemDesc) {
         try {
-            TypedQuery<Long> q = em.createQuery("SELECT SUM(s.quantity) FROM Stockin s WHERE s.items.itemDesc =:itemDesc", Long.class);
+            TypedQuery<Long> q = em.createQuery("SELECT SUM(s.quantity) FROM Stockin s WHERE s.upc.itemDesc =:itemDesc", Long.class);
             q.setParameter("itemDesc", itemDesc);
             return q.getSingleResult();
         } catch (Exception ex) {
@@ -134,7 +128,7 @@ public class StockinBL extends DdsBL {
 
     public long getStockOutTotal(String itemDesc) {
         try {
-            TypedQuery<Long> q = em.createQuery("SELECT SUM(s.quantity) FROM Stockout s WHERE s.items.itemDesc =:itemDesc", Long.class);
+            TypedQuery<Long> q = em.createQuery("SELECT SUM(s.quantity) FROM Stockout s WHERE s.upc.itemDesc =:itemDesc", Long.class);
             q.setParameter("itemDesc", itemDesc);
             return q.getSingleResult();
         } catch (Exception ex) {
@@ -155,7 +149,7 @@ public class StockinBL extends DdsBL {
 
     public long getStockInTotalbyItem(String items) {
         try {
-            TypedQuery<Long> q = em.createQuery("SELECT SUM(s.quantity) FROM Stockin s WHERE s.items.itemDesc =:items", Long.class);
+            TypedQuery<Long> q = em.createQuery("SELECT SUM(s.quantity) FROM Stockin s WHERE s.upc.itemDesc =:items", Long.class);
             q.setParameter("items", items);
             return q.getSingleResult();
         } catch (Exception ex) {
@@ -164,14 +158,14 @@ public class StockinBL extends DdsBL {
     }
 
     public List getStockOutTotal() {
-        TypedQuery<Float> q = em.createQuery("SELECT SUM(s.quantity) FROM Stockin s GROUP BY s.batchNo", Float.class);
+        TypedQuery<Float> q = em.createQuery("SELECT SUM(s.quantity) FROM Stockin s GROUP BY s.upc.upc", Float.class);
         return q.getResultList();
     }
 
     
     public long getTotalReturns(String itemDesc) {
         try {
-            TypedQuery<Long> q = em.createQuery("SELECT SUM(s.rtdQty) FROM RtdItem s WHERE s.salesDetails.item.itemDesc = :itemDesc", Long.class);
+            TypedQuery<Long> q = em.createQuery("SELECT SUM(s.rtdQty) FROM RtdItem s WHERE s.salesDetails.upc.itemDesc = :itemDesc", Long.class);
             q.setParameter("itemDesc", itemDesc);
             return q.getSingleResult();
         } catch (Exception ex) {

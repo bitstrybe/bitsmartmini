@@ -31,7 +31,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Sales.findAll", query = "SELECT s FROM Sales s")
     , @NamedQuery(name = "Sales.findBySalesId", query = "SELECT s FROM Sales s WHERE s.salesId = :salesId")
-    , @NamedQuery(name = "Sales.findByDateS", query = "SELECT s FROM Sales s WHERE s.dateS = :dateS")
+    , @NamedQuery(name = "Sales.findBySalesDate", query = "SELECT s FROM Sales s WHERE s.salesDate = :salesDate")
     , @NamedQuery(name = "Sales.findByEntryDate", query = "SELECT s FROM Sales s WHERE s.entryDate = :entryDate")})
 public class Sales implements Serializable {
 
@@ -41,9 +41,9 @@ public class Sales implements Serializable {
     @Column(name = "sales_id", nullable = false)
     private Integer salesId;
     @Basic(optional = false)
-    @Column(name = "dateS", nullable = false)
+    @Column(name = "sales_date", nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date dateS;
+    private Date salesDate;
     @Basic(optional = false)
     @Column(name = "entry_date", nullable = false)
     @Temporal(TemporalType.DATE)
@@ -66,9 +66,9 @@ public class Sales implements Serializable {
         this.salesId = salesId;
     }
 
-    public Sales(Integer salesId, Date dateS, Date entryDate) {
+    public Sales(Integer salesId, Date salesDate, Date entryDate) {
         this.salesId = salesId;
-        this.dateS = dateS;
+        this.salesDate = salesDate;
         this.entryDate = entryDate;
     }
 
@@ -80,12 +80,12 @@ public class Sales implements Serializable {
         this.salesId = salesId;
     }
 
-    public Date getDateS() {
-        return dateS;
+    public Date getSalesDate() {
+        return salesDate;
     }
 
-    public void setDateS(Date dateS) {
-        this.dateS = dateS;
+    public void setSalesDate(Date salesDate) {
+        this.salesDate = salesDate;
     }
 
     public Date getEntryDate() {

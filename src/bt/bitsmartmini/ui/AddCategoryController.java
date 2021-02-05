@@ -41,10 +41,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import bt.bitsmartmini.bl.FormsBL;
+import bt.bitsmartmini.bl.CategoryBL;
 import bt.bitsmartmini.bl.InsertUpdateBL;
 import bt.bitsmartmini.bl.ItemsBL;
-import bt.bitsmartmini.entity.Forms;
+import bt.bitsmartmini.entity.Category;
 import bt.bitsmartmini.tablemodel.CategoryTableModel;
 
 public class AddCategoryController implements Initializable {
@@ -84,7 +84,7 @@ public class AddCategoryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        FormsBL form = new FormsBL();
+        CategoryBL form = new CategoryBL();
         cattextfield.textProperty().addListener(e -> {
 //            check.setVisible(false);
             if (cattextfield.getLength() > 0) {
@@ -176,10 +176,10 @@ public class AddCategoryController implements Initializable {
     }
 
     public void TableData() {
-        List<Forms> c = new FormsBL().getAllCategory();
+        List<Category> c = new CategoryBL().getAllCategory();
         data = FXCollections.observableArrayList();
         c.forEach((form) -> {
-            data.add(new CategoryTableModel(form.getFormName()));
+            data.add(new CategoryTableModel(form.getCategoryName()));
         });
         category.setCellValueFactory(cell -> cell.getValue().getCategoryNameProperty());
         action.setSortable(false);
@@ -193,10 +193,10 @@ public class AddCategoryController implements Initializable {
     }
 
     public void TableData(String p) {
-        List<Forms> c = new FormsBL().searchAllCategory(p);
+        List<Category> c = new CategoryBL().searchAllCategory(p);
         data = FXCollections.observableArrayList();
         c.forEach((form) -> {
-            data.add(new CategoryTableModel(form.getFormName()));
+            data.add(new CategoryTableModel(form.getCategoryName()));
         });
         category.setCellValueFactory(cell -> cell.getValue().getCategoryNameProperty());
         action.setSortable(false);
@@ -266,7 +266,7 @@ public class AddCategoryController implements Initializable {
                             childController.displayinfo.textProperty().unbind();
                             List catname = new ItemsBL().getItemsFromForm(selectedRecord.getCategoryName());
                             if (catname.isEmpty()) {
-                                int result = new FormsBL().removeData(selectedRecord.getCategoryName());
+                                int result = new CategoryBL().removeData(selectedRecord.getCategoryName());
                                 switch (result) {
                                     case 1:
                                         childController.displayinfo.setText("SUCCESSFULLY DELETED");
@@ -322,13 +322,13 @@ public class AddCategoryController implements Initializable {
         }
     }
 
-    private void clearAllForms() {
+    private void clearAllCategory() {
         cattextfield.clear();
     }
 
     private void closeTransition() {
         save.setDisable(true);
-        clearAllForms();
+        clearAllCategory();
         displayinfo.setText("SUCCESSFULLY SAVED");
         spinner.setVisible(false);
         check.setVisible(true);
@@ -345,8 +345,8 @@ public class AddCategoryController implements Initializable {
 
     private void saveTemplate() {
         displayinfo.textProperty().unbind();
-        Forms cat = new Forms();
-        cat.setFormName(cattextfield.getText());
+        Category cat = new Category();
+        cat.setCategoryName(cattextfield.getText());
         //cat.setUsers(new Users(LoginController.u.getUserid()));
         //cat.setEntryLog(new Date());
         int result = new InsertUpdateBL().insertData(cat);

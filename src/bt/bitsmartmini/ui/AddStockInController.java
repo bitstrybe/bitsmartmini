@@ -8,8 +8,6 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -24,23 +22,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.util.StringConverter;
 import bt.bitsmartmini.bl.InsertUpdateBL;
 import bt.bitsmartmini.bl.ItemsBL;
 import bt.bitsmartmini.bl.StockinBL;
-import bt.bitsmartmini.bl.UomBL;
 import bt.bitsmartmini.entity.Items;
-import bt.bitsmartmini.entity.ItemsPrice;
 import bt.bitsmartmini.entity.Stockin;
 import bt.bitsmartmini.entity.Users;
-import bt.bitsmartmini.utils.Utilities;
 
 /**
  * FXML Controller class
@@ -261,11 +254,11 @@ public class AddStockInController implements Initializable {
         }
 
         //cat.setBatchNo(childController.batchtextfield.getText());
-        cat.setBatchNo(String.valueOf(cat.getStockinId()));
-        cat.setItems(new Items(itemname.getText()));
+        //cat.setUpc(String.valueOf(cat.getStockinId()));
+        cat.setUpc(new Items(itemname.getText()));
         cat.setQuantity(Integer.parseInt(qnttextfield.getText()));
-        cat.setCostPrice(Utilities.roundToTwoDecimalPlace(Double.parseDouble(costtextfield.getText()), 2));
-        cat.setSalesPrice(Utilities.roundToTwoDecimalPlace(Double.parseDouble(salestextfield.getText()), 2));
+        //cat.setC(Utilities.roundToTwoDecimalPlace(Double.parseDouble(costtextfield.getText()), 2));
+        //cat.setSalesPrice(Utilities.roundToTwoDecimalPlace(Double.parseDouble(salestextfield.getText()), 2));
 //                cat.setNhisPrice(Utilities.roundToTwoDecimalPlace(Double.parseDouble(childController.nhistextfield.getText()), 2));
         cat.setStockinDate(new Date());
         cat.setExpiryDate(new Date());
@@ -275,15 +268,15 @@ public class AddStockInController implements Initializable {
         int result = new InsertUpdateBL().insertData(cat);
         switch (result) {
             case 1:
-                ItemsPrice itprice = new ItemsPrice();
-                itprice.setItems(cat.getItems());
-                itprice.setItemDesc(cat.getItems().getItemDesc());
-                itprice.setCostPrice(Utilities.roundToTwoDecimalPlace(Double.parseDouble(costtextfield.getText()), 2));
-                itprice.setSalesPrice(Utilities.roundToTwoDecimalPlace(Double.parseDouble(salestextfield.getText()), 2));
-                itprice.setEntryLog(new Date());
-                itprice.setLastModified(new Date());
-                int resultprice = new InsertUpdateBL().updateData(itprice);
-                if (resultprice == 1) {
+                //Items itprice = new Items();
+                //itprice.setItems(cat.getItems());
+                //itprice.setItemDesc(cat.getItems().getItemDesc());
+                //itprice.setCostPrice(Utilities.roundToTwoDecimalPlace(Double.parseDouble(costtextfield.getText()), 2));
+                //itprice.setSalesPrice(Utilities.roundToTwoDecimalPlace(Double.parseDouble(salestextfield.getText()), 2));
+//                itprice.setEntryLog(new Date());
+//                itprice.setLastModified(new Date());
+//                int resultprice = new InsertUpdateBL().updateData(itprice);
+                if (result == 1) {
                     closeTransition();
                 }
 

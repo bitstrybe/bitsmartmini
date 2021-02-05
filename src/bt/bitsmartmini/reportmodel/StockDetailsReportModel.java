@@ -33,14 +33,14 @@ public class StockDetailsReportModel extends AbstractTableModel implements Runna
         data = new Object[size][colnames.length];
         for (int x = 0; x < sk.size(); x++) {
             Stockin e = sk.get(x);
-            balv = skb.getStockBalance(e.getItems().getItemDesc());
-            data[x][0] = e.getItems().getItemDesc();
-            data[x][1] = skb.getStockInTotal(e.getItems().getItemDesc());
-            data[x][2] = skb.getTotalReturns(e.getItems().getItemDesc());
-            data[x][3] = sb.getSalesTotal(e.getItems().getItemDesc());
-            data[x][4] = skb.getStockOutTotal(e.getItems().getItemDesc());
-            data[x][5] = skb.getStockBalance(e.getItems().getItemDesc());
-            data[x][6] = Long.valueOf(e.getItems().getRol());
+            balv = skb.getStockBalance(e.getUpc().getItemDesc());
+            data[x][0] = e.getUpc().getItemDesc();
+            data[x][1] = skb.getStockInTotal(e.getUpc().getItemDesc());
+            data[x][2] = skb.getTotalReturns(e.getUpc().getItemDesc());
+            data[x][3] = sb.getSalesTotal(e.getUpc().getItemDesc());
+            data[x][4] = skb.getStockOutTotal(e.getUpc().getItemDesc());
+            data[x][5] = skb.getStockBalance(e.getUpc().getItemDesc());
+            data[x][6] = Long.valueOf(e.getUpc().getRol());
         }
     }
     

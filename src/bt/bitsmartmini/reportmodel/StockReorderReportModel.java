@@ -49,7 +49,7 @@ public class StockReorderReportModel extends AbstractTableModel implements Runna
             Items e = skn.get(x);
             data[x][0] = e.getItemDesc();
             System.out.println("sk: "+e.getItemDesc());
-            data[x][1] = DecimalUtil.format2(e.getItemsPrice().getSalesPrice());
+            data[x][1] = DecimalUtil.format2(e.getSp());
             data[x][2] = e.getRol();
             data[x][3] = co.get(e.getItemDesc());
         }

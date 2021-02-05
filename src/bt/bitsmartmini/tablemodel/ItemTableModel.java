@@ -16,7 +16,7 @@ public class ItemTableModel {
     private SimpleStringProperty itemCodeName;
     private SimpleStringProperty itemName;
     private SimpleStringProperty category;
-    private SimpleStringProperty manufacturer;
+    private SimpleStringProperty brand;
     private SimpleStringProperty uom;
     //private SimpleIntegerProperty uomitem;
     private SimpleStringProperty vom_val;
@@ -30,16 +30,16 @@ public class ItemTableModel {
     public ItemTableModel() {
     }
 
-    public ItemTableModel(String itemcodename, String itemName, String category, String manufacturer,String uom, String vom_val, String dose_val, long rol,Double costprice, Double saleprice, ImageView img) {
+    public ItemTableModel(String itemcodename, String itemName, String category, String brand, long rol,Double costprice, Double saleprice, ImageView img) {
        // this.itemCode = new SimpleIntegerProperty(itemCode);
         this.itemCodeName = new SimpleStringProperty(itemcodename);
         this.itemName = new SimpleStringProperty(itemName);
         this.category = new SimpleStringProperty(category);
-        this.manufacturer = new SimpleStringProperty(manufacturer);
-        this.uom = new SimpleStringProperty(uom);
+        this.brand = new SimpleStringProperty(brand);
+        //this.uom = new SimpleStringProperty(uom);
         //this.uomitem = new SimpleIntegerProperty(uomitem);
-        this.vom_val = new SimpleStringProperty(vom_val);
-        this.dose_val = new SimpleStringProperty(dose_val);
+        //this.vom_val = new SimpleStringProperty(vom_val);
+        //this.dose_val = new SimpleStringProperty(dose_val);
         this.rol = new SimpleLongProperty(rol);
         this.costprice = new SimpleDoubleProperty(costprice);
         this.saleprice = new SimpleDoubleProperty(saleprice);
@@ -96,15 +96,15 @@ public class ItemTableModel {
     }
 
     public String getManufacturer() {
-        return manufacturer.get();
+        return brand.get();
     }
 
     public SimpleStringProperty getManufacturerProperty() {
-        return manufacturer;
+        return brand;
     }
 
-    public void setManufacturerProperty(String manufacturer) {
-        this.manufacturer = new SimpleStringProperty(manufacturer);
+    public void setManufacturerProperty(String brand) {
+        this.brand = new SimpleStringProperty(brand);
     }
 
     public String getUmo() {

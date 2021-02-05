@@ -31,10 +31,10 @@ public class StockReportModel extends AbstractTableModel implements Runnable{
         data = new Object[size][colnames.length];
         for (int x = 0; x < sk.size(); x++) {
             Stockin e = sk.get(x);
-            balv = skb.getStockBalance(e.getItems().getItemDesc());
-            data[x][0] = e.getItems().getItemDesc();
-            data[x][1] = e.getBatchNo();
-            data[x][2] = e.getItems().getRol();
+            balv = skb.getStockBalance(e.getUpc().getItemDesc());
+            data[x][0] = e.getUpc().getUpc();
+            data[x][1] = e.getUpc().getItemDesc();
+            data[x][2] = e.getUpc().getRol();
             data[x][3] = balv;
         }
     }

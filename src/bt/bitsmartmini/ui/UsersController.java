@@ -309,7 +309,7 @@ public class UsersController implements Initializable {
                         stage.showAndWait();
 
                     } catch (IOException ex) {
-                        Logger.getLogger(AddManufacturerController.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(AddBrandController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
 

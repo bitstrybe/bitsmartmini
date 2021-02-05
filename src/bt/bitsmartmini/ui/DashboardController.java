@@ -188,8 +188,8 @@ public class DashboardController implements Initializable {
         ObservableList<Stockin> result = FXCollections.observableArrayList(list);
         expirylist.getItems().clear();
         result.forEach((man) -> {
-            String uom = man.getItems().getVomDef() + "" + man.getItems().getVom();
-            expirylist.getItems().add(man.getItems().getItemName() + " " + man.getItems().getForm().getFormName() + " " + uom);
+            //String uom = man.getUpc().getVomDef() + "" + man.getItems().getVom();
+            expirylist.getItems().add(man.getUpc().getItemDesc()+ " " + man.getUpc().getCategory().getCategoryName()+ " " + man.getUpc().getBrand().getBrandName());
         });
     }
 

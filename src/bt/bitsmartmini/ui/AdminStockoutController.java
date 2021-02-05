@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package bt.bitsmartmini.ui;
 
 import com.jfoenix.controls.JFXButton;
@@ -101,11 +97,10 @@ public class AdminStockoutController implements Initializable {
 
     }
     public void saveTemplate(){
-        
                 displayinfo.textProperty().unbind();
                 Stockout cat = new Stockout();
-                cat.setBatchNo(String.valueOf(cat.getStockoutId()));
-                cat.setItems(new Items(itemname.getText()));
+                //cat.setBatchNo(String.valueOf(cat.getStockoutId()));
+                cat.setUpc(new Items(itemname.getText()));
                 cat.setQuantity(Integer.parseInt(skoutqnttextfield.getText()));
 //                cat.setCostPrice(Utilities.roundToTwoDecimalPlace(Float.parseFloat(childController.costpiecestextfield.getText()), 2));
 //                cat.setSalesPrice(Utilities.roundToTwoDecimalPlace(Float.parseFloat(childController.salespiecetextfield.getText()), 2));

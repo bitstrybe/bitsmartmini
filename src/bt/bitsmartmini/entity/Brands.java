@@ -22,33 +22,33 @@ import javax.persistence.Table;
  * @author scarface
  */
 @Entity
-@Table(name = "forms")
+@Table(name = "brands")
 @NamedQueries({
-    @NamedQuery(name = "Forms.findAll", query = "SELECT f FROM Forms f")
-    , @NamedQuery(name = "Forms.findByFormName", query = "SELECT f FROM Forms f WHERE f.formName = :formName")})
-public class Forms implements Serializable {
+    @NamedQuery(name = "Brands.findAll", query = "SELECT b FROM Brands b")
+    , @NamedQuery(name = "Brands.findByBrandName", query = "SELECT b FROM Brands b WHERE b.brandName = :brandName")})
+public class Brands implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "form_name", nullable = false, length = 250)
-    private String formName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "form")
+    @Column(name = "brand_name", nullable = false, length = 200)
+    private String brandName;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "brand")
     private Collection<Items> itemsCollection;
 
-    public Forms() {
+    public Brands() {
     }
 
-    public Forms(String formName) {
-        this.formName = formName;
+    public Brands(String brandName) {
+        this.brandName = brandName;
     }
 
-    public String getFormName() {
-        return formName;
+    public String getBrandName() {
+        return brandName;
     }
 
-    public void setFormName(String formName) {
-        this.formName = formName;
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
     }
 
     public Collection<Items> getItemsCollection() {
@@ -62,18 +62,18 @@ public class Forms implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (formName != null ? formName.hashCode() : 0);
+        hash += (brandName != null ? brandName.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Forms)) {
+        if (!(object instanceof Brands)) {
             return false;
         }
-        Forms other = (Forms) object;
-        if ((this.formName == null && other.formName != null) || (this.formName != null && !this.formName.equals(other.formName))) {
+        Brands other = (Brands) object;
+        if ((this.brandName == null && other.brandName != null) || (this.brandName != null && !this.brandName.equals(other.brandName))) {
             return false;
         }
         return true;
@@ -81,7 +81,7 @@ public class Forms implements Serializable {
 
     @Override
     public String toString() {
-        return "bt.bitsmartmini.entity.Forms[ formName=" + formName + " ]";
+        return "bt.bitsmartmini.entity.Brands[ brandName=" + brandName + " ]";
     }
     
 }

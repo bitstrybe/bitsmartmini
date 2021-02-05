@@ -28,10 +28,10 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Receipt.findAll", query = "SELECT r FROM Receipt r")
     , @NamedQuery(name = "Receipt.findByReceiptId", query = "SELECT r FROM Receipt r WHERE r.receiptId = :receiptId")
+    , @NamedQuery(name = "Receipt.findByReceiptDate", query = "SELECT r FROM Receipt r WHERE r.receiptDate = :receiptDate")
+    , @NamedQuery(name = "Receipt.findByReceiptTime", query = "SELECT r FROM Receipt r WHERE r.receiptTime = :receiptTime")
     , @NamedQuery(name = "Receipt.findByAmountPaid", query = "SELECT r FROM Receipt r WHERE r.amountPaid = :amountPaid")
     , @NamedQuery(name = "Receipt.findByPayMode", query = "SELECT r FROM Receipt r WHERE r.payMode = :payMode")
-    , @NamedQuery(name = "Receipt.findByDateR", query = "SELECT r FROM Receipt r WHERE r.dateR = :dateR")
-    , @NamedQuery(name = "Receipt.findByTimeR", query = "SELECT r FROM Receipt r WHERE r.timeR = :timeR")
     , @NamedQuery(name = "Receipt.findByRemarks", query = "SELECT r FROM Receipt r WHERE r.remarks = :remarks")
     , @NamedQuery(name = "Receipt.findByEntryLog", query = "SELECT r FROM Receipt r WHERE r.entryLog = :entryLog")
     , @NamedQuery(name = "Receipt.findByModifiedDate", query = "SELECT r FROM Receipt r WHERE r.modifiedDate = :modifiedDate")})
@@ -43,19 +43,19 @@ public class Receipt implements Serializable {
     @Column(name = "receipt_id", nullable = false)
     private Integer receiptId;
     @Basic(optional = false)
+    @Column(name = "receipt_date", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date receiptDate;
+    @Basic(optional = false)
+    @Column(name = "receipt_time", nullable = false)
+    @Temporal(TemporalType.TIME)
+    private Date receiptTime;
+    @Basic(optional = false)
     @Column(name = "amount_paid", nullable = false)
     private double amountPaid;
     @Basic(optional = false)
     @Column(name = "pay_mode", nullable = false, length = 25)
     private String payMode;
-    @Basic(optional = false)
-    @Column(name = "dateR", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date dateR;
-    @Basic(optional = false)
-    @Column(name = "timeR", nullable = false)
-    @Temporal(TemporalType.TIME)
-    private Date timeR;
     @Column(name = "remarks", length = 500)
     private String remarks;
     @Column(name = "entry_log")
@@ -78,12 +78,12 @@ public class Receipt implements Serializable {
         this.receiptId = receiptId;
     }
 
-    public Receipt(Integer receiptId, double amountPaid, String payMode, Date dateR, Date timeR) {
+    public Receipt(Integer receiptId, Date receiptDate, Date receiptTime, double amountPaid, String payMode) {
         this.receiptId = receiptId;
+        this.receiptDate = receiptDate;
+        this.receiptTime = receiptTime;
         this.amountPaid = amountPaid;
         this.payMode = payMode;
-        this.dateR = dateR;
-        this.timeR = timeR;
     }
 
     public Integer getReceiptId() {
@@ -92,6 +92,22 @@ public class Receipt implements Serializable {
 
     public void setReceiptId(Integer receiptId) {
         this.receiptId = receiptId;
+    }
+
+    public Date getReceiptDate() {
+        return receiptDate;
+    }
+
+    public void setReceiptDate(Date receiptDate) {
+        this.receiptDate = receiptDate;
+    }
+
+    public Date getReceiptTime() {
+        return receiptTime;
+    }
+
+    public void setReceiptTime(Date receiptTime) {
+        this.receiptTime = receiptTime;
     }
 
     public double getAmountPaid() {
@@ -108,22 +124,6 @@ public class Receipt implements Serializable {
 
     public void setPayMode(String payMode) {
         this.payMode = payMode;
-    }
-
-    public Date getDateR() {
-        return dateR;
-    }
-
-    public void setDateR(Date dateR) {
-        this.dateR = dateR;
-    }
-
-    public Date getTimeR() {
-        return timeR;
-    }
-
-    public void setTimeR(Date timeR) {
-        this.timeR = timeR;
     }
 
     public String getRemarks() {

@@ -18,7 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,14 +30,12 @@ import javax.persistence.TemporalType;
 @Table(name = "items")
 @NamedQueries({
     @NamedQuery(name = "Items.findAll", query = "SELECT i FROM Items i")
+    , @NamedQuery(name = "Items.findByUpc", query = "SELECT i FROM Items i WHERE i.upc = :upc")
     , @NamedQuery(name = "Items.findByItemDesc", query = "SELECT i FROM Items i WHERE i.itemDesc = :itemDesc")
-    , @NamedQuery(name = "Items.findByItemName", query = "SELECT i FROM Items i WHERE i.itemName = :itemName")
     , @NamedQuery(name = "Items.findByItemImg", query = "SELECT i FROM Items i WHERE i.itemImg = :itemImg")
-    , @NamedQuery(name = "Items.findByVom", query = "SELECT i FROM Items i WHERE i.vom = :vom")
-    , @NamedQuery(name = "Items.findByVomDef", query = "SELECT i FROM Items i WHERE i.vomDef = :vomDef")
-    , @NamedQuery(name = "Items.findByDosage", query = "SELECT i FROM Items i WHERE i.dosage = :dosage")
-    , @NamedQuery(name = "Items.findByDosageDef", query = "SELECT i FROM Items i WHERE i.dosageDef = :dosageDef")
     , @NamedQuery(name = "Items.findByRol", query = "SELECT i FROM Items i WHERE i.rol = :rol")
+    , @NamedQuery(name = "Items.findByCp", query = "SELECT i FROM Items i WHERE i.cp = :cp")
+    , @NamedQuery(name = "Items.findBySp", query = "SELECT i FROM Items i WHERE i.sp = :sp")
     , @NamedQuery(name = "Items.findByEntryLog", query = "SELECT i FROM Items i WHERE i.entryLog = :entryLog")
     , @NamedQuery(name = "Items.findByLastModified", query = "SELECT i FROM Items i WHERE i.lastModified = :lastModified")})
 public class Items implements Serializable {
@@ -46,26 +43,23 @@ public class Items implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "item_desc", nullable = false, length = 500)
-    private String itemDesc;
+    @Column(name = "upc", nullable = false, length = 45)
+    private String upc;
     @Basic(optional = false)
-    @Column(name = "item_name", nullable = false, length = 245)
-    private String itemName;
+    @Column(name = "item_desc", nullable = false, length = 200)
+    private String itemDesc;
     @Basic(optional = false)
     @Column(name = "item_img", nullable = false, length = 245)
     private String itemImg;
-    @Column(name = "vom", length = 45)
-    private String vom;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "vom_def", precision = 22, scale = 0)
-    private Double vomDef;
-    @Column(name = "dosage", length = 45)
-    private String dosage;
-    @Column(name = "dosage_def", precision = 22, scale = 0)
-    private Double dosageDef;
     @Basic(optional = false)
     @Column(name = "rol", nullable = false)
     private int rol;
+    @Basic(optional = false)
+    @Column(name = "cp", nullable = false)
+    private double cp;
+    @Basic(optional = false)
+    @Column(name = "sp", nullable = false)
+    private double sp;
     @Basic(optional = false)
     @Column(name = "entry_log", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -74,23 +68,18 @@ public class Items implements Serializable {
     @Column(name = "last_modified", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastModified;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "upc")
     private Collection<SalesDetails> salesDetailsCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "items")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "upc")
     private Collection<Stockout> stockoutCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "items")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "upc")
     private Collection<Stockin> stockinCollection;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "items")
-    private ItemsPrice itemsPrice;
-    @JoinColumn(name = "form", referencedColumnName = "form_name", nullable = false)
+    @JoinColumn(name = "brand", referencedColumnName = "brand_name", nullable = false)
     @ManyToOne(optional = false)
-    private Forms form;
-    @JoinColumn(name = "manufacturer", referencedColumnName = "manufacturer", nullable = false)
+    private Brands brand;
+    @JoinColumn(name = "category", referencedColumnName = "category_name", nullable = false)
     @ManyToOne(optional = false)
-    private Manufacturer manufacturer;
-    @JoinColumn(name = "uom_def", referencedColumnName = "uom_desc", nullable = false)
-    @ManyToOne(optional = false)
-    private Uom uomDef;
+    private Category category;
     @JoinColumn(name = "users", referencedColumnName = "userid", nullable = false)
     @ManyToOne(optional = false)
     private Users users;
@@ -98,17 +87,27 @@ public class Items implements Serializable {
     public Items() {
     }
 
-    public Items(String itemDesc) {
-        this.itemDesc = itemDesc;
+    public Items(String upc) {
+        this.upc = upc;
     }
 
-    public Items(String itemDesc, String itemName, String itemImg, int rol, Date entryLog, Date lastModified) {
+    public Items(String upc, String itemDesc, String itemImg, int rol, double cp, double sp, Date entryLog, Date lastModified) {
+        this.upc = upc;
         this.itemDesc = itemDesc;
-        this.itemName = itemName;
         this.itemImg = itemImg;
         this.rol = rol;
+        this.cp = cp;
+        this.sp = sp;
         this.entryLog = entryLog;
         this.lastModified = lastModified;
+    }
+
+    public String getUpc() {
+        return upc;
+    }
+
+    public void setUpc(String upc) {
+        this.upc = upc;
     }
 
     public String getItemDesc() {
@@ -119,14 +118,6 @@ public class Items implements Serializable {
         this.itemDesc = itemDesc;
     }
 
-    public String getItemName() {
-        return itemName;
-    }
-
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-
     public String getItemImg() {
         return itemImg;
     }
@@ -135,44 +126,28 @@ public class Items implements Serializable {
         this.itemImg = itemImg;
     }
 
-    public String getVom() {
-        return vom;
-    }
-
-    public void setVom(String vom) {
-        this.vom = vom;
-    }
-
-    public Double getVomDef() {
-        return vomDef;
-    }
-
-    public void setVomDef(Double vomDef) {
-        this.vomDef = vomDef;
-    }
-
-    public String getDosage() {
-        return dosage;
-    }
-
-    public void setDosage(String dosage) {
-        this.dosage = dosage;
-    }
-
-    public Double getDosageDef() {
-        return dosageDef;
-    }
-
-    public void setDosageDef(Double dosageDef) {
-        this.dosageDef = dosageDef;
-    }
-
     public int getRol() {
         return rol;
     }
 
     public void setRol(int rol) {
         this.rol = rol;
+    }
+
+    public double getCp() {
+        return cp;
+    }
+
+    public void setCp(double cp) {
+        this.cp = cp;
+    }
+
+    public double getSp() {
+        return sp;
+    }
+
+    public void setSp(double sp) {
+        this.sp = sp;
     }
 
     public Date getEntryLog() {
@@ -215,36 +190,20 @@ public class Items implements Serializable {
         this.stockinCollection = stockinCollection;
     }
 
-    public ItemsPrice getItemsPrice() {
-        return itemsPrice;
+    public Brands getBrand() {
+        return brand;
     }
 
-    public void setItemsPrice(ItemsPrice itemsPrice) {
-        this.itemsPrice = itemsPrice;
+    public void setBrand(Brands brand) {
+        this.brand = brand;
     }
 
-    public Forms getForm() {
-        return form;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setForm(Forms form) {
-        this.form = form;
-    }
-
-    public Manufacturer getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(Manufacturer manufacturer) {
-        this.manufacturer = manufacturer;
-    }
-
-    public Uom getUomDef() {
-        return uomDef;
-    }
-
-    public void setUomDef(Uom uomDef) {
-        this.uomDef = uomDef;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public Users getUsers() {
@@ -258,7 +217,7 @@ public class Items implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (itemDesc != null ? itemDesc.hashCode() : 0);
+        hash += (upc != null ? upc.hashCode() : 0);
         return hash;
     }
 
@@ -269,7 +228,7 @@ public class Items implements Serializable {
             return false;
         }
         Items other = (Items) object;
-        if ((this.itemDesc == null && other.itemDesc != null) || (this.itemDesc != null && !this.itemDesc.equals(other.itemDesc))) {
+        if ((this.upc == null && other.upc != null) || (this.upc != null && !this.upc.equals(other.upc))) {
             return false;
         }
         return true;
@@ -277,7 +236,7 @@ public class Items implements Serializable {
 
     @Override
     public String toString() {
-        return "bt.bitsmartmini.entity.Items[ itemDesc=" + itemDesc + " ]";
+        return "bt.bitsmartmini.entity.Items[ upc=" + upc + " ]";
     }
     
 }

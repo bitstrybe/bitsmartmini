@@ -35,7 +35,7 @@ public class SalesReceiptReportModel extends AbstractTableModel implements Runna
             //String receiptNo = String.valueOf(c.getReceiptId());
             data[x][0] = String.format("%06d", c.getReceiptId());
 //            String cus = new CustomerBL().getCustomerNamebyId(c.getCustomer().getCustomerId());
-            data[x][1] = DateUtil.format2(c.getDateR());
+            data[x][1] = DateUtil.format2(c.getReceiptDate());
             data[x][2] = c.getPayMode();
             data[x][3] = c.getAmountPaid();
         }

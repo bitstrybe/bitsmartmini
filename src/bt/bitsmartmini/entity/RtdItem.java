@@ -63,12 +63,12 @@ public class RtdItem implements Serializable {
     @Column(name = "last_modified", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastModified;
-    @JoinColumn(name = "users", referencedColumnName = "userid", nullable = false)
-    @ManyToOne(optional = false)
-    private Users users;
     @JoinColumn(name = "salescode", referencedColumnName = "sales_details_id", nullable = false, insertable = false, updatable = false)
     @OneToOne(optional = false)
     private SalesDetails salesDetails;
+    @JoinColumn(name = "users", referencedColumnName = "userid", nullable = false)
+    @ManyToOne(optional = false)
+    private Users users;
 
     public RtdItem() {
     }
@@ -142,20 +142,20 @@ public class RtdItem implements Serializable {
         this.lastModified = lastModified;
     }
 
-    public Users getUsers() {
-        return users;
-    }
-
-    public void setUsers(Users users) {
-        this.users = users;
-    }
-
     public SalesDetails getSalesDetails() {
         return salesDetails;
     }
 
     public void setSalesDetails(SalesDetails salesDetails) {
         this.salesDetails = salesDetails;
+    }
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
     }
 
     @Override

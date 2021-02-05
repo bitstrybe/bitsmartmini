@@ -244,7 +244,7 @@ public class SalesController implements Initializable {
             double newtotalsales = totalsales - totalRtd;
             double balanceval = totalsales - amountpaid;
             Double ac = totalsales - (balanceval + totalRtd);//sb.getActualTotalSales(s.getSalesId());
-            salesdata.add(new SalesTableModel(s.getSalesId(), s.getCustomers().getFullname(), DecimalUtil.format2(totalsales), DecimalUtil.format2(amountpaid), DecimalUtil.format2(totalRtd), DecimalUtil.format2(balanceval), Utilities.convertDateToString(s.getDateS()), DecimalUtil.FormatWithSign(ac), s.getUsers().getFname() + " " + s.getUsers().getLname(), DateUtil.formatDate(s.getEntryDate(), "yyyy-MM-dd HH:mm:ss")));
+            salesdata.add(new SalesTableModel(s.getSalesId(), s.getCustomers().getFullname(), DecimalUtil.format2(totalsales), DecimalUtil.format2(amountpaid), DecimalUtil.format2(totalRtd), DecimalUtil.format2(balanceval), Utilities.convertDateToString(s.getSalesDate()), DecimalUtil.FormatWithSign(ac), s.getUsers().getFname() + " " + s.getUsers().getLname(), DateUtil.formatDate(s.getEntryDate(), "yyyy-MM-dd HH:mm:ss")));
         });
         salescodetb.setCellValueFactory(cell -> cell.getValue().getSalescodeProperty());
         customertb.setCellValueFactory(cell -> cell.getValue().getCustomerProperty());
@@ -305,9 +305,9 @@ public class SalesController implements Initializable {
                 sd.forEach((sales) -> {
                     RtdItem rt = new ReturnBL().getRtdItemByID(sales.getSalesDetailsId(), startdate, enddate);
                     if (rt != null) {
-                        salesdetailsdata.add(new SalesDetailsTableModel(sales.getSalesDetailsId(), sales.getItem().getItemDesc(), sales.getQuantity(), DecimalUtil.format2(sales.getCostPrice()), DecimalUtil.format2(sales.getSalesPrice()), rt.getRtdQty(), sales.getDiscount(), Utilities.convertDateToString(sales.getEntryDate())));
+                        salesdetailsdata.add(new SalesDetailsTableModel(sales.getSalesDetailsId(), sales.getUpc().getItemDesc(), sales.getQuantity(), DecimalUtil.format2(sales.getCostPrice()), DecimalUtil.format2(sales.getSalesPrice()), rt.getRtdQty(), sales.getDiscount(), Utilities.convertDateToString(sales.getEntryDate())));
                     } else {
-                        salesdetailsdata.add(new SalesDetailsTableModel(sales.getSalesDetailsId(), sales.getItem().getItemDesc(), sales.getQuantity(), DecimalUtil.format2(sales.getCostPrice()), DecimalUtil.format2(sales.getSalesPrice()), 0, sales.getDiscount(), Utilities.convertDateToString(sales.getEntryDate())));
+                        salesdetailsdata.add(new SalesDetailsTableModel(sales.getSalesDetailsId(), sales.getUpc().getItemDesc(), sales.getQuantity(), DecimalUtil.format2(sales.getCostPrice()), DecimalUtil.format2(sales.getSalesPrice()), 0, sales.getDiscount(), Utilities.convertDateToString(sales.getEntryDate())));
                     }
                 });
                 itemnametb.setCellValueFactory(cell -> cell.getValue().getItemsnameProperty());
@@ -343,7 +343,7 @@ public class SalesController implements Initializable {
                 List<Receipt> receipt = rec.getAllReciptbySalescode(t.getSalescode());
                 receiptdata = FXCollections.observableArrayList();
                 receipt.forEach(r -> {
-                    receiptdata.add(new ReceiptTableModel(r.getReceiptId(), r.getSalesId().getSalesId(), r.getPayMode(), DecimalUtil.format2(r.getAmountPaid()), Utilities.convertDateToString(r.getDateR())));
+                    receiptdata.add(new ReceiptTableModel(r.getReceiptId(), r.getSalesId().getSalesId(), r.getPayMode(), DecimalUtil.format2(r.getAmountPaid()), Utilities.convertDateToString(r.getReceiptDate())));
                 });
                 paymentcodetb.setCellValueFactory(cell -> cell.getValue().getReceiptIdProperty());
                 amountpaidtb.setCellValueFactory(cell -> cell.getValue().getAmountPaidProperty());
@@ -358,7 +358,7 @@ public class SalesController implements Initializable {
                 returns.forEach(r -> {
                     System.out.println("r: " + r.getSalescode());
                     double totalA = (r.getRtdQty() * r.getSalesDetails().getSalesPrice());
-                    rtddata.add(new ReturnTableModel(r.getSalescode(), r.getSalesDetails().getRtdItem().getSalesDetails().getItem().getItemDesc(), r.getRtdQty(), DecimalUtil.format2(r.getSalesDetails().getSalesPrice()), DecimalUtil.format2(totalA), r.getRemarks(), DateUtil.formatDate(r.getRtdDate(), "yyyy-MM-dd")));
+                    rtddata.add(new ReturnTableModel(r.getSalescode(), r.getSalesDetails().getRtdItem().getSalesDetails().getUpc().getItemDesc(), r.getRtdQty(), DecimalUtil.format2(r.getSalesDetails().getSalesPrice()), DecimalUtil.format2(totalA), r.getRemarks(), DateUtil.formatDate(r.getRtdDate(), "yyyy-MM-dd")));
                 });
                 rqty.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
                 ramnt.setCellValueFactory(cell -> cell.getValue().getUnitPriceProperty());
@@ -421,7 +421,7 @@ public class SalesController implements Initializable {
                             receipt.setPayMode(jrb.getText());
                             receipt.setModifiedDate(new Date());
                             receipt.setUsers(new Users(LoginController.u.getUserid()));
-                            receipt.setDateR(new Date());
+                            receipt.setReceiptDate(new Date());
                             int checkresult = new InsertUpdateBL().insertData(receipt);
                             if (checkresult == 1) {
                                 cart.clear();
@@ -756,9 +756,9 @@ public class SalesController implements Initializable {
             RtdItem rd = rb.getRtdItemByID(i);
             double actualsales = sl.getActualTotalDiscountedSales(i);
             System.out.println(actualsales);
-            childControllersk.itemname.setText(sd.getItem().getItemDesc());
+            childControllersk.itemname.setText(sd.getUpc().getItemDesc());
             FileInputStream input;
-            input = new FileInputStream(sd.getItem().getItemImg());
+            input = new FileInputStream(sd.getUpc().getItemImg());
             Image imagesk = new Image(input);
             childControllersk.itemimage.setImage(imagesk);
             int qty = 0;

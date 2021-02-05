@@ -3,7 +3,6 @@ package bt.bitsmartmini.bl;
 import java.util.List;
 import javax.persistence.TypedQuery;
 import bt.bitsmartmini.entity.Items;
-import bt.bitsmartmini.entity.ItemsPrice;
 
 /**
  *
@@ -75,10 +74,10 @@ public class ItemsBL extends DdsBL {
         }
     }
 
-    public List getItemsFromManufacturer(String manid) {
+    public List findItemsbyBrand(String b) {
         try {
-            TypedQuery<String> q = em.createQuery("SELECT r.manufacturer.manufacturer FROM Items r WHERE r.manufacturer.manufacturer = :manid", String.class);
-            q.setParameter("manid", manid);
+            TypedQuery<Items> q = em.createQuery("SELECT r FROM Items r WHERE r.brand.brandName = :b", Items.class);
+            q.setParameter("b", b);
 //        System.out.println(q.getResultList());
             q.setMaxResults(1);
             return q.getResultList();
@@ -93,10 +92,10 @@ public class ItemsBL extends DdsBL {
         return q.getSingleResult();
     }
     
-    public ItemsPrice getItemsPriceByItemDesc(String itemdesc){
-        TypedQuery<ItemsPrice> q = em.createQuery("SELECT i FROM ItemsPrice i WHERE i.itemDesc = :itemDesc", ItemsPrice.class);
-        q.setParameter("itemDesc", itemdesc);
-        return q.getSingleResult();
-    }
+//    public ItemsPrice getItemsPriceByItemDesc(String itemdesc){
+//        TypedQuery<ItemsPrice> q = em.createQuery("SELECT i FROM ItemsPrice i WHERE i.itemDesc = :itemDesc", ItemsPrice.class);
+//        q.setParameter("itemDesc", itemdesc);
+//        return q.getSingleResult();
+//    }
 
 }

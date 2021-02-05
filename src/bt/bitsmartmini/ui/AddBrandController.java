@@ -46,9 +46,10 @@ import javafx.util.Callback;
 import javafx.util.Duration;
 import bt.bitsmartmini.bl.InsertUpdateBL;
 import bt.bitsmartmini.bl.ItemsBL;
-import bt.bitsmartmini.bl.ManufacturerBL;
+import bt.bitsmartmini.bl.BrandBL;
+import bt.bitsmartmini.entity.Brands;
 import bt.bitsmartmini.entity.Manufacturer;
-import bt.bitsmartmini.tablemodel.ManufacturerTableModel;
+import bt.bitsmartmini.tablemodel.BrandTableModel;
 import org.apache.commons.text.WordUtils;
 
 /**
@@ -56,9 +57,9 @@ import org.apache.commons.text.WordUtils;
  *
  * @author JScare
  */
-public class AddManufacturerController implements Initializable {
+public class AddBrandController implements Initializable {
 
-    ObservableList<ManufacturerTableModel> data;
+    ObservableList<BrandTableModel> data;
 
     @FXML
     public Label displayinfo;
@@ -69,11 +70,11 @@ public class AddManufacturerController implements Initializable {
     @FXML
     private JFXTextField searchbtn;
     @FXML
-    private TableView<ManufacturerTableModel> mantableview;
+    private TableView<BrandTableModel> mantableview;
     @FXML
-    private TableColumn<ManufacturerTableModel, String> manufacturer;
+    private TableColumn<BrandTableModel, String> brand;
     @FXML
-    private TableColumn<ManufacturerTableModel, Boolean> action;
+    private TableColumn<BrandTableModel, Boolean> action;
     @FXML
     private JFXButton save;
     @FXML
@@ -92,13 +93,13 @@ public class AddManufacturerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        ManufacturerBL man = new ManufacturerBL();
+        BrandBL man = new BrandBL();
         // TODO
         manutextfield.textProperty().addListener(e -> {
             //  System.out.println(cattextfield.getText());
 //            check.setVisible(false);
             if (manutextfield.getLength() > 0) {
-                String value = man.getManufacturerbyId(manutextfield.getText());
+                String value = man.getBrandsbyId(manutextfield.getText());
                 if (value != null) {
                     save.setDisable(true);
                     displayinfo.setText("Duplicate Found!!!");
@@ -180,25 +181,25 @@ public class AddManufacturerController implements Initializable {
     }
 
     public void TableData() {
-        List<Manufacturer> c = new ManufacturerBL().getAllManufacturer();
+        List<Brands> c = new BrandBL().getAllBrands();
         data = FXCollections.observableArrayList();
 
-        c.forEach((manufacturer) -> {
-            data.add(new ManufacturerTableModel(manufacturer.getManufacturer()));
+        c.forEach((brand) -> {
+            data.add(new BrandTableModel(brand.getBrandName()));
         });
-        manufacturer.setCellValueFactory(cell -> cell.getValue().getManufacturerProperty());
+        brand.setCellValueFactory(cell -> cell.getValue().getBrandProperty());
         action.setSortable(false);
         action.setMaxWidth(480);
 
-        action.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ManufacturerTableModel, Boolean>, ObservableValue<Boolean>>() {
+        action.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<BrandTableModel, Boolean>, ObservableValue<Boolean>>() {
             @Override
-            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<ManufacturerTableModel, Boolean> features) {
+            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<BrandTableModel, Boolean> features) {
                 return new SimpleBooleanProperty(features.getValue() != null);
             }
         });
-        action.setCellFactory(new Callback<TableColumn<ManufacturerTableModel, Boolean>, TableCell<ManufacturerTableModel, Boolean>>() {
+        action.setCellFactory(new Callback<TableColumn<BrandTableModel, Boolean>, TableCell<BrandTableModel, Boolean>>() {
             @Override
-            public TableCell<ManufacturerTableModel, Boolean> call(TableColumn<ManufacturerTableModel, Boolean> personBooleanTableColumn) {
+            public TableCell<BrandTableModel, Boolean> call(TableColumn<BrandTableModel, Boolean> personBooleanTableColumn) {
                 return new AddPersonCell();
             }
         });
@@ -209,25 +210,25 @@ public class AddManufacturerController implements Initializable {
     }
 
     public void TableData(String p) {
-        List<Manufacturer> c = new ManufacturerBL().searchAllManufacturer(p);
+        List<Brands> c = new BrandBL().searchAllBrands(p);
         data = FXCollections.observableArrayList();
 
-        c.forEach((manufacturer) -> {
-            data.add(new ManufacturerTableModel(manufacturer.getManufacturer()));
+        c.forEach((brand) -> {
+            data.add(new BrandTableModel(brand.getBrandName()));
         });
-        manufacturer.setCellValueFactory(cell -> cell.getValue().getManufacturerProperty());
+        brand.setCellValueFactory(cell -> cell.getValue().getBrandProperty());
         action.setSortable(false);
         action.setMaxWidth(480);
 
-        action.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ManufacturerTableModel, Boolean>, ObservableValue<Boolean>>() {
+        action.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<BrandTableModel, Boolean>, ObservableValue<Boolean>>() {
             @Override
-            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<ManufacturerTableModel, Boolean> features) {
+            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<BrandTableModel, Boolean> features) {
                 return new SimpleBooleanProperty(features.getValue() != null);
             }
         });
-        action.setCellFactory(new Callback<TableColumn<ManufacturerTableModel, Boolean>, TableCell<ManufacturerTableModel, Boolean>>() {
+        action.setCellFactory(new Callback<TableColumn<BrandTableModel, Boolean>, TableCell<BrandTableModel, Boolean>>() {
             @Override
-            public TableCell<ManufacturerTableModel, Boolean> call(TableColumn<ManufacturerTableModel, Boolean> personBooleanTableColumn) {
+            public TableCell<BrandTableModel, Boolean> call(TableColumn<BrandTableModel, Boolean> personBooleanTableColumn) {
                 return new AddPersonCell();
             }
         });
@@ -243,7 +244,7 @@ public class AddManufacturerController implements Initializable {
         s.close();
     }
 
-    public class AddPersonCell extends TableCell<ManufacturerTableModel, Boolean> {
+    public class AddPersonCell extends TableCell<BrandTableModel, Boolean> {
 
         //Image img = new Image(getClass().getResourceAsStream("edit.png"));
         Image img2 = new Image(getClass().getResourceAsStream("delete.png"));
@@ -278,7 +279,7 @@ public class AddManufacturerController implements Initializable {
 
                         int selectdIndex = getTableRow().getIndex();
                         //Create a new table show details of the selected item
-                        ManufacturerTableModel selectedRecord = (ManufacturerTableModel) mantableview.getItems().get(selectdIndex);
+                        BrandTableModel selectedRecord = (BrandTableModel) mantableview.getItems().get(selectdIndex);
                         Stage stage = new Stage();
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Delete.fxml"));
                         Parent parent = (Parent) fxmlLoader.load();
@@ -297,9 +298,9 @@ public class AddManufacturerController implements Initializable {
                             childController.displayinfo.textProperty().bind(task.messageProperty());
                             task.setOnSucceeded(f -> {
                                 childController.displayinfo.textProperty().unbind();
-                                List man = new ItemsBL().getItemsFromManufacturer(selectedRecord.getManufacturer());
+                                List man = new ItemsBL().findItemsbyBrand(selectedRecord.getBrand());
                                 if (man.isEmpty()) {
-                                    int result = new ManufacturerBL().removeData(selectedRecord.getManufacturer());
+                                    int result = new BrandBL().removeData(selectedRecord.getBrand());
                                     switch (result) {
                                         case 1:
                                             childController.displayinfo.setText("SUCCESSFULLY DELETED");
@@ -336,7 +337,7 @@ public class AddManufacturerController implements Initializable {
                         stage.showAndWait();
 
                     } catch (IOException ex) {
-                        Logger.getLogger(AddManufacturerController.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(AddBrandController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
 

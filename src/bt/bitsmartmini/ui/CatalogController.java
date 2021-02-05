@@ -30,12 +30,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import bt.bitsmartmini.bl.ItemsBL;
-import bt.bitsmartmini.bl.ItemspriceBL;
 import bt.bitsmartmini.bl.ReceiptBL;
 import bt.bitsmartmini.bl.SalesBL;
 import bt.bitsmartmini.bl.StockinBL;
 import bt.bitsmartmini.entity.Items;
-import bt.bitsmartmini.entity.ItemsPrice;
 //import bt.bitsmartmini.entity.UomDef;
 import bt.bitsmartmini.tablemodel.SalesDetailsTableModel;
 import bt.bitsmartmini.tablemodel.SalesTableModel;
@@ -123,7 +121,7 @@ public class CatalogController extends MainAppController implements Initializabl
                     } else {
                         list = i.getItemsPerPage(12);
                     }
-                    ItemspriceBL itb = new ItemspriceBL();
+                    //ItemspriceBL itb = new ItemspriceBL();
                     ObservableList<Items> result = FXCollections.observableArrayList(list);
                     result.forEach((items) -> {
                         try {
@@ -154,16 +152,16 @@ public class CatalogController extends MainAppController implements Initializabl
                                 }
 
                             }
-                            childController.medsname.setText(items.getItemName());
+                            childController.medsname.setText(items.getItemDesc());
                             // UomDef domf = new UomBL().getUombyItemId(items.getItemDesc());
                             //int uomitem = domf.getUomItem();
-                            String uom_val = String.valueOf(items.getUomDef().getUomDesc());
-                            childController.uom.setText(balance + " " + uom_val + "(s) In Stock");
+                            //String uom_val = String.valueOf(items.getUomDef().getUomDesc());
+                            //childController.uom.setText(balance + " " + uom_val + "(s) In Stock");
                             //childController.cat.setText(stock.getItems().getForm().getFormName());
-                            childController.man.setText(items.getManufacturer().getManufacturer());
-                            ItemsPrice itp = itb.getItemspricebyItemName(items.getItemDesc());
+                            childController.man.setText(items.getBrand().getBrandName());
+                            //ItemsPrice itp = itb.getItemspricebyItemName(items.getItemDesc());
                             //System.out.println("Item Price :" + itp.getSalesPrice());
-                            double prices = itp.getSalesPrice();
+                            double prices = items.getSp();
                             //childController.curr.setText("GHC");
                             childController.exp.setText(DecimalUtil.format2(prices));
                             childController.curr.setText(MainAppController.B.getBCurrency());
@@ -281,7 +279,7 @@ public class CatalogController extends MainAppController implements Initializabl
                                     FXMLLoader fxmlLoaderQnt = new FXMLLoader(getClass().getResource("AddToCart.fxml"));
                                     Parent parentQtn = (Parent) fxmlLoaderQnt.load();
                                     AddToCartController childControllerQnt = fxmlLoaderQnt.getController();
-                                    ItemsPrice itprice = new ItemsBL().getItemsPriceByItemDesc(items.getItemDesc());
+                                    //ItemsPrice itprice = new ItemsBL().getItemsPriceByItemDesc(items.getItemDesc());
                                     childControllerQnt.itemnamelabel.setText(items.getItemDesc());
 
                                     childControllerQnt.itemqty.setText(balance.toString());
@@ -293,9 +291,9 @@ public class CatalogController extends MainAppController implements Initializabl
                                                 long stockinqty = new StockinBL().getStockInTotal(items.getItemDesc());
                                                 long qntfield = Long.valueOf(childControllerQnt.qnttextfield.getText());
                                                 if (qntfield <= balance) {
-                                                    double totalqnt = qntfield * itprice.getSalesPrice();
+                                                    double totalqnt = qntfield * items.getSp();
                                                     //UomDef uom = new UomBL().getUombyItemId(items.getItemDesc());
-                                                    SelectItemSaleTableModel item = new SelectItemSaleTableModel(items.getItemDesc(), Integer.valueOf(childControllerQnt.qnttextfield.getText()), itprice.getCostPrice(), itprice.getSalesPrice(), totalqnt, 0, items.getUomDef().getUomDesc());
+                                                    SelectItemSaleTableModel item = new SelectItemSaleTableModel(items.getItemDesc(), Integer.valueOf(childControllerQnt.qnttextfield.getText()), items.getCp(), items.getSp(), totalqnt, 0);
                                                     cart.put(item.getItemName(), item);
                                                     static_label.setText(String.valueOf(cart.size()));
                                                     childControllerQnt.addtocartinfo.setText("added to cart");

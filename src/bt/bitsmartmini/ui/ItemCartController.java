@@ -140,7 +140,7 @@ public class ItemCartController extends MainAppController implements Initializab
             imageitems.scaleYProperty();
             imageitems.setSmooth(true);
             imageitems.setCache(true);
-            data.add(new SelectItemSaleTableModel(c.getItemName(), c.getQuantity(), c.getCost(), c.getPrice(), c.getTotal(), c.getDiscountValue(), c.getUom(), imageitems));
+            data.add(new SelectItemSaleTableModel(c.getItemName(), c.getQuantity(), c.getCost(), c.getPrice(), c.getTotal(), c.getDiscountValue(), imageitems));
             itemname.setCellValueFactory(cell -> cell.getValue().getItemNameProperty());
             quantity.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
             itemprice.setCellValueFactory(cell -> cell.getValue().getPriceProperty());
@@ -367,7 +367,7 @@ public class ItemCartController extends MainAppController implements Initializab
                         sale.setSalesId(++slc);
                     }
 
-                    sale.setDateS(new Date(System.currentTimeMillis()));
+                    sale.setSalesDate(new Date(System.currentTimeMillis()));
                     sale.setUsers(new Users(LoginController.u.getUserid()));
 //            customerdroplist.getSelectionModel().getSelectedItem();
 
@@ -377,13 +377,13 @@ public class ItemCartController extends MainAppController implements Initializab
                     ObservableList<SelectItemSaleTableModel> list = carttable.getItems();
                     list.forEach(v -> {
                         SalesDetails sd = new SalesDetails();
-                        sd.setItem(new Items(v.getItemName()));
+                        sd.setUpc(new Items(v.getItemName()));
                         sd.setSaleId(sale);
                         sd.setSalesPrice(v.getPrice());
                         sd.setQuantity(v.getQuantity());
                         sd.setCostPrice(v.getCost());
                         sd.setDiscount(v.getDiscountValue());
-                        sd.setUomCode(new Uom(v.getUom()));
+                        //sd.setUomCode(new Uom(v.getUom()));
                         //sd.setUsers(new Users(LoginController.u.getUserid()));
                         sd.setEntryDate(new Date());
                         sd.setModifiedDate(new Date());
@@ -410,8 +410,8 @@ public class ItemCartController extends MainAppController implements Initializab
                     receipt.setPayMode(jrb.getText());
                     receipt.setModifiedDate(new Date());
                     receipt.setUsers(new Users(LoginController.u.getUserid()));
-                    receipt.setDateR(new Date(System.currentTimeMillis()));
-                    receipt.setTimeR(new Date(System.currentTimeMillis()));
+                    receipt.setReceiptDate(new Date(System.currentTimeMillis()));
+                    receipt.setReceiptTime(new Date(System.currentTimeMillis()));
                     rds.add(receipt);
                     sale.setReceiptCollection(rds);
                     int checkresult = insert.insertData(sale);

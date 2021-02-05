@@ -51,15 +51,15 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import javax.imageio.ImageIO;
-import bt.bitsmartmini.bl.FormsBL;
+import bt.bitsmartmini.bl.CategoryBL;
 import bt.bitsmartmini.bl.InsertUpdateBL;
 import bt.bitsmartmini.bl.ItemsBL;
-import bt.bitsmartmini.bl.ManufacturerBL;
+import bt.bitsmartmini.bl.BrandBL;
 import bt.bitsmartmini.bl.UomBL;
 import bt.bitsmartmini.bl.VomBL;
-import bt.bitsmartmini.entity.Forms;
+import bt.bitsmartmini.entity.Brands;
+import bt.bitsmartmini.entity.Category;
 import bt.bitsmartmini.entity.Items;
-import bt.bitsmartmini.entity.ItemsPrice;
 import bt.bitsmartmini.entity.Manufacturer;
 import bt.bitsmartmini.entity.Uom;
 import bt.bitsmartmini.entity.Users;
@@ -161,18 +161,18 @@ public class AddItemsController implements Initializable {
     private FontAwesomeIcon duplicatelock;
 
     public void getManufacturer() {
-        List<Manufacturer> list = new ManufacturerBL().getAllManufacturer();
-        ObservableList<Manufacturer> result = FXCollections.observableArrayList(list);
+        List<Brands> list = new BrandBL().getAllBrands();
+        ObservableList<Brands> result = FXCollections.observableArrayList(list);
         result.forEach((man) -> {
-            manufacturercombo.getItems().add(WordUtils.capitalizeFully(man.getManufacturer()));
+            manufacturercombo.getItems().add(WordUtils.capitalizeFully(man.getBrandName()));
         });
     }
 
     public void getCategory() {
-        List<Forms> list = new FormsBL().getAllCategory();
-        ObservableList<Forms> result = FXCollections.observableArrayList(list);
+        List<Category> list = new CategoryBL().getAllCategory();
+        ObservableList<Category> result = FXCollections.observableArrayList(list);
         result.forEach((cat) -> {
-            categorycombo.getItems().add(WordUtils.capitalizeFully(cat.getFormName()));
+            categorycombo.getItems().add(WordUtils.capitalizeFully(cat.getCategoryName()));
         });
     }
 
@@ -315,10 +315,10 @@ public class AddItemsController implements Initializable {
         c.forEach((item) -> {
             //UomDef domf = new UomBL().getUombyItemId(item.getItemDesc());
             //int uomitem = domf.getUomItem();
-            String uom_val = String.valueOf(item.getUomDef().getUomDesc());
-            String vom_value = String.valueOf(item.getVomDef()) + item.getVom();
-            String dose_value = String.valueOf(item.getDosageDef()) + item.getDosage();
-            ItemsPrice iprice = new ItemsBL().getItemsPriceByItemDesc(item.getItemDesc());
+            //String uom_val = String.valueOf(item.getUomDef().getUomDesc());
+            //String vom_value = String.valueOf(item.getVomDef()) + item.getVom();
+            //String dose_value = String.valueOf(item.getDosageDef()) + item.getDosage();
+            //ItemsPrice iprice = new ItemsBL().getItemsPriceByItemDesc(item.getItemDesc());
             try {
                 ImageView imageitems = new ImageView();
                 File file = new File(item.getItemImg());
@@ -331,7 +331,7 @@ public class AddItemsController implements Initializable {
                 imageitems.scaleYProperty();
                 imageitems.setSmooth(true);
                 imageitems.setCache(true);
-                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getForm().getFormName(), item.getManufacturer().getManufacturer(), uom_val, vom_value, dose_value, item.getRol(), iprice.getCostPrice(), iprice.getSalesPrice(), imageitems));
+                data.add(new ItemTableModel(item.getUpc(), item.getItemDesc(), item.getCategory().getCategoryName(), item.getBrand().getBrandName(), item.getRol(), item.getCp(), item.getSp(), imageitems));
 //                System.out.println(item.getItemCodeFullname() + " " + item.getItemName() + " " + item.getCategory().getCategoryName() + "" + item.getManufacturer().getManufacturer() + " " + uom_value + " " + item.getRol());
             } catch (Exception ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -368,9 +368,9 @@ public class AddItemsController implements Initializable {
         c.forEach((item) -> {
             //Uom domf = uombl.getUombyItemId(item.getItemDesc());
             //int uomitem = domf.getUomItem();
-            String uom_val = String.valueOf(item.getUomDef().getUomDesc());
-            String vom_value = String.valueOf(item.getVomDef()) + item.getVom();
-            String dose_value = String.valueOf(item.getDosageDef()) + item.getDosage();
+//            String uom_val = String.valueOf(item.getUomDef().getUomDesc());
+//            String vom_value = String.valueOf(item.getVomDef()) + item.getVom();
+//            String dose_value = String.valueOf(item.getDosageDef()) + item.getDosage();
             try {
 
                 ImageView imageitems = new ImageView();
@@ -384,7 +384,7 @@ public class AddItemsController implements Initializable {
                 imageitems.scaleYProperty();
                 imageitems.setSmooth(true);
                 imageitems.setCache(true);
-                data.add(new ItemTableModel(item.getItemDesc(), item.getItemName(), item.getForm().getFormName(), item.getManufacturer().getManufacturer(), uom_val, vom_value, dose_value, item.getRol(), item.getItemsPrice().getCostPrice(), item.getItemsPrice().getSalesPrice(), imageitems));
+                data.add(new ItemTableModel(item.getUpc(), item.getItemDesc(), item.getCategory().getCategoryName(), item.getBrand().getBrandName(), item.getRol(), item.getCp(), item.getSp(), imageitems));
             } catch (Exception ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
 
@@ -483,8 +483,7 @@ public class AddItemsController implements Initializable {
 //                                    }
 //                                }
 
-                           // }
-
+                            // }
 //                                } else {
 //                                    childController.displayinfo.setText("UNABLE TO DELETE RECORD");
 //                                    childController.spinner.setVisible(false);
@@ -532,7 +531,7 @@ public class AddItemsController implements Initializable {
         stage.close();
     }
 
-    private void clearAllForms() {
+    private void clearAllCategory() {
         itmtextfield.clear();
         categorycombo.getSelectionModel().clearSelection();
         manufacturercombo.getSelectionModel().clearSelection();
@@ -553,7 +552,7 @@ public class AddItemsController implements Initializable {
         spinner.setVisible(false);
         check.setVisible(true);
         TableData();
-        clearAllForms();
+        clearAllCategory();
         PauseTransition delay = new PauseTransition(Duration.seconds(3));
         delay.setOnFinished(closevnt -> {
             displayinfo.setText("");
@@ -583,22 +582,24 @@ public class AddItemsController implements Initializable {
 
         try {
             cat.setItemDesc(WordUtils.capitalizeFully(itemdesc));
-            cat.setItemName(WordUtils.capitalizeFully(itmtextfield.getText()));
-            cat.setForm(new Forms(categorycombo.getValue()));
-            cat.setManufacturer(new Manufacturer(manufacturercombo.getValue()));
-            if (!vom_val.getText().isEmpty()) {
-                cat.setVomDef(Double.parseDouble(vom_val.getText().trim()));
-                cat.setVom(vom.getSelectionModel().getSelectedItem());
-            }
-            if (!dose_val.getText().isEmpty()) {
-                cat.setDosageDef(Double.parseDouble(dose_val.getText()));
-                cat.setDosage(dose.getSelectionModel().getSelectedItem());
-            }
+            //cat.setItemName(WordUtils.capitalizeFully(itmtextfield.getText()));
+            cat.setCategory(new Category(categorycombo.getValue()));
+            cat.setBrand(new Brands(manufacturercombo.getValue()));
+//            if (!vom_val.getText().isEmpty()) {
+//                cat.setVomDef(Double.parseDouble(vom_val.getText().trim()));
+//                cat.setVom(vom.getSelectionModel().getSelectedItem());
+//            }
+//            if (!dose_val.getText().isEmpty()) {
+//                cat.setDosageDef(Double.parseDouble(dose_val.getText()));
+//                cat.setDosage(dose.getSelectionModel().getSelectedItem());
+//            }
             cat.setRol(Integer.parseInt(roltextfield.getText()));
-            cat.setUomDef(new Uom(uomcombo.getSelectionModel().getSelectedItem()));
+            //cat.setUomDef(new Uom(uomcombo.getSelectionModel().getSelectedItem()));
             cat.setUsers(new Users(LoginController.u.getUserid()));
             cat.setEntryLog(new Date());
             cat.setLastModified(new Date());
+            cat.setCp(0);
+            cat.setSp(0);
             //adding image file to directory
             initialStream = new FileInputStream(ifile);
             // System.out.println("FILE 1: " + ifile.getName());
@@ -619,18 +620,6 @@ public class AddItemsController implements Initializable {
                     if (!ifile.getName().equals("DEFAULT.png")) {
                         ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File("./img/" + itemdesc.replace("/", "-") + "." + FilenameUtils.getExtension(ifile.getName())));
                         //java.nio.file.Files.copy(initialStream, targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                    }
-                    ItemsPrice itp = new ItemsPrice();
-                    itp.setItems(cat);
-                    itp.setCostPrice(Double.parseDouble(costtextfield.getText()));
-                    itp.setSalesPrice(Double.parseDouble(selltextfield.getText()));
-                    itp.setItemDesc(WordUtils.capitalizeFully(itemdesc));
-                    itp.setEntryLog(new Date());
-                    itp.setLastModified(new Date());
-                    int resultip = new InsertUpdateBL().updateData(itp);
-                    if (resultip == 1) {
-                        closeTransition();
-                        break;
                     }
                 default:
                     displayinfo.setText("NOTICE! AN ERROR OCCURED");

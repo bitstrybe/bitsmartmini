@@ -52,7 +52,6 @@ import bt.bitsmartmini.bl.SalesDetailsBL;
 import bt.bitsmartmini.bl.StockinBL;
 import bt.bitsmartmini.bl.StockoutBL;
 import bt.bitsmartmini.entity.Items;
-import bt.bitsmartmini.entity.ItemsPrice;
 import bt.bitsmartmini.entity.RtdItem;
 import bt.bitsmartmini.entity.SalesDetails;
 import bt.bitsmartmini.entity.Stockin;
@@ -265,11 +264,11 @@ public class StockController implements Initializable {
             }
 //            long stkbal = stockinqty - (salesqty + stockoutqty);
             long balance = new StockinBL().getStockBalance(e.getItemDesc());
-            ItemsPrice ipc = new ItemsBL().getItemsPriceByItemDesc(e.getItemDesc()); 
-            double profit = ipc.getSalesPrice() - ipc.getCostPrice();
+            //ItemsPrice ipc = new ItemsBL().getItemsPriceByItemDesc(e.getItemDesc()); 
+            double profit = e.getSp()- e.getCp();
             double expprofit = profit * balance;
 
-            data.add(new StockTableModel(e.getItemDesc(), stockinqty, stockoutqty, returnqty, salesqty, balance, DecimalUtil.format2(ipc.getCostPrice()), DecimalUtil.format2(ipc.getSalesPrice()), DecimalUtil.format2(expprofit)));
+            data.add(new StockTableModel(e.getItemDesc(), stockinqty, stockoutqty, returnqty, salesqty, balance, DecimalUtil.format2(e.getCp()), DecimalUtil.format2(e.getSp()), DecimalUtil.format2(expprofit)));
         });
 //        Items its = new ItemsBL().getImageItembyCode(stkitem.getText());
 //        stkitem.setCellValueFactory(cell -> cell.getValue().getItemsProperty());
@@ -317,11 +316,11 @@ public class StockController implements Initializable {
                                 }
                                 Items i = ib.getImageItembyCode(person.getItems());
                                 childController.iteminfoname.setText(person.getItems());
-                                childController.itemqty.setText(balance + " " + i.getUomDef().getUomDesc() + "(s) In Stock");
-                                childController.itemccost.setText(MainAppController.B.getBCurrency()+" "+DecimalUtil.format2(i.getItemsPrice().getSalesPrice()));
+                                childController.itemqty.setText(balance + " " + " In Stock");
+                                childController.itemccost.setText(MainAppController.B.getBCurrency()+" "+DecimalUtil.format2(i.getSp()));
                                 //UomDef udf = new UomBL().getUombyItemId(person.getItems());
                                 Items its = new ItemsBL().getImageItembyCode(person.getItems());
-                                childController.iteminfouom.setText(its.getUomDef().getUomDesc());
+                               // childController.iteminfouom.setText(its.getUomDef().getUomDesc());
                                 FileInputStream input;
                                 input = new FileInputStream(its.getItemImg());
                                 Image image = new Image(input);
@@ -382,7 +381,7 @@ public class StockController implements Initializable {
 
         stkindata = FXCollections.observableArrayList();
         v.forEach((stockin) -> {
-            stkindata.add(new StockinTableModel(stockin.getStockinId(), stockin.getBatchNo(), stockin.getItems().getItemDesc(), stockin.getQuantity(), Utilities.convertDateToString(stockin.getStockinDate()), Utilities.convertDateToString(stockin.getExpiryDate()), Utilities.roundToTwoDecimalPlace(stockin.getCostPrice(), 2), Utilities.roundToTwoDecimalPlace(stockin.getSalesPrice(), 2)));
+            stkindata.add(new StockinTableModel(stockin.getStockinId(), stockin.getUpc().getUpc(), stockin.getUpc().getItemDesc(), stockin.getQuantity(), Utilities.convertDateToString(stockin.getStockinDate()), Utilities.convertDateToString(stockin.getExpiryDate()), Utilities.roundToTwoDecimalPlace(stockin.getUpc().getCp(), 2), Utilities.roundToTwoDecimalPlace(stockin.getUpc().getSp(), 2)));
         });
 //        stkinbatchno.setCellValueFactory(cell -> cell.getValue().getBatchNoProperty());
         stkinitems.setCellValueFactory(cell -> cell.getValue().getItemProperty());
@@ -419,8 +418,8 @@ public class StockController implements Initializable {
         }
         stkoutdata = FXCollections.observableArrayList();
         v.forEach((out) -> {
-            List<Stockin> batchno = new StockinBL().getItemStockinItemsDesc(out.getBatchNo());
-            stkoutdata.add(new StockoutTableModel(out.getStockoutId(), out.getItems().getItemDesc(), out.getQuantity(), out.getRemarks(), Utilities.convertDateToString(out.getStkDate())));
+            List<Stockin> batchno = new StockinBL().getItemStockinItemsDesc(out.getUpc().getUpc());
+            stkoutdata.add(new StockoutTableModel(out.getStockoutId(), out.getUpc().getItemDesc(), out.getQuantity(), out.getRemarks(), Utilities.convertDateToString(out.getStkDate())));
         });
 //        stkoutbatchno.setCellValueFactory(cell -> cell.getValue().getBatchNoProperty());
         stkoutitems.setCellValueFactory(cell -> cell.getValue().getItemProperty());
@@ -458,7 +457,7 @@ public class StockController implements Initializable {
         v.forEach((out) -> {
             double totalA = (out.getRtdQty() * out.getSalesDetails().getSalesPrice());
 //            List<Stockin> batchno = new StockinBL().getItemStockinItemsDesc(out.getBatchNo());
-            returndata.add(new ReturnTableModel(out.getSalesDetails().getSalesDetailsId() , out.getSalesDetails().getItem().getItemDesc(), out.getRtdQty(), DecimalUtil.format2(out.getSalesDetails().getSalesPrice()), DecimalUtil.format2(totalA), out.getRemarks(), Utilities.convertDateToString(out.getRtdDate())));
+            returndata.add(new ReturnTableModel(out.getSalesDetails().getSalesDetailsId() , out.getSalesDetails().getUpc().getItemDesc(), out.getRtdQty(), DecimalUtil.format2(out.getSalesDetails().getSalesPrice()), DecimalUtil.format2(totalA), out.getRemarks(), Utilities.convertDateToString(out.getRtdDate())));
         });
 //        stkoutbatchno.setCellValueFactory(cell -> cell.getValue().getBatchNoProperty());
         returnitemstb.setCellValueFactory(cell -> cell.getValue().getItemProperty());
@@ -495,7 +494,7 @@ public class StockController implements Initializable {
         salesdata = FXCollections.observableArrayList();
         s.forEach((sales) -> {
 //            List<Stockin> batchno = new StockinBL().getItemStockinItemsDesc(out.getBatchNo());
-            salesdata.add(new SalesDetailsTableModel(sales.getSalesDetailsId(), sales.getItem().getItemDesc(), sales.getQuantity(), String.valueOf(sales.getCostPrice()) ,String.valueOf(sales.getSalesPrice()), sales.getRtdItem().getRtdQty() ,sales.getDiscount() ,Utilities.convertDateToString(sales.getEntryDate())));
+            salesdata.add(new SalesDetailsTableModel(sales.getSalesDetailsId(), sales.getUpc().getItemDesc(), sales.getQuantity(), String.valueOf(sales.getCostPrice()) ,String.valueOf(sales.getSalesPrice()), sales.getRtdItem().getRtdQty() ,sales.getDiscount() ,Utilities.convertDateToString(sales.getEntryDate())));
         });
 //        stkoutbatchno.setCellValueFactory(cell -> cell.getValue().getBatchNoProperty());
         salesitemstb.setCellValueFactory(cell -> cell.getValue().getItemsnameProperty());
@@ -763,11 +762,11 @@ public class StockController implements Initializable {
                                 childController.displayinfo.textProperty().unbind();
                                 Stockin st = new Stockin();
                                 st.setStockinId(selectedRecord.getStockinCode());
-                                st.setBatchNo(childController.batchtextfield.getText());
-                                //st.setItems(new Items(childController.itemname.getText()));
+                               // st.setBatchNo(childController.batchtextfield.getText());
+                                st.setUpc(new Items(childController.itemname.getText()));
                                 st.setExpiryDate(Utilities.convertToDateViaSqlDate(childController.expirydate.getValue()));
-                                st.setCostPrice(Double.parseDouble(childController.costtextfield.getText()));
-                                st.setSalesPrice(Double.parseDouble(childController.salestextfield.getText()));
+                                //st.setCostPrice(Double.parseDouble(childController.costtextfield.getText()));
+                                //st.setSalesPrice(Double.parseDouble(childController.salestextfield.getText()));
 //                                st.setNhisPrice(Double.parseDouble(childController.nhistextfield.getText()));
                                 st.setQuantity(Integer.parseInt(childController.qnttextfield.getText()));
                                 Date date = Utilities.convertStringToDate(selectedRecord.getStockinDate());

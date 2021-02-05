@@ -70,7 +70,7 @@ public class PrintReport extends JFrame {
         param.put("LOGO", image);
         param.put("LOGO1", imageback);
         param.put("RECEIPTCODE", String.format("%06d", r.getReceiptId()));
-        param.put("RECEIPTDATE", DateUtil.format2(r.getDateR()));
+        param.put("RECEIPTDATE", DateUtil.format2(r.getReceiptDate()));
         param.put("AMNT", r.getAmountPaid());
         param.put("MODE", r.getPayMode());
         param.put("CUSTOMER", c.getFullname());

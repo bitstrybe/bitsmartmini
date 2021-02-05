@@ -23,26 +23,26 @@ public class SelectItemSaleTableModel {
     public SelectItemSaleTableModel() {
     }
 
-    public SelectItemSaleTableModel(String itemName, int quantity, double cost, double price, double total, double discountval, String uom, ImageView img) {
+    public SelectItemSaleTableModel(String itemName, int quantity, double cost, double price, double total, double discountval, ImageView img) {
         this.itemName = new SimpleStringProperty(itemName);
         this.quantity = new SimpleIntegerProperty(quantity);
         this.cost = new SimpleDoubleProperty(cost);
         this.price = new SimpleDoubleProperty(price);
         this.total = new SimpleDoubleProperty(total);
         this.discountval = new SimpleDoubleProperty(discountval);
-        this.uom = new SimpleStringProperty(uom);
+        //this.uom = new SimpleStringProperty(uom);
         this.image = img;
 
     }
     
-    public SelectItemSaleTableModel(String itemName, int quantity, double cost, double price, double total, double discountval, String uom) {
+    public SelectItemSaleTableModel(String itemName, int quantity, double cost, double price, double total, double discountval) {
         this.itemName = new SimpleStringProperty(itemName);
         this.quantity = new SimpleIntegerProperty(quantity);
         this.cost = new SimpleDoubleProperty(cost);
         this.price = new SimpleDoubleProperty(price);
         this.total = new SimpleDoubleProperty(total);
         this.discountval = new SimpleDoubleProperty(discountval);
-        this.uom = new SimpleStringProperty(uom);
+        //this.uom = new SimpleStringProperty(uom);
 
     }
 

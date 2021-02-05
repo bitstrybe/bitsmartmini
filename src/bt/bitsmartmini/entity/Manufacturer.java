@@ -6,15 +6,12 @@
 package bt.bitsmartmini.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -33,8 +30,6 @@ public class Manufacturer implements Serializable {
     @Basic(optional = false)
     @Column(name = "manufacturer", nullable = false, length = 245)
     private String manufacturer;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "manufacturer")
-    private Collection<Items> itemsCollection;
 
     public Manufacturer() {
     }
@@ -49,14 +44,6 @@ public class Manufacturer implements Serializable {
 
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
-    }
-
-    public Collection<Items> getItemsCollection() {
-        return itemsCollection;
-    }
-
-    public void setItemsCollection(Collection<Items> itemsCollection) {
-        this.itemsCollection = itemsCollection;
     }
 
     @Override

@@ -64,15 +64,12 @@ public class SalesDetails implements Serializable {
     @Column(name = "modified_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifiedDate;
+    @JoinColumn(name = "upc", referencedColumnName = "upc", nullable = false)
+    @ManyToOne(optional = false)
+    private Items upc;
     @JoinColumn(name = "sale_id", referencedColumnName = "sales_id", nullable = false)
     @ManyToOne(optional = false)
     private Sales saleId;
-    @JoinColumn(name = "item", referencedColumnName = "item_desc", nullable = false)
-    @ManyToOne(optional = false)
-    private Items item;
-    @JoinColumn(name = "uom_code", referencedColumnName = "uom_desc", nullable = false)
-    @ManyToOne(optional = false)
-    private Uom uomCode;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "salesDetails")
     private RtdItem rtdItem;
 
@@ -147,28 +144,20 @@ public class SalesDetails implements Serializable {
         this.modifiedDate = modifiedDate;
     }
 
+    public Items getUpc() {
+        return upc;
+    }
+
+    public void setUpc(Items upc) {
+        this.upc = upc;
+    }
+
     public Sales getSaleId() {
         return saleId;
     }
 
     public void setSaleId(Sales saleId) {
         this.saleId = saleId;
-    }
-
-    public Items getItem() {
-        return item;
-    }
-
-    public void setItem(Items item) {
-        this.item = item;
-    }
-
-    public Uom getUomCode() {
-        return uomCode;
-    }
-
-    public void setUomCode(Uom uomCode) {
-        this.uomCode = uomCode;
     }
 
     public RtdItem getRtdItem() {

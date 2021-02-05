@@ -1,16 +1,16 @@
 
 package bt.bitsmartmini.bl;
 
+import bt.bitsmartmini.entity.Brands;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
-import bt.bitsmartmini.entity.Manufacturer;
 
 /**
  *
  * @author JScare
  */
-public class ManufacturerBL extends DdsBL{
+public class BrandBL extends DdsBL{
 
     @Override
     public int insertData(Object object) {
@@ -25,21 +25,21 @@ public class ManufacturerBL extends DdsBL{
     @Override
     public int removeData(Object id) {
         em.getTransaction().begin();
-        Manufacturer c = em.find(Manufacturer.class, id);
+        Brands c = em.find(Brands.class, id);
         em.remove(c);
         em.getTransaction().commit();
         return 1;
     }
     
-    public List<Manufacturer> getAllManufacturer(){
-        TypedQuery<Manufacturer> q = em.createNamedQuery("Manufacturer.findAll",Manufacturer.class);
+    public List<Brands> getAllBrands(){
+        TypedQuery<Brands> q = em.createNamedQuery("Brands.findAll",Brands.class);
         return q.getResultList();
     }
     
-    public String getManufacturerbyId(String Manufacturer){
+    public String getBrandsbyId(String Brands){
         try{
-        TypedQuery<String> q = em.createQuery("SELECT m.manufacturer FROM Manufacturer m WHERE m.manufacturer = :manufacturer", String.class);
-        q.setParameter("manufacturer", Manufacturer);
+        TypedQuery<String> q = em.createQuery("SELECT m.brand FROM Brands m WHERE m.brand = :brand", String.class);
+        q.setParameter("brand", Brands);
         return q.getSingleResult();
         }catch(NoResultException ex){
             return null;
@@ -47,8 +47,8 @@ public class ManufacturerBL extends DdsBL{
         }
     }
     
-    public List<Manufacturer> searchAllManufacturer(String p) {
-        TypedQuery<Manufacturer> q = em.createQuery("SELECT s FROM Manufacturer s WHERE s.manufacturer LIKE :p", Manufacturer.class);
+    public List<Brands> searchAllBrands(String p) {
+        TypedQuery<Brands> q = em.createQuery("SELECT s FROM Brands s WHERE s.brand LIKE :p", Brands.class);
         q.setParameter("p", "%" + p + "%");
         return q.getResultList();
     }

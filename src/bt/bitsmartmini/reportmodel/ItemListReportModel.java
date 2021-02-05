@@ -24,13 +24,14 @@ public class ItemListReportModel extends AbstractTableModel implements Runnable 
         data = new Object[s.size()][colnames.length];
         for (int x = 0; x < s.size(); x++) {
             Items c = s.get(x);
-            data[x][0] = c.getItemDesc();
-            data[x][1] = c.getForm().getFormName();
-            String dose = c.getDosageDef() != null ? c.getDosageDef() + " " + c.getDosage() : "";
-            String vom = c.getVomDef() != null ? c.getVomDef() + " " + c.getVom() : "";
-            data[x][2] = dose;
-            data[x][3] = vom;
-            data[x][4] = c.getManufacturer().getManufacturer();
+            data[x][0] = c.getUpc();
+            data[x][1] = c.getItemDesc();
+            data[x][2] = c.getCategory().getCategoryName();
+            //String dose = c.getDosageDef() != null ? c.getDosageDef() + " " + c.getDosage() : "";
+            //String vom = c.getVomDef() != null ? c.getVomDef() + " " + c.getVom() : "";
+            data[x][3] = c.getBrand().getBrandName();
+            //data[x][3] = c.get;
+            //data[x][4] = c.getManufacturer().getManufacturer();
         }
     }
 

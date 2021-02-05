@@ -28,11 +28,8 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Stockin.findAll", query = "SELECT s FROM Stockin s")
     , @NamedQuery(name = "Stockin.findByStockinId", query = "SELECT s FROM Stockin s WHERE s.stockinId = :stockinId")
-    , @NamedQuery(name = "Stockin.findByBatchNo", query = "SELECT s FROM Stockin s WHERE s.batchNo = :batchNo")
-    , @NamedQuery(name = "Stockin.findByQuantity", query = "SELECT s FROM Stockin s WHERE s.quantity = :quantity")
-    , @NamedQuery(name = "Stockin.findByCostPrice", query = "SELECT s FROM Stockin s WHERE s.costPrice = :costPrice")
-    , @NamedQuery(name = "Stockin.findBySalesPrice", query = "SELECT s FROM Stockin s WHERE s.salesPrice = :salesPrice")
     , @NamedQuery(name = "Stockin.findByStockinDate", query = "SELECT s FROM Stockin s WHERE s.stockinDate = :stockinDate")
+    , @NamedQuery(name = "Stockin.findByQuantity", query = "SELECT s FROM Stockin s WHERE s.quantity = :quantity")
     , @NamedQuery(name = "Stockin.findByExpiryDate", query = "SELECT s FROM Stockin s WHERE s.expiryDate = :expiryDate")
     , @NamedQuery(name = "Stockin.findByEntryLog", query = "SELECT s FROM Stockin s WHERE s.entryLog = :entryLog")
     , @NamedQuery(name = "Stockin.findByLastModified", query = "SELECT s FROM Stockin s WHERE s.lastModified = :lastModified")})
@@ -44,23 +41,13 @@ public class Stockin implements Serializable {
     @Column(name = "stockin_id", nullable = false)
     private Integer stockinId;
     @Basic(optional = false)
-    @Column(name = "batch_no", nullable = false, length = 250)
-    private String batchNo;
-    @Basic(optional = false)
-    @Column(name = "quantity", nullable = false)
-    private int quantity;
-    @Basic(optional = false)
-    @Column(name = "cost_price", nullable = false)
-    private double costPrice;
-    @Basic(optional = false)
-    @Column(name = "sales_price", nullable = false)
-    private double salesPrice;
-    @Basic(optional = false)
     @Column(name = "stockin_date", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date stockinDate;
     @Basic(optional = false)
-    @Column(name = "expiry_date", nullable = false)
+    @Column(name = "quantity", nullable = false)
+    private int quantity;
+    @Column(name = "expiry_date")
     @Temporal(TemporalType.DATE)
     private Date expiryDate;
     @Basic(optional = false)
@@ -71,12 +58,12 @@ public class Stockin implements Serializable {
     @Column(name = "last_modified", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastModified;
+    @JoinColumn(name = "upc", referencedColumnName = "upc", nullable = false)
+    @ManyToOne(optional = false)
+    private Items upc;
     @JoinColumn(name = "users", referencedColumnName = "userid", nullable = false)
     @ManyToOne(optional = false)
     private Users users;
-    @JoinColumn(name = "items", referencedColumnName = "item_desc", nullable = false)
-    @ManyToOne(optional = false)
-    private Items items;
 
     public Stockin() {
     }
@@ -85,14 +72,10 @@ public class Stockin implements Serializable {
         this.stockinId = stockinId;
     }
 
-    public Stockin(Integer stockinId, String batchNo, int quantity, double costPrice, double salesPrice, Date stockinDate, Date expiryDate, Date entryLog, Date lastModified) {
+    public Stockin(Integer stockinId, Date stockinDate, int quantity, Date entryLog, Date lastModified) {
         this.stockinId = stockinId;
-        this.batchNo = batchNo;
-        this.quantity = quantity;
-        this.costPrice = costPrice;
-        this.salesPrice = salesPrice;
         this.stockinDate = stockinDate;
-        this.expiryDate = expiryDate;
+        this.quantity = quantity;
         this.entryLog = entryLog;
         this.lastModified = lastModified;
     }
@@ -105,12 +88,12 @@ public class Stockin implements Serializable {
         this.stockinId = stockinId;
     }
 
-    public String getBatchNo() {
-        return batchNo;
+    public Date getStockinDate() {
+        return stockinDate;
     }
 
-    public void setBatchNo(String batchNo) {
-        this.batchNo = batchNo;
+    public void setStockinDate(Date stockinDate) {
+        this.stockinDate = stockinDate;
     }
 
     public int getQuantity() {
@@ -119,30 +102,6 @@ public class Stockin implements Serializable {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public double getCostPrice() {
-        return costPrice;
-    }
-
-    public void setCostPrice(double costPrice) {
-        this.costPrice = costPrice;
-    }
-
-    public double getSalesPrice() {
-        return salesPrice;
-    }
-
-    public void setSalesPrice(double salesPrice) {
-        this.salesPrice = salesPrice;
-    }
-
-    public Date getStockinDate() {
-        return stockinDate;
-    }
-
-    public void setStockinDate(Date stockinDate) {
-        this.stockinDate = stockinDate;
     }
 
     public Date getExpiryDate() {
@@ -169,20 +128,20 @@ public class Stockin implements Serializable {
         this.lastModified = lastModified;
     }
 
+    public Items getUpc() {
+        return upc;
+    }
+
+    public void setUpc(Items upc) {
+        this.upc = upc;
+    }
+
     public Users getUsers() {
         return users;
     }
 
     public void setUsers(Users users) {
         this.users = users;
-    }
-
-    public Items getItems() {
-        return items;
-    }
-
-    public void setItems(Items items) {
-        this.items = items;
     }
 
     @Override
