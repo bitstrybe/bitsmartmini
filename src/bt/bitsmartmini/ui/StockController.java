@@ -182,41 +182,17 @@ public class StockController implements Initializable {
                 AllStockTableData("");
             }
         });
-//        stockinsearch.textProperty().addListener(e -> {
-//            if (stockinsearch.getText().length() > 3) {
-//                StockinTableData(stockinsearch.getText());
-//            } else {
-//                StockinTableData("");
-//            }
-//        });
-//        stockoutsearch.textProperty().addListener(e -> {
-//            if (stockoutsearch.getText().length() > 3) {
-//                StockoutTableData(stockoutsearch.getText());
-//            } else {
-//                StockoutTableData("");
-//            }
-//        });
-//        returnsearch.textProperty().addListener(e -> {
-//            if (returnsearch.getText().length() > 3) {
-//                ReturnsTableData(returnsearch.getText());
-//            } else {
-//                ReturnsTableData("");
-//            }
-//        });
 
         stock.addEventHandler(MouseEvent.MOUSE_CLICKED, v -> {
             list = stock.getSelectionModel().getSelectedItem();
-            StockinTableData(list.getItems());
-            StockoutTableData(list.getItems());
-            ReturnsTableData(list.getItems());
-            SalesTableData(list.getItems());
-//            stockoutbtn.setDisable(false);
+            StockinTableData(list.getItemCode());
+            StockoutTableData(list.getItemCode());
+            ReturnsTableData(list.getItemCode());
+            SalesTableData(list.getItemCode());
         });
-//        stockoutbtn.setDisable(true);
 
         if (LoginController.u.getRoles().equals("Administrator") || LoginController.u.getRoles().equals("Supervisor")) {
             stockinbtn.setDisable(false);
-//            stockoutbtn.setDisable(false);
             stock.addEventHandler(MouseEvent.MOUSE_CLICKED, v -> {
                 stockoutbtn.setDisable(false);
             });
@@ -246,7 +222,6 @@ public class StockController implements Initializable {
             } catch (Exception ex) {
                 salesqty = 0;
             }
-
             try {
                 stockinqty = stkinbl.getStockInTotal(e.getItemDesc());
             } catch (Exception ex) {
@@ -262,17 +237,12 @@ public class StockController implements Initializable {
             } catch (NullPointerException ex) {
                 returnqty = 0;
             }
-//            long stkbal = stockinqty - (salesqty + stockoutqty);
             long balance = new StockinBL().getStockBalance(e.getItemDesc());
-            //ItemsPrice ipc = new ItemsBL().getItemsPriceByItemDesc(e.getItemDesc()); 
             double profit = e.getSp()- e.getCp();
             double expprofit = profit * balance;
 
-            data.add(new StockTableModel(e.getItemDesc(), stockinqty, stockoutqty, returnqty, salesqty, balance, DecimalUtil.format2(e.getCp()), DecimalUtil.format2(e.getSp()), DecimalUtil.format2(expprofit)));
+            data.add(new StockTableModel(e.getUpc(), e.getItemDesc(), stockinqty, stockoutqty, returnqty, salesqty, balance, DecimalUtil.format2(e.getCp()), DecimalUtil.format2(e.getSp()), DecimalUtil.format2(expprofit)));
         });
-//        Items its = new ItemsBL().getImageItembyCode(stkitem.getText());
-//        stkitem.setCellValueFactory(cell -> cell.getValue().getItemsProperty());
-
         Callback<TableColumn<StockTableModel, String>, TableCell<StockTableModel, String>> cellFactory = (final TableColumn<StockTableModel, String> param) -> {
             final TableCell<StockTableModel, String> cell = new TableCell<StockTableModel, String>() {
 
@@ -307,20 +277,14 @@ public class StockController implements Initializable {
                                 long balance = sk.getStockBalance(person.getItems());
                                 if (balance == 0) {
                                     childController.outofstockshape.setVisible(true);
-                                    //childController.addtocart.setDisable(true);
-                                    //childController.outofstocklabel.setVisible(true);
                                 } else {
                                     childController.outofstockshape.setVisible(false);
-                                    //childController.addtocart.setDisable(false);
-                                    //childController.outofstocklabel.setVisible(false);
                                 }
                                 Items i = ib.getImageItembyCode(person.getItems());
                                 childController.iteminfoname.setText(person.getItems());
                                 childController.itemqty.setText(balance + " " + " In Stock");
                                 childController.itemccost.setText(MainAppController.B.getBCurrency()+" "+DecimalUtil.format2(i.getSp()));
-                                //UomDef udf = new UomBL().getUombyItemId(person.getItems());
                                 Items its = new ItemsBL().getImageItembyCode(person.getItems());
-                               // childController.iteminfouom.setText(its.getUomDef().getUomDesc());
                                 FileInputStream input;
                                 input = new FileInputStream(its.getItemImg());
                                 Image image = new Image(input);
@@ -328,7 +292,6 @@ public class StockController implements Initializable {
                                 Scene scene = new Scene(parent);
                                 scene.setFill(Color.TRANSPARENT);
                                 stage.setMaximized(true);
-                                //stage.initModality(Modality.APPLICATION_MODAL);
                                 stage.initOwner(parent.getScene().getWindow());
                                 stage.setScene(scene);
                                 stage.initStyle(StageStyle.TRANSPARENT);
@@ -338,8 +301,6 @@ public class StockController implements Initializable {
                             }
                         });
                         setGraphic(hb);
-//                            setGraphic(btn);
-//                            setText(null);
                     }
                 }
             };
@@ -376,23 +337,19 @@ public class StockController implements Initializable {
         if (itemDesc.length() > 0) {
             v = new StockinBL().searchAllStockin(itemDesc);
         } else {
-            v = new StockinBL().getAllStockinBatchNo(itemDesc, 10);
+            v = new StockinBL().getAllStockinBarcode(itemDesc, 10);
         }
 
         stkindata = FXCollections.observableArrayList();
         v.forEach((stockin) -> {
             stkindata.add(new StockinTableModel(stockin.getStockinId(), stockin.getUpc().getUpc(), stockin.getUpc().getItemDesc(), stockin.getQuantity(), Utilities.convertDateToString(stockin.getStockinDate()), Utilities.convertDateToString(stockin.getExpiryDate()), Utilities.roundToTwoDecimalPlace(stockin.getUpc().getCp(), 2), Utilities.roundToTwoDecimalPlace(stockin.getUpc().getSp(), 2)));
         });
-//        stkinbatchno.setCellValueFactory(cell -> cell.getValue().getBatchNoProperty());
         stkinitems.setCellValueFactory(cell -> cell.getValue().getItemProperty());
         stkqty.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
         stkindate.setCellValueFactory(cell -> cell.getValue().getStockinDateProperty());
         expirydate.setCellValueFactory(cell -> cell.getValue().getExpiryDateProperty());
         stkaction.setSortable(false);
-//        action.setMaxWidth(480);
-
         stockin.setItems(stkindata);
-//        mainTableModel.getColumns().add(action);
         stockin.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
         stkaction.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<StockinTableModel, Boolean>, ObservableValue<Boolean>>() {
             @Override
@@ -414,22 +371,18 @@ public class StockController implements Initializable {
         if (itemsDesc.length() > 0) {
             v = stkobl.searchAllStockout(itemsDesc);
         } else {
-            v = stkobl.getAllStockoutbyItems(itemsDesc, 10);
+            v = stkobl.getAllStockoutbyBarcode(itemsDesc, 10);
         }
         stkoutdata = FXCollections.observableArrayList();
         v.forEach((out) -> {
             List<Stockin> batchno = new StockinBL().getItemStockinItemsDesc(out.getUpc().getUpc());
             stkoutdata.add(new StockoutTableModel(out.getStockoutId(), out.getUpc().getItemDesc(), out.getQuantity(), out.getRemarks(), Utilities.convertDateToString(out.getStkDate())));
         });
-//        stkoutbatchno.setCellValueFactory(cell -> cell.getValue().getBatchNoProperty());
         stkoutitems.setCellValueFactory(cell -> cell.getValue().getItemProperty());
         stkoutqtytb.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
         stkoutdate.setCellValueFactory(cell -> cell.getValue().getDateProperty());
         stkoutaction.setSortable(false);
-//        action.setMaxWidth(480);
-
         stockout.setItems(stkoutdata);
-//        mainTableModel.getColumns().add(action);
         stockout.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
         stkoutaction.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<StockoutTableModel, Boolean>, ObservableValue<Boolean>>() {
             @Override
@@ -451,23 +404,18 @@ public class StockController implements Initializable {
         if (itemsDesc.length() > 0) {
             v = retbl.searchAllReturnItems(itemsDesc);
         } else {
-            v = retbl.getAllRtdItembyItemsDesc(itemsDesc, 10);
+            v = retbl.getAllRtdItembyBarcode(itemsDesc, 10);
         }
         returndata = FXCollections.observableArrayList();
         v.forEach((out) -> {
             double totalA = (out.getRtdQty() * out.getSalesDetails().getSalesPrice());
-//            List<Stockin> batchno = new StockinBL().getItemStockinItemsDesc(out.getBatchNo());
             returndata.add(new ReturnTableModel(out.getSalesDetails().getSalesDetailsId() , out.getSalesDetails().getUpc().getItemDesc(), out.getRtdQty(), DecimalUtil.format2(out.getSalesDetails().getSalesPrice()), DecimalUtil.format2(totalA), out.getRemarks(), Utilities.convertDateToString(out.getRtdDate())));
         });
-//        stkoutbatchno.setCellValueFactory(cell -> cell.getValue().getBatchNoProperty());
         returnitemstb.setCellValueFactory(cell -> cell.getValue().getItemProperty());
         returnqtytb.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
         returndatetb.setCellValueFactory(cell -> cell.getValue().getDateProperty());
         returnaction.setSortable(false);
-//        action.setMaxWidth(480);
-
         returnstable.setItems(returndata);
-//        mainTableModel.getColumns().add(action);
         returnstable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
         returnaction.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ReturnTableModel, Boolean>, ObservableValue<Boolean>>() {
             @Override
@@ -481,44 +429,19 @@ public class StockController implements Initializable {
                 return new AddPersonCellReturns();
             }
         });
-
     }
     
     public void SalesTableData(String itemsDesc) {
-        List<SalesDetails> s;
-//        if (itemsDesc.length() > 0) {
-//            v = retbl.searchAllReturnItems(itemsDesc);
-//        } else {
-            s = salesbl.getAllSalesDetailsbyItemsDesc(itemsDesc, 10);
-//        }
+        List<SalesDetails> s = salesbl.getAllSalesDetailsbyBarcode(itemsDesc, 10);
         salesdata = FXCollections.observableArrayList();
         s.forEach((sales) -> {
-//            List<Stockin> batchno = new StockinBL().getItemStockinItemsDesc(out.getBatchNo());
             salesdata.add(new SalesDetailsTableModel(sales.getSalesDetailsId(), sales.getUpc().getItemDesc(), sales.getQuantity(), String.valueOf(sales.getCostPrice()) ,String.valueOf(sales.getSalesPrice()), sales.getRtdItem().getRtdQty() ,sales.getDiscount() ,Utilities.convertDateToString(sales.getEntryDate())));
         });
-//        stkoutbatchno.setCellValueFactory(cell -> cell.getValue().getBatchNoProperty());
         salesitemstb.setCellValueFactory(cell -> cell.getValue().getItemsnameProperty());
         salesqyttb.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
         salesdatetb.setCellValueFactory(cell -> cell.getValue().getDateProperty());
-//        returnaction.setSortable(false);
-//        action.setMaxWidth(480);
-
         salestable.setItems(salesdata);
-//        mainTableModel.getColumns().add(action);
         salestable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
-//        returnaction.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ReturnTableModel, Boolean>, ObservableValue<Boolean>>() {
-//            @Override
-//            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<ReturnTableModel, Boolean> features) {
-//                return new SimpleBooleanProperty(features.getValue() != null);
-//            }
-//        });
-//        returnaction.setCellFactory(new Callback<TableColumn<ReturnTableModel, Boolean>, TableCell<ReturnTableModel, Boolean>>() {
-//            @Override
-//            public TableCell<ReturnTableModel, Boolean> call(TableColumn<ReturnTableModel, Boolean> personBooleanTableColumn) {
-//                return new AddPersonCellReturns();
-//            }
-//        });
-
     }
 
     @FXML
@@ -542,16 +465,15 @@ public class StockController implements Initializable {
             childController.displayinfo.textProperty().bind(task.messageProperty());
             task.setOnSucceeded(s -> {
                 childController.saveTemplate();
-                list = stock.getSelectionModel().getSelectedItem();
-                AllStockTableData(stocksearch.getText());
-                StockinTableData(list.getItems());
+                //list = stock.getSelectionModel().getSelectedItem();
+                AllStockTableData(childController.itembarcode.getText());
+                StockinTableData(childController.itembarcode.getText());
+                stocksearch.setText(childController.itemname.getText());
             });
             Thread d = new Thread(task);
             d.setDaemon(true);
             d.start();
-
         });
-
         Scene scene = new Scene(parent);
         stage.setMaximized(true);
         scene.setFill(Color.TRANSPARENT);
@@ -581,8 +503,7 @@ public class StockController implements Initializable {
                 childController.saveTemplate();
                 list = stock.getSelectionModel().getSelectedItem();
                 AllStockTableData(stocksearch.getText());
-                StockoutTableData(list.getItems());
-
+                StockoutTableData(childController..getItemCode());
             });
             Thread d = new Thread(task);
             d.setDaemon(true);
@@ -592,26 +513,17 @@ public class StockController implements Initializable {
         Scene scene = new Scene(parent);
         scene.setFill(Color.TRANSPARENT);
         stage.setMaximized(true);
-        //stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(parent.getScene().getWindow());
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
-        //stage.resizableProperty().setValue(false);
-        //stage.initModality(Modality.APPLICATION_MODAL);
-//        stage.initStyle(StageStyle.UNDECORATED);
 
         stage.show();
 
     }
 
     public class AddPersonCell extends TableCell<StockinTableModel, Boolean> {
-
 //        Image img = new Image(getClass().getResourceAsStream("edit.png"));
         Image img2 = new Image(getClass().getResourceAsStream("delete.png"));
-
-        // a button for adding a new person.
-//        JFXButton addButton = new JFXButton();
-        // pads and centers the add button in the cell.
         HBox paddedButton = new HBox();
         JFXButton delButton = new JFXButton();
         JFXButton editButton = new JFXButton();
@@ -682,7 +594,6 @@ public class StockController implements Initializable {
                                     childController.spinner.setVisible(false);
                                     childController.check.setVisible(false);
                                 }
-
                             });
                             Thread d = new Thread(task);
                             d.setDaemon(true);
@@ -701,9 +612,7 @@ public class StockController implements Initializable {
                         Logger.getLogger(StockController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-
             });
-
         }
 
         /**
@@ -754,7 +663,6 @@ public class StockController implements Initializable {
                                 Thread.sleep(1000);
                                 return null;
                             }
-
                         };
                         childController.displayinfo.textProperty().bind(task.messageProperty());
                         task.setOnSucceeded(s -> {
@@ -762,12 +670,8 @@ public class StockController implements Initializable {
                                 childController.displayinfo.textProperty().unbind();
                                 Stockin st = new Stockin();
                                 st.setStockinId(selectedRecord.getStockinCode());
-                               // st.setBatchNo(childController.batchtextfield.getText());
                                 st.setUpc(new Items(childController.itemname.getText()));
                                 st.setExpiryDate(Utilities.convertToDateViaSqlDate(childController.expirydate.getValue()));
-                                //st.setCostPrice(Double.parseDouble(childController.costtextfield.getText()));
-                                //st.setSalesPrice(Double.parseDouble(childController.salestextfield.getText()));
-//                                st.setNhisPrice(Double.parseDouble(childController.nhistextfield.getText()));
                                 st.setQuantity(Integer.parseInt(childController.qnttextfield.getText()));
                                 Date date = Utilities.convertStringToDate(selectedRecord.getStockinDate());
                                 st.setStockinDate(date);
@@ -818,8 +722,6 @@ public class StockController implements Initializable {
     }
 
     public class AddPersonCellStockout extends TableCell<StockoutTableModel, Boolean> {
-
-//        Image img = new Image(getClass().getResourceAsStream("edit.png"));
         Image img2 = new Image(getClass().getResourceAsStream("delete.png"));
 
         // a button for adding a new person.
@@ -881,7 +783,6 @@ public class StockController implements Initializable {
                                         childController.spinner.setVisible(false);
                                         childController.check.setVisible(false);
                                         break;
-
                                 }
                             });
                             Thread d = new Thread(task);
@@ -985,7 +886,6 @@ public class StockController implements Initializable {
                                         childController.spinner.setVisible(false);
                                         childController.check.setVisible(false);
                                         break;
-
                                 }
                             });
                             Thread d = new Thread(task);

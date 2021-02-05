@@ -26,7 +26,7 @@
                   </Label>
                   <JFXTextField fx:id="stocksearch" focusColor="#343436" labelFloat="true" prefHeight="34.0" prefWidth="398.0" promptText="Search Stock" unFocusColor="#9a9999">
                      <font>
-                        <Font name="Open Sans" size="16.0" />
+                        <Font name="Open Sans" size="14.0" />
                      </font></JFXTextField>
                   <ButtonBar prefHeight="34.0" prefWidth="253.0">
                      <buttons>
@@ -40,7 +40,7 @@
                   </ButtonBar>
                </children>
                <VBox.margin>
-                  <Insets />
+                  <Insets top="10.0" />
                </VBox.margin>
             </HBox>
             <HBox alignment="CENTER" prefHeight="22.0" prefWidth="1106.0">

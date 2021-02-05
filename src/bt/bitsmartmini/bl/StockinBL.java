@@ -36,19 +36,26 @@ public class StockinBL extends DdsBL {
             return 0;
         }
     }
+    
+    public List<Stockin> getAllStockinBarcode(String u, int Page) {
+        TypedQuery q = em.createQuery("SELECT s FROM Stockin s Where s.upc.upc = :u", Stockin.class);
+        q.setParameter("u", u);
+        q.setMaxResults(Page);
+        return q.getResultList();
+    }
 
-    public List<Stockin> getAllStockinBatchNo(String itemDesc, int Page) {
-        TypedQuery q = em.createQuery("SELECT s FROM Stockin s Where s.items.itemDesc = :itemDesc", Stockin.class);
-        q.setParameter("itemDesc", itemDesc);
+    public List<Stockin> getAllStockinByDesc(String u, int Page) {
+        TypedQuery q = em.createQuery("SELECT s FROM Stockin s Where s.upc.itemDesc = :u", Stockin.class);
+        q.setParameter("u", u);
         q.setMaxResults(Page);
         return q.getResultList();
     }
 
     public List<Stockin> searchAllStockin(String p) {
-        TypedQuery<Stockin> q = em.createQuery("SELECT s FROM Stockin s WHERE s.batchNo LIKE :p OR s.items.itemDesc LIKE :p1 OR s.items.itemName LIKE :p2", Stockin.class);
+        TypedQuery<Stockin> q = em.createQuery("SELECT s FROM Stockin s WHERE s.upc.upc LIKE :p OR s.upc.itemDesc LIKE :p1", Stockin.class);
         q.setParameter("p", "%" + p + "%");
         q.setParameter("p1", "%" + p + "%");
-        q.setParameter("p2", "%" + p + "%");
+        //q.setParameter("p2", "%" + p + "%");
         q.setMaxResults(20);
         return q.getResultList();
     }
@@ -83,11 +90,6 @@ public class StockinBL extends DdsBL {
         return q.getResultList();
     }
 
-    public List<Stockin> getStockinBatchNobyItem(String stockin) {
-        TypedQuery<Stockin> q = em.createQuery("SELECT s FROM Stockin s GROUP BY s.upc.itemDesc WHERE s.upc.itemDesc = :item", Stockin.class);
-        q.setParameter("item", stockin);
-        return q.getResultList();
-    }
     
     public List<Stockin> getItemStockinByUpc(String u) {
         TypedQuery<Stockin> q = em.createQuery("SELECT i FROM Stockin i WHERE i.upc.upc = :u", Stockin.class);
@@ -95,9 +97,9 @@ public class StockinBL extends DdsBL {
         return q.getResultList();
     }
 
-    public List<Stockin> getItemStockinItemsDesc(String itemDesc) {
-        TypedQuery<Stockin> q = em.createQuery("SELECT i FROM Stockin i WHERE i.upc.itemDesc = :itemDesc", Stockin.class);
-        q.setParameter("itemDesc", itemDesc);
+    public List<Stockin> getItemStockinItemsDesc(String u) {
+        TypedQuery<Stockin> q = em.createQuery("SELECT i FROM Stockin i WHERE i.upc.upc = :u", Stockin.class);
+        q.setParameter("u", u);
         return q.getResultList();
     }
 
@@ -105,10 +107,10 @@ public class StockinBL extends DdsBL {
 //    public float getStockBalance(){
 //        
 //    }
-    public long getStockInTotal(String itemDesc) {
+    public long getStockInTotal(String u) {
         try {
-            TypedQuery<Long> q = em.createQuery("SELECT SUM(s.quantity) FROM Stockin s WHERE s.upc.itemDesc =:itemDesc", Long.class);
-            q.setParameter("itemDesc", itemDesc);
+            TypedQuery<Long> q = em.createQuery("SELECT SUM(s.quantity) FROM Stockin s WHERE s.upc.upc =:u", Long.class);
+            q.setParameter("u", u);
             return q.getSingleResult();
         } catch (Exception ex) {
             return 0l;
@@ -126,10 +128,10 @@ public class StockinBL extends DdsBL {
         }
     }
 
-    public long getStockOutTotal(String itemDesc) {
+    public long getStockOutTotal(String u) {
         try {
-            TypedQuery<Long> q = em.createQuery("SELECT SUM(s.quantity) FROM Stockout s WHERE s.upc.itemDesc =:itemDesc", Long.class);
-            q.setParameter("itemDesc", itemDesc);
+            TypedQuery<Long> q = em.createQuery("SELECT SUM(s.quantity) FROM Stockout s WHERE s.upc.upc =:u", Long.class);
+            q.setParameter("u", u);
             return q.getSingleResult();
         } catch (Exception ex) {
             return 0l;
@@ -163,10 +165,10 @@ public class StockinBL extends DdsBL {
     }
 
     
-    public long getTotalReturns(String itemDesc) {
+    public long getTotalReturns(String u) {
         try {
-            TypedQuery<Long> q = em.createQuery("SELECT SUM(s.rtdQty) FROM RtdItem s WHERE s.salesDetails.upc.itemDesc = :itemDesc", Long.class);
-            q.setParameter("itemDesc", itemDesc);
+            TypedQuery<Long> q = em.createQuery("SELECT SUM(s.rtdQty) FROM RtdItem s WHERE s.salesDetails.upc.upc = :u", Long.class);
+            q.setParameter("u", u);
             return q.getSingleResult();
         } catch (Exception ex) {
             return 0l;
@@ -184,12 +186,12 @@ public class StockinBL extends DdsBL {
         }
     }
 
-    public long getStockBalance(String batchNo) {
+    public long getStockBalance(String b) {
         SalesBL sb = new SalesBL();
-        long stockin = getStockInTotal(batchNo);
-        long stockout = getStockOutTotal(batchNo);
-        long returns = getTotalReturns(batchNo);
-        long sales = sb.getSalesTotal(batchNo);
+        long stockin = getStockInTotal(b);
+        long stockout = getStockOutTotal(b);
+        long returns = getTotalReturns(b);
+        long sales = sb.getSalesTotal(b);
         long stocks = (stockin + returns) - (stockout + sales);
         //long stockafreturns = stocks + retruns;
         return stocks;

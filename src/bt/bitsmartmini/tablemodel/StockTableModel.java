@@ -2,7 +2,6 @@
 package bt.bitsmartmini.tablemodel;
 
 
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -13,7 +12,7 @@ import javafx.beans.property.SimpleStringProperty;
 public class StockTableModel {
 
 //    private Integer stockinId;
-//    private SimpleStringProperty batchNo;
+    private SimpleStringProperty itemcode;
     private SimpleStringProperty items;
     private SimpleLongProperty stkinqty;
     private SimpleLongProperty stkoutqty;
@@ -30,8 +29,8 @@ public class StockTableModel {
     public StockTableModel() {
     }
 
-    public StockTableModel( String items, long stkinqty, long stkoutqty,long returns, long salesqty, long stkbal, String stkcostprice, String stksalesprice, String exp) {
-//        this.batchNo = new SimpleStringProperty(batchNo);
+    public StockTableModel( String code, String items, long stkinqty, long stkoutqty,long returns, long salesqty, long stkbal, String stkcostprice, String stksalesprice, String exp) {
+        this.itemcode = new SimpleStringProperty(code);
         this.items = new SimpleStringProperty(items);
         this.stkinqty = new SimpleLongProperty(stkinqty);
         this.stkoutqty = new SimpleLongProperty(stkoutqty);
@@ -45,17 +44,17 @@ public class StockTableModel {
 //        this.nhisprice = new SimpleDoubleProperty(nhisprice);
     }
 
-//    public String getBatchNo() {
-//        return batchNo.get();
-//    }
-//
-//    public SimpleStringProperty getBatchNoProperty() {
-//        return batchNo;
-//    }
-//
-//    public void setBatchNoProperty(String batchNo) {
-//        this.batchNo = new SimpleStringProperty(batchNo);
-//    }
+    public String getItemCode() {
+        return itemcode.get();
+    }
+
+    public SimpleStringProperty getItemCodeProperty() {
+        return itemcode;
+    }
+
+    public void setItemCodeProperty(String code) {
+        this.itemcode = new SimpleStringProperty(code);
+    }
 
     public String getItems() {
         return items.get();

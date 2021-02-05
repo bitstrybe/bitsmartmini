@@ -12,18 +12,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <StackPane styleClass="popupbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.AddStockInController">
    <children>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="522.0" prefWidth="755.0" styleClass="form_background">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="771.0" styleClass="form_background">
          <children>
-            <HBox alignment="CENTER" prefHeight="49.0" prefWidth="842.0">
+            <HBox alignment="CENTER" prefHeight="12.0" prefWidth="735.0">
                <children>
-                  <Label prefHeight="21.0" prefWidth="710.0" text="STOCK IN" textFill="#544848">
+                  <Label prefHeight="21.0" prefWidth="710.0" text="STOCK IN" textFill="#908888">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -43,32 +41,49 @@
                   <Line endX="654.2929077148438" startX="-100.0" styleClass="linecolor-dark" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
+            <HBox alignment="CENTER" prefHeight="38.0" prefWidth="751.0">
+               <children>
+                  <JFXTextField fx:id="search" prefHeight="40.0" prefWidth="751.0" promptText="Search Items" HBox.hgrow="ALWAYS" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
             <HBox prefHeight="414.0" prefWidth="723.0">
                <children>
                   <VBox prefHeight="413.0" prefWidth="352.0" styleClass="form_background">
                      <children>
-                        <JFXTextField fx:id="search" prefHeight="25.0" prefWidth="263.0" promptText="Search Items" />
-                        <JFXListView fx:id="itemlist" prefHeight="385.0" prefWidth="199.0" />
+                        <JFXListView fx:id="itemlist" prefHeight="385.0" prefWidth="199.0" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin></JFXListView>
                      </children>
                      <padding>
                         <Insets left="5.0" right="5.0" />
                      </padding>
                   </VBox>
-                  <VBox prefHeight="413.0" prefWidth="546.0" spacing="20.0" styleClass="form_background">
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="441.0" spacing="20.0" styleClass="form_background">
                      <children>
-                        <HBox prefHeight="162.0" prefWidth="465.0" style="-fx-background-color: #ffffff;">
+                        <HBox prefHeight="208.0" prefWidth="465.0" style="-fx-background-color: #ffffff;" VBox.vgrow="ALWAYS">
                            <children>
-                              <ImageView fx:id="itemimage" fitHeight="112.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
-                              <VBox prefHeight="112.0" prefWidth="323.0">
+                              <HBox alignment="CENTER" prefHeight="234.0" prefWidth="195.0">
                                  <children>
-                                    <Label fx:id="itemname" prefHeight="17.0" prefWidth="331.0" />
-                                    <Label fx:id="uomitem" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="233.0" />
+                                    <ImageView fx:id="itemimage" fitHeight="208.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS" />
                                  </children>
-                                 <padding>
-                                    <Insets left="10.0" top="5.0" />
-                                 </padding>
+                              </HBox>
+                              <VBox alignment="CENTER" prefHeight="234.0" prefWidth="250.0" spacing="2.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label fx:id="itembarcode" layoutX="20.0" layoutY="32.0" prefHeight="30.0" prefWidth="300.0" VBox.vgrow="ALWAYS" />
+                                    <Label fx:id="itemname" prefHeight="55.0" prefWidth="300.0" wrapText="true" VBox.vgrow="ALWAYS" />
+                                    <Label fx:id="itembrand" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="300.0" />
+                                    <Label fx:id="itemqty" layoutX="20.0" layoutY="49.0" prefHeight="27.0" prefWidth="300.0" />
+                                    <Label fx:id="itemsp" layoutX="20.0" layoutY="66.0" prefHeight="27.0" prefWidth="300.0" textFill="#f20404" />
+                                 </children>
                               </VBox>
                            </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="89.0" prefWidth="459.0" spacing="10.0">
                            <children>
@@ -77,18 +92,10 @@
                                     <FontAwesomeIcon glyphName="MINUS" />
                                  </graphic>
                               </Button>
-                              <JFXTextField fx:id="qnttextfield" alignment="CENTER" prefHeight="77.0" prefWidth="201.0" promptText="0" styleClass="form_field">
+                              <JFXTextField fx:id="qnttextfield" alignment="CENTER" focusColor="#4d4c4c" prefHeight="77.0" prefWidth="201.0" promptText="0" styleClass="form_field" text="1" unFocusColor="#838181">
                                  <font>
                                     <Font size="34.0" />
                                  </font>
-                                 <focusColor>
-                                    <LinearGradient endX="1.0" endY="1.0">
-                                       <stops>
-                                          <Stop color="#0a8e90" />
-                                          <Stop color="#902121" offset="1.0" />
-                                       </stops>
-                                    </LinearGradient>
-                                 </focusColor>
                               </JFXTextField>
                               <Button mnemonicParsing="false" onAction="#plusqnty" prefHeight="70.0" prefWidth="70.0">
                                  <graphic>
@@ -121,12 +128,22 @@
                      <padding>
                         <Insets left="5.0" right="5.0" />
                      </padding>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
                   </VBox>
                </children>
             </HBox>
-            <VBox prefHeight="50.0" prefWidth="100.0" styleClass="form_background">
+            <HBox>
                <children>
                   <Line endX="653.2929077148438" startX="-100.0" stroke="#bfbfbf" />
+               </children>
+            </HBox>
+            <HBox>
+               <VBox.margin>
+                  <Insets left="30.0" top="10.0" />
+               </VBox.margin>
+               <children>
                   <Label fx:id="displayinfo" prefHeight="26.0" prefWidth="266.0">
                      <graphic>
                         <StackPane>
@@ -140,12 +157,9 @@
                      <font>
                         <Font size="13.0" />
                      </font>
-                     <VBox.margin>
-                        <Insets left="30.0" top="10.0" />
-                     </VBox.margin>
                   </Label>
                </children>
-            </VBox>
+            </HBox>
          </children>
       </VBox>
    </children>

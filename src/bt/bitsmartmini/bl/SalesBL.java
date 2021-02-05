@@ -106,10 +106,10 @@ public class SalesBL extends DdsBL {
         }
     }
     
-    public long getSalesTotal(String itemDesc) {
+    public long getSalesTotal(String u) {
         try {
-            TypedQuery<Long> q = em.createQuery("SELECT SUM(s.quantity) FROM SalesDetails s WHERE s.item.itemDesc = :itemDesc", Long.class);
-            q.setParameter("itemDesc", itemDesc);
+            TypedQuery<Long> q = em.createQuery("SELECT SUM(s.quantity) FROM SalesDetails s WHERE s.upc.upc = :u", Long.class);
+            q.setParameter("u", u);
             return q.getSingleResult();
         } catch (Exception ex) {
             return 0l;
@@ -279,9 +279,16 @@ public class SalesBL extends DdsBL {
         return q.getResultList();
     }
 
-    public List<SalesDetails> getAllSalesDetailsbyItemsDesc(String itemDesc, int page) {
-        TypedQuery<SalesDetails> q = em.createQuery("SELECT s FROM SalesDetails s WHERE s.item.itemDesc = :itemDesc", SalesDetails.class);
-        q.setParameter("itemDesc", itemDesc);
+    public List<SalesDetails> getAllSalesDetailsbyItemsDesc(String u, int page) {
+        TypedQuery<SalesDetails> q = em.createQuery("SELECT s FROM SalesDetails s WHERE s.upc.itemDesc = :u", SalesDetails.class);
+        q.setParameter("u", u);
+        q.setMaxResults(page);
+        return q.getResultList();
+    }
+    
+    public List<SalesDetails> getAllSalesDetailsbyBarcode(String u, int page) {
+        TypedQuery<SalesDetails> q = em.createQuery("SELECT s FROM SalesDetails s WHERE s.upc.upc = :u", SalesDetails.class);
+        q.setParameter("u", u);
         q.setMaxResults(page);
         return q.getResultList();
     }

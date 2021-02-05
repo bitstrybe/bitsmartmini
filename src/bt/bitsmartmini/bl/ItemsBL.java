@@ -41,8 +41,17 @@ public class ItemsBL extends DdsBL {
     }
     
 
-    public List<String> getAllItemsName() {
-        TypedQuery<String> q = em.createQuery("SELECT i.itemDesc FROM Items i", String.class);
+    public List<String> getAllItemsForList() {
+        TypedQuery<String> q = em.createQuery("SELECT CONCAT(i.upc,':',i.itemDesc,':',i.brand.brandName,':',i.cp,':',i.sp) FROM Items i", String.class);
+        return q.getResultList();
+    }
+    
+    public List<String> searchItemsForList(String param) {
+        TypedQuery<String> q = em.createQuery("SELECT CONCAT(i.upc,':',i.itemDesc,':',i.brand.brandName,':',i.cp,':',i.sp) FROM Items i WHERE i.upc LIKE :p OR i.itemDesc LIKE :p1 OR i.brand.brandName LIKE :p2 OR i.category.categoryName LIKE :p3", String.class);
+        q.setParameter("p", "%" + param + "%");
+        q.setParameter("p1", "%" + param + "%");
+        q.setParameter("p2", "%" + param + "%");
+        q.setParameter("p3", "%" + param + "%");
         return q.getResultList();
     }
 
@@ -86,9 +95,9 @@ public class ItemsBL extends DdsBL {
         }
     }
 
-    public Items getImageItembyCode(String val) {
-        TypedQuery<Items> q = em.createQuery("SELECT i FROM Items i WHERE i.itemDesc = :itemDesc", Items.class);
-        q.setParameter("itemDesc", val);
+    public Items getImageItembyCode(String u) {
+        TypedQuery<Items> q = em.createQuery("SELECT i FROM Items i WHERE i.upc = :u", Items.class);
+        q.setParameter("u", u);
         return q.getSingleResult();
     }
     

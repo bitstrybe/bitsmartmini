@@ -1,4 +1,3 @@
-
 package bt.bitsmartmini.ui;
 
 import com.jfoenix.controls.JFXButton;
@@ -27,15 +26,15 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import bt.bitsmartmini.bl.InsertUpdateBL;
 import bt.bitsmartmini.bl.ItemsBL;
-import bt.bitsmartmini.bl.UomBL;
+import bt.bitsmartmini.bl.StockinBL;
 import bt.bitsmartmini.entity.Items;
 import bt.bitsmartmini.entity.Stockout;
 import bt.bitsmartmini.entity.Users;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * FXML Controller class
@@ -44,42 +43,59 @@ import bt.bitsmartmini.entity.Users;
  */
 public class AddStockOutController implements Initializable {
 
-    @FXML
     public DatePicker stockoutdate;
     @FXML
     public JFXTextField qnttextfield;
-    @FXML
     public JFXButton save;
     private Button closeButton;
-    @FXML
     public Label displayinfo;
-    @FXML
     public JFXSpinner spinner;
-    @FXML
     public FontAwesomeIcon check;
-    @FXML
     public FontAwesomeIcon duplicatelock;
-    @FXML
     public Label itemname;
-    @FXML
     private Button closebtn;
-    @FXML
     private JFXTextField search;
     @FXML
     private JFXListView<String> itemlist;
     @FXML
     private ImageView itemimage;
-    @FXML
-    private Label uomitem;
-    @FXML
     public TextArea remarks;
+    @FXML
+    private Button closebtn1;
+    @FXML
+    private JFXTextField search1;
+    @FXML
+    private Label itembarcode;
+    @FXML
+    private Label itembrand;
+    @FXML
+    private Label itemqty;
+    @FXML
+    private Label itemsp;
+    @FXML
+    private Label displayinfo1;
+    @FXML
+    private FontAwesomeIcon check1;
+    @FXML
+    private FontAwesomeIcon duplicatelock1;
+    @FXML
+    private JFXSpinner spinner1;
+    AtomicInteger rowCounter = new AtomicInteger(0);
 
-    public void getItemList() {
-        List<String> item = new ItemsBL().getAllItemsName();
+    ItemsBL ib = new ItemsBL();
+    StockinBL sb = new StockinBL();
+
+    public void getItemList(String p) {
+        List<String> item = new ItemsBL().getAllItemsForList();
+        if (p.length() > 0) {
+            item = new ItemsBL().searchItemsForList(p);
+        } else {
+            item = new ItemsBL().getAllItemsForList();
+        }
+
         ObservableList<String> result = FXCollections.observableArrayList(item);
         itemlist.getItems().clear();
         itemlist.setItems(result);
-//        Utilities.searchListView(itemlist.getItems(), search, itemlist);
     }
 
     public void searchItemList(String p) {
@@ -96,20 +112,20 @@ public class AddStockOutController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        getItemList();
+        getItemList(search.getText());
         search.textProperty().addListener(e -> {
-            if (search.getText().length() > 4) {
-                searchItemList(search.getText());
-            } else {
-                getItemList();
-            }
+            getItemList(search.getText());
+
         });
 
         itemlist.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            itemname.setText(itemlist.getSelectionModel().getSelectedItem());
-            //UomDef ud = new UomBL().getUombyItemId(itemlist.getSelectionModel().getSelectedItem());
-            Items its = new ItemsBL().getImageItembyCode(itemlist.getSelectionModel().getSelectedItem());
-            //uomitem.setText(ud.getUomCode().getUomDesc() + " " + ud.getUomNm() + " X " + ud.getUomDm());
+            itembarcode.setText(itemlist.getSelectionModel().getSelectedItem().split(":")[0]);
+            itemname.setText(itemlist.getSelectionModel().getSelectedItem().split(":")[1]);
+            itembrand.setText(itemlist.getSelectionModel().getSelectedItem().split(":")[2]);
+            long qty = sb.getStockBalance(itemlist.getSelectionModel().getSelectedItem().split(":")[0]);
+            itemqty.setText(Long.valueOf(qty).toString() + " Remaining");
+            itemsp.setText(MainAppController.B.getBCurrency() + " " + itemlist.getSelectionModel().getSelectedItem().split(":")[4]);
+            Items its = new ItemsBL().getImageItembyCode(itemlist.getSelectionModel().getSelectedItem().split(":")[0]);
             FileInputStream input;
             try {
                 input = new FileInputStream(its.getItemImg());
@@ -131,6 +147,7 @@ public class AddStockOutController implements Initializable {
     @FXML
     private void saveAction(ActionEvent event) {
     }
+
     private void clearAllForms() {
         qnttextfield.clear();
         remarks.clear();
@@ -153,34 +170,43 @@ public class AddStockOutController implements Initializable {
         delay.play();
 
     }
-    public void saveTemplate(){
-        
-                displayinfo.textProperty().unbind();
-                Stockout cat = new Stockout();
-                //cat.setBatchNo(String.valueOf(cat.getStockoutId()));
-                cat.setUpc(new Items(itemname.getText()));
-                cat.setQuantity(Integer.parseInt(qnttextfield.getText()));
-//                cat.setCostPrice(Utilities.roundToTwoDecimalPlace(Float.parseFloat(childController.costpiecestextfield.getText()), 2));
-//                cat.setSalesPrice(Utilities.roundToTwoDecimalPlace(Float.parseFloat(childController.salespiecetextfield.getText()), 2));
-                cat.setStkDate(new Date());
-                cat.setRemarks(remarks.getText());
-//                cat.setExpiryDate(Utilities.convertToDateViaSqlDate(childController.expirydate.getValue()));
-                cat.setUsers(new Users(LoginController.u.getUserid()));
-                cat.setEntryLog(new Date());
-                cat.setModifiedDate(new Date());
-                int result = new InsertUpdateBL().insertData(cat);
-                switch (result) {
-                    case 1:
-                     closeTransition();
-                        break;
-                    default:
-                        displayinfo.setText("NOTICE! AN ERROR OCCURED");
-                       spinner.setVisible(false);
-                       check.setVisible(false);
-                        break;
 
-                }
-           
+    public void saveTemplate() {
+        displayinfo.textProperty().unbind();
+        Stockout cat = new Stockout();
+        cat.setUpc(new Items(itembarcode.getText()));
+        cat.setQuantity(Integer.parseInt(qnttextfield.getText()));
+        cat.setStkDate(new Date());
+        cat.setRemarks(remarks.getText());
+        cat.setUsers(new Users(LoginController.u.getUserid()));
+        cat.setEntryLog(new Date());
+        cat.setModifiedDate(new Date());
+        int result = new InsertUpdateBL().insertData(cat);
+        switch (result) {
+            case 1:
+                closeTransition();
+                break;
+            default:
+                displayinfo.setText("There was an error, check and try again.");
+                spinner.setVisible(false);
+                check.setVisible(false);
+                break;
+        }
+
+    }
+
+    @FXML
+    private void minusqnty(ActionEvent event) {
+        if (rowCounter.get() > 1) {
+            qnttextfield.setText(Integer.toString(rowCounter.decrementAndGet()));
+        } else {
+            rowCounter.set(1);
+        }
+    }
+
+    @FXML
+    private void plusqnty(ActionEvent event) {
+        qnttextfield.setText(Integer.toString(rowCounter.incrementAndGet()));
     }
 
 }

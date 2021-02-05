@@ -30,6 +30,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import bt.bitsmartmini.bl.InsertUpdateBL;
 import bt.bitsmartmini.bl.ItemsBL;
+import bt.bitsmartmini.bl.SalesBL;
 import bt.bitsmartmini.bl.StockinBL;
 import bt.bitsmartmini.entity.Items;
 import bt.bitsmartmini.entity.Stockin;
@@ -46,10 +47,6 @@ public class AddStockInController implements Initializable {
     public JFXTextField batchtextfield;
     @FXML
     public JFXTextField qnttextfield;
-//    @FXML
-//    public JFXTextField costtextfield;
-//    @FXML
-//    public JFXTextField salestextfield;
     @FXML
     public JFXButton save;
     @FXML
@@ -69,26 +66,31 @@ public class AddStockInController implements Initializable {
     @FXML
     private ImageView itemimage;
     @FXML
-    private Label uomitem;
-    @FXML
     private FontAwesomeIcon duplicatelock;
 
     AtomicInteger rowCounter = new AtomicInteger(0);
+    @FXML
+    public Label itembarcode;
+    @FXML
+    private Label itembrand;
+    @FXML
+    private Label itemqty;
+    @FXML
+    private Label itemsp;
 
-    public void getItemList() {
-        List<String> item = new ItemsBL().getAllItemsName();
+    ItemsBL ib = new ItemsBL();
+    StockinBL sb = new StockinBL();
+
+    public void getItemList(String p) {
+        List<String> item = new ItemsBL().getAllItemsForList();
+        if (p.length() > 0) {
+            item = new ItemsBL().searchItemsForList(p);
+        } else {
+            item = new ItemsBL().getAllItemsForList();
+        }
         ObservableList<String> result = FXCollections.observableArrayList(item);
         itemlist.getItems().clear();
         itemlist.setItems(result);
-//        Utilities.searchListView(itemlist.getItems(), search, itemlist);
-    }
-
-    public void searchItemList(String p) {
-        List<String> item = new ItemsBL().searchItemsNames(p);
-        ObservableList<String> result = FXCollections.observableArrayList(item);
-        itemlist.getItems().clear();
-        itemlist.setItems(result);
-//        Utilities.searchListView(itemlist.getItems(), search, itemlist);
     }
 
     /**
@@ -97,20 +99,19 @@ public class AddStockInController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        getItemList();
+        getItemList(search.getText());
         search.textProperty().addListener(e -> {
-            if (search.getText().length() > 4) {
-                searchItemList(search.getText());
-            } else {
-                getItemList();
-            }
-        });
+            getItemList(search.getText());
 
+        });
         itemlist.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            itemname.setText(itemlist.getSelectionModel().getSelectedItem());
-            //UomDef ud = new UomBL().getUombyItemId(itemlist.getSelectionModel().getSelectedItem());
-            Items its = new ItemsBL().getImageItembyCode(itemlist.getSelectionModel().getSelectedItem());
-            //uomitem.setText(ud.getUomCode().getUomDesc() + " " + ud.getUomNm() + " X " + ud.getUomDm());
+            itembarcode.setText(itemlist.getSelectionModel().getSelectedItem().split(":")[0]);
+            itemname.setText(itemlist.getSelectionModel().getSelectedItem().split(":")[1]);
+            itembrand.setText(itemlist.getSelectionModel().getSelectedItem().split(":")[2]);
+            long qty = sb.getStockBalance(itemlist.getSelectionModel().getSelectedItem().split(":")[0]);
+            itemqty.setText(Long.valueOf(qty).toString()+" Remaining");
+            itemsp.setText(MainAppController.B.getBCurrency()+" "+itemlist.getSelectionModel().getSelectedItem().split(":")[4]);
+            Items its = new ItemsBL().getImageItembyCode(itemlist.getSelectionModel().getSelectedItem().split(":")[0]);
             FileInputStream input;
             try {
                 input = new FileInputStream(its.getItemImg());
@@ -121,23 +122,6 @@ public class AddStockInController implements Initializable {
                 Logger.getLogger(AddStockInController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-
-//        costtextfield.textProperty().addListener(new ChangeListener<String>() {
-//            @Override
-//            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-//                if (!newValue.matches("\\d*")) {
-//                    costtextfield.setText(newValue.replaceAll("[^\\d\\.]", ""));
-//                }
-//            }
-//        });
-//        salestextfield.textProperty().addListener(new ChangeListener<String>() {
-//            @Override
-//            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-//                if (!newValue.matches("\\d*")) {
-//                    salestextfield.setText(newValue.replaceAll("[^\\d\\.]", ""));
-//                }
-//            }
-//        });
         qnttextfield.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -146,69 +130,6 @@ public class AddStockInController implements Initializable {
                 }
             }
         });
-//        costtextfield.textProperty().addListener(e -> {
-//            try {
-//                if (costtextfield.getLength() >= 1) {
-//                    float val = Float.parseFloat(costtextfield.getText()) / Float.parseFloat(qnttextfield.getText());
-//                    costpiecestextfield.setText(String.valueOf(val));
-//                }
-//            } catch (NumberFormatException ex) {
-//                System.out.println("formatting error");
-//            }
-//
-//        });
-//        salestextfield.textProperty().addListener(e -> {
-//            try {
-//                if (salestextfield.getLength() >= 1) {
-//                    float val = Float.parseFloat(salestextfield.getText()) / Float.parseFloat(qnttextfield.getText());
-//                    salespiecetextfield.setText(String.valueOf(val));
-//                }
-//            } catch (NumberFormatException ex) {
-//                System.out.println("formatting error");
-//            }
-//        });
-//        nhistextfield.textProperty().addListener(e -> {
-//            try {
-//                if (nhistextfield.getLength() >= 1) {
-//                    float val = Float.parseFloat(nhistextfield.getText()) * Float.parseFloat(qnttextfield.getText());
-//                    nhispiecetextfield.setText(String.valueOf(val));
-//                }
-//            } catch (NumberFormatException ex) {
-//                System.out.println("formatting error");
-//            }
-//        });
-//        qnttextfield.textProperty().addListener(e -> {
-//            try {
-//                if (qnttextfield.getText().length() >= 1) {
-//                    float valcost = Float.parseFloat(costtextfield.getText()) * Float.parseFloat(qnttextfield.getText());
-//                    float valsales = Float.parseFloat(salestextfield.getText()) * Float.parseFloat(qnttextfield.getText());
-//               }
-//            } catch (Exception ex) {
-//                System.out.println("formatting error");
-//            }
-//
-//        });
-
-//        expirydate.setConverter(new StringConverter<LocalDate>() {
-//            private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//admin
-//            @Override
-//            public String toString(LocalDate object) {
-//                if (object == null) {
-//                    return "";
-//                }
-//                return dateTimeFormatter.format(object);
-//            }
-//
-//            @Override
-//            public LocalDate fromString(String datestring) {
-//                if (datestring == null || datestring.trim().isEmpty()) {
-//                    return null;
-//                }
-//                return LocalDate.parse(datestring, dateTimeFormatter);
-//            }
-//
-//        });
     }
 
     @FXML
@@ -222,14 +143,12 @@ public class AddStockInController implements Initializable {
     }
 
     private void clearAllForms() {
-        qnttextfield.clear();
-//        costtextfield.clear();
-//        salestextfield.clear();
+        qnttextfield.setText("1");
         itemimage.setImage(null);
     }
 
     private void closeTransition() {
-        displayinfo.setText("SUCCESSFULLY SAVED");
+        displayinfo.setText("Transaction was successful");
         itemname.setText(null);
         spinner.setVisible(false);
         check.setVisible(true);
@@ -255,14 +174,8 @@ public class AddStockInController implements Initializable {
             int stkval = stcinid.get(0);
             cat.setStockinId(++stkval);
         }
-
-        //cat.setBatchNo(childController.batchtextfield.getText());
-        //cat.setUpc(String.valueOf(cat.getStockinId()));
-        cat.setUpc(new Items(itemname.getText()));
+        cat.setUpc(new Items(itembarcode.getText()));
         cat.setQuantity(Integer.parseInt(qnttextfield.getText()));
-        //cat.setC(Utilities.roundToTwoDecimalPlace(Double.parseDouble(costtextfield.getText()), 2));
-        //cat.setSalesPrice(Utilities.roundToTwoDecimalPlace(Double.parseDouble(salestextfield.getText()), 2));
-//                cat.setNhisPrice(Utilities.roundToTwoDecimalPlace(Double.parseDouble(childController.nhistextfield.getText()), 2));
         cat.setStockinDate(new Date());
         cat.setExpiryDate(new Date());
         cat.setUsers(new Users(LoginController.u.getUserid()));
@@ -271,35 +184,25 @@ public class AddStockInController implements Initializable {
         int result = new InsertUpdateBL().insertData(cat);
         switch (result) {
             case 1:
-                //Items itprice = new Items();
-                //itprice.setItems(cat.getItems());
-                //itprice.setItemDesc(cat.getItems().getItemDesc());
-                //itprice.setCostPrice(Utilities.roundToTwoDecimalPlace(Double.parseDouble(costtextfield.getText()), 2));
-                //itprice.setSalesPrice(Utilities.roundToTwoDecimalPlace(Double.parseDouble(salestextfield.getText()), 2));
-//                itprice.setEntryLog(new Date());
-//                itprice.setLastModified(new Date());
-//                int resultprice = new InsertUpdateBL().updateData(itprice);
                 if (result == 1) {
                     closeTransition();
                 }
-
                 break;
             default:
-                displayinfo.setText("NOTICE! AN ERROR OCCURED");
+                displayinfo.setText("There was an error, check and try again.");
                 spinner.setVisible(false);
                 check.setVisible(false);
                 break;
-
         }
 
     }
 
     @FXML
     private void minusqnty(ActionEvent event) {
-        if (rowCounter.get() > 0) {
+        if (rowCounter.get() > 1) {
             qnttextfield.setText(Integer.toString(rowCounter.decrementAndGet()));
         } else {
-            rowCounter.set(0);
+            rowCounter.set(1);
         }
     }
 

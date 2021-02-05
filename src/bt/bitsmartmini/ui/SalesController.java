@@ -123,7 +123,6 @@ public class SalesController implements Initializable {
     private TableColumn<SalesDetailsTableModel, String> itemnametb;
     @FXML
     private TableColumn<SalesDetailsTableModel, Number> salesdetailsquantitytb;
-    @FXML
     private TableColumn<SalesDetailsTableModel, String> itemcosttb;
     @FXML
     private TableColumn<SalesDetailsTableModel, String> itemspricetb;
@@ -147,7 +146,6 @@ public class SalesController implements Initializable {
     ReceiptBL rb = new ReceiptBL();
     ReturnBL rn = new ReturnBL();
 
-    @FXML
     private TableColumn<SalesDetailsTableModel, Boolean> raction;
     @FXML
     private TableColumn<SalesDetailsTableModel, Number> returned;
@@ -165,6 +163,10 @@ public class SalesController implements Initializable {
     private TableColumn<SalesTableModel, String> actuals;
     @FXML
     private TableColumn<SalesTableModel, String> refunds;
+    @FXML
+    private TableColumn<SalesDetailsTableModel, Number> refundsCol;
+    @FXML
+    private TableColumn<SalesDetailsTableModel, Number> actualsCol;
 
     /**
      * Initializes the controller class.

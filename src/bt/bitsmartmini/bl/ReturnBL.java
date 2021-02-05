@@ -114,16 +114,23 @@ public class ReturnBL extends DdsBL {
             return 0.00;
         }
     }
+    
+    public List<RtdItem> getAllRtdItembyBarcode(String u, int page) {
+        TypedQuery<RtdItem> q = em.createQuery("SELECT s FROM RtdItem s WHERE s.salesDetails.upc.upc = :itemDesc AND s.salesDetails IS NOT NULL", RtdItem.class);
+        q.setParameter("u", u);
+        q.setMaxResults(page);
+        return q.getResultList();
+    }
 
     public List<RtdItem> getAllRtdItembyItemsDesc(String itemDesc, int page) {
-        TypedQuery<RtdItem> q = em.createQuery("SELECT s FROM RtdItem s WHERE s.salesDetails.item.itemDesc = :itemDesc AND s.salesDetails IS NOT NULL", RtdItem.class);
+        TypedQuery<RtdItem> q = em.createQuery("SELECT s FROM RtdItem s WHERE s.salesDetails.upc.itemDesc = :itemDesc AND s.salesDetails IS NOT NULL", RtdItem.class);
         q.setParameter("itemDesc", itemDesc);
         q.setMaxResults(page);
         return q.getResultList();
     }
 
     public List<RtdItem> searchAllReturnItems(String p) {
-        TypedQuery<RtdItem> q = em.createQuery("SELECT s FROM RtdItem s WHERE s.salesDetails.item.itemDesc LIKE :p OR s.salesDetails.item.itemName LIKE :p1 AND s.salesDetails IS NOT NULL", RtdItem.class);
+        TypedQuery<RtdItem> q = em.createQuery("SELECT s FROM RtdItem s WHERE s.salesDetails.upc.upc LIKE :p OR s.salesDetails.upc.itemDesc LIKE :p1 AND s.salesDetails IS NOT NULL", RtdItem.class);
         q.setParameter("p", "%" + p + "%");
         q.setParameter("p1", "%" + p + "%");
         // q.setParameter("p2", "%" + p + "%");
