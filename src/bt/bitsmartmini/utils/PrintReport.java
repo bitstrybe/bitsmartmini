@@ -62,7 +62,7 @@ public class PrintReport extends JFrame {
         Customers c = cb.getCustomersBySales(r.getSalesId().getSalesId());
         //String reportSrcFile = "data/Blank_A4.jrxml";
         // First, compile jrxml file.
-        InputStream inputStream = getClass().getResourceAsStream("/lxe/pharmabitretail/reports/TerminalReceiptReport.jasper");
+        InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/TerminalReceiptReport.jasper");
         // Fields for report
 
         BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/resources/logo.png"));
@@ -95,7 +95,7 @@ public class PrintReport extends JFrame {
 
         //String reportSrcFile = "data/Blank_A4.jrxml";
         // First, compile jrxml file.
-        InputStream inputStream = getClass().getResourceAsStream("/lxe/pharmabitretail/reports/SalesReceiptReport.jasper");
+        InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/SalesReceiptReport.jasper");
         // Fields for report
         param = setBasiParam();
         BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/resources/logo.png"));
@@ -124,7 +124,7 @@ public class PrintReport extends JFrame {
 
         //String reportSrcFile = "data/Blank_A4.jrxml";
         // First, compile jrxml file.
-        InputStream inputStream = getClass().getResourceAsStream("/lxe/pharmabitretail/reports/SalesReportA.jasper");
+        InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/SalesReportA.jasper");
         // Fields for report
         param = setBasiParam();
         BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/resources/logo.png"));
@@ -155,7 +155,7 @@ public class PrintReport extends JFrame {
 
         //String reportSrcFile = "data/Blank_A4.jrxml";
         // First, compile jrxml file.
-        InputStream inputStream = getClass().getResourceAsStream("/lxe/pharmabitretail/reports/SalesReportB.jasper");
+        InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/SalesReportB.jasper");
         // Fields for report
         param = setBasiParam();
         BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/resources/logo.png"));
@@ -184,7 +184,7 @@ public class PrintReport extends JFrame {
 
         //String reportSrcFile = "data/Blank_A4.jrxml";
         // First, compile jrxml file.
-        InputStream inputStream = getClass().getResourceAsStream("/lxe/pharmabitretail/reports/StockReorderLevelReport.jasper");
+        InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/StockReorderLevelReport.jasper");
         // Fields for report
         param = setBasiParam();
 //        BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/resources/dodtitle1.png"));
@@ -211,7 +211,7 @@ public class PrintReport extends JFrame {
 
         //String reportSrcFile = "data/Blank_A4.jrxml";
         // First, compile jrxml file.
-        InputStream inputStream = getClass().getResourceAsStream("/lxe/pharmabitretail/reports/StockReport.jasper");
+        InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/StockReport.jasper");
         // Fields for report
         param = setBasiParam();
 //        BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/resources/dodtitle1.png"));
@@ -238,7 +238,7 @@ public class PrintReport extends JFrame {
 
         //String reportSrcFile = "data/Blank_A4.jrxml";
         // First, compile jrxml file.
-        InputStream inputStream = getClass().getResourceAsStream("/lxe/pharmabitretail/reports/StockDetailsReport.jasper");
+        InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/StockDetailsReport.jasper");
         // Fields for report
         param = setBasiParam();
 //        BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/resources/dodtitle1.png"));
@@ -265,7 +265,7 @@ public class PrintReport extends JFrame {
 
         //String reportSrcFile = "data/Blank_A4.jrxml";
         // First, compile jrxml file.
-        InputStream inputStream = getClass().getResourceAsStream("/lxe/pharmabitretail/reports/ItemListReport.jasper");
+        InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/ItemListReport.jasper");
         // Fields for report
         param = setBasiParam();
 //        BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/resources/dodtitle1.png"));
@@ -273,8 +273,8 @@ public class PrintReport extends JFrame {
 //        param.put("LOGO", image);
 //        param.put("LOGO1", image1);
         ItemListReportModel im = new ItemListReportModel();
-        Thread t = new Thread(im);
-        t.start();
+//        Thread t = new Thread(im);
+//        t.start();
         JRTableModelDataSource jrtmds = new JRTableModelDataSource(im);
         JasperPrint print = JasperFillManager.fillReport(inputStream, param, jrtmds);
         JRViewer viewer = new JRViewer(print);
@@ -291,7 +291,7 @@ public class PrintReport extends JFrame {
     public void showDebtorsByCustomerReport(String c) throws JRException, ClassNotFoundException, SQLException, IOException {
         //String reportSrcFile = "data/Blank_A4.jrxml";
         // First, compile jrxml file.
-        InputStream inputStream = getClass().getResourceAsStream("/lxe/pharmabitretail/reports/DebtorsReport.jasper");
+        InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/DebtorsReport.jasper");
         // Fields for report
         param = setBasiParam();
         BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/resources/logo.png"));
@@ -319,7 +319,7 @@ public class PrintReport extends JFrame {
 
         //String reportSrcFile = "data/Blank_A4.jrxml";
         // First, compile jrxml file.
-        InputStream inputStream = getClass().getResourceAsStream("/lxe/pharmabitretail/reports/DebtorsReport.jasper");
+        InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/DebtorsReport.jasper");
         // Fields for report
         param = setBasiParam();
         BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/resources/logo.png"));
