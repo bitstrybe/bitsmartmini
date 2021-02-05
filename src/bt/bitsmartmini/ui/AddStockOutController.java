@@ -157,8 +157,8 @@ public class AddStockOutController implements Initializable {
         
                 displayinfo.textProperty().unbind();
                 Stockout cat = new Stockout();
-                cat.setBatchNo(String.valueOf(cat.getStockoutId()));
-                cat.setItems(new Items(itemname.getText()));
+                //cat.setBatchNo(String.valueOf(cat.getStockoutId()));
+                cat.setUpc(new Items(itemname.getText()));
                 cat.setQuantity(Integer.parseInt(qnttextfield.getText()));
 //                cat.setCostPrice(Utilities.roundToTwoDecimalPlace(Float.parseFloat(childController.costpiecestextfield.getText()), 2));
 //                cat.setSalesPrice(Utilities.roundToTwoDecimalPlace(Float.parseFloat(childController.salespiecetextfield.getText()), 2));

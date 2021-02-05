@@ -146,12 +146,7 @@ public class LoginController implements Initializable {
         log.setUsername(new Users(u.getUserid()));
         log.setLoginDatetime(new Date(System.currentTimeMillis()));
         int result = loginbl.insertData(log);
-//        if (result == 1) {
-//            //System.out.println("Logged Successfully");
-//        } else {
-//            System.out.println("Unable to log");
-//        }
-        return result;//log.getLogsid();
+        return result;
     }
 
     public void visitUrl() {
