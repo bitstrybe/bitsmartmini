@@ -94,7 +94,7 @@
                         <Font name="Open Sans" size="13.0" />
                      </font>
                   </Text>
-                  <Text fill="#9e9c9c" strokeType="OUTSIDE" strokeWidth="0.0" text="Remaining" wrappingWidth="70.22900390625" />
+                  <Text fill="#9e9c9c" strokeType="OUTSIDE" strokeWidth="0.0" text=" Remaining" wrappingWidth="70.22900390625" />
                </children>
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
