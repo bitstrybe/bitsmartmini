@@ -470,3 +470,20 @@ add-to-cart-btn{
 .sidemenu-text-color{
     -fx-text-fill: #000000;
 }
+
+.VboxColor{
+    -fx-background-color:#cbd0d4;
+}
+.ActiveSideTextAndFont{
+    -fx-fill:#F0F0F0;
+}
+.InactiveSideTextAndFont{
+     -fx-fill: #000000;
+}
+
+VBox .hoverVbox:hover{
+    -fx-background-color: #2e2e2e;
+}
+VBox .hoverVboxActive{
+    -fx-background-color: #2e2e2e;
+}

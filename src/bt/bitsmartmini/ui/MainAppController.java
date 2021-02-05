@@ -36,6 +36,7 @@ import bt.bitsmartmini.entity.Business;
 import bt.bitsmartmini.entity.Userlogs;
 import bt.bitsmartmini.tablemodel.SelectItemSaleTableModel;
 import bt.bitsmartmini.utils.PrintReport;
+import javafx.scene.Node;
 import net.sf.jasperreports.engine.JRException;
 
 /**
@@ -106,6 +107,10 @@ public class MainAppController implements Initializable {
     private MenuButton cartmainbtn;
     @FXML
     private Menu pharmabits;
+    @FXML
+    private FontAwesomeIcon backupawesome;
+    @FXML
+    private Text backuptext;
 
     public void setScene(String scenechange) throws IOException {
         Parent root;
@@ -157,11 +162,23 @@ public class MainAppController implements Initializable {
 
         try {
             setScene("Dashboard.fxml");
-            dashboard.setStyle("-fx-background-color:#cbd0d4");
-            dashawesome.setFill(Color.BLACK);
-            dashtext.setFill(Color.BLACK);
-            stocks.setStyle("-fx-background-color: transparent");
-            sales.setStyle("-fx-background-color: transparent");
+            dashboard.getStyleClass().add("hoverVboxActive");
+            catalog.getStyleClass().clear();
+            catalog.getStyleClass().add("hoverVbox");
+            catalogawesome.getStyleClass().add("InactiveSideTextAndFont");
+            catalogtext.getStyleClass().add("InactiveSideTextAndFont");
+            sales.getStyleClass().clear();
+            sales.getStyleClass().add("hoverVbox");
+            salesawesome.getStyleClass().add("InactiveSideTextAndFont");
+            salestext.getStyleClass().add("InactiveSideTextAndFont");
+            stocks.getStyleClass().clear();
+            stocks.getStyleClass().add("hoverVbox");
+            stockawesome.getStyleClass().add("InactiveSideTextAndFont");
+            stocktext.getStyleClass().add("InactiveSideTextAndFont");
+            backup.getStyleClass().add("hoverVbox");
+            backupawesome.getStyleClass().add("InactiveSideTextAndFont");
+            backuptext.getStyleClass().add("InactiveSideTextAndFont");
+
         } catch (IOException ex) {
             Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -169,18 +186,48 @@ public class MainAppController implements Initializable {
         dashboard.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             try {
                 setScene("Dashboard.fxml");
-                dashboard.setStyle("-fx-background-color:#cbd0d4");
-                dashawesome.setFill(Color.BLACK);
-                dashtext.setFill(Color.BLACK);
-                stockawesome.setFill(Color.valueOf("#dddee0"));
-                stocktext.setFill(Color.valueOf("#dddee0"));
-                catalogawesome.setFill(Color.valueOf("#dddee0"));
-                catalogtext.setFill(Color.valueOf("#dddee0"));
-                salesawesome.setFill(Color.valueOf("#dddee0"));
-                salestext.setFill(Color.valueOf("#dddee0"));
-                stocks.setStyle("-fx-background-color: transparent");
-                sales.setStyle("-fx-background-color: transparent");
-                catalog.setStyle("-fx-background-color: transparent");
+                //Dashboard is Active
+                dashboard.getStyleClass().add("hoverVboxActive");
+                dashawesome.getStyleClass().clear();
+                dashawesome.getStyleClass().add("ActiveSideTextAndFont");
+                dashtext.getStyleClass().clear();
+                dashtext.getStyleClass().add("ActiveSideTextAndFont");
+                //Catalog
+                catalog.getStyleClass().clear();
+                catalog.getStyleClass().add("hoverVbox");
+                catalogawesome.getStyleClass().add("InactiveSideTextAndFont");
+                catalogtext.getStyleClass().add("InactiveSideTextAndFont");
+                //Sales
+                sales.getStyleClass().clear();
+                sales.getStyleClass().add("hoverVbox");
+                salesawesome.getStyleClass().add("InactiveSideTextAndFont");
+                salestext.getStyleClass().add("InactiveSideTextAndFont");
+                //Stocks
+                stocks.getStyleClass().clear();
+                stocks.getStyleClass().add("hoverVbox");
+                stockawesome.getStyleClass().add("InactiveSideTextAndFont");
+                stocktext.getStyleClass().add("InactiveSideTextAndFont");
+                //Backup
+                backup.getStyleClass().add("hoverVbox");
+                backupawesome.getStyleClass().add("InactiveSideTextAndFont");
+                backuptext.getStyleClass().add("InactiveSideTextAndFont");
+
+////                stocks.getStyleClass().add("hoverVbox");
+//                dashboard = new VBox();
+//                dashboard.getStyleClass().add("hoverActive");
+//                dashawesome.getStyleClass().clear();
+//                dashawesome.getStyleClass().add("ActiveSideTextAndFont");
+//                dashtext.getStyleClass().clear();
+//                dashtext.getStyleClass().add("ActiveSideTextAndFont");
+//                stockawesome.getStyleClass().add("InactiveSideTextAndFont");
+//                stocktext.getStyleClass().add("InactiveSideTextAndFont");
+//                catalogawesome.getStyleClass().add("InactiveSideTextAndFont");
+//                catalogtext.getStyleClass().add("InactiveSideTextAndFont");
+//                salesawesome.getStyleClass().add("InactiveSideTextAndFont");
+//                salestext.getStyleClass().add("InactiveSideTextAndFont");
+//                stocks.setStyle("-fx-background-color: transparent");
+//                sales.setStyle("-fx-background-color: transparent");
+//                catalog.setStyle("-fx-background-color: transparent");
             } catch (IOException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -189,18 +236,41 @@ public class MainAppController implements Initializable {
         stocks.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             try {
                 setScene("Stock.fxml");
-                stocks.setStyle("-fx-background-color:#cbd0d4");
-                stockawesome.setFill(Color.BLACK);
-                stocktext.setFill(Color.BLACK);
-                dashawesome.setFill(Color.valueOf("#000000"));
-                dashtext.setFill(Color.valueOf("#000000"));
-                catalogawesome.setFill(Color.valueOf("#000000"));
-                catalogtext.setFill(Color.valueOf("#000000"));
-                salesawesome.setFill(Color.valueOf("#000000"));
-                salestext.setFill(Color.valueOf("#000000"));
-                sales.setStyle("-fx-background-color:  transparent");
-                dashboard.setStyle("-fx-background-color: transparent");
-                catalog.setStyle("-fx-background-color: transparent");
+                //Dashboard
+                dashboard.getStyleClass().clear();
+                dashboard.getStyleClass().add("hoverVbox");
+                dashawesome.getStyleClass().add("InactiveSideTextAndFont");
+                dashtext.getStyleClass().add("InactiveSideTextAndFont");
+                //Catalog
+                catalog.getStyleClass().clear();
+                catalog.getStyleClass().add("hoverVbox");
+                catalogawesome.getStyleClass().add("InactiveSideTextAndFont");
+                catalogtext.getStyleClass().add("InactiveSideTextAndFont");
+                //Sales
+                sales.getStyleClass().clear();
+                sales.getStyleClass().add("hoverVbox");
+                salesawesome.getStyleClass().add("InactiveSideTextAndFont");
+                salestext.getStyleClass().add("InactiveSideTextAndFont");
+                //Stocks is Active
+                stocks.getStyleClass().add("hoverVboxActive");
+                stockawesome.getStyleClass().clear();
+                stockawesome.getStyleClass().add("ActiveSideTextAndFont");
+                stocktext.getStyleClass().clear();
+                stocktext.getStyleClass().add("ActiveSideTextAndFont");
+//                stocks.setStyle("-fx-background-color:#2e2e2e");
+//                stockawesome.getStyleClass().clear();
+//                stockawesome.getStyleClass().add("ActiveSideTextAndFont");
+//                stocktext.getStyleClass().clear();
+//                stocktext.getStyleClass().add("ActiveSideTextAndFont");
+//                dashawesome.getStyleClass().add("InactiveSideTextAndFont");
+//                dashtext.getStyleClass().add("InactiveSideTextAndFont");
+//                catalogawesome.getStyleClass().add("InactiveSideTextAndFont");
+//                catalogtext.getStyleClass().add("InactiveSideTextAndFont");
+//                salesawesome.getStyleClass().add("InactiveSideTextAndFont");
+//                salestext.getStyleClass().add("InactiveSideTextAndFont");
+////                sales.setStyle("-fx-background-color:  transparent");
+////                dashboard.setStyle("-fx-background-color: transparent");
+////                catalog.setStyle("-fx-background-color: transparent");
             } catch (IOException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -209,18 +279,41 @@ public class MainAppController implements Initializable {
         catalog.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             try {
                 setScene("Catalog.fxml");
-                catalog.setStyle("-fx-background-color:#cbd0d4");
-                catalogawesome.setFill(Color.BLACK);
-                catalogtext.setFill(Color.BLACK);
-                dashawesome.setFill(Color.valueOf("#dddee0"));
-                dashtext.setFill(Color.valueOf("#dddee0"));
-                stockawesome.setFill(Color.valueOf("#dddee0"));
-                stocktext.setFill(Color.valueOf("#dddee0"));
-                salesawesome.setFill(Color.valueOf("#dddee0"));
-                salestext.setFill(Color.valueOf("#dddee0"));
-                stocks.setStyle("-fx-background-color:  transparent");
-                dashboard.setStyle("-fx-background-color: transparent");
-                sales.setStyle("-fx-background-color: transparent");
+                //Dashboard
+                dashboard.getStyleClass().clear();
+                dashboard.getStyleClass().add("hoverVbox");
+                dashawesome.getStyleClass().add("InactiveSideTextAndFont");
+                dashtext.getStyleClass().add("InactiveSideTextAndFont");
+                //Catalog is Active
+                catalog.getStyleClass().add("hoverVboxActive");
+                catalogawesome.getStyleClass().clear();
+                catalogawesome.getStyleClass().add("ActiveSideTextAndFont");
+                catalogtext.getStyleClass().clear();
+                catalogtext.getStyleClass().add("ActiveSideTextAndFont");
+                //Sales
+                sales.getStyleClass().clear();
+                sales.getStyleClass().add("hoverVbox");
+                salesawesome.getStyleClass().add("InactiveSideTextAndFont");
+                salestext.getStyleClass().add("InactiveSideTextAndFont");
+                //Stocks
+                stocks.getStyleClass().clear();
+                stocks.getStyleClass().add("hoverVbox");
+                stockawesome.getStyleClass().add("InactiveSideTextAndFont");
+                stocktext.getStyleClass().add("InactiveSideTextAndFont");
+//                catalog.setStyle("-fx-background-color:#2e2e2e");
+//                catalogawesome.getStyleClass().clear();
+//                catalogawesome.getStyleClass().add("ActiveSideTextAndFont");
+//                catalogtext.getStyleClass().clear();
+//                catalogtext.getStyleClass().add("ActiveSideTextAndFont");
+//                dashawesome.getStyleClass().add("InactiveSideTextAndFont");
+//                dashtext.getStyleClass().add("InactiveSideTextAndFont");
+//                stockawesome.getStyleClass().add("InactiveSideTextAndFont");
+//                stocktext.getStyleClass().add("InactiveSideTextAndFont");
+//                salesawesome.getStyleClass().add("InactiveSideTextAndFont");
+//                salestext.getStyleClass().add("InactiveSideTextAndFont");
+//                stocks.setStyle("-fx-background-color:  transparent");
+//                dashboard.setStyle("-fx-background-color: transparent");
+//                sales.setStyle("-fx-background-color: transparent");
             } catch (IOException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -229,18 +322,41 @@ public class MainAppController implements Initializable {
         sales.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             try {
                 setScene("Sales.fxml");
-                sales.setStyle("-fx-background-color:#cbd0d4");
-                salesawesome.setFill(Color.BLACK);
-                salestext.setFill(Color.BLACK);
-                dashawesome.setFill(Color.valueOf("#dddee0"));
-                dashtext.setFill(Color.valueOf("#dddee0"));
-                stockawesome.setFill(Color.valueOf("#dddee0"));
-                stocktext.setFill(Color.valueOf("#dddee0"));
-                catalogawesome.setFill(Color.valueOf("#dddee0"));
-                catalogtext.setFill(Color.valueOf("#dddee0"));
-                stocks.setStyle("-fx-background-color:  transparent");
-                dashboard.setStyle("-fx-background-color: transparent");
-                catalog.setStyle("-fx-background-color: transparent");
+                //Dashboard
+                dashboard.getStyleClass().clear();
+                dashboard.getStyleClass().add("hoverVbox");
+                dashawesome.getStyleClass().add("InactiveSideTextAndFont");
+                dashtext.getStyleClass().add("InactiveSideTextAndFont");
+                //Catalog
+                catalog.getStyleClass().clear();
+                catalog.getStyleClass().add("hoverVbox");
+                catalogawesome.getStyleClass().add("InactiveSideTextAndFont");
+                catalogtext.getStyleClass().add("InactiveSideTextAndFont");
+                //Sales is Active
+                sales.getStyleClass().add("hoverVboxActive");
+                salesawesome.getStyleClass().clear();
+                salesawesome.getStyleClass().add("ActiveSideTextAndFont");
+                salestext.getStyleClass().clear();
+                salestext.getStyleClass().add("ActiveSideTextAndFont");
+                //Stocks
+                stocks.getStyleClass().clear();
+                stocks.getStyleClass().add("hoverVbox");
+                stockawesome.getStyleClass().add("InactiveSideTextAndFont");
+                stocktext.getStyleClass().add("InactiveSideTextAndFont");
+//                sales.setStyle("-fx-background-color:#2e2e2e");
+//                salesawesome.getStyleClass().clear();
+//                salesawesome.getStyleClass().add("ActiveSideTextAndFont");
+//                salestext.getStyleClass().clear();
+//                salestext.getStyleClass().add("ActiveSideTextAndFont");
+//                dashawesome.getStyleClass().add("InactiveSideTextAndFont");
+//                dashtext.getStyleClass().add("InactiveSideTextAndFont");
+//                stockawesome.getStyleClass().add("InactiveSideTextAndFont");
+//                stocktext.getStyleClass().add("InactiveSideTextAndFont");
+//                catalogawesome.getStyleClass().add("InactiveSideTextAndFont");
+//                catalogtext.getStyleClass().add("InactiveSideTextAndFont");
+//                stocks.setStyle("-fx-background-color:  transparent");
+//                dashboard.setStyle("-fx-background-color: transparent");
+//                catalog.setStyle("-fx-background-color: transparent");
             } catch (IOException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -397,7 +513,6 @@ public class MainAppController implements Initializable {
             Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 
     @FXML
     private void stocksActivityReport(ActionEvent event) {
@@ -593,8 +708,7 @@ public class MainAppController implements Initializable {
         //stage.resizableProperty().setValue(false);
         stage.show();
     }
-    
-    
+
     @FXML
     private void refundPolicyView(ActionEvent event) throws IOException {
         Stage stage = new Stage();

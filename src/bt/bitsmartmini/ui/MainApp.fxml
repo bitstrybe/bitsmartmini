@@ -25,7 +25,7 @@
          <children>
             <MenuBar prefHeight="50.0" prefWidth="800.0" style="-fx-background-color: transparent;" styleClass="menu-b" stylesheets="@style.css">
                <menus>
-                  <Menu fx:id="pharmabits" mnemonicParsing="false" text="BitsmartMini">
+                  <Menu fx:id="pharmabits" mnemonicParsing="false" text="Pharmabits">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#getbusiness" text="License" />
                     </items>
@@ -112,7 +112,7 @@
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../resources/addtocart.png" />
+                        <Image url="@../../resources/addtocart.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -129,13 +129,13 @@
       </StackPane>
    </top>
    <left>
-      <VBox id="sidebackground" fx:id="sidemenu" alignment="TOP_CENTER" prefHeight="650.0" prefWidth="150.0" spacing="5.0" style="-fx-background-color: #ccccff;" stylesheets="@style.css" BorderPane.alignment="TOP_CENTER">
+      <VBox id="sidebackground" fx:id="sidemenu" alignment="TOP_CENTER" prefHeight="650.0" prefWidth="150.0" spacing="5.0" stylesheets="@style.css" BorderPane.alignment="TOP_CENTER">
          <children>
             <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="79.0" prefWidth="109.0" spacing="5.0">
                <children>
-                  <Label opacity="0.78" prefHeight="28.0" prefWidth="95.0" text="BitsmartMini" textFill="WHITE">
+                  <Label prefHeight="28.0" prefWidth="95.0" text="Pharmabits" textFill="WHITE">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="19.0" />
                      </font>
                   </Label>
                   <Label fx:id="user" alignment="CENTER" prefHeight="18.0" prefWidth="180.0" text="Label" textFill="WHITE">
@@ -153,8 +153,12 @@
                   <Insets bottom="30.0" top="30.0" />
                </VBox.margin>
             </VBox>
-            <Line endX="122.29289245605469" endY="7.748603820800781E-7" opacity="0.45" stroke="#3f3f3f" styleClass="sidebar-line" />
-            <VBox fx:id="dashboard" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="150.0" spacing="5.0">
+            <HBox>
+               <children>
+                  <Line endX="148.2928924560547" endY="-1.1587142944335938E-4" opacity="0.45" stroke="#3f3f3f" styleClass="sidebar-line" />
+               </children>
+            </HBox>
+            <VBox fx:id="dashboard" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="150.0" spacing="5.0" styleClass="hoverVbox">
                <children>
                   <FontAwesomeIcon fx:id="dashawesome" fill="#dddee0" glyphName="BAR_CHART" size="2.5em" wrappingWidth="39.62142753601074" />
                   <Text fx:id="dashtext" fill="#dddee0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard" textAlignment="CENTER" wrappingWidth="126.08100128173828" />
@@ -163,8 +167,7 @@
                   <Insets />
                </VBox.margin>
             </VBox>
-            <HBox />
-            <VBox fx:id="catalog" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="150.0" spacing="5.0">
+            <VBox fx:id="catalog" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="150.0" spacing="5.0" styleClass="hoverVbox">
                <children>
                   <FontAwesomeIcon fx:id="catalogawesome" fill="#dddee0" glyphName="LEANPUB" size="2.5em" wrappingWidth="39.62142753601074" />
                   <Text fx:id="catalogtext" fill="#dddee0" strokeType="OUTSIDE" strokeWidth="0.0" text="Catalog" textAlignment="CENTER" wrappingWidth="51.580078125" />
@@ -173,7 +176,7 @@
                   <Insets />
                </VBox.margin>
             </VBox>
-            <VBox fx:id="sales" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="150.0" spacing="5.0">
+            <VBox fx:id="sales" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="150.0" spacing="5.0" styleClass="hoverVbox">
                <children>
                   <FontAwesomeIcon fx:id="salesawesome" fill="#dddee0" glyphName="ALIGN_LEFT" size="2.5em" wrappingWidth="39.62142753601074" />
                   <Text fx:id="salestext" fill="#dddee0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sales" textAlignment="CENTER" wrappingWidth="44.35107421875" />
@@ -182,7 +185,7 @@
                   <Insets />
                </VBox.margin>
             </VBox>
-            <VBox fx:id="stocks" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="150.0" spacing="5.0">
+            <VBox fx:id="stocks" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="150.0" spacing="5.0" styleClass="hoverVbox">
                <children>
                   <FontAwesomeIcon fx:id="stockawesome" fill="#dddee0" glyphName="CUBE" size="2.5em" wrappingWidth="39.62142753601074" />
                   <Text fx:id="stocktext" fill="#dddee0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stocks" textAlignment="CENTER" wrappingWidth="44.35107421875" />
@@ -191,11 +194,10 @@
                   <Insets />
                </VBox.margin>
             </VBox>
-            <VBox layoutX="10.0" layoutY="273.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="0.0" prefWidth="150.0" />
-            <VBox fx:id="backup" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="150.0">
+            <VBox fx:id="backup" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="150.0" styleClass="hoverVbox">
                <children>
-                  <FontAwesomeIcon fill="#dddee0" glyphName="SAVE" size="2.5em" wrappingWidth="39.62142753601074" />
-                  <Text fill="#dddee0" strokeType="OUTSIDE" strokeWidth="0.0" text="Backup" textAlignment="CENTER" wrappingWidth="54.1962890625" />
+                  <FontAwesomeIcon fx:id="backupawesome" fill="#dddee0" glyphName="SAVE" size="2.5em" wrappingWidth="39.62142753601074" />
+                  <Text fx:id="backuptext" fill="#dddee0" strokeType="OUTSIDE" strokeWidth="0.0" text="Backup" textAlignment="CENTER" wrappingWidth="54.1962890625" />
                </children>
                <VBox.margin>
                   <Insets />
