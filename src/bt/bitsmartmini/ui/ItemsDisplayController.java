@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Rectangle;
 
 /**
  * FXML Controller class
@@ -28,7 +29,6 @@ public class ItemsDisplayController implements Initializable {
     public Label exp;
     @FXML
     public Button addtocart;
-    @FXML
     public ImageView outofstockshape;
     public Label outofstocklabel;
     public Label curr;
@@ -39,6 +39,8 @@ public class ItemsDisplayController implements Initializable {
     public Button adminstockout;
     @FXML
     public HBox catalogstaus;
+    @FXML
+    public HBox outofstockbackground;
 
     /**
      * Initializes the controller class.

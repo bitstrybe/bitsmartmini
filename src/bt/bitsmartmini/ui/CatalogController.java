@@ -92,14 +92,16 @@ public class CatalogController extends MainAppController implements Initializabl
                             if ("Supervisor".equals(LoginController.u.getRoles()) || "Administrator".equals(LoginController.u.getRoles())) {
                                 childController.catalogstaus.getChildren().add(childController.adminstockin);
                                 if (balance > 0) {
-                                    childController.outofstockshape.setVisible(false);
+                                    childController.outofstocklabel.setVisible(false);
+                                    childController.outofstockbackground.setVisible(false);
                                     childController.catalogstaus.getChildren().add(childController.adminstockout);
                                     childController.catalogstaus.getChildren().add(childController.addtocart);
                                 }
                             }
                             if ("Sales".equals(LoginController.u.getRoles())) {
                                 if (balance > 0) {
-                                    childController.outofstockshape.setVisible(false);
+                                    childController.outofstocklabel.setVisible(false);
+                                    childController.outofstockbackground.setVisible(false);
                                     childController.catalogstaus.getChildren().add(childController.addtocart);
                                 }
                             }
