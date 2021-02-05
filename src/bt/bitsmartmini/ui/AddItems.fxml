@@ -12,9 +12,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.LinearGradient?>
@@ -24,272 +22,233 @@
 
 <StackPane prefHeight="601.0" prefWidth="905.0" styleClass="popupbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.AddItemsController">
    <children>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="661.0" prefWidth="985.0" styleClass="form_border_color" stylesheets="@style.css">
-         <top>
-            <HBox prefHeight="70.0" prefWidth="361.0" BorderPane.alignment="CENTER">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+         <children>
+            <HBox prefHeight="70.0" prefWidth="361.0">
                <children>
-                  <Pane prefHeight="49.0" prefWidth="879.0" style="-fx-background-color: #eee;" stylesheets="@style.css" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Label layoutX="14.0" layoutY="25.0" text="CATALOG" textFill="#464444">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Label>
-                        <Button fx:id="closebtn" layoutX="940.0" layoutY="12.0" mnemonicParsing="false" onAction="#closefrom" styleClass="closeform">
-                           <graphic>
-                              <FontAwesomeIcon glyphName="CLOSE" />
-                           </graphic>
-                        </Button>
-                        <Line endX="856.0" layoutX="129.0" layoutY="157.0" startX="-130.0" />
-                     </children>
-                  </Pane>
+                  <Label text="CATALOG" textFill="#464444">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="closebtn" mnemonicParsing="false" onAction="#closefrom" styleClass="closeform">
+                     <graphic>
+                        <FontAwesomeIcon glyphName="CLOSE" />
+                     </graphic>
+                  </Button>
+                  <Line endX="856.0" startX="-130.0" />
                </children>
             </HBox>
-         </top>
-         <center>
-            <Pane fx:id="itemspane" prefHeight="529.0" prefWidth="983.0" styleClass="form_background" BorderPane.alignment="CENTER">
+            <HBox prefHeight="214.0" prefWidth="985.0">
                <children>
-                  <HBox layoutX="-1.0" layoutY="-5.0" prefHeight="214.0" prefWidth="985.0">
+                  <VBox prefHeight="222.0" prefWidth="328.3">
                      <children>
-                        <VBox prefHeight="222.0" prefWidth="328.3">
+                        <HBox prefHeight="17.0" prefWidth="245.0">
                            <children>
-                              <HBox prefHeight="17.0" prefWidth="245.0">
-                                 <children>
-                                    <Label text="Upload image">
-                                       <HBox.margin>
-                                          <Insets left="50.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="120.0" prefWidth="305.0">
-                                 <children>
-                                    <ImageView fx:id="itemimages" fitHeight="123.0" fitWidth="217.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../resources/DEFAULT.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Button fx:id="browse" mnemonicParsing="false" prefHeight="32.0" prefWidth="33.0">
-                                       <HBox.margin>
-                                          <Insets left="30.0" />
-                                       </HBox.margin>
-                                       <graphic>
-                                          <FontAwesomeIcon glyphName="FILE" />
-                                       </graphic>
-                                    </Button>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox prefHeight="30.0" prefWidth="312.0">
-                                 <VBox.margin>
-                                    <Insets top="5.0" />
-                                 </VBox.margin>
-                                 <children>
-                                    <JFXTextField fx:id="itmtextfield" labelFloat="true" opacity="0.93" prefHeight="30.0" prefWidth="324.0" promptText="Item Description *" styleClass="form_field">
-                                       <font>
-                                          <Font name="Open Sans" size="13.0" />
-                                       </font>
-                                       <focusColor>
-                                          <LinearGradient endX="1.0" endY="1.0">
-                                             <stops>
-                                                <Stop color="#0a8e90" />
-                                                <Stop color="#902121" offset="1.0" />
-                                             </stops>
-                                          </LinearGradient>
-                                       </focusColor>
-                                    </JFXTextField>
-                                 </children>
-                              </HBox>
+                              <Label text="Upload image">
+                                 <HBox.margin>
+                                    <Insets left="50.0" />
+                                 </HBox.margin>
+                              </Label>
                            </children>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                           <padding>
-                              <Insets right="10.0" top="5.0" />
-                           </padding>
-                        </VBox>
-                        <VBox alignment="TOP_CENTER" prefHeight="245.0" prefWidth="328.3" spacing="30.0">
-                           <children>
-                              <HBox>
-                                 <VBox.margin>
-                                    <Insets top="5.0" />
-                                 </VBox.margin>
-                                 <children>
-                                    <ComboBox fx:id="categorycombo" prefHeight="30.0" prefWidth="326.0" promptText="Form *" />
-                                 </children>
-                              </HBox>
-                              <HBox>
-                                 <VBox.margin>
-                                    <Insets top="5.0" />
-                                 </VBox.margin>
-                                 <children>
-                                    <ComboBox fx:id="manufacturercombo" prefHeight="30.0" prefWidth="324.0" promptText="Manufacturer *" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="29.0" prefWidth="300.0" spacing="4.0">
-                                 <children>
-                                    <ComboBox fx:id="uomcombo" prefHeight="29.0" prefWidth="296.0" promptText="Unit of Pricing *" HBox.hgrow="ALWAYS" />
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets top="5.0" />
-                                 </VBox.margin>
-                              </HBox>
-                           </children>
-                           <HBox.margin>
+                           <VBox.margin>
                               <Insets />
-                           </HBox.margin>
-                           <padding>
-                              <Insets left="10.0" right="10.0" top="15.0" />
-                           </padding>
-                        </VBox>
-                        <VBox layoutX="291.0" layoutY="10.0" prefHeight="241.0" prefWidth="328.3" spacing="30.0">
-                           <HBox.margin>
-                              <Insets right="20.0" />
-                           </HBox.margin>
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="123.0" prefWidth="270.0">
                            <children>
-                              <HBox prefHeight="30.0" prefWidth="300.0" spacing="5.0">
-                                 <children>
-                                    <JFXTextField fx:id="dose_val" labelFloat="true" opacity="0.93" prefHeight="29.0" prefWidth="58.0" promptText="value" styleClass="form_field">
-                                       <font>
-                                          <Font name="Open Sans" size="13.0" />
-                                       </font>
-                                       <focusColor>
-                                          <LinearGradient endX="1.0" endY="1.0">
-                                             <stops>
-                                                <Stop color="#0a8e90" />
-                                                <Stop color="#902121" offset="1.0" />
-                                             </stops>
-                                          </LinearGradient>
-                                       </focusColor>
-                                    </JFXTextField>
-                                    <ComboBox fx:id="dose" prefHeight="29.0" prefWidth="142.0" promptText="Dose/Strength *" />
-                                    <JFXTextField fx:id="vom_val" labelFloat="true" opacity="0.93" prefHeight="27.0" prefWidth="59.0" promptText="value" styleClass="form_field">
-                                       <font>
-                                          <Font name="Open Sans" size="13.0" />
-                                       </font>
-                                       <focusColor>
-                                          <LinearGradient endX="1.0" endY="1.0">
-                                             <stops>
-                                                <Stop color="#0a8e90" />
-                                                <Stop color="#902121" offset="1.0" />
-                                             </stops>
-                                          </LinearGradient>
-                                       </focusColor>
-                                    </JFXTextField>
-                                    <ComboBox fx:id="vom" prefHeight="29.0" prefWidth="110.0" promptText="Volume *" />
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets top="5.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox>
-                                 <VBox.margin>
-                                    <Insets top="5.0" />
-                                 </VBox.margin>
-                                 <children>
-                                    <JFXTextField fx:id="costtextfield" labelFloat="true" opacity="0.93" prefHeight="32.0" prefWidth="266.0" promptText="Cost Price *" styleClass="form_field">
-                                       <font>
-                                          <Font name="Open Sans" size="13.0" />
-                                       </font>
-                                       <focusColor>
-                                          <LinearGradient endX="1.0" endY="1.0">
-                                             <stops>
-                                                <Stop color="#0a8e90" />
-                                                <Stop color="#902121" offset="1.0" />
-                                             </stops>
-                                          </LinearGradient>
-                                       </focusColor>
-                                    </JFXTextField>
-                                    <JFXTextField fx:id="selltextfield" labelFloat="true" layoutX="10.0" layoutY="10.0" opacity="0.93" prefHeight="32.0" prefWidth="266.0" promptText="Sales Price *" styleClass="form_field">
-                                       <font>
-                                          <Font name="Open Sans" size="13.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets left="5.0" />
-                                       </HBox.margin>
-                                       <focusColor>
-                                          <LinearGradient endX="1.0" endY="1.0">
-                                             <stops>
-                                                <Stop color="#0a8e90" />
-                                                <Stop color="#902121" offset="1.0" />
-                                             </stops>
-                                          </LinearGradient>
-                                       </focusColor>
-                                    </JFXTextField>
-                                    <JFXTextField fx:id="roltextfield" labelFloat="true" layoutX="163.0" layoutY="10.0" opacity="0.93" prefHeight="32.0" prefWidth="266.0" promptText="Reorder level *" styleClass="form_field">
-                                       <font>
-                                          <Font name="Open Sans" size="13.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets left="5.0" />
-                                       </HBox.margin>
-                                       <focusColor>
-                                          <LinearGradient endX="1.0" endY="1.0">
-                                             <stops>
-                                                <Stop color="#0a8e90" />
-                                                <Stop color="#902121" offset="1.0" />
-                                             </stops>
-                                          </LinearGradient>
-                                       </focusColor>
-                                    </JFXTextField>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="47.0" prefWidth="286.0">
-                                 <children>
-                                    <JFXButton id="action-btn" onAction="#saveAction" prefHeight="30.0" prefWidth="110.0" stylesheets="@style.css" text="Save" textFill="#323232">
-                                       <HBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </HBox.margin>
-                                    </JFXButton>
-                                    <JFXButton contentDisplay="CENTER" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #cccccc;" text="Clear">
-                                       <HBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </HBox.margin>
-                                    </JFXButton>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </HBox>
+                              <ImageView fx:id="itemimages" fitHeight="123.0" fitWidth="217.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../resources/DEFAULT.png" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="browse" mnemonicParsing="false" prefHeight="32.0" prefWidth="33.0">
+                                 <HBox.margin>
+                                    <Insets left="30.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="FILE" />
+                                 </graphic>
+                              </Button>
                            </children>
-                           <padding>
-                              <Insets left="10.0" top="15.0" />
-                           </padding>
-                        </VBox>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="246.0">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                           <children>
+                              <JFXTextField fx:id="itmtextfield" labelFloat="true" opacity="0.93" prefHeight="30.0" prefWidth="278.0" promptText="Item Description *" styleClass="form_field">
+                                 <font>
+                                    <Font name="Open Sans" size="13.0" />
+                                 </font>
+                                 <focusColor>
+                                    <LinearGradient endX="1.0" endY="1.0">
+                                       <stops>
+                                          <Stop color="#0a8e90" />
+                                          <Stop color="#902121" offset="1.0" />
+                                       </stops>
+                                    </LinearGradient>
+                                 </focusColor>
+                              </JFXTextField>
+                           </children>
+                        </HBox>
                      </children>
-                  </HBox>
-                  <VBox layoutX="17.0" layoutY="209.0" prefHeight="300.0" prefWidth="950.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets right="10.0" top="5.0" />
+                     </padding>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="245.0" prefWidth="328.3" spacing="30.0">
                      <children>
-                        <JFXTextField fx:id="searchbtn" prefHeight="25.0" prefWidth="217.0" promptText="Search Item" />
-                        <TableView fx:id="itemtableview" prefHeight="270.0" prefWidth="950.0" styleClass="table-cell" stylesheets="@style.css">
-                           <columns>
-                              <TableColumn fx:id="itemimage" prefWidth="125.0" resizable="false" text="Image" />
-                              <TableColumn fx:id="itemname" prefWidth="257.0" text="Item Name" />
-                              <TableColumn fx:id="category" prefWidth="76.0" text="Forms" />
-                              <TableColumn fx:id="manufacturer" prefWidth="196.0" text="Manufacturer" />
-                              <TableColumn fx:id="uomtb" prefWidth="96.0" text="UOM" />
-                              <TableColumn fx:id="dose_value" prefWidth="79.0" text="Dose" />
-                              <TableColumn fx:id="vomtb" prefWidth="79.0" text="Volume" />
-                              <TableColumn fx:id="costpricetb" prefWidth="62.0" text="Cost Price" />
-                              <TableColumn fx:id="salespricetb" prefWidth="62.0" text="Sales Price" />
-                              <TableColumn fx:id="rol" prefWidth="62.0" text="ROL" />
-                              <TableColumn fx:id="action" prefWidth="55.0" resizable="false" text="Action" />
-                           </columns>
-                        </TableView>
+                        <HBox>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                           <children>
+                              <ComboBox fx:id="categorycombo" prefHeight="30.0" prefWidth="326.0" promptText="Category*" />
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                           <children>
+                              <ComboBox fx:id="manufacturercombo" prefHeight="30.0" prefWidth="324.0" promptText="Brands*" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="29.0" prefWidth="300.0" spacing="4.0">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </HBox>
                      </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="10.0" right="10.0" top="15.0" />
+                     </padding>
+                  </VBox>
+                  <VBox layoutX="291.0" layoutY="10.0" prefHeight="241.0" prefWidth="328.3" spacing="30.0">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                     <children>
+                        <HBox>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                           <children>
+                              <JFXTextField fx:id="costtextfield" labelFloat="true" opacity="0.93" prefHeight="32.0" prefWidth="266.0" promptText="Cost Price *" styleClass="form_field">
+                                 <font>
+                                    <Font name="Open Sans" size="13.0" />
+                                 </font>
+                                 <focusColor>
+                                    <LinearGradient endX="1.0" endY="1.0">
+                                       <stops>
+                                          <Stop color="#0a8e90" />
+                                          <Stop color="#902121" offset="1.0" />
+                                       </stops>
+                                    </LinearGradient>
+                                 </focusColor>
+                              </JFXTextField>
+                              <JFXTextField fx:id="selltextfield" labelFloat="true" layoutX="10.0" layoutY="10.0" opacity="0.93" prefHeight="32.0" prefWidth="266.0" promptText="Sales Price *" styleClass="form_field">
+                                 <font>
+                                    <Font name="Open Sans" size="13.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                                 <focusColor>
+                                    <LinearGradient endX="1.0" endY="1.0">
+                                       <stops>
+                                          <Stop color="#0a8e90" />
+                                          <Stop color="#902121" offset="1.0" />
+                                       </stops>
+                                    </LinearGradient>
+                                 </focusColor>
+                              </JFXTextField>
+                              <JFXTextField fx:id="roltextfield" labelFloat="true" layoutX="163.0" layoutY="10.0" opacity="0.93" prefHeight="32.0" prefWidth="266.0" promptText="Reorder level *" styleClass="form_field">
+                                 <font>
+                                    <Font name="Open Sans" size="13.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                                 <focusColor>
+                                    <LinearGradient endX="1.0" endY="1.0">
+                                       <stops>
+                                          <Stop color="#0a8e90" />
+                                          <Stop color="#902121" offset="1.0" />
+                                       </stops>
+                                    </LinearGradient>
+                                 </focusColor>
+                              </JFXTextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="47.0" prefWidth="286.0">
+                           <children>
+                              <JFXButton id="action-btn" onAction="#saveAction" prefHeight="30.0" prefWidth="110.0" stylesheets="@style.css" text="Save" textFill="#323232">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                              <JFXButton contentDisplay="CENTER" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #cccccc;" text="Clear">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" top="15.0" />
+                     </padding>
                   </VBox>
                </children>
-            </Pane>
-         </center>
-         <bottom>
-            <VBox prefHeight="50.0" styleClass="form_background">
+            </HBox>
+            <HBox>
+               <children>
+                  <JFXTextField fx:id="searchbtn" prefHeight="25.0" prefWidth="217.0" promptText="Search Item" />
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <TableView fx:id="itemtableview" prefHeight="270.0" prefWidth="950.0" styleClass="table-cell" stylesheets="@style.css">
+                     <columns>
+                        <TableColumn fx:id="itemimage" prefWidth="125.0" resizable="false" text="Image" />
+                        <TableColumn fx:id="itemname" prefWidth="257.0" text="Item Name" />
+                        <TableColumn fx:id="category" prefWidth="76.0" text="Forms" />
+                        <TableColumn fx:id="manufacturer" prefWidth="196.0" text="Manufacturer" />
+                        <TableColumn fx:id="uomtb" prefWidth="96.0" text="UOM" />
+                        <TableColumn fx:id="dose_value" prefWidth="79.0" text="Dose" />
+                        <TableColumn fx:id="vomtb" prefWidth="79.0" text="Volume" />
+                        <TableColumn fx:id="costpricetb" prefWidth="62.0" text="Cost Price" />
+                        <TableColumn fx:id="salespricetb" prefWidth="62.0" text="Sales Price" />
+                        <TableColumn fx:id="rol" prefWidth="62.0" text="ROL" />
+                        <TableColumn fx:id="action" prefWidth="55.0" resizable="false" text="Action" />
+                     </columns>
+                  </TableView>
+               </children>
+            </HBox>
+            <HBox>
                <children>
                   <Line endX="882.5" startX="-100.0" stroke="#bfbfbf" />
+               </children>
+            </HBox>
+            <HBox>
+               <VBox.margin>
+                  <Insets left="30.0" top="10.0" />
+               </VBox.margin>
+               <children>
                   <Label fx:id="displayinfo" prefHeight="26.0" prefWidth="266.0">
                      <graphic>
                         <StackPane>
@@ -303,13 +262,10 @@
                      <font>
                         <Font size="13.0" />
                      </font>
-                     <VBox.margin>
-                        <Insets left="30.0" top="10.0" />
-                     </VBox.margin>
                   </Label>
                </children>
-            </VBox>
-         </bottom>
-      </BorderPane>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </StackPane>
