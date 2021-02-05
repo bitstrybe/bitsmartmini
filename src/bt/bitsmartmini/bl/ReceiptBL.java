@@ -53,7 +53,7 @@ public class ReceiptBL extends DdsBL {
     }
 
     public List<Receipt> getReceiptsDateRange(Date startdate, Date enddate) {
-        TypedQuery q = em.createQuery("SELECT s FROM Receipt s WHERE s.dateR BETWEEN :date1 AND :date2", Receipt.class);
+        TypedQuery q = em.createQuery("SELECT s FROM Receipt s WHERE s.receiptDate BETWEEN :date1 AND :date2", Receipt.class);
         q.setParameter("date1", startdate);
         q.setParameter("date2", enddate);
         //q.setHint("org.hibernate.cacheMode", "IGNORE");
@@ -62,7 +62,7 @@ public class ReceiptBL extends DdsBL {
 
     public Double getTotalPaidbySalesCodeGrp(Integer salesid) {
         try {
-            TypedQuery<Double> q = em.createQuery("SELECT SUM(r.amountPaid) FROM Receipt r WHERE r.salesId.salesId = :salescode GROUP BY r.dateR", Double.class);
+            TypedQuery<Double> q = em.createQuery("SELECT SUM(r.amountPaid) FROM Receipt r WHERE r.salesId.salesId = :salescode GROUP BY r.receiptDate", Double.class);
             q.setParameter("salescode", salesid);
             return q.getSingleResult();
         } catch (Exception ex) {
@@ -112,7 +112,7 @@ public class ReceiptBL extends DdsBL {
 
     public double getDailySalesReceipt(Date today) {
         try {
-            TypedQuery<Double> q = em.createQuery("SELECT SUM(s.amountPaid) FROM Receipt s WHERE s.dateR = :edate", Double.class);
+            TypedQuery<Double> q = em.createQuery("SELECT SUM(s.amountPaid) FROM Receipt s WHERE s.receiptDate = :edate", Double.class);
             q.setParameter("edate", today);
             return q.getSingleResult();
 
@@ -135,7 +135,7 @@ public class ReceiptBL extends DdsBL {
 
     public double getDurationSalesReceipt(Date s, Date d) {
         try {
-            TypedQuery<Double> q = em.createQuery("SELECT SUM(s.amountPaid) FROM Receipt s WHERE s.dateR BETWEEN :s AND :d", Double.class);
+            TypedQuery<Double> q = em.createQuery("SELECT SUM(s.amountPaid) FROM Receipt s WHERE s.receiptDate BETWEEN :s AND :d", Double.class);
             q.setParameter("s", s);
             q.setParameter("d", d);
             return BigDecimal.valueOf(q.getSingleResult()).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
@@ -147,7 +147,7 @@ public class ReceiptBL extends DdsBL {
     
     public double getDailySalesDurationReceipt(Time s, Time d) {
         try {
-            TypedQuery<Double> q = em.createQuery("SELECT SUM(s.amountPaid) FROM Receipt s WHERE s.timeR BETWEEN :s AND :d", Double.class);
+            TypedQuery<Double> q = em.createQuery("SELECT SUM(s.amountPaid) FROM Receipt s WHERE s.receiptTime BETWEEN :s AND :d", Double.class);
             q.setParameter("s", s);
             q.setParameter("d", d);
             return BigDecimal.valueOf(q.getSingleResult()).setScale(2, RoundingMode.HALF_EVEN).doubleValue();

@@ -5,13 +5,15 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import bt.bitsmartmini.bl.ReceiptBL;
 import bt.bitsmartmini.entity.Receipt;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lxe.utility.date.DateUtil;
 
 /**
  *
  * @author scarface
  */
-public class SalesReceiptReportModel extends AbstractTableModel implements Runnable{
+public class SalesReceiptReportModel extends AbstractTableModel implements Runnable {
 
     private Object data[][];
     String[] colnames = {"0", "1", "2", "3", "4", "5", "6"};
@@ -22,25 +24,28 @@ public class SalesReceiptReportModel extends AbstractTableModel implements Runna
     public SalesReceiptReportModel(Date sd, Date ed) {
         s = new ReceiptBL().getReceiptsDateRange(sd, ed);
         convertListToReportData(s);
-        
-       // run();
+
+        // run();
     }
 
     private void convertListToReportData(List<Receipt> s) {
-        
-        data = new Object[s.size()][colnames.length];
-        for (int x = 0; x < s.size(); x++) {
-            // Rece sb = new SalesBL();
-            Receipt c = s.get(x);
-            //String receiptNo = String.valueOf(c.getReceiptId());
-            data[x][0] = String.format("%06d", c.getReceiptId());
+        try {
+            data = new Object[s.size()][colnames.length];
+            for (int x = 0; x < s.size(); x++) {
+                // Rece sb = new SalesBL();
+                Receipt c = s.get(x);
+                //String receiptNo = String.valueOf(c.getReceiptId());
+                data[x][0] = String.format("%06d", c.getReceiptId());
 //            String cus = new CustomerBL().getCustomerNamebyId(c.getCustomer().getCustomerId());
-            data[x][1] = DateUtil.format2(c.getReceiptDate());
-            data[x][2] = c.getPayMode();
-            data[x][3] = c.getAmountPaid();
+                data[x][1] = DateUtil.format2(c.getReceiptDate());
+                data[x][2] = c.getPayMode();
+                data[x][3] = c.getAmountPaid();
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(SalesReceiptReportModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Override
     public void run() {
         //convertListToReportData();

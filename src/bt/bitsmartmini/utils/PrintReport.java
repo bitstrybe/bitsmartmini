@@ -90,8 +90,6 @@ public class PrintReport extends JFrame {
 
     public void showSalesReceipteport(Date start, Date end) throws JRException, ClassNotFoundException, SQLException, IOException {
 
-        //String reportSrcFile = "data/Blank_A4.jrxml";
-        // First, compile jrxml file.
         InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/SalesReceiptReport.jasper");
         // Fields for report
         param = setBasiParam();

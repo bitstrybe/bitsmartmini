@@ -198,7 +198,7 @@ public class DashboardController implements Initializable {
                 new KeyFrame(Duration.seconds(0.5), e -> {
                     //DateTime today = new DateTime(System.currentTimeMillis());
                     DateTime dt = new DateTime().withYear(year).dayOfMonth().getDateTime();
-                    System.out.println("today: " + dt.toDate());
+                    //System.out.println("today: " + dt.toDate());
                     double val = rc.getDailySalesReceipt(dt.toDate());
                     dailysalesCurr.setText(MainAppController.B.getBCurrency());
                     if (val > 0) {

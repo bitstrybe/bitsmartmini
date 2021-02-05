@@ -116,7 +116,7 @@ public class SalesController implements Initializable {
     private TableColumn<SalesTableModel, String> actuals;
     @FXML
     private TableColumn<SalesTableModel, Boolean> action;
-    
+
     //SalesDetails Starts
     @FXML
     private TableView<SalesDetailsTableModel> salesdetailstable;
@@ -170,7 +170,6 @@ public class SalesController implements Initializable {
 
     ReceiptBL rb = new ReceiptBL();
     ReturnBL rn = new ReturnBL();
-    
 
     /**
      * Initializes the controller class.
@@ -335,22 +334,15 @@ public class SalesController implements Initializable {
                     //
                     @Override
                     public TableCell<SalesDetailsTableModel, Boolean> call(TableColumn<SalesDetailsTableModel, Boolean> personBooleanTableColumn) {
-//                        if (rt != null) {
                         return new AddReturnPolicy(true);
-//                        } else {
-//                            return new AddReturnPolicy(false);
-//                        }
                     }
                 });
                 ReceiptTable(t.getSalescode());
                 ReturnTable(t.getSalescode());
-
-                //mode.setCellValueFactory(cell -> cell.getValue().getPmodeProperty());
             } catch (Exception ex) {
                 Logger.getLogger(SalesController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-
     }
 
     public void ReceiptTable(int salescode) {
