@@ -159,9 +159,15 @@
     -fx-fill: #999999;
 }
 
+.dashboard-card{
+   -fx-pref-width:170px;
+   -fx-max-width:170px;
+   
+}
+
 .dashboard-label{
     -fx-font-family: 'Open Sans';
-    -fx-font-size: 34px;
+    -fx-font-size: 28px;
 }
 
 .sidebar-color{

@@ -43,13 +43,13 @@
             </HBox>
                 <HBox alignment="CENTER" prefHeight="175.0" prefWidth="1086.0" spacing="10.0">
                     <children>
-                  <FlowPane fx:id="dashboardcards" alignment="CENTER" columnHalignment="CENTER" hgap="10.0" vgap="20.0" HBox.hgrow="ALWAYS">
+                  <FlowPane fx:id="dashboardcards" alignment="CENTER" columnHalignment="CENTER" hgap="8.0" vgap="10.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <HBox fx:id="dailysalescard">
+                        <HBox fx:id="dailysalescard" styleClass="dashboard-card">
                            <children>
                                     <VBox alignment="CENTER" styleClass="dashbord-card-color" HBox.hgrow="ALWAYS">
                                         <children>
-                                            <HBox alignment="CENTER_RIGHT" prefHeight="6.0" prefWidth="183.0">
+                                            <HBox alignment="CENTER_RIGHT">
                                                 <children>
                                                     <Label fx:id="dailysalesCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE">
                                              <font>
@@ -61,24 +61,24 @@
                                           <Insets right="30.0" />
                                        </padding>
                                             </HBox>
-                                            <HBox alignment="CENTER" prefHeight="56.0" prefWidth="176.0">
+                                            <HBox alignment="CENTER">
                                                 <children>
                                                     <Text fx:id="dailysales" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                                         <font>
-                                                            <Font name="Open Sans" size="34.0" />
+                                                            <Font name="Open Sans" size="16.0" />
                                                         </font>
                                              <styleClass>
                                                 <String fx:value="dashboard-color" />
-                                                <String fx:value="dashboard-card-label" />
+                                                <String fx:value="dashboard-label" />
                                              </styleClass>
                                                     </Text>
                                                 </children>
                                             </HBox>
-                                            <VBox alignment="CENTER" cacheShape="false" prefHeight="25.0" prefWidth="197.0">
-                                                <children>
-                                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Today's Sales" textAlignment="CENTER" wrappingWidth="80.24267578125" VBox.vgrow="ALWAYS" />
-                                                </children>
-                                            </VBox>
+                                    <HBox VBox.vgrow="ALWAYS">
+                                       <children>
+                                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Today's Sales" textAlignment="CENTER" wrappingWidth="80.24267578125" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
                                         </children>
                                         <effect>
                                             <DropShadow color="#a8a7a7" height="10.0" radius="4.5" width="10.0" />
@@ -89,11 +89,11 @@
                                     </VBox>
                            </children>
                         </HBox>
-                        <HBox fx:id="weeklysalescard">
+                        <HBox fx:id="weeklysalescard" styleClass="dashboard-card">
                            <children>
                                     <VBox alignment="CENTER" styleClass="dashbord-card-color" HBox.hgrow="ALWAYS">
                                         <children>
-                                    <HBox alignment="CENTER_RIGHT" prefHeight="6.0" prefWidth="183.0">
+                                    <HBox alignment="CENTER_RIGHT">
                                        <children>
                                           <Label fx:id="weeklySalesCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE">
                                              <font>
@@ -105,11 +105,11 @@
                                           <Insets right="30.0" />
                                        </padding>
                                     </HBox>
-                                            <HBox alignment="CENTER" prefHeight="56.0" prefWidth="176.0" styleClass="dashboard-card-label">
+                                            <HBox alignment="CENTER" styleClass="dashboard-card-label">
                                                 <children>
                                                     <Text fx:id="weeklysales" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                                         <font>
-                                                            <Font size="36.0" />
+                                                            <Font name="Open Sans" size="16.0" />
                                                         </font>
                                              <styleClass>
                                                 <String fx:value="dashboard-color" />
@@ -118,11 +118,11 @@
                                                     </Text>
                                                 </children>
                                             </HBox>
-                                            <VBox alignment="CENTER" prefHeight="25.0" prefWidth="197.0">
-                                                <children>
-                                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Current Week Sales" textAlignment="CENTER" wrappingWidth="114.24267578125" VBox.vgrow="ALWAYS" />
-                                                </children>
-                                            </VBox>
+                                    <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                                       <children>
+                                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Current Week" textAlignment="CENTER" wrappingWidth="114.24267578125" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
                                         </children>
                                         <effect>
                                             <DropShadow color="#a8a7a7" height="10.0" radius="4.5" width="10.0" />
@@ -133,13 +133,13 @@
                                     </VBox>
                            </children>
                         </HBox>
-                        <HBox fx:id="monthlysalescard" alignment="CENTER">
+                        <HBox fx:id="monthlysalescard" alignment="CENTER" styleClass="dashboard-card">
                            <children>
                                     <VBox alignment="CENTER" styleClass="dashbord-card-color" HBox.hgrow="ALWAYS">
                                         <children>
-                                    <HBox alignment="CENTER_RIGHT" prefHeight="6.0" prefWidth="183.0">
+                                    <HBox alignment="CENTER_RIGHT">
                                        <children>
-                                          <Label fx:id="monthlySalesCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE">
+                                          <Label fx:id="monthlySalesCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -149,11 +149,11 @@
                                           <Insets right="30.0" />
                                        </padding>
                                     </HBox>
-                                            <HBox alignment="CENTER" prefHeight="56.0" prefWidth="176.0" styleClass="dashboard-card-label">
+                                            <HBox alignment="CENTER" styleClass="dashboard-card-label">
                                                 <children>
-                                                    <Text fx:id="monthlysales" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                                    <Text fx:id="monthlysales" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0" HBox.hgrow="ALWAYS">
                                                         <font>
-                                                            <Font size="36.0" />
+                                                            <Font name="Open Sans" size="16.0" />
                                                         </font>
                                              <styleClass>
                                                 <String fx:value="dashboard-color" />
@@ -162,11 +162,11 @@
                                                     </Text>
                                                 </children>
                                             </HBox>
-                                            <VBox alignment="CENTER" prefHeight="25.0" prefWidth="197.0">
-                                                <children>
-                                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="This Month Sales" textAlignment="CENTER" wrappingWidth="111.24267578125" VBox.vgrow="ALWAYS" />
-                                                </children>
-                                            </VBox>
+                                    <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                                       <children>
+                                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Current  Month" textAlignment="CENTER" wrappingWidth="111.24267578125" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
                                         </children>
                                         <effect>
                                             <DropShadow color="#a8a7a7" height="10.0" radius="4.5" width="10.0" />
@@ -177,11 +177,11 @@
                                     </VBox>
                            </children>
                         </HBox>
-                        <HBox fx:id="annualsalescard" alignment="CENTER">
+                        <HBox fx:id="annualsalescard" alignment="CENTER" styleClass="dashboard-card">
                            <children>
                                     <VBox alignment="CENTER" styleClass="dashbord-card-color" HBox.hgrow="ALWAYS">
                                         <children>
-                                    <HBox alignment="CENTER_RIGHT" prefHeight="6.0" prefWidth="183.0">
+                                    <HBox alignment="CENTER_RIGHT">
                                        <children>
                                           <Label fx:id="yearlySalesCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE">
                                              <font>
@@ -193,11 +193,11 @@
                                           <Insets right="30.0" />
                                        </padding>
                                     </HBox>
-                                            <HBox alignment="CENTER" prefHeight="56.0" prefWidth="176.0">
+                                            <HBox alignment="CENTER">
                                                 <children>
                                                     <Text fx:id="quaterlysales" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                                         <font>
-                                                            <Font size="36.0" />
+                                                            <Font name="Open Sans" size="16.0" />
                                                         </font>
                                              <styleClass>
                                                 <String fx:value="dashboard-color" />
@@ -206,11 +206,11 @@
                                                     </Text>
                                                 </children>
                                             </HBox>
-                                            <VBox alignment="CENTER" prefHeight="25.0" prefWidth="197.0">
-                                                <children>
-                                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Current Year Sales" textAlignment="CENTER" wrappingWidth="111.24267578125" VBox.vgrow="ALWAYS" />
-                                                </children>
-                                            </VBox>
+                                    <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                                       <children>
+                                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Current Year" textAlignment="CENTER" wrappingWidth="111.24267578125" />
+                                       </children>
+                                    </HBox>
                                         </children>
                                         <effect>
                                             <DropShadow color="#a8a7a7" height="10.0" radius="4.5" width="10.0" />
@@ -221,11 +221,11 @@
                                     </VBox>
                            </children>
                         </HBox>
-                        <HBox fx:id="refundscard" alignment="CENTER">
+                        <HBox fx:id="refundscard" alignment="CENTER" styleClass="dashboard-card">
                            <children>
                               <VBox alignment="CENTER" styleClass="dashbord-card-color" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <HBox alignment="CENTER_RIGHT" prefHeight="6.0" prefWidth="183.0">
+                                    <HBox alignment="CENTER_RIGHT">
                                        <children>
                                           <Label fx:id="refundsCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE">
                                              <font>
@@ -237,11 +237,11 @@
                                           <Insets right="30.0" />
                                        </padding>
                                     </HBox>
-                                    <HBox alignment="CENTER" prefHeight="56.0" prefWidth="176.0">
+                                    <HBox alignment="CENTER">
                                        <children>
                                           <Text fx:id="refunds" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                              <font>
-                                                <Font size="36.0" />
+                                                <Font name="Open Sans" size="16.0" />
                                              </font>
                                              <styleClass>
                                                 <String fx:value="dashboard-color" />
@@ -250,11 +250,11 @@
                                           </Text>
                                        </children>
                                     </HBox>
-                                    <VBox alignment="CENTER" prefHeight="25.0" prefWidth="197.0">
+                                    <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Today's Refunds" textAlignment="CENTER" wrappingWidth="104.24267578125" VBox.vgrow="ALWAYS" />
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Today's Refunds" textAlignment="CENTER" wrappingWidth="104.24267578125" />
                                        </children>
-                                    </VBox>
+                                    </HBox>
                                  </children>
                                  <effect>
                                     <DropShadow color="#a8a7a7" height="10.0" radius="4.5" width="10.0" />
@@ -265,11 +265,11 @@
                               </VBox>
                            </children>
                         </HBox>
-                        <HBox fx:id="creditscard" alignment="CENTER">
+                        <HBox fx:id="creditscard" alignment="CENTER" styleClass="dashboard-card">
                            <children>
                               <VBox alignment="CENTER" styleClass="dashbord-card-color" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <HBox alignment="CENTER_RIGHT" prefHeight="6.0" prefWidth="183.0">
+                                    <HBox alignment="CENTER_RIGHT">
                                        <children>
                                           <Label fx:id="CreditsCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE">
                                              <font>
@@ -281,11 +281,11 @@
                                           <Insets right="30.0" />
                                        </padding>
                                     </HBox>
-                                    <HBox alignment="CENTER" prefHeight="56.0" prefWidth="176.0">
+                                    <HBox alignment="CENTER">
                                        <children>
                                           <Text fx:id="credits" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                              <font>
-                                                <Font size="36.0" />
+                                                <Font name="Open Sans" size="16.0" />
                                              </font>
                                              <styleClass>
                                                 <String fx:value="dashboard-color" />
@@ -294,11 +294,11 @@
                                           </Text>
                                        </children>
                                     </HBox>
-                                    <VBox alignment="CENTER" prefHeight="25.0" prefWidth="197.0">
+                                    <HBox VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Today's Credits" textAlignment="CENTER" wrappingWidth="98.24267578125" VBox.vgrow="ALWAYS" />
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Today's Credits" textAlignment="CENTER" wrappingWidth="98.24267578125" />
                                        </children>
-                                    </VBox>
+                                    </HBox>
                                  </children>
                                  <effect>
                                     <DropShadow color="#a8a7a7" height="10.0" radius="4.5" width="10.0" />
@@ -309,11 +309,11 @@
                               </VBox>
                            </children>
                         </HBox>
-                        <HBox fx:id="actualsalescard" alignment="CENTER">
+                        <HBox fx:id="actualsalescard" alignment="CENTER" styleClass="dashboard-card">
                            <children>
                               <VBox alignment="CENTER" styleClass="dashbord-card-color" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <HBox alignment="CENTER_RIGHT" prefHeight="6.0" prefWidth="183.0">
+                                    <HBox alignment="CENTER_RIGHT">
                                        <children>
                                           <Label fx:id="actualsalesCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE">
                                              <font>
@@ -325,11 +325,11 @@
                                           <Insets right="30.0" />
                                        </padding>
                                     </HBox>
-                                    <HBox alignment="CENTER" prefHeight="56.0" prefWidth="176.0">
+                                    <HBox alignment="CENTER">
                                        <children>
                                           <Text fx:id="actualsales" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                              <font>
-                                                <Font size="36.0" />
+                                                <Font name="Open Sans" size="16.0" />
                                              </font>
                                              <styleClass>
                                                 <String fx:value="dashboard-color" />
@@ -338,11 +338,11 @@
                                           </Text>
                                        </children>
                                     </HBox>
-                                    <VBox alignment="CENTER" prefHeight="25.0" prefWidth="197.0">
+                                    <HBox VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Actual Sales" textAlignment="CENTER" wrappingWidth="80.24267578125" VBox.vgrow="ALWAYS" />
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Actual Sales" textAlignment="CENTER" wrappingWidth="80.24267578125" />
                                        </children>
-                                    </VBox>
+                                    </HBox>
                                  </children>
                                  <effect>
                                     <DropShadow color="#a8a7a7" height="10.0" radius="4.5" width="10.0" />
