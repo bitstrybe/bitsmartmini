@@ -9,6 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -21,17 +23,23 @@ public class ItemInfoController implements Initializable {
     @FXML
     private Button closebtn;
     @FXML
-    public ImageView itemimagename;
+    public ImageView itemsimage;
     @FXML
-    public Label iteminfoname;
+    public HBox outofstockbackground;
     @FXML
-    public Label iteminfouom;
+    public Label outofstocklabel;
     @FXML
-    public ImageView outofstockshape;
+    public Label itembcode;
     @FXML
-    public Label itemqty;
+    public Label medsname;
     @FXML
-    public Label itemccost;
+    public Label brand;
+    @FXML
+    public Text qty;
+    @FXML
+    public Label curr;
+    @FXML
+    public Label exp;
 
     /**
      * Initializes the controller class.

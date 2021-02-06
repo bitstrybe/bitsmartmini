@@ -1,6 +1,4 @@
-
 package bt.bitsmartmini.tablemodel;
-
 
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,8 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class StockTableModel {
 
-    
-     private SimpleStringProperty barcode;
+    private SimpleStringProperty barcode;
     private SimpleStringProperty items;
     private SimpleLongProperty stkinqty;
     private SimpleLongProperty stkoutqty;
@@ -22,14 +19,13 @@ public class StockTableModel {
     private SimpleStringProperty stkcostprice;
     private SimpleStringProperty stksalesprice;
     private SimpleStringProperty exprofit;
-    //private SimpleDoubleProperty acprofit;
-    
-//    private SimpleDoubleProperty nhisprice;
+    private SimpleStringProperty brand;
 
+//    private SimpleDoubleProperty nhisprice;
     public StockTableModel() {
     }
 
-    public StockTableModel(String barcode, String items, long stkinqty, long stkoutqty,long returns, long salesqty, long stkbal, String stkcostprice, String stksalesprice, String exp) {
+    public StockTableModel(String barcode, String items, long stkinqty, long stkoutqty, long returns, long salesqty, long stkbal, String stkcostprice, String stksalesprice, String exp) {
         this.barcode = new SimpleStringProperty(barcode);
         this.items = new SimpleStringProperty(items);
         this.stkinqty = new SimpleLongProperty(stkinqty);
@@ -44,7 +40,21 @@ public class StockTableModel {
 //        this.nhisprice = new SimpleDoubleProperty(nhisprice);
     }
 
-    
+    public StockTableModel(String barcode, String items, String brand, long stkinqty, long stkoutqty, long returns, long salesqty, long stkbal, String stkcostprice, String stksalesprice, String exp) {
+        this.barcode = new SimpleStringProperty(barcode);
+        this.items = new SimpleStringProperty(items);
+        this.stkinqty = new SimpleLongProperty(stkinqty);
+        this.stkoutqty = new SimpleLongProperty(stkoutqty);
+        this.returns = new SimpleLongProperty(returns);
+        this.salesqty = new SimpleLongProperty(salesqty);
+        this.stkbal = new SimpleLongProperty(stkbal);
+        this.stkcostprice = new SimpleStringProperty(stkcostprice);
+        this.stksalesprice = new SimpleStringProperty(stksalesprice);
+        this.exprofit = new SimpleStringProperty(exp);
+        this.brand = new SimpleStringProperty(brand);
+//        this.nhisprice = new SimpleDoubleProperty(nhisprice);
+    }
+
     public String getBarcode() {
         return barcode.get();
     }
@@ -67,6 +77,18 @@ public class StockTableModel {
 
     public void setItemsProperty(String items) {
         this.items = new SimpleStringProperty(items);
+    }
+
+    public String getBrand() {
+        return brand.get();
+    }
+
+    public SimpleStringProperty getBrandProperty() {
+        return brand;
+    }
+
+    public void setBrandProperty(String brand) {
+        this.brand = new SimpleStringProperty(brand);
     }
 
     public long getStockinQty() {
@@ -92,8 +114,8 @@ public class StockTableModel {
     public void setStockoutQtyProperty(long stkoutqty) {
         this.stkoutqty = new SimpleLongProperty(stkoutqty);
     }
-    
-     public long getReturnQty() {
+
+    public long getReturnQty() {
         return returns.get();
     }
 
@@ -152,7 +174,7 @@ public class StockTableModel {
     public void setStockSalesPriceProperty(String stksalesprice) {
         this.stksalesprice = new SimpleStringProperty(stksalesprice);
     }
-    
+
     public String getExprofit() {
         return exprofit.get();
     }

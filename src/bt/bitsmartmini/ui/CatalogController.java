@@ -77,7 +77,7 @@ public class CatalogController extends MainAppController implements Initializabl
                     if (p.length() > 0) {
                         list = new ItemsBL().searchAllItems(p);
                     } else {
-                        list = i.getItemsPerPage(8);
+                        list = i.getItemsPerPage(10);
                     }
                     ObservableList<Items> result = FXCollections.observableArrayList(list);
                     result.forEach((items) -> {

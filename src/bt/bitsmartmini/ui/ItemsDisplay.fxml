@@ -117,7 +117,7 @@
                   </Label>
                   <Label fx:id="exp" layoutX="17.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="118.0" text="Label" textFill="#fc0303">
                      <font>
-                        <Font name="Open Sans Semibold" size="16.0" />
+                        <Font name="Open Sans" size="16.0" />
                      </font>
                   </Label>
                   <HBox fx:id="catalogstaus" alignment="CENTER" prefHeight="33.0" prefWidth="67.0" spacing="5.0">

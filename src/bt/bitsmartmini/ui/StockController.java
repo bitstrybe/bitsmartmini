@@ -238,11 +238,10 @@ public class StockController implements Initializable {
             double profit = e.getSp() - e.getCp();
             double expprofit = profit * balance;
 
-            data.add(new StockTableModel(e.getUpc(), e.getItemDesc(), stockinqty, stockoutqty, returnqty, salesqty, balance, DecimalUtil.format2(e.getCp()), DecimalUtil.format2(e.getSp()), DecimalUtil.format2(expprofit)));
+            data.add(new StockTableModel(e.getUpc(), e.getItemDesc(), e.getBrand().getBrandName(), stockinqty, stockoutqty, returnqty, salesqty, balance, DecimalUtil.format2(e.getCp()), DecimalUtil.format2(e.getSp()), DecimalUtil.format2(expprofit)));
         });
         Callback<TableColumn<StockTableModel, String>, TableCell<StockTableModel, String>> cellFactory = (final TableColumn<StockTableModel, String> param) -> {
             final TableCell<StockTableModel, String> cell = new TableCell<StockTableModel, String>() {
-
                 @Override
                 public void updateItem(String item, boolean empty) {
                     StockinBL sk = new StockinBL();
@@ -271,21 +270,25 @@ public class StockController implements Initializable {
                                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ItemInfo.fxml"));
                                 Parent parent = (Parent) fxmlLoader.load();
                                 ItemInfoController childController = fxmlLoader.getController();
-                                long balance = sk.getStockBalance(person.getItems());
+                                Long balance = sk.getStockBalance(person.getBarcode());
                                 if (balance == 0) {
-                                    childController.outofstockshape.setVisible(true);
+                                    childController.outofstockbackground.setVisible(true);
                                 } else {
-                                    childController.outofstockshape.setVisible(false);
+                                    childController.outofstockbackground.setVisible(false);
                                 }
-                                Items i = ib.getImageItembyCode(person.getItems());
-                                childController.iteminfoname.setText(person.getItems());
-                                childController.itemqty.setText(balance + " " + " In Stock");
-                                childController.itemccost.setText(MainAppController.B.getBCurrency() + " " + DecimalUtil.format2(i.getSp()));
-                                Items its = new ItemsBL().getImageItembyCode(person.getItems());
+                                Items i = ib.getImageItembyCode(person.getBarcode());
+                                childController.itembcode.setText(person.getBarcode());
+                                childController.medsname.setText(person.getItems());
+                                childController.brand.setText(person.getBrand());
+                                childController.brand.setText(person.getItems());
+                                childController.qty.setText(balance.toString());
+                                childController.exp.setText(DecimalUtil.format2(i.getSp()));
+                                childController.curr.setText(MainAppController.B.getBCurrency());
+                                //Items its = new ItemsBL().getImageItembyCode(person.getItems());
                                 FileInputStream input;
-                                input = new FileInputStream(its.getItemImg());
+                                input = new FileInputStream(i.getItemImg());
                                 Image image = new Image(input);
-                                childController.itemimagename.setImage(image);
+                                childController.itemsimage.setImage(image);
                                 Scene scene = new Scene(parent);
                                 scene.setFill(Color.TRANSPARENT);
                                 stage.setMaximized(true);

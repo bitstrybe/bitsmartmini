@@ -5,63 +5,89 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="419.0" prefWidth="292.0" style="-fx-background-color: #00000044;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.ItemInfoController">
+<StackPane prefWidth="292.0" style="-fx-background-color: #00000044;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.ItemInfoController">
    <children>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="293.0" style="-fx-background-color: #FFFFFE;" styleClass="form_border_color" StackPane.alignment="CENTER">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #FFFFFE;" styleClass="form_border_color">
          <children>
-            <HBox prefHeight="49.0" prefWidth="421.0">
+            <HBox alignment="CENTER" layoutX="11.0" layoutY="302.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="291.0">
                <children>
-                  <Pane prefHeight="49.0" prefWidth="460.0" style="-fx-background-color: #eee;" stylesheets="@style.css" HBox.hgrow="ALWAYS">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="289.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label layoutX="14.0" layoutY="11.0" text="ITEM INFORMATION" textFill="#796e6e">
-                           <font>
-                              <Font name="Open Sans" size="15.0" />
-                           </font>
-                        </Label>
-                        <Button fx:id="closebtn" layoutX="255.0" layoutY="10.0" mnemonicParsing="false" onAction="#closefrom" styleClass="closeform">
+                        <Button fx:id="closebtn" mnemonicParsing="false" onAction="#closefrom" styleClass="closeform">
                            <graphic>
                               <FontAwesomeIcon glyphName="CLOSE" />
                            </graphic>
+                           <font>
+                              <Font size="12.0" />
+                           </font>
                         </Button>
                      </children>
-                  </Pane>
+                  </HBox>
                </children>
+               <padding>
+                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+               </padding>
             </HBox>
-            <StackPane prefHeight="177.0" prefWidth="245.0" VBox.vgrow="ALWAYS">
+            <StackPane>
                <children>
-                  <ImageView fx:id="itemimagename" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
-                  <Pane prefHeight="190.0" prefWidth="293.0" StackPane.alignment="CENTER">
+                  <ImageView fx:id="itemsimage" fitHeight="140.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
+                  <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <ImageView fx:id="outofstockshape" fitHeight="150.0" fitWidth="155.0" layoutX="72.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@soldout.png" />
-                           </image>
-                        </ImageView>
+                        <HBox fx:id="outofstockbackground" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.78" prefHeight="18.0" prefWidth="62.0" style="-fx-background-color: RED;" HBox.hgrow="NEVER">
+                           <children>
+                              <Label fx:id="outofstocklabel" text="out of stock" textFill="WHITE">
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="CLOSE" />
+                                 </graphic>
+                                 <font>
+                                    <Font name="Open Sans Bold" size="8.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
                      </children>
-                  </Pane>
+                  </HBox>
                </children>
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
             </StackPane>
-            <HBox alignment="CENTER" prefHeight="16.0" prefWidth="293.0" VBox.vgrow="ALWAYS">
+            <HBox alignment="CENTER" layoutX="11.0" layoutY="201.0" prefHeight="25.0" prefWidth="247.0">
+               <children>
+                  <Label fx:id="itembcode" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" prefHeight="22.0" prefWidth="227.0" style="-fx-border-color: #f5f0f0; -fx-border-width: 1;" text="Label" textAlignment="CENTER" textFill="#797878" wrapText="true" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Open Sans Bold" size="12.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="40.0" right="40.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="247.0" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
                <children>
-                  <Label fx:id="iteminfoname" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" prefHeight="52.0" prefWidth="273.0" text="Label" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                  <Label fx:id="medsname" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" prefHeight="51.0" prefWidth="235.0" text="Label" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
                      <font>
-                        <Font name="Open Sans Bold" size="14.0" />
+                        <Font name="Open Sans Bold" size="12.0" />
                      </font>
-                     <padding>
-                        <Insets bottom="5.0" top="5.0" />
-                     </padding>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
                   </Label>
                </children>
             </HBox>
@@ -70,7 +96,7 @@
                   <Insets />
                </VBox.margin>
                <children>
-                  <Label fx:id="iteminfouom" alignment="CENTER" prefHeight="15.0" prefWidth="229.0" text="Label" textFill="#838282" wrapText="true" HBox.hgrow="ALWAYS">
+                  <Label fx:id="brand" alignment="CENTER" prefHeight="15.0" prefWidth="229.0" text="Label" textFill="#838282" wrapText="true" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="Arial Bold" size="12.0" />
                      </font>
@@ -80,51 +106,47 @@
                   <Insets bottom="5.0" top="5.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
+            <TextFlow prefHeight="13.0" prefWidth="247.0" textAlignment="CENTER">
                <children>
-                  <Label fx:id="itemqty" text="Label" textFill="#828282" wrapText="true" HBox.hgrow="ALWAYS">
+                  <Text fx:id="qty" strokeType="OUTSIDE" strokeWidth="0.0" text=" CURR ">
                      <font>
-                        <Font name="Arial Bold" size="12.0" />
+                        <Font name="Open Sans" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#9e9c9c" strokeType="OUTSIDE" strokeWidth="0.0" text=" In Stock" wrappingWidth="70.22900390625">
+                     <font>
+                        <Font name="Open Sans" size="12.0" />
+                     </font>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="7.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </TextFlow>
+            <HBox>
+               <children>
+                  <Line endX="143.2928924560547" endY="0.2928932309150696" fill="#e1dcdc" opacity="0.13" startX="-100.0" stroke="#4a4848" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="291.0">
+               <children>
+                  <Label fx:id="curr" alignment="BOTTOM_CENTER" contentDisplay="CENTER" graphicTextGap="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.47" prefHeight="18.0" prefWidth="27.0" text="c" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Open Sans Light" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="exp" layoutX="17.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="242.0" text="Label" textFill="#fc0303" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Open Sans Semibold" size="16.0" />
                      </font>
                   </Label>
                </children>
-               <padding>
-                  <Insets bottom="10.0" top="5.0" />
-               </padding>
-            </HBox>
-            <HBox>
-               <children>
-                  <Line endX="191.2928924560547" fill="#e1dcdc" opacity="0.13" startX="-100.0" stroke="#4a4848" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="28.0" prefWidth="245.0" spacing="60.0">
-               <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="242.0" spacing="1.0" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Label fx:id="itemccost" prefHeight="21.0" prefWidth="163.0" text="Label" textFill="#fc0303" HBox.hgrow="ALWAYS">
-                           <font>
-                              <Font name="Open Sans Light" size="15.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" top="5.0" />
-                     </padding>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="30.0" prefWidth="17.0" />
-               </children>
-               <padding>
-                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-               </padding>
                <VBox.margin>
-                  <Insets />
+                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                </VBox.margin>
+               <padding>
+                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+               </padding>
             </HBox>
          </children>
          <effect>
