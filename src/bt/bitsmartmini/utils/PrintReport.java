@@ -25,6 +25,8 @@ import bt.bitsmartmini.reportmodel.StockReorderReportModel;
 import bt.bitsmartmini.reportmodel.StockReportModel;
 import bt.bitsmartmini.ui.LoginController;
 import bt.bitsmartmini.ui.MainAppController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lxe.utility.date.DateUtil;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -89,29 +91,34 @@ public class PrintReport extends JFrame {
     }
 
     public void showSalesReceipteport(Date start, Date end) throws JRException, ClassNotFoundException, SQLException, IOException {
-
-        InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/SalesReceiptReport.jasper");
-        // Fields for report
-        param = setBasiParam();
-        BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/bt/resources/logo.png"));
-        param.put("LOGO", image);
-        param.put("SD", DateUtil.format3(start));
-        param.put("ED", DateUtil.format3(end));
-        SalesReceiptReportModel sm = new SalesReceiptReportModel(start, end);
-        //sm.sd = start;
-        //sm.ed = end;
-        //Thread t = new Thread(sm);
-        //t.start();
-        JRTableModelDataSource jrtmds = new JRTableModelDataSource(sm);
-        JasperPrint print = JasperFillManager.fillReport(inputStream, param, jrtmds);
-        JRViewer viewer = new JRViewer(print);
-        viewer.setOpaque(true);
-        viewer.setVisible(true);
+        
+        try {
+            InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/SalesReceiptReport.jasper");
+            // Fields for report
+            param = setBasiParam();
+            BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/bt/resources/logo.png"));
+            param.put("LOGO", image);
+            param.put("SD", DateUtil.format3(start));
+            param.put("ED", DateUtil.format3(end));
+            SalesReceiptReportModel sm = new SalesReceiptReportModel(start, end);
+            //sm.sd = start;
+            //sm.ed = end;
+            //Thread t = new Thread(sm);
+            //t.start();
+            JRTableModelDataSource jrtmds = new JRTableModelDataSource(sm);
+            JasperPrint print = JasperFillManager.fillReport(inputStream, param, jrtmds);
+            JRViewer viewer = new JRViewer(print);
+            viewer.setOpaque(true);
+            viewer.setVisible(true);
 //        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-        this.add(viewer);
-        this.setSize(dim);
-        this.setVisible(true);
-        //System.out.print("Done!");
+            this.add(viewer);
+            this.setSize(dim);
+            this.setVisible(true);
+//            System.out.print("Done!");
+        } catch (Exception ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
 
     }
 

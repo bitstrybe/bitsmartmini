@@ -11,8 +11,8 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class StockTableModel {
 
-//    private Integer stockinId;
-    private SimpleStringProperty itemcode;
+    
+     private SimpleStringProperty barcode;
     private SimpleStringProperty items;
     private SimpleLongProperty stkinqty;
     private SimpleLongProperty stkoutqty;
@@ -29,8 +29,8 @@ public class StockTableModel {
     public StockTableModel() {
     }
 
-    public StockTableModel( String code, String items, long stkinqty, long stkoutqty,long returns, long salesqty, long stkbal, String stkcostprice, String stksalesprice, String exp) {
-        this.itemcode = new SimpleStringProperty(code);
+    public StockTableModel(String barcode, String items, long stkinqty, long stkoutqty,long returns, long salesqty, long stkbal, String stkcostprice, String stksalesprice, String exp) {
+        this.barcode = new SimpleStringProperty(barcode);
         this.items = new SimpleStringProperty(items);
         this.stkinqty = new SimpleLongProperty(stkinqty);
         this.stkoutqty = new SimpleLongProperty(stkoutqty);
@@ -44,16 +44,17 @@ public class StockTableModel {
 //        this.nhisprice = new SimpleDoubleProperty(nhisprice);
     }
 
-    public String getItemCode() {
-        return itemcode.get();
+    
+    public String getBarcode() {
+        return barcode.get();
     }
 
-    public SimpleStringProperty getItemCodeProperty() {
-        return itemcode;
+    public SimpleStringProperty getBarcodeProperty() {
+        return barcode;
     }
 
-    public void setItemCodeProperty(String code) {
-        this.itemcode = new SimpleStringProperty(code);
+    public void setBarcodeProperty(String barcode) {
+        this.barcode = new SimpleStringProperty(barcode);
     }
 
     public String getItems() {
@@ -163,18 +164,4 @@ public class StockTableModel {
     public void setExprofitProperty(String exp) {
         this.exprofit = new SimpleStringProperty(exp);
     }
-    
-    
-//     public double getNhisPrice() {
-//        return nhisprice.get();
-//    }
-//
-//    public SimpleDoubleProperty getNhisPriceProperty() {
-//        return nhisprice;
-//    }
-//
-//    public void setNhisPriceProperty(double nhisprice) {
-//        this.nhisprice = new SimpleDoubleProperty(nhisprice);
-//    }
-
 }

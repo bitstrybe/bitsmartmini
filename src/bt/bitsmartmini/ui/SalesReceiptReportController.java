@@ -26,12 +26,12 @@ public class SalesReceiptReportController implements Initializable {
 
     @FXML
     private Button closebtn;
+    @FXML
     private DatePicker startdate;
+    @FXML
     private DatePicker enddate;
     @FXML
-    private Spinner<?> duration_val;
-    @FXML
-    private Button discountbtn1;
+    private Button discountbtn;
 
     /**
      * Initializes the controller class.
@@ -51,16 +51,18 @@ public class SalesReceiptReportController implements Initializable {
     @FXML
     private void salesReceiptReport(ActionEvent event) {
         try {
+            System.out.println("Start date" + Utilities.convertToDateViaSqlDate(startdate.getValue()));
+            System.out.println("Start date" + Utilities.convertToDateViaSqlDate(startdate.getValue()));
             new PrintReport().showSalesReceipteport(Utilities.convertToDateViaSqlDate(startdate.getValue()), Utilities.convertToDateViaSqlDate(enddate.getValue()));
         } catch (JRException ex) {
-            Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalesReceiptReportController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalesReceiptReportController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalesReceiptReportController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            Logger.getLogger(SalesReceiptReportController.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }
 
 }

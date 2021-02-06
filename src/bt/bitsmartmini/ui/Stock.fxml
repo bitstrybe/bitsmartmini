@@ -58,6 +58,7 @@
                <children>
                   <TableView fx:id="stock" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="1062.0" styleClass="table-cell" VBox.vgrow="NEVER">
                      <columns>
+                        <TableColumn fx:id="barcode" minWidth="0.0" prefWidth="200.0" resizable="false" styleClass="align_table_left" text="Barcode" />
                         <TableColumn fx:id="stkitem" minWidth="0.0" prefWidth="295.0" resizable="false" styleClass="align_table_left" text="Items Description" />
                         <TableColumn fx:id="stkinqty" prefWidth="202.0" resizable="false" styleClass="align-table" text="Stockin Qty" />
                         <TableColumn fx:id="stkoutqty" prefWidth="120.0" resizable="false" styleClass="align-table" text="Stockout Qty" />

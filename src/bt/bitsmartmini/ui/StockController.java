@@ -82,6 +82,8 @@ public class StockController implements Initializable {
     @FXML
     private TableView<StockTableModel> stock;
     @FXML
+    private TableColumn<StockTableModel, String> barcode;
+    @FXML
     private TableColumn<StockTableModel, String> stkitem;
     @FXML
     private TableColumn<StockTableModel, Number> stkinqty;
@@ -181,10 +183,10 @@ public class StockController implements Initializable {
 
         stock.addEventHandler(MouseEvent.MOUSE_CLICKED, v -> {
             list = stock.getSelectionModel().getSelectedItem();
-            StockinTableData(list.getItemCode());
-            StockoutTableData(list.getItemCode());
-            ReturnsTableData(list.getItemCode());
-            SalesTableData(list.getItemCode());
+            StockinTableData(list.getBarcode());
+            StockoutTableData(list.getBarcode());
+            ReturnsTableData(list.getBarcode());
+            SalesTableData(list.getBarcode());
         });
 
         if (LoginController.u.getRoles().equals("Administrator") || LoginController.u.getRoles().equals("Supervisor")) {
@@ -201,7 +203,7 @@ public class StockController implements Initializable {
 
     public void AllStockTableData(String p) {
         List<Items> stk;
-        if (p!= null && p.length() > 0) {
+        if (p != null && p.length() > 0) {
             stk = itembl.searchAllItems(p);
         } else {
             stk = new ItemsBL().getItemsPerPage(10);
@@ -214,26 +216,27 @@ public class StockController implements Initializable {
             long stockoutqty;
             long returnqty;
             try {
-                salesqty = salesbl.getSalesTotal(e.getItemDesc());
+                salesqty = salesbl.getSalesTotal(e.getUpc());
+                System.out.println("saletotal: " + salesqty);
             } catch (Exception ex) {
                 salesqty = 0;
             }
             try {
-                stockinqty = stkinbl.getStockInTotal(e.getItemDesc());
+                stockinqty = stkinbl.getStockInTotal(e.getUpc());
             } catch (Exception ex) {
                 stockinqty = 0;
             }
             try {
-                stockoutqty = stkobl.getTotalStockoutbyItemDesc(e.getItemDesc());
+                stockoutqty = stkobl.getTotalStockoutbyItemDesc(e.getUpc());
             } catch (NullPointerException ex) {
                 stockoutqty = 0;
             }
             try {
-                returnqty = retbl.getTotalReturnsbyItemDesc(e.getItemDesc());
+                returnqty = retbl.getTotalReturnsbyItemDesc(e.getUpc());
             } catch (NullPointerException ex) {
                 returnqty = 0;
             }
-            long balance = new StockinBL().getStockBalance(e.getItemDesc());
+            long balance = new StockinBL().getStockBalance(e.getUpc());
             double profit = e.getSp() - e.getCp();
             double expprofit = profit * balance;
 
@@ -303,24 +306,16 @@ public class StockController implements Initializable {
 
             return cell;
         };
-
+        barcode.setCellValueFactory(cell -> cell.getValue().getBarcodeProperty());
         stkitem.setCellFactory(cellFactory);
         stkinqty.setCellValueFactory(cell -> cell.getValue().getStockinQtyProperty());
-        stkinqty.getStyleClass().add("align_table_center");
         stkoutqty.setCellValueFactory(cell -> cell.getValue().getStockoutQtyProperty());
-        stkoutqty.getStyleClass().add("align_table_center");
         returnsqty.setCellValueFactory(cell -> cell.getValue().getReturnQtyProperty());
-        returnsqty.getStyleClass().add("align_table_center");
         salesqty.setCellValueFactory(cell -> cell.getValue().getSalesQtyProperty());
-        salesqty.getStyleClass().add("align_table_center");
         stkbal.setCellValueFactory(cell -> cell.getValue().getStockbalProperty());
-        stkbal.getStyleClass().add("align_table_center");
         cstprice.setCellValueFactory(cell -> cell.getValue().getStockCostPriceProperty());
-        cstprice.getStyleClass().add("align_table_right");
         salesprice.setCellValueFactory(cell -> cell.getValue().getStockSalesPriceProperty());
-        salesprice.getStyleClass().add("align_table_right");
         exp.setCellValueFactory(cell -> cell.getValue().getExprofitProperty());
-        exp.getStyleClass().add("align_table_right");
 
         stock.setItems(data);
 //        clientTable.getColumns().add(action);
@@ -328,12 +323,12 @@ public class StockController implements Initializable {
 
     }
 
-    public void StockinTableData(String itemDesc) {
+    public void StockinTableData(String upc) {
         List<Stockin> v;
-        if (itemDesc.length() > 0) {
-            v = new StockinBL().searchAllStockin(itemDesc);
+        if (upc.length() > 0) {
+            v = new StockinBL().searchAllStockin(upc);
         } else {
-            v = new StockinBL().getAllStockinBarcode(itemDesc, 10);
+            v = new StockinBL().getAllStockinBarcode(upc, 10);
         }
 
         stkindata = FXCollections.observableArrayList();
@@ -431,7 +426,12 @@ public class StockController implements Initializable {
         List<SalesDetails> s = salesbl.getAllSalesDetailsbyBarcode(itemsDesc, 10);
         salesdata = FXCollections.observableArrayList();
         s.forEach((sales) -> {
-            salesdata.add(new SalesDetailsTableModel(sales.getUpc().getUpc(), sales.getUpc().getItemDesc(), sales.getQuantity(), DecimalUtil.format2(sales.getSalesPrice()), sales.getRtdItem().getRtdQty(), DecimalUtil.format2(sales.getDiscount()),"0","0", Utilities.convertDateToString(sales.getEntryDate())));
+            try {
+                salesdata.add(new SalesDetailsTableModel(sales.getUpc().getUpc(), sales.getUpc().getItemDesc(), sales.getQuantity(), DecimalUtil.format2(sales.getSalesPrice()), sales.getRtdItem().getRtdQty(), DecimalUtil.format2(sales.getDiscount()), "0", "0", Utilities.convertDateToString(sales.getEntryDate())));
+            } catch (Exception ex) {
+                Logger.getLogger(StockController.class.getName()).log(Level.SEVERE, null, ex);
+
+            }
         });
         salesitemstb.setCellValueFactory(cell -> cell.getValue().getItemsnameProperty());
         salesqyttb.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
