@@ -363,7 +363,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                 </HBox>
-            <HBox alignment="TOP_CENTER" prefHeight="293.0" prefWidth="1086.0" spacing="10.0" VBox.vgrow="ALWAYS">
+            <HBox fx:id="chartbox" alignment="TOP_CENTER" prefHeight="293.0" prefWidth="1086.0" spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
                           <LineChart fx:id="linechartA" styleClass="chart-series-line" stylesheets="@style.css" title="Sales Analysis" HBox.hgrow="ALWAYS">
                               <xAxis>

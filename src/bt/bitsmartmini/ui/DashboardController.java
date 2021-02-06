@@ -67,7 +67,8 @@ public class DashboardController implements Initializable {
     private NumberAxis yAxis1;
     @FXML
     private CategoryAxis xAxis1;
-    private FlowPane chartbox;
+    @FXML
+    private HBox chartbox;
 
     int year = (Integer.parseInt(DateUtil.formatYY(new Date())));
     @FXML
