@@ -23,7 +23,7 @@
    <top>
       <VBox>
          <children>
-            <StackPane alignment="CENTER_RIGHT" style="-fx-background-color: #030b0e;">
+            <StackPane alignment="CENTER_RIGHT" style="-fx-background-color: #151515;">
                <children>
                   <MenuBar prefHeight="50.0" prefWidth="800.0" style="-fx-background-color: transparent;" styleClass="menu-b" stylesheets="@style.css">
                      <menus>
@@ -129,7 +129,7 @@
                   </Label>
                </children>
             </StackPane>
-            <HBox id="sidebackground" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="79.0" prefWidth="861.0">
+            <HBox id="rootPane" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="79.0" prefWidth="861.0">
                <children>
                   <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="79.0" prefWidth="258.0" spacing="1.0" HBox.hgrow="ALWAYS">
                      <children>

@@ -11,7 +11,7 @@
     -fx-background-size: cover;
 }
 #homebackground {
-    -fx-background-image:url(bitsmartappbackground.jpg);
+    -fx-background-image:url(home-background.jpg);
     -fx-background-size: cover;
 }
 .homebtn{
@@ -182,10 +182,10 @@
 
 #action-btn {
     -fx-background-color: #090a0c;
-        /*,
-        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
-        linear-gradient(#20262b, #191d22),
-        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));*/
+    /*,
+    linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+    linear-gradient(#20262b, #191d22),
+    radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));*/
     /*-fx-background-radius: 5,4,3,5;
     -fx-background-insets: 0,1,2,0;*/
     -fx-text-fill: white;
@@ -417,18 +417,18 @@ add-to-cart-btn{
 }
 
 .window-title-line{
-    
+
 }
 
 /*Flat button example */
 .jfx-button {
-     -jfx-button-type: FLAT;
+    -jfx-button-type: FLAT;
 }
 
 .jfx-checkout-button {
-     -jfx-button-type: RAISED;
-     -fx-background-color: #1faa00;
-     -fx-text-fill: white;
+    -jfx-button-type: RAISED;
+    -fx-background-color: #1faa00;
+    -fx-text-fill: white;
 }
 
 /*Raised button example 
@@ -456,9 +456,9 @@ add-to-cart-btn{
 }
 
 .sidebar-line{
-   -fx-stroke: #303030;
-   -fx-stroke-width:1px;
-   -fx-padding: 0;
+    -fx-stroke: #303030;
+    -fx-stroke-width:1px;
+    -fx-padding: 0;
 }
 
 .login-text-fill{
@@ -475,12 +475,18 @@ add-to-cart-btn{
     -fx-fill:#000000;
 }
 .InactiveSideTextAndFont{
-     -fx-fill: #F0F0F0;
+    -fx-fill: #F0F0F0;
 }
 
-VBox .hoverVbox:hover{
-    -fx-background-color: #cbd0d4;
+
+.hoverVboxActive{
+    -fx-background-color: #FFFFFF;
 }
-VBox .hoverVboxActive{
-    -fx-background-color: #cbd0d4;
+.vboxmenuicon{
+    -fx-fill: #FFFFFF;
+}
+
+.hoverVbox:hover .vboxmenuicon{
+    -fx-background-color: #FFFFFF;
+    -fx-fill: #000000;
 }

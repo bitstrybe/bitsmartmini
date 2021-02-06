@@ -39,7 +39,7 @@
             </HBox>
             <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="600.0" prefWidth="1085.0" style="-fx-background-color: transparent;">
                <content>
-                  <FlowPane fx:id="displaypane" columnHalignment="CENTER" prefHeight="611.0" prefWidth="1080.0" prefWrapLength="100.0">
+                  <FlowPane fx:id="displaypane" alignment="CENTER" columnHalignment="CENTER" prefHeight="611.0" prefWidth="1080.0" prefWrapLength="100.0">
                      <padding>
                         <Insets left="35.0" />
                      </padding>
