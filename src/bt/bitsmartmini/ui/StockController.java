@@ -152,8 +152,6 @@ public class StockController implements Initializable {
     private TableColumn<ReturnTableModel, String> returndatetb;
     @FXML
     private TableColumn<ReturnTableModel, Boolean> returnaction;
-//    private JFXTextField stockoutsearch;
-//    private JFXTextField returnsearch;
     @FXML
     private TableView<SalesDetailsTableModel> salestable;
     @FXML
@@ -361,32 +359,33 @@ public class StockController implements Initializable {
         List<Stockout> v;
         if (itemsDesc.length() > 0) {
             v = stkobl.searchAllStockout(itemsDesc);
-        } else {
-            v = stkobl.getAllStockoutbyBarcode(itemsDesc, 10);
+//        } else {
+//            v = stkobl.getAllStockoutbyBarcode(itemsDesc, 10);
+//        }
+            stkoutdata = FXCollections.observableArrayList();
+            v.forEach((out) -> {
+                List<Stockin> batchno = new StockinBL().getItemStockinByBarcode(out.getUpc().getUpc());
+                stkoutdata.add(new StockoutTableModel(out.getStockoutId(), out.getUpc().getItemDesc(), out.getQuantity(), out.getRemarks(), Utilities.convertDateToString(out.getStkDate())));
+            });
+            stkoutitems.setCellValueFactory(cell -> cell.getValue().getItemProperty());
+            stkoutqtytb.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
+            stkoutdate.setCellValueFactory(cell -> cell.getValue().getDateProperty());
+            stkoutaction.setSortable(false);
+            stockout.setItems(stkoutdata);
+            stockout.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+            stkoutaction.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<StockoutTableModel, Boolean>, ObservableValue<Boolean>>() {
+                @Override
+                public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<StockoutTableModel, Boolean> features) {
+                    return new SimpleBooleanProperty(features.getValue() != null);
+                }
+            });
+            stkoutaction.setCellFactory(new Callback<TableColumn<StockoutTableModel, Boolean>, TableCell<StockoutTableModel, Boolean>>() {
+                @Override
+                public TableCell<StockoutTableModel, Boolean> call(TableColumn<StockoutTableModel, Boolean> personBooleanTableColumn) {
+                    return new AddPersonCellStockout();
+                }
+            });
         }
-        stkoutdata = FXCollections.observableArrayList();
-        v.forEach((out) -> {
-            List<Stockin> batchno = new StockinBL().getItemStockinByBarcode(out.getUpc().getUpc());
-            stkoutdata.add(new StockoutTableModel(out.getStockoutId(), out.getUpc().getItemDesc(), out.getQuantity(), out.getRemarks(), Utilities.convertDateToString(out.getStkDate())));
-        });
-        stkoutitems.setCellValueFactory(cell -> cell.getValue().getItemProperty());
-        stkoutqtytb.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
-        stkoutdate.setCellValueFactory(cell -> cell.getValue().getDateProperty());
-        stkoutaction.setSortable(false);
-        stockout.setItems(stkoutdata);
-        stockout.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
-        stkoutaction.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<StockoutTableModel, Boolean>, ObservableValue<Boolean>>() {
-            @Override
-            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<StockoutTableModel, Boolean> features) {
-                return new SimpleBooleanProperty(features.getValue() != null);
-            }
-        });
-        stkoutaction.setCellFactory(new Callback<TableColumn<StockoutTableModel, Boolean>, TableCell<StockoutTableModel, Boolean>>() {
-            @Override
-            public TableCell<StockoutTableModel, Boolean> call(TableColumn<StockoutTableModel, Boolean> personBooleanTableColumn) {
-                return new AddPersonCellStockout();
-            }
-        });
 
     }
 
@@ -394,50 +393,53 @@ public class StockController implements Initializable {
         List<RtdItem> v;
         if (itemsDesc.length() > 0) {
             v = retbl.searchAllReturnItems(itemsDesc);
-        } else {
-            v = retbl.getAllRtdItembyBarcode(itemsDesc, 10);
+            //} else {
+            // v = retbl.getAllRtdItembyBarcode(itemsDesc, 10);
+            //}
+            returndata = FXCollections.observableArrayList();
+            v.forEach((out) -> {
+                double totalA = (out.getRtdQty() * out.getSalesDetails().getSalesPrice());
+                returndata.add(new ReturnTableModel(out.getSalesDetails().getSalesDetailsId(), out.getSalesDetails().getUpc().getItemDesc(), out.getRtdQty(), DecimalUtil.format2(out.getSalesDetails().getSalesPrice()), DecimalUtil.format2(totalA), out.getRemarks(), Utilities.convertDateToString(out.getRtdDate())));
+            });
+            returnitemstb.setCellValueFactory(cell -> cell.getValue().getItemProperty());
+            returnqtytb.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
+            returndatetb.setCellValueFactory(cell -> cell.getValue().getDateProperty());
+            returnaction.setSortable(false);
+            returnstable.setItems(returndata);
+            returnstable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+            returnaction.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ReturnTableModel, Boolean>, ObservableValue<Boolean>>() {
+                @Override
+                public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<ReturnTableModel, Boolean> features) {
+                    return new SimpleBooleanProperty(features.getValue() != null);
+                }
+            });
+            returnaction.setCellFactory(new Callback<TableColumn<ReturnTableModel, Boolean>, TableCell<ReturnTableModel, Boolean>>() {
+                @Override
+                public TableCell<ReturnTableModel, Boolean> call(TableColumn<ReturnTableModel, Boolean> personBooleanTableColumn) {
+                    return new AddPersonCellReturns();
+                }
+            });
         }
-        returndata = FXCollections.observableArrayList();
-        v.forEach((out) -> {
-            double totalA = (out.getRtdQty() * out.getSalesDetails().getSalesPrice());
-            returndata.add(new ReturnTableModel(out.getSalesDetails().getSalesDetailsId(), out.getSalesDetails().getUpc().getItemDesc(), out.getRtdQty(), DecimalUtil.format2(out.getSalesDetails().getSalesPrice()), DecimalUtil.format2(totalA), out.getRemarks(), Utilities.convertDateToString(out.getRtdDate())));
-        });
-        returnitemstb.setCellValueFactory(cell -> cell.getValue().getItemProperty());
-        returnqtytb.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
-        returndatetb.setCellValueFactory(cell -> cell.getValue().getDateProperty());
-        returnaction.setSortable(false);
-        returnstable.setItems(returndata);
-        returnstable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
-        returnaction.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ReturnTableModel, Boolean>, ObservableValue<Boolean>>() {
-            @Override
-            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<ReturnTableModel, Boolean> features) {
-                return new SimpleBooleanProperty(features.getValue() != null);
-            }
-        });
-        returnaction.setCellFactory(new Callback<TableColumn<ReturnTableModel, Boolean>, TableCell<ReturnTableModel, Boolean>>() {
-            @Override
-            public TableCell<ReturnTableModel, Boolean> call(TableColumn<ReturnTableModel, Boolean> personBooleanTableColumn) {
-                return new AddPersonCellReturns();
-            }
-        });
     }
 
     public void SalesTableData(String itemsDesc) {
-        List<SalesDetails> s = salesbl.getAllSalesDetailsbyBarcode(itemsDesc, 10);
-        salesdata = FXCollections.observableArrayList();
-        s.forEach((sales) -> {
-            try {
-                salesdata.add(new SalesDetailsTableModel(sales.getUpc().getUpc(), sales.getUpc().getItemDesc(), sales.getQuantity(), DecimalUtil.format2(sales.getSalesPrice()), sales.getRtdItem().getRtdQty(), DecimalUtil.format2(sales.getDiscount()), "0", "0", Utilities.convertDateToString(sales.getEntryDate())));
-            } catch (Exception ex) {
-                Logger.getLogger(StockController.class.getName()).log(Level.SEVERE, null, ex);
-
-            }
-        });
-        salesitemstb.setCellValueFactory(cell -> cell.getValue().getItemsnameProperty());
-        salesqyttb.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
-        salesdatetb.setCellValueFactory(cell -> cell.getValue().getDateProperty());
-        salestable.setItems(salesdata);
-        salestable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+        List<SalesDetails> s;
+        if (itemsDesc.length() > 0) {
+            s = salesbl.getAllSalesDetailsbyBarcode(itemsDesc, 10);
+            salesdata = FXCollections.observableArrayList();
+            s.forEach((sales) -> {
+                try {
+                    salesdata.add(new SalesDetailsTableModel(sales.getUpc().getUpc(), sales.getUpc().getItemDesc(), sales.getQuantity(), DecimalUtil.format2(sales.getSalesPrice()),  DecimalUtil.format2(sales.getDiscount()), Utilities.convertDateToString(sales.getEntryDate())));
+                } catch (Exception ex) {
+                    Logger.getLogger(StockController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+            salesitemstb.setCellValueFactory(cell -> cell.getValue().getItemsnameProperty());
+            salesqyttb.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
+            salesdatetb.setCellValueFactory(cell -> cell.getValue().getDateProperty());
+            salestable.setItems(salesdata);
+            salestable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+        }
     }
 
     @FXML

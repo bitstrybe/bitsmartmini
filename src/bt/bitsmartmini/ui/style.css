@@ -32,17 +32,22 @@
     -fx-background-color: #666666;
 }
 .addtocartbutton{
-    -fx-background-color: #ff3333;
+    -fx-background-color: #ffb5b5;
 }
 .addtocartbutton:hover{
-    -fx-background-color: #cccccc;
+    -fx-background-color: red;
+}
+
+.addtocartbutton:hover{
+    -fx-text-fill: #cc8f1e;
 }
 
 .addtocartbuttonReverse{
     -fx-background-color: #ffffff;
 }
+
 .addtocartbuttonReverse:hover{
-    -fx-background-color: #ccc;
+    -fx-fill: red;
 }
 
 
@@ -54,18 +59,10 @@
 }
 
 
-.table-row-cell .table-cell {
-    -fx-padding: 2 0 2 10; 
+*/.table-background{
     -fx-background-color: transparent;
-    -fx-border-color:  #cccccc -fx-table-cell-border-color  #cccccc  #cccccc;
-    -fx-border-width: 0.04333em; 
-    -fx-cell-size: 40px; 
-    -fx-text-fill: -fx-text-inner-color;
-    -fx-font-size: 14px;
-    -fx-background-color: #FFFFFF;
-    -fx-alignment: CENTER_LEFT;
 }
-*/
+
 
 
 .savebtn{

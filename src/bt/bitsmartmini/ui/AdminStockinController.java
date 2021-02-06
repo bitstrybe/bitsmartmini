@@ -78,6 +78,7 @@ public class AdminStockinController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        qnttextfield.setText("1");
 //        try {
 //            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ItemsDisplay.fxml"));
 //            Parent parent = (Parent) fxmlLoader.load();
@@ -120,7 +121,6 @@ public class AdminStockinController implements Initializable {
 //        salestextfield.clear();
 //        itemimage.setImage(null);
 //    }
-
     private void refreshView() {
         qnttextfield.setText("1");
         //itemimage.setImage(null);

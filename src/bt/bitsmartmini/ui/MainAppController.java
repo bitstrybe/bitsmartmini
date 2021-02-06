@@ -36,7 +36,7 @@ import bt.bitsmartmini.entity.Business;
 import bt.bitsmartmini.entity.Userlogs;
 import bt.bitsmartmini.tablemodel.SelectItemSaleTableModel;
 import bt.bitsmartmini.utils.PrintReport;
-import javafx.scene.Node;
+import javafx.stage.Modality;
 import net.sf.jasperreports.engine.JRException;
 
 /**
@@ -46,7 +46,6 @@ import net.sf.jasperreports.engine.JRException;
  */
 public class MainAppController implements Initializable {
 
-//    ObservableList<SelectItemSaleTableModel> data;
     @FXML
     private MenuButton mainmenu;
     @FXML
@@ -64,7 +63,6 @@ public class MainAppController implements Initializable {
     private Label user_role;
     @FXML
     private VBox backup;
-    @FXML
     private VBox sidemenu;
     @FXML
     private MenuItem reorderlevel;
@@ -138,8 +136,8 @@ public class MainAppController implements Initializable {
         if (!directory.exists()) {
             directory.mkdir();
         }
-        mainmenu.setText(LoginController.u.getFname() + " " + LoginController.u.getLname());
-        user.setText(LoginController.u.getUsername());
+        mainmenu.setText(LoginController.u.getUsername());
+        user.setText(LoginController.u.getFname() + " " + LoginController.u.getLname());
         user_role.setText(LoginController.u.getRoles());
         if (LoginController.u.getRoles().equals("Administrator") || LoginController.u.getRoles().equals("Supervisor")) {
             admintopmenu.setVisible(true);
@@ -154,11 +152,6 @@ public class MainAppController implements Initializable {
             cartnum.setVisible(true);
             pharmabits.setVisible(false);
         }
-//        if (LoginController.u.getRoles().equals("Administrator") || LoginController.u.getRoles().equals("Sales Supervisor")) {
-//           
-//        } else {
-//           
-//        }
 
         try {
             setScene("Dashboard.fxml");
@@ -221,22 +214,6 @@ public class MainAppController implements Initializable {
                 backupawesome.getStyleClass().add("InactiveSideTextAndFont");
                 backuptext.getStyleClass().add("InactiveSideTextAndFont");
 
-////                stocks.getStyleClass().add("hoverVbox");
-//                dashboard = new VBox();
-//                dashboard.getStyleClass().add("hoverActive");
-//                dashawesome.getStyleClass().clear();
-//                dashawesome.getStyleClass().add("ActiveSideTextAndFont");
-//                dashtext.getStyleClass().clear();
-//                dashtext.getStyleClass().add("ActiveSideTextAndFont");
-//                stockawesome.getStyleClass().add("InactiveSideTextAndFont");
-//                stocktext.getStyleClass().add("InactiveSideTextAndFont");
-//                catalogawesome.getStyleClass().add("InactiveSideTextAndFont");
-//                catalogtext.getStyleClass().add("InactiveSideTextAndFont");
-//                salesawesome.getStyleClass().add("InactiveSideTextAndFont");
-//                salestext.getStyleClass().add("InactiveSideTextAndFont");
-//                stocks.setStyle("-fx-background-color: transparent");
-//                sales.setStyle("-fx-background-color: transparent");
-//                catalog.setStyle("-fx-background-color: transparent");
             } catch (IOException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -266,20 +243,6 @@ public class MainAppController implements Initializable {
                 stockawesome.getStyleClass().add("ActiveSideTextAndFont");
                 stocktext.getStyleClass().clear();
                 stocktext.getStyleClass().add("ActiveSideTextAndFont");
-//                stocks.setStyle("-fx-background-color:#2e2e2e");
-//                stockawesome.getStyleClass().clear();
-//                stockawesome.getStyleClass().add("ActiveSideTextAndFont");
-//                stocktext.getStyleClass().clear();
-//                stocktext.getStyleClass().add("ActiveSideTextAndFont");
-//                dashawesome.getStyleClass().add("InactiveSideTextAndFont");
-//                dashtext.getStyleClass().add("InactiveSideTextAndFont");
-//                catalogawesome.getStyleClass().add("InactiveSideTextAndFont");
-//                catalogtext.getStyleClass().add("InactiveSideTextAndFont");
-//                salesawesome.getStyleClass().add("InactiveSideTextAndFont");
-//                salestext.getStyleClass().add("InactiveSideTextAndFont");
-////                sales.setStyle("-fx-background-color:  transparent");
-////                dashboard.setStyle("-fx-background-color: transparent");
-////                catalog.setStyle("-fx-background-color: transparent");
             } catch (IOException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -309,20 +272,6 @@ public class MainAppController implements Initializable {
                 stocks.getStyleClass().add("hoverVbox");
                 stockawesome.getStyleClass().add("InactiveSideTextAndFont");
                 stocktext.getStyleClass().add("InactiveSideTextAndFont");
-//                catalog.setStyle("-fx-background-color:#2e2e2e");
-//                catalogawesome.getStyleClass().clear();
-//                catalogawesome.getStyleClass().add("ActiveSideTextAndFont");
-//                catalogtext.getStyleClass().clear();
-//                catalogtext.getStyleClass().add("ActiveSideTextAndFont");
-//                dashawesome.getStyleClass().add("InactiveSideTextAndFont");
-//                dashtext.getStyleClass().add("InactiveSideTextAndFont");
-//                stockawesome.getStyleClass().add("InactiveSideTextAndFont");
-//                stocktext.getStyleClass().add("InactiveSideTextAndFont");
-//                salesawesome.getStyleClass().add("InactiveSideTextAndFont");
-//                salestext.getStyleClass().add("InactiveSideTextAndFont");
-//                stocks.setStyle("-fx-background-color:  transparent");
-//                dashboard.setStyle("-fx-background-color: transparent");
-//                sales.setStyle("-fx-background-color: transparent");
             } catch (IOException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -352,20 +301,6 @@ public class MainAppController implements Initializable {
                 stocks.getStyleClass().add("hoverVbox");
                 stockawesome.getStyleClass().add("InactiveSideTextAndFont");
                 stocktext.getStyleClass().add("InactiveSideTextAndFont");
-//                sales.setStyle("-fx-background-color:#2e2e2e");
-//                salesawesome.getStyleClass().clear();
-//                salesawesome.getStyleClass().add("ActiveSideTextAndFont");
-//                salestext.getStyleClass().clear();
-//                salestext.getStyleClass().add("ActiveSideTextAndFont");
-//                dashawesome.getStyleClass().add("InactiveSideTextAndFont");
-//                dashtext.getStyleClass().add("InactiveSideTextAndFont");
-//                stockawesome.getStyleClass().add("InactiveSideTextAndFont");
-//                stocktext.getStyleClass().add("InactiveSideTextAndFont");
-//                catalogawesome.getStyleClass().add("InactiveSideTextAndFont");
-//                catalogtext.getStyleClass().add("InactiveSideTextAndFont");
-//                stocks.setStyle("-fx-background-color:  transparent");
-//                dashboard.setStyle("-fx-background-color: transparent");
-//                catalog.setStyle("-fx-background-color: transparent");
             } catch (IOException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -390,23 +325,14 @@ public class MainAppController implements Initializable {
     }
 
     public void setLabelText(String text) {
-        //System.out.println("MainAppController.setLabelText(): Called");
         cartnum.setText(text);
     }
 
-//    public static void Connecting(MainAppController controller) {
-//        System.out.println("Connector.Connecting(): Called");
-//        controller.setLabelText(String.valueOf(cart.size()));
-//    }
-//    public static void setCartNum(String num) {
-//        cartnum.setText(num);
-//    }
     @FXML
     public void signOut() {
         LoginBL mtd = new LoginBL();
         Userlogs l = mtd.getLogById(LoginController.log.getLogsid());
         l.setLogoutDatetime(new Date(System.currentTimeMillis()));
-        //System.out.println(new Date(System.currentTimeMillis()));
         int result = mtd.updateData(l);
         if (result == 1) {
             try {
@@ -434,18 +360,11 @@ public class MainAppController implements Initializable {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddCategory.fxml"));
         Parent parent = (Parent) fxmlLoader.load();
-//        double width = screenSize.getWidth();
-////        double height = screenSize.getHeight();
         Scene scene = new Scene(parent);
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setMaximized(true);
-        //stage.initModality(Modality.APPLICATION_MODAL);
-//        stage.initOwner(parent.getScene().getWindow());
-//        stage.setScene(scene);
-//        stage.initStyle(StageStyle.UNDECORATED);
-//        stage.resizableProperty().setValue(false);
         stage.show();
     }
 
@@ -457,16 +376,11 @@ public class MainAppController implements Initializable {
         Scene scene = new Scene(parent);
         scene.setFill(Color.TRANSPARENT);
         stage.setMaximized(true);
-        //stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(parent.getScene().getWindow());
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
-        //stage.resizableProperty().setValue(false);
-        //stage.initModality(Modality.APPLICATION_MODAL);
-//        stage.initStyle(StageStyle.UNDECORATED);
-
         stage.show();
-
     }
 
     @FXML
@@ -477,13 +391,10 @@ public class MainAppController implements Initializable {
         Scene scene = new Scene(parent);
         scene.setFill(Color.TRANSPARENT);
         stage.setMaximized(true);
-        //stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(parent.getScene().getWindow());
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
-        //stage.initModality(Modality.APPLICATION_MODAL);
-//        stage.initStyle(StageStyle.UNDECORATED);
-        //stage.resizableProperty().setValue(false);
         stage.show();
     }
 
@@ -577,18 +488,11 @@ public class MainAppController implements Initializable {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Customer.fxml"));
         Parent parent = (Parent) fxmlLoader.load();
-//        double width = screenSize.getWidth();
-////        double height = screenSize.getHeight();
         Scene scene = new Scene(parent);
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setMaximized(true);
-        //stage.initModality(Modality.APPLICATION_MODAL);
-//        stage.initOwner(parent.getScene().getWindow());
-//        stage.setScene(scene);
-//        stage.initStyle(StageStyle.UNDECORATED);
-//        stage.resizableProperty().setValue(false);
         stage.show();
     }
 
@@ -612,18 +516,11 @@ public class MainAppController implements Initializable {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Users.fxml"));
         Parent parent = (Parent) fxmlLoader.load();
-//        double width = screenSize.getWidth();
-////        double height = screenSize.getHeight();
         Scene scene = new Scene(parent);
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setMaximized(true);
-        //stage.initModality(Modality.APPLICATION_MODAL);
-//        stage.initOwner(parent.getScene().getWindow());
-//        stage.setScene(scene);
-//        stage.initStyle(StageStyle.UNDECORATED);
-//        stage.resizableProperty().setValue(false);
         stage.show();
     }
 
@@ -638,18 +535,6 @@ public class MainAppController implements Initializable {
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setMaximized(true);
         stage.show();
-        // }
-//        try {
-//            new PrintReport().showSalesReceipteport(new Date(), new Date());
-//        } catch (JRException ex) {
-//            Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (IOException ex) {
-//            Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
     }
 
     private void debtorsByCustomerReport(ActionEvent event) {
@@ -708,13 +593,10 @@ public class MainAppController implements Initializable {
         Scene scene = new Scene(parent);
         scene.setFill(Color.TRANSPARENT);
         stage.setMaximized(true);
-        //stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(parent.getScene().getWindow());
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
-        //stage.initModality(Modality.APPLICATION_MODAL);
-//        stage.initStyle(StageStyle.UNDECORATED);
-        //stage.resizableProperty().setValue(false);
         stage.show();
     }
 

@@ -51,7 +51,6 @@ public class DashboardController implements Initializable {
     @FXML
     private Text quaterlysales;
     DecimalFormat df = new DecimalFormat("#,###.00");
-    @FXML
     private ListView<String> expirylist;
     //private LineChart<String, Number> linechart;
     @FXML
@@ -68,7 +67,6 @@ public class DashboardController implements Initializable {
     private NumberAxis yAxis1;
     @FXML
     private CategoryAxis xAxis1;
-    @FXML
     private FlowPane chartbox;
 
     int year = (Integer.parseInt(DateUtil.formatYY(new Date())));
@@ -173,25 +171,25 @@ public class DashboardController implements Initializable {
             );
             timeline.play();
         }
-        try {
-            getExiryList();
-        } catch (Exception ex) {
-            expirylist.getItems();
-        }
+//        try {
+//            getExiryList();
+//        } catch (Exception ex) {
+//            expirylist.getItems();
+//        }
         yearchoicbox.getSelectionModel().select(1);
     }
 
-    public void getExiryList() {
-        DateTime today = DateTime.now();
-        DateTime dt = new DateTime().plusMonths(1);
-        List<Stockin> list = sb.getTwoWeekToExpiry(today.toDate(), dt.toDate());
-        ObservableList<Stockin> result = FXCollections.observableArrayList(list);
-        expirylist.getItems().clear();
-        result.forEach((man) -> {
-            //String uom = man.getUpc().getVomDef() + "" + man.getItems().getVom();
-            expirylist.getItems().add(man.getUpc().getItemDesc()+ " " + man.getUpc().getCategory().getCategoryName()+ " " + man.getUpc().getBrand().getBrandName());
-        });
-    }
+//    public void getExiryList() {
+//        DateTime today = DateTime.now();
+//        DateTime dt = new DateTime().plusMonths(1);
+//        List<Stockin> list = sb.getTwoWeekToExpiry(today.toDate(), dt.toDate());
+//        ObservableList<Stockin> result = FXCollections.observableArrayList(list);
+//        expirylist.getItems().clear();
+//        result.forEach((man) -> {
+//            //String uom = man.getUpc().getVomDef() + "" + man.getItems().getVom();
+//            expirylist.getItems().add(man.getUpc().getItemDesc()+ " " + man.getUpc().getCategory().getCategoryName()+ " " + man.getUpc().getBrand().getBrandName());
+//        });
+//    }
 
     public void getDailySales(int year) {
         Timeline timeline = new Timeline(

@@ -33,28 +33,34 @@ public class AdminStockoutController implements Initializable {
 
     @FXML
     private Button closebtn;
-    @FXML
     public ImageView itemimage;
-    @FXML
     public Label itemname;
-    @FXML
     public Label uomitem;
-    @FXML
     private JFXTextField skoutqnttextfield;
-    @FXML
     private DatePicker skoutdate;
-    @FXML
     private JFXTextArea skoutremarks;
-    @FXML
     public JFXButton save;
-    @FXML
     public Label displayinfo;
-    @FXML
     public FontAwesomeIcon check;
-    @FXML
-    private FontAwesomeIcon duplicatelock;
-    @FXML
     public JFXSpinner spinner;
+    @FXML
+    public Label itembarcode;
+    @FXML
+    public Label itembrand;
+    @FXML
+    public Label itemqty;
+    @FXML
+    public Label itemsp;
+    @FXML
+    public JFXTextField qnttextfield;
+    @FXML
+    private Label displayinfo1;
+    @FXML
+    private FontAwesomeIcon check1;
+    @FXML
+    private FontAwesomeIcon duplicatelock1;
+    @FXML
+    private JFXSpinner spinner1;
 
     /**
      * Initializes the controller class.
@@ -82,7 +88,7 @@ public class AdminStockoutController implements Initializable {
     }
 
     private void closeTransition() {
-        displayinfo.setText("SUCCESSFULLY SAVED");
+        displayinfo.setText("Saved ");
         itemname.setText(null);
         spinner.setVisible(false);
         check.setVisible(true);
@@ -123,6 +129,14 @@ public class AdminStockoutController implements Initializable {
 
                 }
            
+    }
+
+    @FXML
+    private void minusqnty(ActionEvent event) {
+    }
+
+    @FXML
+    private void plusqnty(ActionEvent event) {
     }
     
     

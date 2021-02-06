@@ -18,7 +18,7 @@
 
 <StackPane prefHeight="354.0" prefWidth="510.0" styleClass="popupbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.AdminStockinController">
    <children>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="561.0" styleClass="form_background" StackPane.alignment="CENTER">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="561.0" styleClass="form_background" StackPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="560.0" styleClass="form_background" VBox.vgrow="ALWAYS">
                <children>
@@ -63,7 +63,7 @@
                   </VBox>
                </children>
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </HBox>
             <HBox alignment="CENTER" prefHeight="87.0" prefWidth="551.0">

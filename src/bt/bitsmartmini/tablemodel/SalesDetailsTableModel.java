@@ -26,6 +26,19 @@ public class SalesDetailsTableModel implements Serializable {
 
     public SalesDetailsTableModel() {
     }
+    
+    public SalesDetailsTableModel(String itemcode, String itemsname, Integer quantity, String itemsprice, String discount,String date) {
+        //this.salesDetailscode = new SimpleIntegerProperty(salesDetailscode);
+        this.itemscode = new SimpleStringProperty(itemcode);
+        this.itemsname = new SimpleStringProperty(itemsname);
+        this.quantity = new SimpleIntegerProperty(quantity);
+        //this.actuals = new SimpleStringProperty(actuals);
+        //this.refunds = new SimpleStringProperty(refunds);
+        this.itemsprice = new SimpleStringProperty(itemsprice);
+        //this.itemsrtd = new SimpleIntegerProperty(rtd);
+        this.discount = new SimpleStringProperty(discount);
+        this.date = new SimpleStringProperty(date);
+    }
 
     public SalesDetailsTableModel(String itemcode, String itemsname, Integer quantity, String itemsprice, Integer rtd, String discount, String refunds, String actuals, String date) {
         //this.salesDetailscode = new SimpleIntegerProperty(salesDetailscode);

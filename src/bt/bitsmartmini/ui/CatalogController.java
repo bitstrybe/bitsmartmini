@@ -105,7 +105,6 @@ public class CatalogController extends MainAppController implements Initializabl
                             childController.itembcode.setText(items.getUpc());
                             childController.medsname.setText(items.getItemDesc());
                             childController.brand.setText(items.getBrand().getBrandName());
-                            //childController.qty.setText(items.getBrand().getBrandName());
                             Long bal = sk.getStockBalance(items.getUpc());
                             childController.qty.setText(bal.toString());
                             double prices = items.getSp();
@@ -133,8 +132,8 @@ public class CatalogController extends MainAppController implements Initializabl
                                     childControllersk.itemname.setText(childController.medsname.getText());
                                     childControllersk.itembrand.setText(childController.brand.getText());
                                     long qty = st.getStockBalance(childController.itembcode.getText());
-                                    childControllersk.itemqty.setText(Long.valueOf(qty).toString() + " Remaining");
-                                    childControllersk.itemsp.setText(MainAppController.B.getBCurrency() + " " + childController.qty.getText());
+                                    childControllersk.itemqty.setText(Long.toString(qty) + " Remaining");
+                                    childControllersk.itemsp.setText(MainAppController.B.getBCurrency() + " " + childController.exp.getText());
                                     Items its = new ItemsBL().getImageItembyCode(childController.itembcode.getText());
                                     FileInputStream input;
                                     input = new FileInputStream(its.getItemImg());
@@ -161,9 +160,7 @@ public class CatalogController extends MainAppController implements Initializabl
                                         Thread d = new Thread(task);
                                         d.setDaemon(true);
                                         d.start();
-
                                     });
-
                                     Scene scene = new Scene(parentsk);
                                     stage.setMaximized(true);
                                     scene.setFill(Color.TRANSPARENT);
@@ -174,8 +171,6 @@ public class CatalogController extends MainAppController implements Initializabl
                                     Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             });
-
-                            //Catalog Administrator Stockout starts
                             childController.adminstockout.setOnAction(v -> {
                                 try {
                                     Stage stage = new Stage();
@@ -183,7 +178,13 @@ public class CatalogController extends MainAppController implements Initializabl
                                     Parent parentsk = (Parent) fxmlLoadersk.load();
                                     AdminStockoutController childControllersk = fxmlLoadersk.getController();
                                     childControllersk.itemname.setText(items.getItemDesc());
-                                    Items its = new ItemsBL().getImageItembyCode(items.getItemDesc());
+                                    childControllersk.itembarcode.setText(childController.itembcode.getText());
+                                    childControllersk.itemname.setText(childController.medsname.getText());
+                                    childControllersk.itembrand.setText(childController.brand.getText());
+                                    long qty = st.getStockBalance(childController.itembcode.getText());
+                                    childControllersk.itemqty.setText(Long.toString(qty) + " Remaining");
+                                    childControllersk.itemsp.setText(MainAppController.B.getBCurrency() + " " + childController.exp.getText());
+                                    Items its = new ItemsBL().getImageItembyCode(childController.itembcode.getText());
                                     FileInputStream input;
                                     input = new FileInputStream(its.getItemImg());
                                     Image imagesk = new Image(input);
@@ -210,7 +211,6 @@ public class CatalogController extends MainAppController implements Initializabl
                                         d.setDaemon(true);
                                         d.start();
                                     });
-
                                     Scene scene = new Scene(parentsk);
                                     stage.setMaximized(true);
                                     scene.setFill(Color.TRANSPARENT);
@@ -221,7 +221,6 @@ public class CatalogController extends MainAppController implements Initializabl
                                     Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             });
-
                             //Sales Add to cart starts
                             childController.addtocart.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                                 try {
@@ -266,7 +265,6 @@ public class CatalogController extends MainAppController implements Initializabl
                                     Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             });
-                            //Return Items starts
                         } catch (IOException ex) {
                             Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
                         }

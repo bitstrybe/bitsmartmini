@@ -14,9 +14,9 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<HBox prefHeight="341.0" prefWidth="256.0" spacing="1.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.ItemsDisplayController">
+<HBox alignment="CENTER" prefHeight="341.0" prefWidth="256.0" spacing="1.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.ItemsDisplayController">
    <children>
-      <VBox prefHeight="321.0" prefWidth="237.0" style="-fx-background-color: #FFFFFE;" styleClass="form_border_color">
+      <VBox alignment="CENTER" prefHeight="321.0" prefWidth="237.0" style="-fx-background-color: #FFFFFE;" styleClass="form_border_color">
          <children>
             <StackPane>
                <children>
@@ -44,7 +44,7 @@
             </StackPane>
             <HBox alignment="CENTER" layoutX="11.0" layoutY="201.0" prefHeight="25.0" prefWidth="247.0">
                <children>
-                  <Label fx:id="itembcode" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" prefHeight="22.0" prefWidth="227.0" style="-fx-border-color: #eee; -fx-border-width: 1;" text="Label" textAlignment="CENTER" textFill="#797878" wrapText="true" HBox.hgrow="ALWAYS">
+                  <Label fx:id="itembcode" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" prefHeight="22.0" prefWidth="227.0" style="-fx-border-color: #f5f0f0; -fx-border-width: 1;" text="Label" textAlignment="CENTER" textFill="#797878" wrapText="true" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="Open Sans Bold" size="12.0" />
                      </font>
@@ -91,13 +91,16 @@
                <children>
                   <Text fx:id="qty" strokeType="OUTSIDE" strokeWidth="0.0" text=" CURR ">
                      <font>
-                        <Font name="Open Sans" size="13.0" />
+                        <Font name="Open Sans" size="12.0" />
                      </font>
                   </Text>
-                  <Text fill="#9e9c9c" strokeType="OUTSIDE" strokeWidth="0.0" text=" Remaining" wrappingWidth="70.22900390625" />
+                  <Text fill="#9e9c9c" strokeType="OUTSIDE" strokeWidth="0.0" text=" In Stock" wrappingWidth="70.22900390625">
+                     <font>
+                        <Font name="Open Sans" size="12.0" />
+                     </font></Text>
                </children>
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  <Insets bottom="7.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </TextFlow>
             <HBox>
@@ -109,7 +112,7 @@
                <children>
                   <Label fx:id="curr" alignment="BOTTOM_CENTER" contentDisplay="CENTER" graphicTextGap="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.47" prefHeight="18.0" prefWidth="27.0" text="c" HBox.hgrow="ALWAYS">
                      <font>
-                        <Font name="Open Sans Semibold" size="12.0" />
+                        <Font name="Open Sans Light" size="12.0" />
                      </font>
                   </Label>
                   <Label fx:id="exp" layoutX="17.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="118.0" text="Label" textFill="#fc0303">
@@ -117,7 +120,7 @@
                         <Font name="Open Sans Semibold" size="16.0" />
                      </font>
                   </Label>
-                  <HBox fx:id="catalogstaus" alignment="CENTER" prefHeight="33.0" prefWidth="67.0" spacing="2.0">
+                  <HBox fx:id="catalogstaus" alignment="CENTER" prefHeight="33.0" prefWidth="67.0" spacing="5.0">
                      <children>
                         <Button fx:id="adminstockin" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="15.0" prefWidth="15.0" styleClass="addtocartbutton" HBox.hgrow="ALWAYS">
                            <graphic>
@@ -140,7 +143,7 @@
                         </Button>
                         <Button fx:id="addtocart" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="5.0" prefWidth="5.0" styleClass="addtocartbuttonReverse" HBox.hgrow="ALWAYS">
                            <graphic>
-                              <FontAwesomeIcon fill="RED" glyphName="CART_PLUS" size="1.5em" styleClass="addtocartbuttonReverse" />
+                              <FontAwesomeIcon fill="#ffb5b5" glyphName="CART_PLUS" size="1.5em" styleClass="addtocartbuttonReverse" />
                            </graphic>
                            <font>
                               <Font size="11.0" />
@@ -166,6 +169,6 @@
       </VBox>
    </children>
    <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
    </padding>
 </HBox>
