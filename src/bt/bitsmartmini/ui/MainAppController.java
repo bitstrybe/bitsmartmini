@@ -36,6 +36,7 @@ import bt.bitsmartmini.entity.Business;
 import bt.bitsmartmini.entity.Userlogs;
 import bt.bitsmartmini.tablemodel.SelectItemSaleTableModel;
 import bt.bitsmartmini.utils.PrintReport;
+import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import net.sf.jasperreports.engine.JRException;
 
@@ -63,7 +64,6 @@ public class MainAppController implements Initializable {
     private Label user_role;
     @FXML
     private VBox backup;
-    private VBox sidemenu;
     @FXML
     private MenuItem reorderlevel;
     @FXML
@@ -109,6 +109,8 @@ public class MainAppController implements Initializable {
     private FontAwesomeIcon backupawesome;
     @FXML
     private Text backuptext;
+    @FXML
+    private HBox topmenu;
 
     public void setScene(String scenechange) throws IOException {
         Parent root;
@@ -148,7 +150,7 @@ public class MainAppController implements Initializable {
         } else {
             admintopmenu.setVisible(false);
             cartmainbtn.setVisible(true);
-            sidemenu.getChildren().remove(stocks);
+            topmenu.getChildren().remove(stocks);
             cartnum.setVisible(true);
             pharmabits.setVisible(false);
         }
