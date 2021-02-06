@@ -478,15 +478,15 @@ add-to-cart-btn{
     -fx-fill: #F0F0F0;
 }
 
-
-.hoverVboxActive{
+VBox .hoverVbox:hover{
     -fx-background-color: #FFFFFF;
-}
-.vboxmenuicon{
-    -fx-fill: #FFFFFF;
-}
 
-.hoverVbox:hover .vboxmenuicon{
+}
+VBox .hoverVbox:hover .hovericons{
     -fx-background-color: #FFFFFF;
     -fx-fill: #000000;
+
+}
+VBox .hoverVboxActive{
+    -fx-background-color: #FFFFFF;
 }
