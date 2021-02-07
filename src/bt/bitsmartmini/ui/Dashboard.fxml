@@ -40,9 +40,9 @@
                     <children>
                   <FlowPane fx:id="dashboardcards" alignment="CENTER" columnHalignment="CENTER" hgap="8.0" vgap="10.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <HBox fx:id="dailysalescard" styleClass="dashboard-card">
+                        <HBox fx:id="dailysalescard" style="-fx-background-color: #1faa00;" styleClass="dashboard-card">
                            <children>
-                                    <VBox alignment="CENTER" styleClass="dashbord-card-color" HBox.hgrow="ALWAYS">
+                                    <VBox alignment="CENTER" styleClass="dashboard-card" HBox.hgrow="ALWAYS">
                                         <children>
                                             <HBox alignment="CENTER_RIGHT">
                                                 <children>
@@ -71,7 +71,10 @@
                                             </HBox>
                                     <HBox VBox.vgrow="ALWAYS">
                                        <children>
-                                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Today's Sales" textAlignment="CENTER" wrappingWidth="80.24267578125" HBox.hgrow="ALWAYS" />
+                                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Today's Sales" textAlignment="CENTER" wrappingWidth="80.24267578125" HBox.hgrow="ALWAYS">
+                                             <font>
+                                                <Font name="Open Sans" size="11.0" />
+                                             </font></Text>
                                        </children>
                                     </HBox>
                                         </children>
@@ -84,9 +87,9 @@
                                     </VBox>
                            </children>
                         </HBox>
-                        <HBox fx:id="weeklysalescard" styleClass="dashboard-card">
+                        <HBox fx:id="weeklysalescard" style="-fx-background-color: #ffd600;" styleClass="dashboard-card">
                            <children>
-                                    <VBox alignment="CENTER" styleClass="dashbord-card-color" HBox.hgrow="ALWAYS">
+                                    <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                                         <children>
                                     <HBox alignment="CENTER_RIGHT">
                                        <children>
@@ -113,9 +116,12 @@
                                                     </Text>
                                                 </children>
                                             </HBox>
-                                    <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                                    <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
                                        <children>
-                                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Current Week" textAlignment="CENTER" wrappingWidth="114.24267578125" HBox.hgrow="ALWAYS" />
+                                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Current Week" textAlignment="CENTER" wrappingWidth="114.24267578125" HBox.hgrow="ALWAYS">
+                                             <font>
+                                                <Font name="Open Sans" size="11.0" />
+                                             </font></Text>
                                        </children>
                                     </HBox>
                                         </children>
@@ -128,9 +134,9 @@
                                     </VBox>
                            </children>
                         </HBox>
-                        <HBox fx:id="monthlysalescard" alignment="CENTER" styleClass="dashboard-card">
+                        <HBox fx:id="monthlysalescard" alignment="CENTER" style="-fx-background-color: #90caf9;" styleClass="dashboard-card">
                            <children>
-                                    <VBox alignment="CENTER" styleClass="dashbord-card-color" HBox.hgrow="ALWAYS">
+                                    <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                                         <children>
                                     <HBox alignment="CENTER_RIGHT">
                                        <children>
@@ -157,9 +163,12 @@
                                                     </Text>
                                                 </children>
                                             </HBox>
-                                    <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                                    <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
                                        <children>
-                                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Current  Month" textAlignment="CENTER" wrappingWidth="111.24267578125" HBox.hgrow="ALWAYS" />
+                                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Current  Month" textAlignment="CENTER" wrappingWidth="111.24267578125" HBox.hgrow="ALWAYS">
+                                             <font>
+                                                <Font name="Open Sans" size="11.0" />
+                                             </font></Text>
                                        </children>
                                     </HBox>
                                         </children>
@@ -172,9 +181,9 @@
                                     </VBox>
                            </children>
                         </HBox>
-                        <HBox fx:id="annualsalescard" alignment="CENTER" styleClass="dashboard-card">
+                        <HBox fx:id="annualsalescard" alignment="CENTER" style="-fx-background-color: #f0f4c3;" styleClass="dashboard-card">
                            <children>
-                                    <VBox alignment="CENTER" styleClass="dashbord-card-color" HBox.hgrow="ALWAYS">
+                                    <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                                         <children>
                                     <HBox alignment="CENTER_RIGHT">
                                        <children>
@@ -201,9 +210,12 @@
                                                     </Text>
                                                 </children>
                                             </HBox>
-                                    <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                                    <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
                                        <children>
-                                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Current Year" textAlignment="CENTER" wrappingWidth="111.24267578125" />
+                                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Current Year" textAlignment="CENTER" wrappingWidth="111.24267578125">
+                                             <font>
+                                                <Font name="Open Sans" size="11.0" />
+                                             </font></Text>
                                        </children>
                                     </HBox>
                                         </children>
@@ -216,9 +228,9 @@
                                     </VBox>
                            </children>
                         </HBox>
-                        <HBox fx:id="refundscard" alignment="CENTER" styleClass="dashboard-card">
+                        <HBox fx:id="refundscard" alignment="CENTER" style="-fx-background-color: #e53935;" styleClass="dashboard-card">
                            <children>
-                              <VBox alignment="CENTER" styleClass="dashbord-card-color" HBox.hgrow="ALWAYS">
+                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                                  <children>
                                     <HBox alignment="CENTER_RIGHT">
                                        <children>
@@ -245,9 +257,12 @@
                                           </Text>
                                        </children>
                                     </HBox>
-                                    <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                                    <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Today's Refunds" textAlignment="CENTER" wrappingWidth="104.24267578125" />
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Today's Refunds" textAlignment="CENTER" wrappingWidth="104.24267578125">
+                                             <font>
+                                                <Font name="Open Sans" size="11.0" />
+                                             </font></Text>
                                        </children>
                                     </HBox>
                                  </children>
@@ -260,9 +275,9 @@
                               </VBox>
                            </children>
                         </HBox>
-                        <HBox fx:id="creditscard" alignment="CENTER" styleClass="dashboard-card">
+                        <HBox fx:id="creditscard" alignment="CENTER" style="-fx-background-color: #ce93d8;" styleClass="dashboard-card">
                            <children>
-                              <VBox alignment="CENTER" styleClass="dashbord-card-color" HBox.hgrow="ALWAYS">
+                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                                  <children>
                                     <HBox alignment="CENTER_RIGHT">
                                        <children>
@@ -291,7 +306,10 @@
                                     </HBox>
                                     <HBox VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Today's Credits" textAlignment="CENTER" wrappingWidth="98.24267578125" />
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Today's Credits" textAlignment="CENTER" wrappingWidth="98.24267578125">
+                                             <font>
+                                                <Font name="Open Sans" size="11.0" />
+                                             </font></Text>
                                        </children>
                                     </HBox>
                                  </children>

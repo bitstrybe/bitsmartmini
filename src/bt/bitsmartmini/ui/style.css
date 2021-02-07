@@ -155,8 +155,8 @@
     -fx-text-fill: #ffffff;
 }
 .dashboard-color{
-    -fx-text-fill: #999999;
-    -fx-fill: #999999;
+    -fx-text-fill: #000000;
+    -fx-fill: #000000;
 }
 
 .dashboard-card{
