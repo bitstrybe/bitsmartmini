@@ -219,7 +219,7 @@ public class AddItemsController implements Initializable {
                     itemimages.setSmooth(true);
                     itemimages.setCache(true);
                 } catch (IOException | IllegalArgumentException ex) {
-                    Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
+//                    Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });

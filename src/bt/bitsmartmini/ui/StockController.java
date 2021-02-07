@@ -333,7 +333,7 @@ public class StockController implements Initializable {
 
     public void StockinTableData(String upc) {
         List<Stockin> v;
-        if (upc.length() > 0) {
+        if (upc != null && upc.length() > 0) {
             v = new StockinBL().searchAllStockin(upc);
         } else {
             v = new StockinBL().getAllStockinBarcode(upc, 10);

@@ -18,24 +18,24 @@
    <content>
       <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="1086.0" spacing="10.0">
          <children>
-            <HBox alignment="CENTER" styleClass="window-title">
+            <HBox alignment="CENTER" prefHeight="82.0" prefWidth="1182.0" styleClass="window-title" VBox.vgrow="ALWAYS">
                <children>
-                  <JFXTextField fx:id="stocksearch" focusColor="#656568" labelFloat="true" prefHeight="34.0" prefWidth="798.0" promptText="Search Stock" unFocusColor="#b5b2b2">
+                  <JFXTextField fx:id="stocksearch" focusColor="#656568" labelFloat="true" prefHeight="34.0" prefWidth="940.0" promptText="Search Stock" unFocusColor="#b5b2b2">
                      <font>
                         <Font name="Open Sans" size="14.0" />
                      </font></JFXTextField>
-                  <ButtonBar prefHeight="34.0" prefWidth="153.0">
+                  <ButtonBar buttonMinWidth="0.0" prefHeight="62.0" prefWidth="131.0" HBox.hgrow="NEVER">
                      <buttons>
-                        <JFXButton id="action-btn" fx:id="stockoutbtn" buttonType="RAISED" minWidth="46.0" onAction="#addstockoutpopup" prefHeight="34.0" prefWidth="50.0" styleClass="alldefaultbtn">
+                        <JFXButton id="action-btn" fx:id="stockoutbtn" buttonType="RAISED" minWidth="36.0" onAction="#addstockoutpopup" prefHeight="48.0" prefWidth="50.0" styleClass="alldefaultbtn">
                            <graphic>
-                              <FontAwesomeIcon fill="#fcfcfc" glyphName="PLUS" />
+                              <FontAwesomeIcon fill="#fcfcfc" glyphName="PLUS" size="2.5em" />
                            </graphic></JFXButton>
-                        <JFXButton id="action-btn" fx:id="stockinbtn" buttonType="RAISED" minWidth="28.0" onAction="#addstockinpopup" prefHeight="34.0" prefWidth="110.0">
+                        <JFXButton id="action-btn" fx:id="stockinbtn" buttonType="RAISED" minWidth="28.0" onAction="#addstockinpopup" prefHeight="48.0" prefWidth="50.0">
                            <font>
                               <Font size="10.0" />
                            </font>
                            <graphic>
-                              <FontAwesomeIcon fill="WHITE" glyphName="MINUS" />
+                              <FontAwesomeIcon fill="WHITE" glyphName="MINUS" size="2.5em" />
                            </graphic>
                         </JFXButton>
                      </buttons>
