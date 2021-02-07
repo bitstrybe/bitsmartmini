@@ -36,6 +36,7 @@ import bt.bitsmartmini.entity.Business;
 import bt.bitsmartmini.entity.Userlogs;
 import bt.bitsmartmini.tablemodel.SelectItemSaleTableModel;
 import bt.bitsmartmini.utils.PrintReport;
+import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import net.sf.jasperreports.engine.JRException;
@@ -80,8 +81,7 @@ public class MainAppController implements Initializable {
     private Text catalogtext;
 
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    @FXML
-    public MenuItem addtocartbtn;
+    public Button addtocartbtn;
     @FXML
     private VBox catalog;
     @FXML
@@ -93,16 +93,11 @@ public class MainAppController implements Initializable {
 
     public static Business B;
 
-    @FXML
     public Label cartnum;
 
     public static Label static_label;
     @FXML
-    private MenuItem clearcart;
-    @FXML
     private BorderPane boarderpane;
-    @FXML
-    private MenuButton cartmainbtn;
     @FXML
     private Menu pharmabits;
     @FXML
@@ -145,13 +140,13 @@ public class MainAppController implements Initializable {
         user_role.setText(LoginController.u.getRoles());
         if (LoginController.u.getRoles().equals("Administrator") || LoginController.u.getRoles().equals("Supervisor")) {
             admintopmenu.setVisible(true);
-            cartmainbtn.setVisible(true);
+//            cartmainbtn.setVisible(true);
             stocks.setDisable(false);
             cartnum.setVisible(true);
             pharmabits.setVisible(true);
         } else {
             admintopmenu.setVisible(false);
-            cartmainbtn.setVisible(true);
+//            cartmainbtn.setVisible(true);
             topmenu.getChildren().remove(stocks);
             cartnum.setVisible(true);
             pharmabits.setVisible(false);
@@ -381,6 +376,10 @@ public class MainAppController implements Initializable {
                 Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+        
+        cartbox.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
+            addtoCartAction();
+        });
     }
 
     public void setLabelText(String text) {
@@ -541,7 +540,6 @@ public class MainAppController implements Initializable {
         stage.show();
     }
 
-    @FXML
     public void addtoCartAction() {
         try {
             setScene("ItemCart.fxml");
@@ -584,7 +582,6 @@ public class MainAppController implements Initializable {
         }
     }
 
-    @FXML
     public void clearAllCartItem() {
         cart.clear();
         static_label.setText(String.valueOf(cart.size()));

@@ -169,33 +169,21 @@
                         <Line opacity="0.45" startX="-4.3451786041259766E-5" startY="80.29289245605469" stroke="#3f3f3f" styleClass="sidebar-line" />
                      </children>
                   </VBox>
-                  <VBox fx:id="cartbox" alignment="CENTER">
+                  <VBox fx:id="cartbox" alignment="CENTER" prefHeight="79.0" prefWidth="56.0">
                      <children>
-                        <StackPane>
+                        <StackPane prefHeight="110.0" prefWidth="56.0">
                            <children>
-                              <MenuButton fx:id="cartmainbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="56.0" style="-fx-background-color: transparent;">
-                                <items>
-                                  <MenuItem fx:id="addtocartbtn" mnemonicParsing="false" onAction="#addtoCartAction" text="View Cart" />
-                                  <MenuItem fx:id="clearcart" mnemonicParsing="false" onAction="#clearAllCartItem" text="Clear Cart" />
-                                </items>
-                                 <graphic>
-                                    <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../resources/addtocart.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </MenuButton>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../resources/addtocart.png" />
+                                 </image>
+                              </ImageView>
                               <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
                                  <children>
-                                    <Label fx:id="cartnum" text="0">
-                                       <font>
-                                          <Font size="13.0" />
-                                       </font>
-                                    </Label>
+                                    <Label fx:id="cartnum" text="0" />
                                  </children>
                                  <StackPane.margin>
-                                    <Insets bottom="16.0" left="6.0" />
+                                    <Insets bottom="16.0" left="11.0" />
                                  </StackPane.margin>
                               </HBox>
                            </children>
