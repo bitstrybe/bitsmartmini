@@ -52,7 +52,6 @@ import bt.bitsmartmini.entity.Items;
 import bt.bitsmartmini.entity.Receipt;
 import bt.bitsmartmini.entity.Sales;
 import bt.bitsmartmini.entity.SalesDetails;
-import bt.bitsmartmini.entity.Uom;
 import bt.bitsmartmini.entity.Users;
 import bt.bitsmartmini.tablemodel.SelectItemSaleTableModel;
 import static bt.bitsmartmini.ui.MainAppController.cart;
@@ -195,6 +194,10 @@ public class ItemCartController extends MainAppController implements Initializab
         carttable.getItems().clear();
         totalprice.setText(" 0");
         curr.setText(MainAppController.B.getBCurrency());
+    }
+
+    @FXML
+    private void addDiscountbtn(ActionEvent event) {
     }
 
     public class AddPersonDiscountCell extends TableCell<SelectItemSaleTableModel, Boolean> {

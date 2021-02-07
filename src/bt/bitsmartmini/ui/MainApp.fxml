@@ -171,7 +171,7 @@
                   </VBox>
                   <VBox fx:id="cartbox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="79.0" prefWidth="150.0" spacing="1.0" HBox.hgrow="NEVER">
                      <children>
-                        <StackPane prefHeight="110.0" prefWidth="56.0">
+                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
                            <children>
                               <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

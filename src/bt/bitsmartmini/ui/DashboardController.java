@@ -202,10 +202,10 @@ public class DashboardController implements Initializable {
                     dailysalesCurr.setText(MainAppController.B.getBCurrency());
                     if (val > 0) {
                         dailysales.setText(String.valueOf(df.format(val)));
-                        dailysales.setFill(Paint.valueOf("#6ba16f"));
+//                        dailysales.setFill(Paint.valueOf("#6ba16f"));
                     } else {
                         dailysales.setText("0");
-                        dailysales.setFill(Paint.valueOf("#999999"));
+//                        dailysales.setFill(Paint.valueOf("#999999"));
                     }
                 })
         );
@@ -221,7 +221,7 @@ public class DashboardController implements Initializable {
                     weeklySalesCurr.setText(MainAppController.B.getBCurrency());
                     if (val > 0) {
                         weeklysales.setText(String.valueOf(df.format(val)));
-                        weeklysales.setFill(Paint.valueOf("#8d4747"));
+//                        weeklysales.setFill(Paint.valueOf("#8d4747"));
                     }
                 })
         );
@@ -237,7 +237,7 @@ public class DashboardController implements Initializable {
                     monthlySalesCurr.setText(MainAppController.B.getBCurrency());
                     if (val > 0) {
                         monthlysales.setText(String.valueOf(df.format(val)));
-                        monthlysales.setFill(Paint.valueOf("#5a4c97"));
+//                        monthlysales.setFill(Paint.valueOf("#5a4c97"));
                     }
                 })
         );
@@ -252,7 +252,7 @@ public class DashboardController implements Initializable {
                     yearlySalesCurr.setText(MainAppController.B.getBCurrency());
                     if (val > 0) {
                         quaterlysales.setText(String.valueOf(df.format(val)));
-                        quaterlysales.setFill(Paint.valueOf("#a1a187"));
+//                        quaterlysales.setFill(Paint.valueOf("#a1a187"));
                     }
                 })
         );
@@ -268,7 +268,7 @@ public class DashboardController implements Initializable {
                         refundsCurr.setText(MainAppController.B.getBCurrency());
                         refunds.setText(String.valueOf(df.format(val)));
                         //if (val > 0) {
-                        refunds.setFill(Paint.valueOf("#6ba16f"));
+//                        refunds.setFill(Paint.valueOf("#6ba16f"));
                     }
                 })
         );
@@ -284,7 +284,7 @@ public class DashboardController implements Initializable {
                         CreditsCurr.setText(MainAppController.B.getBCurrency());
                         credits.setText(String.valueOf(df.format(val)));
                         //if (val > 0) {
-                        credits.setFill(Paint.valueOf("#6ba16f"));
+//                        credits.setFill(Paint.valueOf("#6ba16f"));
                     }
                 })
         );

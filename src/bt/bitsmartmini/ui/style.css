@@ -162,6 +162,8 @@
 .dashboard-card{
    -fx-pref-width:170px;
    -fx-max-width:170px;
+   -fx-border-width: 0.1px;
+   -fx-border-color: #999999;
    
 }
 
