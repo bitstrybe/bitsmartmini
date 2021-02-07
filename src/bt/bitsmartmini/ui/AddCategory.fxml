@@ -23,7 +23,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="21.0" prefWidth="700.0">
                <children>
-                  <Label prefHeight="19.0" prefWidth="664.0" text="Category " textFill="#544848" HBox.hgrow="ALWAYS">
+                  <Label prefHeight="19.0" prefWidth="664.0" text="Form" textFill="#544848" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -95,7 +95,7 @@
                <children>
                   <TableView fx:id="cattableview" prefHeight="297.0" prefWidth="289.0" styleClass="table-cell" stylesheets="@style.css" HBox.hgrow="ALWAYS">
                      <columns>
-                        <TableColumn fx:id="category" maxWidth="1.7976931348623157E308" prefWidth="291.0" resizable="false" text="Form name" />
+                        <TableColumn fx:id="category" maxWidth="1.7976931348623157E308" prefWidth="291.0" resizable="false" styleClass="align_table_left" text="Form name" />
                         <TableColumn fx:id="action" maxWidth="1.7976931348623157E308" prefWidth="95.0" resizable="false" text="Action" />
                      </columns>
                   </TableView>

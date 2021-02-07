@@ -180,11 +180,18 @@ public class StockController implements Initializable {
         });
 
         stock.addEventHandler(MouseEvent.MOUSE_CLICKED, v -> {
-            list = stock.getSelectionModel().getSelectedItem();
-            StockinTableData(list.getBarcode());
-            StockoutTableData(list.getBarcode());
-            ReturnsTableData(list.getBarcode());
-            SalesTableData(list.getBarcode());
+            try {
+                list = stock.getSelectionModel().getSelectedItem();
+                StockinTableData(list.getBarcode());
+                StockoutTableData(list.getBarcode());
+                ReturnsTableData(list.getBarcode());
+                SalesTableData(list.getBarcode());
+            } catch (Exception ex) {
+                StockinTableData(null);
+                StockoutTableData(null);
+                ReturnsTableData(null);
+                SalesTableData(null);
+            }
         });
 
         if (LoginController.u.getRoles().equals("Administrator") || LoginController.u.getRoles().equals("Supervisor")) {
@@ -432,7 +439,7 @@ public class StockController implements Initializable {
             salesdata = FXCollections.observableArrayList();
             s.forEach((sales) -> {
                 try {
-                    salesdata.add(new SalesDetailsTableModel(sales.getUpc().getUpc(), sales.getUpc().getItemDesc(), sales.getQuantity(), DecimalUtil.format2(sales.getSalesPrice()),  DecimalUtil.format2(sales.getDiscount()), Utilities.convertDateToString(sales.getEntryDate())));
+                    salesdata.add(new SalesDetailsTableModel(sales.getUpc().getUpc(), sales.getUpc().getItemDesc(), sales.getQuantity(), DecimalUtil.format2(sales.getSalesPrice()), DecimalUtil.format2(sales.getDiscount()), Utilities.convertDateToString(sales.getEntryDate())));
                 } catch (Exception ex) {
                     Logger.getLogger(StockController.class.getName()).log(Level.SEVERE, null, ex);
                 }

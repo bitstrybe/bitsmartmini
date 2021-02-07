@@ -111,6 +111,8 @@ public class MainAppController implements Initializable {
     private Text backuptext;
     @FXML
     private HBox topmenu;
+    @FXML
+    private VBox cartbox;
 
     public void setScene(String scenechange) throws IOException {
         Parent root;
@@ -190,6 +192,9 @@ public class MainAppController implements Initializable {
             backupawesome.getStyleClass().add("InactiveSideTextAndFont");
             backuptext.getStyleClass().add("hovericons");
             backuptext.getStyleClass().add("InactiveSideTextAndFont");
+            //Cart
+            cartbox.getStyleClass().clear();
+            cartbox.getStyleClass().add("hoverVbox");
 
         } catch (IOException ex) {
             Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
@@ -231,7 +236,85 @@ public class MainAppController implements Initializable {
                 backupawesome.getStyleClass().add("InactiveSideTextAndFont");
                 backuptext.getStyleClass().add("hovericons");
                 backuptext.getStyleClass().add("InactiveSideTextAndFont");
+                //Cart
+                cartbox.getStyleClass().clear();
+                cartbox.getStyleClass().add("hoverVbox");
 
+            } catch (IOException ex) {
+                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        catalog.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            try {
+                setScene("Catalog.fxml");
+                //Dashboard
+                dashboard.getStyleClass().clear();
+                dashboard.getStyleClass().add("hoverVbox");
+                dashawesome.getStyleClass().add("hovericons");
+                dashawesome.getStyleClass().add("InactiveSideTextAndFont");
+                dashtext.getStyleClass().add("hovericons");
+                dashtext.getStyleClass().add("InactiveSideTextAndFont");
+                //Catalog is Active
+                catalog.getStyleClass().add("hoverVboxActive");
+                catalogawesome.getStyleClass().clear();
+                catalogawesome.getStyleClass().add("ActiveSideTextAndFont");
+                catalogtext.getStyleClass().clear();
+                catalogtext.getStyleClass().add("ActiveSideTextAndFont");
+                //Sales
+                sales.getStyleClass().clear();
+                sales.getStyleClass().add("hoverVbox");
+                salesawesome.getStyleClass().add("hovericons");
+                salesawesome.getStyleClass().add("InactiveSideTextAndFont");
+                salestext.getStyleClass().add("hovericons");
+                salestext.getStyleClass().add("InactiveSideTextAndFont");
+                //Stocks
+                stocks.getStyleClass().clear();
+                stocks.getStyleClass().add("hoverVbox");
+                stockawesome.getStyleClass().add("hovericons");
+                stockawesome.getStyleClass().add("InactiveSideTextAndFont");
+                stocktext.getStyleClass().add("hovericons");
+                stocktext.getStyleClass().add("InactiveSideTextAndFont");
+                //Cart
+                cartbox.getStyleClass().clear();
+                cartbox.getStyleClass().add("hoverVbox");
+            } catch (IOException ex) {
+                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+
+        sales.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            try {
+                setScene("Sales.fxml");
+                //Dashboard
+                dashboard.getStyleClass().clear();
+                dashboard.getStyleClass().add("hoverVbox");
+                dashawesome.getStyleClass().add("hovericons");
+                dashawesome.getStyleClass().add("InactiveSideTextAndFont");
+                dashtext.getStyleClass().add("hovericons");
+                dashtext.getStyleClass().add("InactiveSideTextAndFont");
+                //Catalog
+                catalog.getStyleClass().clear();
+                catalog.getStyleClass().add("hoverVbox");
+                catalogawesome.getStyleClass().add("hovericons");
+                catalogawesome.getStyleClass().add("InactiveSideTextAndFont");
+                catalogtext.getStyleClass().add("hovericons");
+                catalogtext.getStyleClass().add("InactiveSideTextAndFont");
+                //Sales is Active
+                sales.getStyleClass().add("hoverVboxActive");
+                salesawesome.getStyleClass().clear();
+                salesawesome.getStyleClass().add("ActiveSideTextAndFont");
+                salestext.getStyleClass().clear();
+                salestext.getStyleClass().add("ActiveSideTextAndFont");
+                //Stocks
+                stocks.getStyleClass().clear();
+                stocks.getStyleClass().add("hoverVbox");
+                stockawesome.getStyleClass().add("hovericons");
+                stockawesome.getStyleClass().add("InactiveSideTextAndFont");
+                stocktext.getStyleClass().add("hovericons");
+                stocktext.getStyleClass().add("InactiveSideTextAndFont");
+                //Cart
+                cartbox.getStyleClass().clear();
+                cartbox.getStyleClass().add("hoverVbox");
             } catch (IOException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -273,77 +356,10 @@ public class MainAppController implements Initializable {
                 backupawesome.getStyleClass().add("InactiveSideTextAndFont");
                 backuptext.getStyleClass().add("hovericons");
                 backuptext.getStyleClass().add("InactiveSideTextAndFont");
+                //Cart
+                cartbox.getStyleClass().clear();
+                cartbox.getStyleClass().add("hoverVbox");
 
-            } catch (IOException ex) {
-                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-
-        catalog.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            try {
-                setScene("Catalog.fxml");
-                //Dashboard
-                dashboard.getStyleClass().clear();
-                dashboard.getStyleClass().add("hoverVbox");
-                dashawesome.getStyleClass().add("hovericons");
-                dashawesome.getStyleClass().add("InactiveSideTextAndFont");
-                dashtext.getStyleClass().add("hovericons");
-                dashtext.getStyleClass().add("InactiveSideTextAndFont");
-                //Catalog is Active
-                catalog.getStyleClass().add("hoverVboxActive");
-                catalogawesome.getStyleClass().clear();
-                catalogawesome.getStyleClass().add("ActiveSideTextAndFont");
-                catalogtext.getStyleClass().clear();
-                catalogtext.getStyleClass().add("ActiveSideTextAndFont");
-                //Sales
-                sales.getStyleClass().clear();
-                sales.getStyleClass().add("hoverVbox");
-                salesawesome.getStyleClass().add("hovericons");
-                salesawesome.getStyleClass().add("InactiveSideTextAndFont");
-                salestext.getStyleClass().add("hovericons");
-                salestext.getStyleClass().add("InactiveSideTextAndFont");
-                //Stocks
-                stocks.getStyleClass().clear();
-                stocks.getStyleClass().add("hoverVbox");
-                stockawesome.getStyleClass().add("hovericons");
-                stockawesome.getStyleClass().add("InactiveSideTextAndFont");
-                stocktext.getStyleClass().add("hovericons");
-                stocktext.getStyleClass().add("InactiveSideTextAndFont");
-            } catch (IOException ex) {
-                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-
-        sales.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            try {
-                setScene("Sales.fxml");
-                //Dashboard
-                dashboard.getStyleClass().clear();
-                dashboard.getStyleClass().add("hoverVbox");
-                dashawesome.getStyleClass().add("hovericons");
-                dashawesome.getStyleClass().add("InactiveSideTextAndFont");
-                dashtext.getStyleClass().add("hovericons");
-                dashtext.getStyleClass().add("InactiveSideTextAndFont");
-                //Catalog
-                catalog.getStyleClass().clear();
-                catalog.getStyleClass().add("hoverVbox");
-                catalogawesome.getStyleClass().add("hovericons");
-                catalogawesome.getStyleClass().add("InactiveSideTextAndFont");
-                catalogtext.getStyleClass().add("hovericons");
-                catalogtext.getStyleClass().add("InactiveSideTextAndFont");
-                //Sales is Active
-                sales.getStyleClass().add("hoverVboxActive");
-                salesawesome.getStyleClass().clear();
-                salesawesome.getStyleClass().add("ActiveSideTextAndFont");
-                salestext.getStyleClass().clear();
-                salestext.getStyleClass().add("ActiveSideTextAndFont");
-                //Stocks
-                stocks.getStyleClass().clear();
-                stocks.getStyleClass().add("hoverVbox");
-                stockawesome.getStyleClass().add("hovericons");
-                stockawesome.getStyleClass().add("InactiveSideTextAndFont");
-                stocktext.getStyleClass().add("hovericons");
-                stocktext.getStyleClass().add("InactiveSideTextAndFont");
             } catch (IOException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -411,21 +427,7 @@ public class MainAppController implements Initializable {
         stage.show();
     }
 
-    @FXML
-    private void addmanufacturer(ActionEvent event) throws IOException {
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddManufacturer.fxml"));
-        Parent parent = (Parent) fxmlLoader.load();
-        Scene scene = new Scene(parent);
-        scene.setFill(Color.TRANSPARENT);
-        stage.setMaximized(true);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initOwner(parent.getScene().getWindow());
-        stage.setScene(scene);
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.show();
-    }
-
+   
     @FXML
     private void additems(ActionEvent event) throws IOException {
         Stage stage = new Stage();
@@ -543,6 +545,40 @@ public class MainAppController implements Initializable {
     public void addtoCartAction() {
         try {
             setScene("ItemCart.fxml");
+            //Dashboard
+            dashboard.getStyleClass().clear();
+            dashboard.getStyleClass().add("hoverVbox");
+            dashawesome.getStyleClass().add("hovericons");
+            dashawesome.getStyleClass().add("InactiveSideTextAndFont");
+            dashtext.getStyleClass().add("hovericons");
+            dashtext.getStyleClass().add("InactiveSideTextAndFont");
+            //Catalog
+            catalog.getStyleClass().clear();
+            catalog.getStyleClass().add("hoverVbox");
+            catalogawesome.getStyleClass().add("hovericons");
+            catalogawesome.getStyleClass().add("InactiveSideTextAndFont");
+            catalogtext.getStyleClass().add("hovericons");
+            catalogtext.getStyleClass().add("InactiveSideTextAndFont");
+            //Sales
+            sales.getStyleClass().clear();
+            sales.getStyleClass().add("hoverVbox");
+            salesawesome.getStyleClass().add("hovericons");
+            salesawesome.getStyleClass().add("InactiveSideTextAndFont");
+            salestext.getStyleClass().add("hovericons");
+            salestext.getStyleClass().add("InactiveSideTextAndFont");
+            //Stocks
+            stocks.getStyleClass().clear();
+            stocks.getStyleClass().add("hoverVbox");
+            stockawesome.getStyleClass().add("hovericons");
+            stockawesome.getStyleClass().add("InactiveSideTextAndFont");
+            stocktext.getStyleClass().add("hovericons");
+            stocktext.getStyleClass().add("InactiveSideTextAndFont");
+            //Cart is Active
+            cartbox.getStyleClass().add("hoverVboxActive");
+//                stockawesome.getStyleClass().add("InactiveSideTextAndFont");
+//                stocktext.getStyleClass().add("hovericons");
+//                stocktext.getStyleClass().add("InactiveSideTextAndFont");
+
         } catch (IOException ex) {
             Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -653,6 +689,21 @@ public class MainAppController implements Initializable {
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setMaximized(true);
+        stage.show();
+    }
+
+    @FXML
+    private void addbrand(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddBrand.fxml"));
+        Parent parent = (Parent) fxmlLoader.load();
+        Scene scene = new Scene(parent);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setMaximized(true);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(parent.getScene().getWindow());
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
     }
 

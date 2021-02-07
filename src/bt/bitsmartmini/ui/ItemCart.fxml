@@ -12,27 +12,25 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane id="homebackground" prefHeight="757.0" prefWidth="1215.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.ItemCartController">
+<ScrollPane prefHeight="671.0" prefWidth="1323.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.ItemCartController">
    <content>
-      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="653.0" prefWidth="1130.0" spacing="10.0" stylesheets="@style.css">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="669.0" prefWidth="1276.0" spacing="10.0" stylesheets="@style.css">
          <children>
-            <HBox alignment="TOP_CENTER" styleClass="window-title">
+            <HBox alignment="CENTER_RIGHT" maxWidth="-Infinity" prefHeight="71.0" prefWidth="1152.0" spacing="10.0" styleClass="window-title">
                <children>
-                  <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="391.0" styleClass="window-title-text" text="Check Out">
-                     <font>
-                        <Font size="26.0" />
-                     </font>
-                  </Label>
                   <Button mnemonicParsing="false" onAction="#addcustomer" prefHeight="45.0" text="Add Customer" />
                   <ChoiceBox fx:id="customerdroplist" prefHeight="45.0" prefWidth="559.0" />
                </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
             </HBox>
-            <HBox alignment="TOP_CENTER">
+            <HBox alignment="CENTER" prefWidth="1086.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Line endX="997.2929077148438" startX="-100.0" stroke="#c9c9c9" />
+                  <Line endX="170.7347412109375" startX="-1009.5581665039062" styleClass="linecolor" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="1017.0">
+            <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="1017.0" VBox.vgrow="ALWAYS">
                <children>
                   <Button id="action-btn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clearAllCart" prefHeight="34.0" prefWidth="187.0" text="Clear All Items From Cart" />
                </children>
@@ -40,9 +38,9 @@
                   <Insets bottom="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="1091.0">
+            <HBox alignment="CENTER" maxWidth="-Infinity" VBox.vgrow="ALWAYS">
                <children>
-                  <TableView fx:id="carttable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1054.0" styleClass="table-cell" stylesheets="@style.css">
+                  <TableView fx:id="carttable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1139.0" styleClass="table-cell" stylesheets="@style.css">
                      <columns>
                         <TableColumn fx:id="itemimage" prefWidth="125.0" resizable="false" text="Item Image" />
                         <TableColumn fx:id="itemcode" minWidth="0.0" prefWidth="140.0" resizable="false" text="Barcode" />
@@ -57,7 +55,7 @@
                   </TableView>
                </children>
             </HBox>
-            <HBox alignment="TOP_CENTER">
+            <HBox alignment="TOP_CENTER" maxWidth="-Infinity">
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="731.0">
                      <children>
@@ -78,7 +76,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="354.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="417.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#checkout" prefHeight="59.0" prefWidth="240.0" styleClass="jfx-checkout-button" text="Confirm Checkout">
                            <font>
@@ -99,6 +97,6 @@
       </VBox>
    </content>
    <padding>
-      <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+      <Insets bottom="50.0" left="50.0" right="50.0" top="20.0" />
    </padding>
 </ScrollPane>

@@ -163,8 +163,12 @@ public class ReturnBL extends DdsBL {
     }
 
     public RefundPolicy findRefundPolicy() {
+        try{
         TypedQuery<RefundPolicy> q = em.createQuery("SELECT f FROM RefundPolicy f", RefundPolicy.class);
         q.setMaxResults(1);
         return q.getResultList().get(0);
+        }catch(Exception ex){
+            return null;
+        }
     }
 }

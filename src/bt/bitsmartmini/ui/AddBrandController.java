@@ -69,8 +69,8 @@ public class AddBrandController implements Initializable {
     public FontAwesomeIcon duplicatelock;
     @FXML
     private JFXTextField searchbtn;
-    @FXML
-    private TableView<BrandTableModel> mantableview;
+     @FXML
+    private TableView<BrandTableModel> brandtable;
     @FXML
     private TableColumn<BrandTableModel, String> brand;
     @FXML
@@ -86,6 +86,7 @@ public class AddBrandController implements Initializable {
     private FontAwesomeIcon check;
     @FXML
     private JFXSpinner spinner;
+   
 
     /**
      * Initializes the controller class.
@@ -183,14 +184,12 @@ public class AddBrandController implements Initializable {
     public void TableData() {
         List<Brands> c = new BrandBL().getAllBrands();
         data = FXCollections.observableArrayList();
-
         c.forEach((brand) -> {
             data.add(new BrandTableModel(brand.getBrandName()));
         });
         brand.setCellValueFactory(cell -> cell.getValue().getBrandProperty());
         action.setSortable(false);
         action.setMaxWidth(480);
-
         action.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<BrandTableModel, Boolean>, ObservableValue<Boolean>>() {
             @Override
             public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<BrandTableModel, Boolean> features) {
@@ -203,9 +202,9 @@ public class AddBrandController implements Initializable {
                 return new AddPersonCell();
             }
         });
-        mantableview.setItems(data);
+        brandtable.setItems(data);
 //        clientTable.getColumns().add(action);
-        mantableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        brandtable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     }
 
@@ -232,9 +231,9 @@ public class AddBrandController implements Initializable {
                 return new AddPersonCell();
             }
         });
-        mantableview.setItems(data);
+        brandtable.setItems(data);
 //        clientTable.getColumns().add(action);
-        mantableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        brandtable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     }
 
@@ -279,7 +278,7 @@ public class AddBrandController implements Initializable {
 
                         int selectdIndex = getTableRow().getIndex();
                         //Create a new table show details of the selected item
-                        BrandTableModel selectedRecord = (BrandTableModel) mantableview.getItems().get(selectdIndex);
+                        BrandTableModel selectedRecord = (BrandTableModel) brandtable.getItems().get(selectdIndex);
                         Stage stage = new Stage();
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Delete.fxml"));
                         Parent parent = (Parent) fxmlLoader.load();

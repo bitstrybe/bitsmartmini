@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="boarderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.MainAppController">
+<BorderPane fx:id="boarderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="229.0" prefWidth="1072.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.MainAppController">
    <top>
       <VBox>
          <children>
@@ -39,7 +39,7 @@
                                 <items>
                                     <MenuItem mnemonicParsing="false" onAction="#additems" text="New Item" />
                                     <MenuItem mnemonicParsing="false" onAction="#addcategory" text="Category" />
-                                    <MenuItem mnemonicParsing="false" onAction="#addmanufacturer" text="Brands" />
+                                    <MenuItem mnemonicParsing="false" onAction="#addbrand" text="Brands" />
                                     <MenuItem mnemonicParsing="false" onAction="#addUom" text="Unit Of Pricing" />
                                     <MenuItem mnemonicParsing="false" onAction="#refundPolicyView" text="Refund Policy" />
                                 </items>
@@ -103,30 +103,6 @@
                         <Insets right="5.0" />
                      </StackPane.margin>
                   </Button>
-                  <MenuButton fx:id="cartmainbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="56.0" style="-fx-background-color: transparent;" StackPane.alignment="CENTER">
-                    <items>
-                      <MenuItem fx:id="addtocartbtn" mnemonicParsing="false" onAction="#addtoCartAction" text="View Cart" />
-                      <MenuItem fx:id="clearcart" mnemonicParsing="false" onAction="#clearAllCartItem" text="Clear Cart" />
-                    </items>
-                     <StackPane.margin>
-                        <Insets left="510.0" />
-                     </StackPane.margin>
-                     <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../resources/addtocart.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </MenuButton>
-                  <Label fx:id="cartnum" text="0" StackPane.alignment="CENTER">
-                     <StackPane.margin>
-                        <Insets bottom="16.0" left="516.0" />
-                     </StackPane.margin>
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
                </children>
             </StackPane>
             <HBox id="rootPane" fx:id="topmenu" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="79.0" prefWidth="861.0">
@@ -186,6 +162,44 @@
                      <children>
                         <FontAwesomeIcon fx:id="backupawesome" fill="#dddee0" glyphName="SAVE" size="2.5em" textAlignment="CENTER" wrappingWidth="153.62142753601074" />
                         <Text fx:id="backuptext" fill="#dddee0" strokeType="OUTSIDE" strokeWidth="0.0" text="Backup" textAlignment="CENTER" wrappingWidth="152.1962890625" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="268.0" layoutY="9.0">
+                     <children>
+                        <Line opacity="0.45" startX="-4.3451786041259766E-5" startY="80.29289245605469" stroke="#3f3f3f" styleClass="sidebar-line" />
+                     </children>
+                  </VBox>
+                  <VBox fx:id="cartbox" alignment="CENTER">
+                     <children>
+                        <StackPane>
+                           <children>
+                              <MenuButton fx:id="cartmainbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="56.0" style="-fx-background-color: transparent;">
+                                <items>
+                                  <MenuItem fx:id="addtocartbtn" mnemonicParsing="false" onAction="#addtoCartAction" text="View Cart" />
+                                  <MenuItem fx:id="clearcart" mnemonicParsing="false" onAction="#clearAllCartItem" text="Clear Cart" />
+                                </items>
+                                 <graphic>
+                                    <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../resources/addtocart.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </MenuButton>
+                              <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+                                 <children>
+                                    <Label fx:id="cartnum" text="0">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <StackPane.margin>
+                                    <Insets bottom="16.0" left="6.0" />
+                                 </StackPane.margin>
+                              </HBox>
+                           </children>
+                        </StackPane>
                      </children>
                   </VBox>
                </children>
