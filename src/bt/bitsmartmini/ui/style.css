@@ -286,7 +286,13 @@ add-to-cart-btn{
 
 .table-view{
     -fx-background-color: #ffffff;
-    -fx-table-cell-border-color: transparent;
+    /*-fx-table-cell-border-color: transparent;*/
+    -fx-font-family: 'Open Sans'; 
+    -fx-background-color: white;
+    -fx-font-size: 13px;
+    /*-fx-border-color: derive(black, -60%);*/
+    -fx-border-color:transparent;
+    -fx-border-width:0px;
 }
 
 .table-view:focused{
@@ -307,7 +313,7 @@ add-to-cart-btn{
 
 .table-view .column-header-background .label{
     -fx-background-color: transparent; 
-    -fx-font-weight:bold;
+    /*-fx-font-weight:bold;*/
     /*-fx-text-fill: white;*/
 }
 
@@ -315,11 +321,18 @@ add-to-cart-btn{
     -fx-alignment:center;
 }
 
+.table-row-cell{
+    /*-fx-opacity:0.5;*/
+    /*-fx-background-color:darkgray; */
+    -fx-cell-size: 50px;
+}
+
 /* .table-row-cell */
 
 .table-row-cell:disabled{
     -fx-opacity:0.5;
-    -fx-background-color:darkgray;    
+    -fx-background-color:darkgray; 
+    -fx-cell-size: 50px;
 }
 
 .table-row-cell:disabled .text{
@@ -327,8 +340,8 @@ add-to-cart-btn{
 } 
 
 .table-row-cell .text{
-    -fx-font-weight:bold;
-    -fx-fill: #333333;
+    /*-fx-font-weight:bold;*/
+    /*-fx-fill: #333333;*/
 } 
 
 /*.table-row-cell:focused .text {
