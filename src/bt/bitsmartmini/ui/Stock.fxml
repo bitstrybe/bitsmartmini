@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
@@ -23,14 +24,20 @@
                      <font>
                         <Font name="Open Sans" size="14.0" />
                      </font></JFXTextField>
-                  <ButtonBar prefHeight="34.0" prefWidth="253.0">
+                  <ButtonBar prefHeight="34.0" prefWidth="153.0">
                      <buttons>
-                        <JFXButton id="action-btn" fx:id="stockinbtn" buttonType="RAISED" onAction="#addstockinpopup" prefHeight="34.0" prefWidth="110.0" text="Add To Stock">
+                        <JFXButton id="action-btn" fx:id="stockoutbtn" buttonType="RAISED" minWidth="46.0" onAction="#addstockoutpopup" prefHeight="34.0" prefWidth="50.0" styleClass="alldefaultbtn">
+                           <graphic>
+                              <FontAwesomeIcon fill="#fcfcfc" glyphName="PLUS" />
+                           </graphic></JFXButton>
+                        <JFXButton id="action-btn" fx:id="stockinbtn" buttonType="RAISED" minWidth="28.0" onAction="#addstockinpopup" prefHeight="34.0" prefWidth="110.0">
                            <font>
                               <Font size="10.0" />
                            </font>
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="MINUS" />
+                           </graphic>
                         </JFXButton>
-                        <JFXButton id="action-btn" fx:id="stockoutbtn" buttonType="RAISED" onAction="#addstockoutpopup" prefHeight="34.0" prefWidth="203.0" styleClass="alldefaultbtn" text="Take Out Stock" />
                      </buttons>
                   </ButtonBar>
                </children>
