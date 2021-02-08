@@ -79,9 +79,7 @@ public class MainAppController implements Initializable {
     private FontAwesomeIcon catalogawesome;
     @FXML
     private Text catalogtext;
-
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    public Button addtocartbtn;
     @FXML
     private VBox catalog;
     @FXML

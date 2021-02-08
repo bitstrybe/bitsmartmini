@@ -11,45 +11,42 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane id="homebackground" fitToHeight="true" fitToWidth="true" prefHeight="716.0" prefWidth="1297.0" styleClass="edge-to-edge" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.CatalogController">
-   <content>
-      <VBox alignment="CENTER" prefHeight="676.0" prefWidth="942.0" spacing="10.0">
+
+<VBox id="homebackground" alignment="CENTER" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.CatalogController">
+   <children>
+      <HBox alignment="CENTER" styleClass="window-title">
          <children>
-            <HBox alignment="CENTER" styleClass="window-title">
-               <children>
-                  <ButtonBar prefHeight="34.0" prefWidth="1042.0">
-                     <buttons>
-                        <FontAwesomeIcon fill="#ababab" glyphName="SEARCH" size="2em" wrappingWidth="25.142857551574707" />
-                        <JFXTextField fx:id="itemsearch" focusColor="#313132" labelFloat="true" prefHeight="34.0" prefWidth="964.0" promptText="Search for an item" unFocusColor="#a8a5a5">
-                           <font>
-                              <Font name="Open Sans" size="16.0" />
-                           </font>
-                        </JFXTextField>
-                     </buttons>
-                  </ButtonBar>
-               </children>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER">
-               <children>
-                  <Line endX="170.7347412109375" startX="-1009.5581665039062" styleClass="linecolor" />
-               </children>
-            </HBox>
-            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="600.0" prefWidth="1085.0" style="-fx-background-color: transparent;">
-               <content>
-                  <FlowPane fx:id="displaypane" alignment="CENTER" columnHalignment="CENTER" prefHeight="611.0" prefWidth="1080.0" prefWrapLength="100.0">
-                     <padding>
-                        <Insets left="35.0" />
-                     </padding>
-                  </FlowPane>
-               </content>
-            </ScrollPane>
+            <ButtonBar prefHeight="34.0" prefWidth="1042.0">
+               <buttons>
+                  <FontAwesomeIcon fill="#ababab" glyphName="SEARCH" size="2em" wrappingWidth="25.142857551574707" />
+                  <JFXTextField fx:id="itemsearch" focusColor="#313132" labelFloat="true" prefHeight="34.0" prefWidth="964.0" promptText="Search for an item" unFocusColor="#a8a5a5">
+                     <font>
+                        <Font name="Open Sans" size="16.0" />
+                     </font>
+                  </JFXTextField>
+               </buttons>
+            </ButtonBar>
          </children>
-      </VBox>
-   </content>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER">
+         <children>
+            <Line endX="170.7347412109375" startX="-1009.5581665039062" styleClass="linecolor" />
+         </children>
+      </HBox>
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="600.0" prefWidth="1085.0" style="-fx-background-color: transparent;">
+         <content>
+            <FlowPane fx:id="displaypane" alignment="CENTER" columnHalignment="CENTER" prefHeight="611.0" prefWidth="1080.0" prefWrapLength="100.0">
+               <padding>
+                  <Insets left="35.0" />
+               </padding>
+            </FlowPane>
+         </content>
+      </ScrollPane>
+   </children>
    <padding>
-      <Insets bottom="50.0" left="50.0" right="50.0" top="20.0" />
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
-</ScrollPane>
+</VBox>

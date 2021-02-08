@@ -15,136 +15,144 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane id="homebackground" fitToHeight="true" fitToWidth="true" styleClass="edge-to-edge" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.SalesController">
-   <content>
-      <VBox alignment="TOP_CENTER" prefHeight="643.0" prefWidth="1189.0" spacing="10.0">
+<VBox id="homebackground" alignment="TOP_CENTER" prefHeight="643.0" prefWidth="1189.0" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.SalesController">
+   <children>
+      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="56.0" prefWidth="1189.0" spacing="10.0">
          <children>
-            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="56.0" prefWidth="1189.0" spacing="10.0">
-               <children>
-                  <JFXTextField focusColor="#807e7e" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="456.0" promptText="Sales Search" unFocusColor="#9e9e9e">
-                     <font>
-                        <Font name="Open Sans" size="14.0" />
-                     </font></JFXTextField>
-                  <DatePicker fx:id="startdate" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="27.0" prefWidth="180.0" promptText="Start Date" />
-                  <DatePicker fx:id="enddate" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="180.0" promptText="End Date" />
-                  <ButtonBar maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="55.0" prefWidth="157.0">
-                     <buttons>
-                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minWidth="51.0" mnemonicParsing="false" onAction="#filterdate" prefHeight="26.0">
-                           <graphic>
-                              <FontAwesomeIcon glyphName="SEARCH" />
-                           </graphic>
-                        </Button>
-                        <Button fx:id="salespdfbtn" minWidth="54.0" mnemonicParsing="false" onAction="#salesPDF" prefHeight="27.0" text="PDF">
-                           <graphic>
-                              <FontAwesomeIcon glyphName="PRINT" />
-                           </graphic>
-                        </Button>
-                     </buttons>
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </ButtonBar>
-               </children>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER" prefWidth="1086.0">
-               <children>
-                  <Line endX="170.7347412109375" startX="-1009.5581665039062" styleClass="linecolor" HBox.hgrow="ALWAYS" />
-               </children>
-            </HBox>
-            <HBox minHeight="-Infinity" prefHeight="250.0" VBox.vgrow="ALWAYS">
-               <children>
-                  <TableView fx:id="salestable" style="-fx-background-color: transparent;">
-                     <columns>
-                        <TableColumn fx:id="salescodetb" prefWidth="100.0" text="Sales Code" />
-                        <TableColumn fx:id="saledatetb" prefWidth="150.0" text="Date" />
-                        <TableColumn fx:id="customertb" prefWidth="390.0" styleClass="align_table_left" text="Customer" />
-                        <TableColumn fx:id="salespricetb" prefWidth="150.0" text="Expectd Sales" />
-                        <TableColumn fx:id="saleamountpaidtb" prefWidth="150.0" text="Amount" />
-                        <TableColumn fx:id="balancetb" prefWidth="150.0" text="Outstandings" />
-                        <TableColumn fx:id="refunds" prefWidth="150.0" text="Refunds" />
-                        <TableColumn fx:id="actuals" prefWidth="150.0" text="Actuals" />
-                        <TableColumn fx:id="action" prefWidth="60.0" text="Action" />
-                     </columns>
-                  </TableView>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="401.0" prefHeight="14.0" prefWidth="1256.0">
-               <children>
-                  <Label alignment="CENTER" text="Sales Details" textFill="#686868" HBox.hgrow="ALWAYS">
-                     <font>
-                        <Font name="Open Sans" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="200.0" VBox.vgrow="ALWAYS">
-               <children>
-                  <TableView fx:id="salesdetailstable" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
-                     <columns>
-                        <TableColumn fx:id="salesdetailsdate" prefWidth="100.0" resizable="false" text="Date" />
-                        <TableColumn fx:id="sditemcode" minWidth="30.0" prefWidth="150.0" resizable="false" styleClass="align_table_left" text="Barcode" />
-                        <TableColumn fx:id="sditemname" prefWidth="500.0" resizable="false" styleClass="align_table_left" text="Items Desc" />
-                        <TableColumn fx:id="sdqtyCol" resizable="false" text="Qty" />
-                        <TableColumn fx:id="sdrtdCol" resizable="false" text="RTD" />
-                        <TableColumn fx:id="sdpriceCol" prefWidth="100.0" resizable="false" text="price" />
-                        <TableColumn fx:id="sddiscCol" prefWidth="100.0" resizable="false" text="Disc" />
-                        <TableColumn fx:id="refundsCol" maxWidth="99.0" minWidth="0.0" prefWidth="100.0" resizable="false" text="Refunds" />
-                        <TableColumn fx:id="actualsCol" maxWidth="99.0" minWidth="0.0" prefWidth="100.0" resizable="false" text="Actual" />
-                        <TableColumn fx:id="actionCol" maxWidth="99.0" minWidth="0.0" prefWidth="76.0" resizable="false" text="Action" />
-                     </columns>
-                  </TableView>
-               </children>
-            </HBox>
-            <HBox>
-               <children>
-                  <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Label alignment="CENTER" text="Returns" textFill="#686868">
-                           <font>
-                              <Font name="Open Sans" size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="20.0" prefWidth="555.0" text="Receipts" textFill="#686868" HBox.hgrow="ALWAYS">
-                           <font>
-                              <Font name="Open Sans" size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-               </children>
-            </HBox>
-            <HBox alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="200.0" VBox.vgrow="ALWAYS">
-               <children>
-                  <TableView fx:id="paymenttable" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
-                     <columns>
-                        <TableColumn fx:id="receiptno" prefWidth="97.0" resizable="false" text="Receipt #" />
-                        <TableColumn fx:id="receiptdate" prefWidth="150.0" resizable="false" text="Date" />
-                        <TableColumn fx:id="amountpaidtb" prefWidth="150.0" resizable="false" text="Amount" />
-                        <TableColumn fx:id="mode" prefWidth="150.0" text="Mode" />
-                        <TableColumn fx:id="preview" prefWidth="200.0" text="Preview" />
-                     </columns>
-                  </TableView>
-                  <TableView fx:id="returnstable" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
-                    <columns>
-                      <TableColumn fx:id="rdate" prefWidth="150.0" text="Returned Date" />
-                      <TableColumn fx:id="rqty" prefWidth="150.0" text="Qty" />
-                        <TableColumn fx:id="ramnt" prefWidth="150.0" text="Unit Price" />
-                        <TableColumn fx:id="refunded" prefWidth="150.0" text="Refunded" />
-                    </columns>
-                  </TableView>
-               </children>
-            </HBox>
+            <JFXTextField focusColor="#807e7e" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="456.0" promptText="Sales Search" unFocusColor="#9e9e9e">
+               <font>
+                  <Font name="Open Sans" size="14.0" />
+               </font>
+            </JFXTextField>
+            <DatePicker fx:id="startdate" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="27.0" prefWidth="180.0" promptText="Start Date" />
+            <DatePicker fx:id="enddate" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="180.0" promptText="End Date" />
+            <ButtonBar maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="55.0" prefWidth="157.0">
+               <buttons>
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minWidth="51.0" mnemonicParsing="false" onAction="#filterdate" prefHeight="26.0">
+                     <graphic>
+                        <FontAwesomeIcon glyphName="SEARCH" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="salespdfbtn" minWidth="54.0" mnemonicParsing="false" onAction="#salesPDF" prefHeight="27.0" text="PDF">
+                     <graphic>
+                        <FontAwesomeIcon glyphName="PRINT" />
+                     </graphic>
+                  </Button>
+               </buttons>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </ButtonBar>
          </children>
-      </VBox>
-   </content>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER" prefWidth="1086.0">
+         <children>
+            <Line endX="170.7347412109375" startX="-1009.5581665039062" styleClass="linecolor" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <ScrollPane style="-fx-background-color: transpaarent;">
+         <content>
+            <VBox style="-fx-background-color: transparent;">
+               <children>
+                  <HBox minHeight="-Infinity" prefHeight="250.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <TableView fx:id="salestable" style="-fx-background-color: transparent;">
+                           <columns>
+                              <TableColumn fx:id="salescodetb" prefWidth="100.0" text="Sales Code" />
+                              <TableColumn fx:id="saledatetb" prefWidth="150.0" text="Date" />
+                              <TableColumn fx:id="customertb" prefWidth="390.0" styleClass="align_table_left" text="Customer" />
+                              <TableColumn fx:id="salespricetb" prefWidth="150.0" text="Expectd Sales" />
+                              <TableColumn fx:id="saleamountpaidtb" prefWidth="150.0" text="Amount" />
+                              <TableColumn fx:id="balancetb" prefWidth="150.0" text="Outstandings" />
+                              <TableColumn fx:id="refunds" prefWidth="150.0" text="Refunds" />
+                              <TableColumn fx:id="actuals" prefWidth="150.0" text="Actuals" />
+                              <TableColumn fx:id="action" prefWidth="60.0" text="Action" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="14.0" prefWidth="1256.0">
+                     <children>
+                        <Label alignment="CENTER" text="Sales Details" textFill="#686868" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="Open Sans" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="200.0">
+                     <children>
+                        <TableView fx:id="salesdetailstable" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                           <columns>
+                              <TableColumn fx:id="salesdetailsdate" prefWidth="100.0" resizable="false" text="Date" />
+                              <TableColumn fx:id="sditemcode" minWidth="30.0" prefWidth="150.0" resizable="false" styleClass="align_table_left" text="Barcode" />
+                              <TableColumn fx:id="sditemname" prefWidth="500.0" resizable="false" styleClass="align_table_left" text="Items Desc" />
+                              <TableColumn fx:id="sdqtyCol" resizable="false" text="Qty" />
+                              <TableColumn fx:id="sdrtdCol" resizable="false" text="RTD" />
+                              <TableColumn fx:id="sdpriceCol" prefWidth="100.0" resizable="false" text="price" />
+                              <TableColumn fx:id="sddiscCol" prefWidth="100.0" resizable="false" text="Disc" />
+                              <TableColumn fx:id="refundsCol" maxWidth="99.0" minWidth="0.0" prefWidth="100.0" resizable="false" text="Refunds" />
+                              <TableColumn fx:id="actualsCol" maxWidth="99.0" minWidth="0.0" prefWidth="100.0" resizable="false" text="Actual" />
+                              <TableColumn fx:id="actionCol" maxWidth="99.0" minWidth="0.0" prefWidth="76.0" resizable="false" text="Action" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label alignment="CENTER" text="Returns" textFill="#686868">
+                                 <font>
+                                    <Font name="Open Sans" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="20.0" prefWidth="555.0" text="Receipts" textFill="#686868" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Open Sans" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="200.0">
+                     <children>
+                        <TableView fx:id="paymenttable" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                           <columns>
+                              <TableColumn fx:id="receiptno" prefWidth="97.0" resizable="false" text="Receipt #" />
+                              <TableColumn fx:id="receiptdate" prefWidth="150.0" resizable="false" text="Date" />
+                              <TableColumn fx:id="amountpaidtb" prefWidth="150.0" resizable="false" text="Amount" />
+                              <TableColumn fx:id="mode" prefWidth="150.0" text="Mode" />
+                              <TableColumn fx:id="preview" prefWidth="200.0" text="Preview" />
+                           </columns>
+                        </TableView>
+                        <TableView fx:id="returnstable" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                          <columns>
+                            <TableColumn fx:id="rdate" prefWidth="150.0" text="Returned Date" />
+                            <TableColumn fx:id="rqty" prefWidth="150.0" text="Qty" />
+                              <TableColumn fx:id="ramnt" prefWidth="150.0" text="Unit Price" />
+                              <TableColumn fx:id="refunded" prefWidth="150.0" text="Refunded" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </content>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </ScrollPane>
+   </children>
    <padding>
-      <Insets bottom="50.0" left="50.0" right="50.0" top="20.0" />
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
-</ScrollPane>
+</VBox>

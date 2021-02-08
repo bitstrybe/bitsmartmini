@@ -164,7 +164,7 @@
             <Insets />
          </HBox.margin>
          <effect>
-            <DropShadow color="#7a797967" />
+            <DropShadow color="#7a797967" height="5.82" radius="3.17" width="8.86" />
          </effect>
       </VBox>
    </children>

@@ -160,11 +160,11 @@
 }
 
 .dashboard-card{
-   -fx-pref-width:170px;
-   -fx-max-width:170px;
-   -fx-border-width: 0.1px;
-   -fx-border-color: #999999;
-   
+    -fx-pref-width:170px;
+    -fx-max-width:170px;
+    -fx-border-width: 0.1px;
+    -fx-border-color: #999999;
+
 }
 
 .dashboard-label{
@@ -232,6 +232,7 @@
 
 .scroll-pane > .viewport { 
     -fx-background-color: transparent;
+    -fx-border-color: transparent;
 }
 
 #my-table .table-column {
@@ -303,18 +304,17 @@ add-to-cart-btn{
 .table-view .column-header .filler,
 .table-view .column-header-background .filler{
     -fx-background-color: transparent;
-    -fx-border-width:0.1;
-    -fx-size:45;
+    -fx-border-width:1px;
+    -fx-size:55;
 } 
 
 .table-view .column-header-background{
-    /*-fx-background-color: linear-gradient(#888888 0.0%, #cccccc 100.0%);*/
+   /* -fx-background-color: linear-gradient(#888888 0.0%, #cccccc 100.0%);*/
+    -fx-background-color:transparent;
 }
 
 .table-view .column-header-background .label{
     -fx-background-color: transparent; 
-    /*-fx-font-weight:bold;*/
-    /*-fx-text-fill: white;*/
 }
 
 .table-view .table-column{
@@ -322,9 +322,7 @@ add-to-cart-btn{
 }
 
 .table-row-cell{
-    /*-fx-opacity:0.5;*/
-    /*-fx-background-color:darkgray; */
-    -fx-cell-size: 50px;
+    -fx-cell-size: 45px;
 }
 
 /* .table-row-cell */
@@ -337,16 +335,7 @@ add-to-cart-btn{
 
 .table-row-cell:disabled .text{
     /*-fx-strikethrough:  true ;*/
-} 
-
-.table-row-cell .text{
-    /*-fx-font-weight:bold;*/
-    /*-fx-fill: #333333;*/
-} 
-
-/*.table-row-cell:focused .text {
-     -fx-fill: white ;
-} */
+}
 
 .table-view .table-row-cell:hover .text , .table-row-cell:selected .text{
     -fx-fill: #777777; 
@@ -361,7 +350,6 @@ add-to-cart-btn{
     -fx-size:50;
     -fx-table-cell-border-color: transparent;
     -fx-border-width: 1;
-
 }
 
 .table-view .table-row-cell:focused:disabled{ 
@@ -435,10 +423,6 @@ add-to-cart-btn{
     -fx-font-size: 24px;
     -fx-text-fill: #666666;
     -fx-alignment: center-left;
-}
-
-.window-title-line{
-
 }
 
 /*Flat button example */

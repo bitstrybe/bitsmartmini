@@ -31,7 +31,7 @@
                         <ChoiceBox fx:id="customerdroplist" prefHeight="71.0" prefWidth="624.0" />
                      </children>
                   </HBox>
-                  <ButtonBar buttonMinWidth="82.0" buttonOrder="%key.unspecified" prefHeight="55.0" prefWidth="188.0">
+                  <ButtonBar buttonMinWidth="82.0" prefHeight="55.0" prefWidth="188.0">
                      <buttons>
                         <JFXButton id="action-btn" buttonType="RAISED" contentDisplay="TOP" minWidth="-Infinity" onAction="#addDiscountbtn" prefHeight="55.0" prefWidth="82.0" styleClass="alldefaultbtn" text="Discount">
                            <graphic>
