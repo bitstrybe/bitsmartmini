@@ -240,9 +240,9 @@ public class CatalogController extends MainAppController implements Initializabl
                                                 if (qntfield <= balance) {
                                                     double totalqnt = qntfield * items.getSp();
                                                     SelectItemSaleTableModel item = new SelectItemSaleTableModel(items.getUpc(), items.getItemDesc(), childControllerQnt.qnttextfield.getText(), DecimalUtil.format2(items.getCp()), DecimalUtil.format2(items.getSp()), DecimalUtil.format2(totalqnt), "0");
-                                                    System.out.println("item: "+items.getUpc());
-                                                    System.out.println("item1: "+item.getItemCode());
-                                                    System.out.println("qty: "+totalqnt);
+                                                    System.out.println("item: " + items.getUpc());
+                                                    System.out.println("item1: " + item.getItemCode());
+                                                    System.out.println("qty: " + totalqnt);
                                                     cart.put(items.getUpc(), item);
                                                     static_label.setText(String.valueOf(cart.size()));
                                                     childControllerQnt.addtocartinfo.setText("item has been added to cart");
@@ -285,9 +285,14 @@ public class CatalogController extends MainAppController implements Initializabl
         itemsearch.textProperty().addListener(e -> {
             //if (itemsearch.getText().length() > 4) {
             getStockingItemList(itemsearch.getText());
-//            } else {
-//                getStockingItemList("");
-//            }
+            //itemsearch.setInputMethodRequests(value);
+
+        });
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                itemsearch.requestFocus();
+            }
         });
 
     }

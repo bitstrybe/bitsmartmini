@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
@@ -11,20 +10,16 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="homebackground" alignment="CENTER" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.CatalogController">
+<VBox id="homebackground" alignment="TOP_CENTER" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.CatalogController">
    <children>
-      <HBox alignment="CENTER" styleClass="window-title">
+      <HBox alignment="TOP_CENTER" styleClass="window-title">
          <children>
-            <ButtonBar prefHeight="34.0" prefWidth="1042.0">
-               <buttons>
-                  <FontAwesomeIcon fill="#ababab" glyphName="SEARCH" size="2em" wrappingWidth="25.142857551574707" />
-                  <JFXTextField fx:id="itemsearch" focusColor="#313132" labelFloat="true" prefHeight="34.0" prefWidth="964.0" promptText="Search for an item" unFocusColor="#a8a5a5">
-                     <font>
-                        <Font name="Open Sans" size="16.0" />
-                     </font>
-                  </JFXTextField>
-               </buttons>
-            </ButtonBar>
+            <FontAwesomeIcon fill="#ababab" glyphName="SEARCH" size="2em" wrappingWidth="25.142857551574707" />
+            <JFXTextField fx:id="itemsearch" focusColor="#313132" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="500.0" promptText="Search for an item" unFocusColor="#a8a5a5">
+               <font>
+                  <Font name="Open Sans" size="16.0" />
+               </font>
+            </JFXTextField>
          </children>
          <VBox.margin>
             <Insets top="10.0" />

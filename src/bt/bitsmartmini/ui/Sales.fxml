@@ -15,25 +15,25 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="homebackground" alignment="TOP_CENTER" prefHeight="643.0" prefWidth="1189.0" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.SalesController">
+<VBox id="homebackground" alignment="TOP_CENTER" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.SalesController">
    <children>
-      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="56.0" prefWidth="1189.0" spacing="10.0">
+      <HBox alignment="CENTER" spacing="10.0">
          <children>
-            <JFXTextField focusColor="#807e7e" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="456.0" promptText="Sales Search" unFocusColor="#9e9e9e">
+            <JFXTextField focusColor="#807e7e" labelFloat="true" prefHeight="30.0" prefWidth="378.0" promptText="Sales Search" unFocusColor="#9e9e9e">
                <font>
                   <Font name="Open Sans" size="14.0" />
                </font>
             </JFXTextField>
             <DatePicker fx:id="startdate" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="27.0" prefWidth="180.0" promptText="Start Date" />
-            <DatePicker fx:id="enddate" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="180.0" promptText="End Date" />
+            <DatePicker fx:id="enddate" editable="false" promptText="End Date" />
             <ButtonBar maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="55.0" prefWidth="157.0">
                <buttons>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minWidth="51.0" mnemonicParsing="false" onAction="#filterdate" prefHeight="26.0">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#filterdate">
                      <graphic>
                         <FontAwesomeIcon glyphName="SEARCH" />
                      </graphic>
                   </Button>
-                  <Button fx:id="salespdfbtn" minWidth="54.0" mnemonicParsing="false" onAction="#salesPDF" prefHeight="27.0" text="PDF">
+                  <Button fx:id="salespdfbtn" mnemonicParsing="false" onAction="#salesPDF" text="PDF">
                      <graphic>
                         <FontAwesomeIcon glyphName="PRINT" />
                      </graphic>
@@ -50,7 +50,7 @@
       </HBox>
       <HBox alignment="CENTER" prefWidth="1086.0">
          <children>
-            <Line endX="170.7347412109375" startX="-1009.5581665039062" styleClass="linecolor" HBox.hgrow="ALWAYS" />
+            <Line endX="-613.2652587890625" startX="-1009.5581665039062" styleClass="linecolor" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <ScrollPane style="-fx-background-color: white;">
