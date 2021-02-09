@@ -17,348 +17,355 @@
 
 <ScrollPane id="homebackground" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge" stylesheets="@style.css" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.DashboardController">
    <content>
-      <VBox alignment="CENTER_RIGHT" prefHeight="684.0" prefWidth="1086.0" spacing="10.0">
+      <VBox alignment="TOP_CENTER" spacing="10.0">
          <children>
-            <HBox alignment="CENTER_RIGHT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="166.0" styleClass="window-title">
+            <HBox alignment="CENTER_RIGHT" styleClass="window-title">
                <children>
-                  <ChoiceBox fx:id="yearchoicbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="151.0" />
+                  <ChoiceBox fx:id="yearchoicbox">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin></ChoiceBox>
                </children>
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefWidth="1086.0">
+            <VBox alignment="TOP_CENTER">
                <children>
-                  <Line endX="170.7347412109375" startX="-1009.5581665039062" styleClass="linecolor" HBox.hgrow="ALWAYS" />
-               </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </HBox>
-                <HBox alignment="CENTER" prefWidth="1086.0" spacing="10.0">
-                    <children>
-                  <FlowPane fx:id="dashboardcards" alignment="CENTER" columnHalignment="CENTER" hgap="8.0" vgap="10.0" HBox.hgrow="ALWAYS">
+                  <HBox alignment="CENTER" prefWidth="1086.0">
                      <children>
-                        <HBox fx:id="dailysalescard" style="-fx-background-color: #1faa00;" styleClass="dashboard-card">
-                           <children>
-                                    <VBox alignment="CENTER" styleClass="dashboard-card" HBox.hgrow="ALWAYS">
-                                        <children>
-                                            <HBox alignment="CENTER_RIGHT">
-                                                <children>
-                                                    <Label fx:id="dailysalesCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                                </children>
-                                       <padding>
-                                          <Insets right="30.0" />
-                                       </padding>
-                                            </HBox>
-                                            <HBox alignment="CENTER">
-                                                <children>
-                                                    <Text fx:id="dailysales" fill="#003d00" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-label" text="0">
-                                                        <font>
-                                                            <Font name="Open Sans" size="16.0" />
-                                                        </font>
-                                                    </Text>
-                                                </children>
-                                            </HBox>
-                                    <HBox VBox.vgrow="ALWAYS">
-                                       <children>
-                                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Today's Sales" textAlignment="CENTER" wrappingWidth="80.24267578125" HBox.hgrow="ALWAYS">
-                                             <font>
-                                                <Font name="Open Sans" size="11.0" />
-                                             </font></Text>
-                                       </children>
-                                    </HBox>
-                                        </children>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                    </VBox>
-                           </children>
-                        </HBox>
-                        <HBox fx:id="weeklysalescard" style="-fx-background-color: #ffd600;" styleClass="dashboard-card">
-                           <children>
-                                    <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                        <children>
-                                    <HBox alignment="CENTER_RIGHT">
-                                       <children>
-                                          <Label fx:id="weeklySalesCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                       <padding>
-                                          <Insets right="30.0" />
-                                       </padding>
-                                    </HBox>
-                                            <HBox alignment="CENTER" styleClass="dashboard-card-label">
-                                                <children>
-                                                    <Text fx:id="weeklysales" fill="#c7a500" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-label" text="0">
-                                                        <font>
-                                                            <Font name="Open Sans" size="16.0" />
-                                                        </font>
-                                                    </Text>
-                                                </children>
-                                            </HBox>
-                                    <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
-                                       <children>
-                                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Current Week" textAlignment="CENTER" wrappingWidth="114.24267578125" HBox.hgrow="ALWAYS">
-                                             <font>
-                                                <Font name="Open Sans" size="11.0" />
-                                             </font></Text>
-                                       </children>
-                                    </HBox>
-                                        </children>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                    </VBox>
-                           </children>
-                        </HBox>
-                        <HBox fx:id="monthlysalescard" alignment="CENTER" style="-fx-background-color: #90caf9;" styleClass="dashboard-card">
-                           <children>
-                                    <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                        <children>
-                                    <HBox alignment="CENTER_RIGHT">
-                                       <children>
-                                          <Label fx:id="monthlySalesCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                       <padding>
-                                          <Insets right="30.0" />
-                                       </padding>
-                                    </HBox>
-                                            <HBox alignment="CENTER" styleClass="dashboard-card-label">
-                                                <children>
-                                                    <Text fx:id="monthlysales" fill="#2286c3" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-label" text="0" HBox.hgrow="ALWAYS">
-                                                        <font>
-                                                            <Font name="Open Sans" size="16.0" />
-                                                        </font>
-                                                    </Text>
-                                                </children>
-                                            </HBox>
-                                    <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
-                                       <children>
-                                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Current  Month" textAlignment="CENTER" wrappingWidth="111.24267578125" HBox.hgrow="ALWAYS">
-                                             <font>
-                                                <Font name="Open Sans" size="11.0" />
-                                             </font></Text>
-                                       </children>
-                                    </HBox>
-                                        </children>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                    </VBox>
-                           </children>
-                        </HBox>
-                        <HBox fx:id="annualsalescard" alignment="CENTER" style="-fx-background-color: #f0f4c3;" styleClass="dashboard-card">
-                           <children>
-                                    <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                        <children>
-                                    <HBox alignment="CENTER_RIGHT">
-                                       <children>
-                                          <Label fx:id="yearlySalesCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                       <padding>
-                                          <Insets right="30.0" />
-                                       </padding>
-                                    </HBox>
-                                            <HBox alignment="CENTER">
-                                                <children>
-                                                    <Text fx:id="quaterlysales" fill="#cbc693" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-label" text="0">
-                                                        <font>
-                                                            <Font name="Open Sans" size="16.0" />
-                                                        </font>
-                                                    </Text>
-                                                </children>
-                                            </HBox>
-                                    <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
-                                       <children>
-                                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Current Year" textAlignment="CENTER" wrappingWidth="111.24267578125">
-                                             <font>
-                                                <Font name="Open Sans" size="11.0" />
-                                             </font></Text>
-                                       </children>
-                                    </HBox>
-                                        </children>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                    </VBox>
-                           </children>
-                        </HBox>
-                        <HBox fx:id="refundscard" alignment="CENTER" style="-fx-background-color: #e53935;" styleClass="dashboard-card">
-                           <children>
-                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <HBox alignment="CENTER_RIGHT">
-                                       <children>
-                                          <Label fx:id="refundsCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                       <padding>
-                                          <Insets right="30.0" />
-                                       </padding>
-                                    </HBox>
-                                    <HBox alignment="CENTER">
-                                       <children>
-                                          <Text fx:id="refunds" fill="#ab000d" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-label" text="0">
-                                             <font>
-                                                <Font name="Open Sans" size="16.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
-                                       <children>
-                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Today's Refunds" textAlignment="CENTER" wrappingWidth="104.24267578125">
-                                             <font>
-                                                <Font name="Open Sans" size="11.0" />
-                                             </font></Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox fx:id="creditscard" alignment="CENTER" style="-fx-background-color: #ce93d8;" styleClass="dashboard-card">
-                           <children>
-                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <HBox alignment="CENTER_RIGHT">
-                                       <children>
-                                          <Label fx:id="CreditsCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                       <padding>
-                                          <Insets right="30.0" />
-                                       </padding>
-                                    </HBox>
-                                    <HBox alignment="CENTER">
-                                       <children>
-                                          <Text fx:id="credits" fill="#b64fc8" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-label" text="0">
-                                             <font>
-                                                <Font name="Open Sans" size="16.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                    <HBox VBox.vgrow="ALWAYS">
-                                       <children>
-                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Today's Credits" textAlignment="CENTER" wrappingWidth="98.24267578125">
-                                             <font>
-                                                <Font name="Open Sans" size="11.0" />
-                                             </font></Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox fx:id="actualsalescard" alignment="CENTER" styleClass="dashboard-card">
-                           <children>
-                              <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <HBox alignment="CENTER_RIGHT">
-                                       <children>
-                                          <Label fx:id="actualsalesCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                       <padding>
-                                          <Insets right="30.0" />
-                                       </padding>
-                                    </HBox>
-                                    <HBox alignment="CENTER">
-                                       <children>
-                                          <Text fx:id="actualsales" fill="#969595" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-label" text="0">
-                                             <font>
-                                                <Font name="Open Sans" size="16.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                    <HBox VBox.vgrow="ALWAYS">
-                                       <children>
-                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Actual Sales" textAlignment="CENTER" wrappingWidth="80.24267578125" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </VBox>
-                           </children>
-                        </HBox>
+                        <Line endX="-552.2652587890625" startX="-1009.5581665039062" styleClass="linecolor" HBox.hgrow="ALWAYS" />
                      </children>
-                  </FlowPane>
-                    </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-                </HBox>
-            <HBox fx:id="chartbox" alignment="TOP_CENTER" spacing="10.0" VBox.vgrow="ALWAYS">
-               <children>
-                          <LineChart fx:id="linechartA" styleClass="chart-series-line" stylesheets="@style.css" title="Sales Analysis" HBox.hgrow="ALWAYS">
-                              <xAxis>
-                                  <CategoryAxis side="BOTTOM" tickLabelFill="#999999" fx:id="xAxis" />
-                              </xAxis>
-                              <yAxis>
-                                  <NumberAxis fx:id="yAxis" side="LEFT" tickLabelFill="#999999" />
-                              </yAxis>
-                              <effect>
-                                  <DropShadow color="#d3d0d0" />
-                              </effect>
-                          </LineChart>
-                  <LineChart fx:id="linechartB" styleClass="chart-series-line" stylesheets="@style.css" title="Stock Analysis" HBox.hgrow="ALWAYS">
-                     <xAxis>
-                        <CategoryAxis side="BOTTOM" tickLabelFill="#999999" fx:id="xAxis1" />
-                     </xAxis>
-                     <yAxis>
-                        <NumberAxis fx:id="yAxis1" side="LEFT" tickLabelFill="#999999" />
-                     </yAxis>
-                     <effect>
-                        <DropShadow color="#d3d0d0" />
-                     </effect>
-                  </LineChart>
+                  </HBox>
+                      <HBox alignment="CENTER" spacing="10.0">
+                          <children>
+                        <FlowPane fx:id="dashboardcards" alignment="CENTER" columnHalignment="CENTER" hgap="8.0" vgap="10.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <HBox fx:id="dailysalescard" style="-fx-background-color: #1faa00;" styleClass="dashboard-card">
+                                 <children>
+                                          <VBox alignment="CENTER" styleClass="dashboard-card" HBox.hgrow="ALWAYS">
+                                              <children>
+                                                  <HBox alignment="CENTER_RIGHT">
+                                                      <children>
+                                                          <Label fx:id="dailysalesCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                      </children>
+                                             <padding>
+                                                <Insets right="30.0" />
+                                             </padding>
+                                                  </HBox>
+                                                  <HBox alignment="CENTER">
+                                                      <children>
+                                                          <Text fx:id="dailysales" fill="#003d00" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-label" text="0">
+                                                              <font>
+                                                                  <Font name="Open Sans" size="16.0" />
+                                                              </font>
+                                                          </Text>
+                                                      </children>
+                                                  </HBox>
+                                          <HBox VBox.vgrow="ALWAYS">
+                                             <children>
+                                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Today's Sales" textAlignment="CENTER" wrappingWidth="80.24267578125" HBox.hgrow="ALWAYS">
+                                                   <font>
+                                                      <Font name="Open Sans" size="11.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                              </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                          </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="weeklysalescard" style="-fx-background-color: #ffd600;" styleClass="dashboard-card">
+                                 <children>
+                                          <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                                              <children>
+                                          <HBox alignment="CENTER_RIGHT">
+                                             <children>
+                                                <Label fx:id="weeklySalesCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <padding>
+                                                <Insets right="30.0" />
+                                             </padding>
+                                          </HBox>
+                                                  <HBox alignment="CENTER" styleClass="dashboard-card-label">
+                                                      <children>
+                                                          <Text fx:id="weeklysales" fill="#c7a500" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-label" text="0">
+                                                              <font>
+                                                                  <Font name="Open Sans" size="16.0" />
+                                                              </font>
+                                                          </Text>
+                                                      </children>
+                                                  </HBox>
+                                          <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Current Week" textAlignment="CENTER" wrappingWidth="114.24267578125" HBox.hgrow="ALWAYS">
+                                                   <font>
+                                                      <Font name="Open Sans" size="11.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                              </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                          </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="monthlysalescard" alignment="CENTER" style="-fx-background-color: #90caf9;" styleClass="dashboard-card">
+                                 <children>
+                                          <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                                              <children>
+                                          <HBox alignment="CENTER_RIGHT">
+                                             <children>
+                                                <Label fx:id="monthlySalesCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <padding>
+                                                <Insets right="30.0" />
+                                             </padding>
+                                          </HBox>
+                                                  <HBox alignment="CENTER" styleClass="dashboard-card-label">
+                                                      <children>
+                                                          <Text fx:id="monthlysales" fill="#2286c3" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-label" text="0" HBox.hgrow="ALWAYS">
+                                                              <font>
+                                                                  <Font name="Open Sans" size="16.0" />
+                                                              </font>
+                                                          </Text>
+                                                      </children>
+                                                  </HBox>
+                                          <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Current  Month" textAlignment="CENTER" wrappingWidth="111.24267578125" HBox.hgrow="ALWAYS">
+                                                   <font>
+                                                      <Font name="Open Sans" size="11.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                              </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                          </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="annualsalescard" alignment="CENTER" style="-fx-background-color: #f0f4c3;" styleClass="dashboard-card">
+                                 <children>
+                                          <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                                              <children>
+                                          <HBox alignment="CENTER_RIGHT">
+                                             <children>
+                                                <Label fx:id="yearlySalesCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <padding>
+                                                <Insets right="30.0" />
+                                             </padding>
+                                          </HBox>
+                                                  <HBox alignment="CENTER">
+                                                      <children>
+                                                          <Text fx:id="quaterlysales" fill="#cbc693" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-label" text="0">
+                                                              <font>
+                                                                  <Font name="Open Sans" size="16.0" />
+                                                              </font>
+                                                          </Text>
+                                                      </children>
+                                                  </HBox>
+                                          <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Current Year" textAlignment="CENTER" wrappingWidth="111.24267578125">
+                                                   <font>
+                                                      <Font name="Open Sans" size="11.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                              </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                          </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="refundscard" alignment="CENTER" style="-fx-background-color: #e53935;" styleClass="dashboard-card">
+                                 <children>
+                                    <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <HBox alignment="CENTER_RIGHT">
+                                             <children>
+                                                <Label fx:id="refundsCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <padding>
+                                                <Insets right="30.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox alignment="CENTER">
+                                             <children>
+                                                <Text fx:id="refunds" fill="#ab000d" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-label" text="0">
+                                                   <font>
+                                                      <Font name="Open Sans" size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Today's Refunds" textAlignment="CENTER" wrappingWidth="104.24267578125">
+                                                   <font>
+                                                      <Font name="Open Sans" size="11.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="creditscard" alignment="CENTER" style="-fx-background-color: #ce93d8;" styleClass="dashboard-card">
+                                 <children>
+                                    <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <HBox alignment="CENTER_RIGHT">
+                                             <children>
+                                                <Label fx:id="CreditsCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <padding>
+                                                <Insets right="30.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox alignment="CENTER">
+                                             <children>
+                                                <Text fx:id="credits" fill="#b64fc8" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-label" text="0">
+                                                   <font>
+                                                      <Font name="Open Sans" size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                          <HBox VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Today's Credits" textAlignment="CENTER" wrappingWidth="98.24267578125">
+                                                   <font>
+                                                      <Font name="Open Sans" size="11.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="actualsalescard" alignment="CENTER" styleClass="dashboard-card">
+                                 <children>
+                                    <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <HBox alignment="CENTER_RIGHT">
+                                             <children>
+                                                <Label fx:id="actualsalesCurr" styleClass="dashboard-color" text="GH¢" textAlignment="CENTER" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <padding>
+                                                <Insets right="30.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox alignment="CENTER">
+                                             <children>
+                                                <Text fx:id="actualsales" fill="#969595" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-label" text="0">
+                                                   <font>
+                                                      <Font name="Open Sans" size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                          <HBox VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-color" text="Actual Sales" textAlignment="CENTER" wrappingWidth="80.24267578125" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </FlowPane>
+                          </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                      </HBox>
+                  <HBox fx:id="chartbox" alignment="CENTER" spacing="10.0">
+                     <children>
+                                <LineChart fx:id="linechartA" styleClass="chart-series-line" stylesheets="@style.css" title="Sales Analysis" HBox.hgrow="ALWAYS">
+                                    <xAxis>
+                                        <CategoryAxis side="BOTTOM" tickLabelFill="#999999" fx:id="xAxis" />
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis fx:id="yAxis" side="LEFT" tickLabelFill="#999999" />
+                                    </yAxis>
+                                    <effect>
+                                        <DropShadow color="#d3d0d0" />
+                                    </effect>
+                                </LineChart>
+                        <LineChart fx:id="linechartB" styleClass="chart-series-line" stylesheets="@style.css" title="Stock Analysis" HBox.hgrow="ALWAYS">
+                           <xAxis>
+                              <CategoryAxis side="BOTTOM" tickLabelFill="#999999" fx:id="xAxis1" />
+                           </xAxis>
+                           <yAxis>
+                              <NumberAxis fx:id="yAxis1" side="LEFT" tickLabelFill="#999999" />
+                           </yAxis>
+                           <effect>
+                              <DropShadow color="#d3d0d0" />
+                           </effect>
+                        </LineChart>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
                </children>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-            </HBox>
+            </VBox>
          </children>
       </VBox>
    </content>
    <padding>
-      <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
 </ScrollPane>

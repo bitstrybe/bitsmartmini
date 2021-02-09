@@ -145,31 +145,31 @@
                         <Line endX="1.1715726852416992" endY="78.29289245605469" opacity="0.45" stroke="#3f3f3f" styleClass="linecolor-dark" />
                      </children>
                   </VBox>
-                  <VBox fx:id="dashboard" alignment="CENTER" spacing="1.0" HBox.hgrow="NEVER">
+                  <VBox fx:id="dashboard" alignment="CENTER" maxWidth="-Infinity" prefWidth="120.0" spacing="1.0" HBox.hgrow="NEVER">
                      <children>
                         <FontAwesomeIcon fx:id="dashawesome" fill="#dddee0" glyphName="TH_LARGE" size="2.5em" styleClass="vboxmenuicon" textAlignment="CENTER" wrappingWidth="95.62142753601074" />
                         <Text fx:id="dashtext" fill="#dddee0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="vboxmenuicon" text="Dashboard" textAlignment="CENTER" wrappingWidth="99.08100128173828" />
                      </children>
                   </VBox>
-                  <VBox fx:id="catalog" alignment="CENTER" spacing="1.0" HBox.hgrow="NEVER">
+                  <VBox fx:id="catalog" alignment="CENTER" maxWidth="-Infinity" prefWidth="120.0" spacing="1.0" HBox.hgrow="NEVER">
                      <children>
                         <FontAwesomeIcon fx:id="catalogawesome" fill="#dddee0" glyphName="TH" size="2.5em" textAlignment="CENTER" wrappingWidth="98.62142753601074" />
                         <Text fx:id="catalogtext" fill="#dddee0" strokeType="OUTSIDE" strokeWidth="0.0" text="Catalog" textAlignment="CENTER" wrappingWidth="100.580078125" />
                      </children>
                   </VBox>
-                  <VBox fx:id="sales" alignment="CENTER" spacing="1.0" HBox.hgrow="NEVER">
+                  <VBox fx:id="sales" alignment="CENTER" maxWidth="-Infinity" prefWidth="120.0" spacing="1.0" HBox.hgrow="NEVER">
                      <children>
                         <FontAwesomeIcon fx:id="salesawesome" fill="#dddee0" glyphName="TAGS" size="2.5em" textAlignment="CENTER" wrappingWidth="92.62142753601074" />
                         <Text fx:id="salestext" fill="#dddee0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sales Activity" textAlignment="CENTER" wrappingWidth="96.35107421875" />
                      </children>
                   </VBox>
-                  <VBox fx:id="stocks" alignment="CENTER" spacing="1.0" HBox.hgrow="NEVER">
+                  <VBox fx:id="stocks" alignment="CENTER" maxWidth="-Infinity" prefWidth="120.0" spacing="1.0" HBox.hgrow="NEVER">
                      <children>
                         <FontAwesomeIcon fx:id="stockawesome" fill="#dddee0" glyphName="BARS" size="2.5em" textAlignment="CENTER" wrappingWidth="71.62142753601074" />
                         <Text fx:id="stocktext" fill="#dddee0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stock Activity" textAlignment="CENTER" wrappingWidth="90.35107421875" />
                      </children>
                   </VBox>
-                  <VBox fx:id="backup" alignment="CENTER" spacing="1.0" HBox.hgrow="NEVER">
+                  <VBox fx:id="backup" alignment="CENTER" maxWidth="-Infinity" prefWidth="120.0" spacing="1.0" HBox.hgrow="NEVER">
                      <children>
                         <FontAwesomeIcon fx:id="backupawesome" fill="#dddee0" glyphName="DATABASE" size="2.5em" textAlignment="CENTER" wrappingWidth="68.62142753601074" />
                         <Text fx:id="backuptext" fill="#dddee0" strokeType="OUTSIDE" strokeWidth="0.0" text="Backup" textAlignment="CENTER" wrappingWidth="70.1962890625" />
@@ -180,9 +180,9 @@
                         <Line opacity="0.45" startX="0.2928932309150696" startY="78.29287719726562" stroke="#3f3f3f" styleClass="linecolor" />
                      </children>
                   </VBox>
-                  <VBox fx:id="cartbox" alignment="CENTER" spacing="1.0" HBox.hgrow="NEVER">
+                  <VBox fx:id="cartbox" alignment="CENTER" maxWidth="-Infinity" prefWidth="120.0" spacing="1.0" HBox.hgrow="NEVER">
                      <children>
-                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+                        <StackPane>
                            <children>
                               <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -201,7 +201,7 @@
                         </StackPane>
                      </children>
                      <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets />
                      </HBox.margin>
                   </VBox>
                </children>
