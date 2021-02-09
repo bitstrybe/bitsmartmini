@@ -35,6 +35,7 @@ import bt.bitsmartmini.tablemodel.SalesTableModel;
 import bt.bitsmartmini.tablemodel.SelectItemSaleTableModel;
 import static bt.bitsmartmini.ui.MainAppController.cart;
 import static bt.bitsmartmini.ui.MainAppController.static_label;
+import javafx.scene.Node;
 import lxe.utility.math.DecimalUtil;
 
 /**
@@ -285,16 +286,36 @@ public class CatalogController extends MainAppController implements Initializabl
         itemsearch.textProperty().addListener(e -> {
             //if (itemsearch.getText().length() > 4) {
             getStockingItemList(itemsearch.getText());
-            //itemsearch.setInputMethodRequests(value);
-
         });
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                itemsearch.requestFocus();
-            }
-        });
+//        Platform.runLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                itemsearch.requestFocus();
+//            }
+//        });
+        repeatFocus(itemsearch);
 
     }
 
+    private void repeatFocus(Node node) {
+        Platform.runLater(() -> {
+            if (!node.isFocused()) {
+                node.requestFocus();
+                repeatFocus(node);
+            }
+        });
+    }
+
+    private void requestFocus(final Node node, final int max) {
+        if (max > 3) {
+            Platform.runLater(
+                    () -> {
+                        if (!node.isFocused()) {
+                            node.requestFocus();
+                            requestFocus(node, max - 1);
+                        }
+                    }
+            );
+        }
+    }
 }

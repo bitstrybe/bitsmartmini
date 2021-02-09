@@ -27,7 +27,7 @@
       </HBox>
       <HBox alignment="CENTER">
          <children>
-            <Line endX="-711.0581665039062" startX="-1009.5581665039062" styleClass="linecolor" />
+            <Line endX="-528.0581665039062" startX="-1009.5581665039062" styleClass="linecolor" />
          </children>
       </HBox>
       <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: transparent;">

@@ -48,7 +48,7 @@
             <Insets top="10.0" />
          </VBox.margin>
       </HBox>
-      <HBox alignment="CENTER" prefWidth="1086.0">
+      <HBox alignment="CENTER">
          <children>
             <Line endX="-613.2652587890625" startX="-1009.5581665039062" styleClass="linecolor" HBox.hgrow="ALWAYS" />
          </children>
@@ -61,20 +61,20 @@
                      <children>
                         <TableView fx:id="salestable" style="-fx-background-color: white;">
                            <columns>
-                              <TableColumn fx:id="salescodetb" prefWidth="100.0" text="Sales Code" />
-                              <TableColumn fx:id="saledatetb" prefWidth="150.0" text="Date" />
-                              <TableColumn fx:id="customertb" prefWidth="390.0" styleClass="align_table_left" text="Customer" />
-                              <TableColumn fx:id="salespricetb" prefWidth="150.0" text="Expectd Sales" />
-                              <TableColumn fx:id="saleamountpaidtb" prefWidth="150.0" text="Amount" />
-                              <TableColumn fx:id="balancetb" prefWidth="150.0" text="Outstandings" />
-                              <TableColumn fx:id="refunds" prefWidth="150.0" text="Refunds" />
-                              <TableColumn fx:id="actuals" prefWidth="150.0" text="Actuals" />
+                              <TableColumn fx:id="salescodetb" text="Sales Code" />
+                              <TableColumn fx:id="saledatetb" text="Date" />
+                              <TableColumn fx:id="customertb" prefWidth="200.0" styleClass="align_table_left" text="Customer" />
+                              <TableColumn fx:id="salespricetb" prefWidth="90.0" text="Sales" />
+                              <TableColumn fx:id="saleamountpaidtb" text="Amount" />
+                              <TableColumn fx:id="balancetb" prefWidth="100.0" text="Outstandings" />
+                              <TableColumn fx:id="refunds" text="Refunds" />
+                              <TableColumn fx:id="actuals" text="Actuals" />
                               <TableColumn fx:id="action" prefWidth="60.0" text="Action" />
                            </columns>
                         </TableView>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="14.0" prefWidth="1256.0">
+                  <HBox alignment="CENTER">
                      <children>
                         <Label alignment="CENTER" text="Sales Details" textFill="#686868" HBox.hgrow="ALWAYS">
                            <font>
@@ -89,7 +89,7 @@
                            <columns>
                               <TableColumn fx:id="salesdetailsdate" prefWidth="100.0" resizable="false" text="Date" />
                               <TableColumn fx:id="sditemcode" minWidth="30.0" prefWidth="150.0" resizable="false" styleClass="align_table_left" text="Barcode" />
-                              <TableColumn fx:id="sditemname" prefWidth="500.0" resizable="false" styleClass="align_table_left" text="Items Desc" />
+                              <TableColumn fx:id="sditemname" prefWidth="200.0" resizable="false" styleClass="align_table_left" text="Items Desc" />
                               <TableColumn fx:id="sdqtyCol" resizable="false" text="Qty" />
                               <TableColumn fx:id="sdrtdCol" resizable="false" text="RTD" />
                               <TableColumn fx:id="sdpriceCol" prefWidth="100.0" resizable="false" text="price" />
@@ -103,7 +103,7 @@
                   </HBox>
                   <HBox>
                      <children>
-                        <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                        <HBox alignment="CENTER" HBox.hgrow="NEVER">
                            <children>
                               <Label alignment="CENTER" text="Returns" textFill="#686868">
                                  <font>
@@ -114,7 +114,7 @@
                         </HBox>
                         <HBox alignment="CENTER">
                            <children>
-                              <Label alignment="CENTER" prefHeight="20.0" prefWidth="555.0" text="Receipts" textFill="#686868" HBox.hgrow="ALWAYS">
+                              <Label alignment="CENTER" text="Receipts" textFill="#686868" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Open Sans" size="14.0" />
                                  </font>
@@ -127,19 +127,19 @@
                      <children>
                         <TableView fx:id="paymenttable" style="-fx-background-color: white;" HBox.hgrow="ALWAYS">
                            <columns>
-                              <TableColumn fx:id="receiptno" prefWidth="97.0" resizable="false" text="Receipt #" />
-                              <TableColumn fx:id="receiptdate" prefWidth="150.0" resizable="false" text="Date" />
-                              <TableColumn fx:id="amountpaidtb" prefWidth="150.0" resizable="false" text="Amount" />
-                              <TableColumn fx:id="mode" prefWidth="150.0" text="Mode" />
-                              <TableColumn fx:id="preview" prefWidth="200.0" text="Preview" />
+                              <TableColumn fx:id="receiptno" resizable="false" text="Receipt #" />
+                              <TableColumn fx:id="receiptdate" resizable="false" text="Date" />
+                              <TableColumn fx:id="amountpaidtb" resizable="false" text="Amount" />
+                              <TableColumn fx:id="mode" text="Mode" />
+                              <TableColumn fx:id="preview" text="Preview" />
                            </columns>
                         </TableView>
                         <TableView fx:id="returnstable" style="-fx-background-color: white;" HBox.hgrow="ALWAYS">
                           <columns>
-                            <TableColumn fx:id="rdate" prefWidth="150.0" text="Returned Date" />
-                            <TableColumn fx:id="rqty" prefWidth="150.0" text="Qty" />
-                              <TableColumn fx:id="ramnt" prefWidth="150.0" text="Unit Price" />
-                              <TableColumn fx:id="refunded" prefWidth="150.0" text="Refunded" />
+                            <TableColumn fx:id="rdate" text="Date" />
+                            <TableColumn fx:id="rqty" text="Qty" />
+                              <TableColumn fx:id="ramnt" text="Unit Price" />
+                              <TableColumn fx:id="refunded" text="Refunded" />
                           </columns>
                         </TableView>
                      </children>
