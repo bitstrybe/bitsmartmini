@@ -11,7 +11,6 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox id="homebackground" alignment="CENTER" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.CatalogController">
    <children>
       <HBox alignment="CENTER" styleClass="window-title">
@@ -33,16 +32,12 @@
       </HBox>
       <HBox alignment="CENTER">
          <children>
-            <Line endX="170.7347412109375" startX="-1009.5581665039062" styleClass="linecolor" />
+            <Line endX="-711.0581665039062" startX="-1009.5581665039062" styleClass="linecolor" />
          </children>
       </HBox>
-      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="600.0" prefWidth="1085.0" style="-fx-background-color: transparent;">
+      <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: transparent;">
          <content>
-            <FlowPane fx:id="displaypane" alignment="CENTER" columnHalignment="CENTER" prefHeight="611.0" prefWidth="1080.0" prefWrapLength="100.0">
-               <padding>
-                  <Insets left="35.0" />
-               </padding>
-            </FlowPane>
+            <FlowPane fx:id="displaypane" alignment="CENTER" columnHalignment="CENTER" prefWrapLength="100.0" />
          </content>
       </ScrollPane>
    </children>

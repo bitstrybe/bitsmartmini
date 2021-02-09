@@ -14,13 +14,13 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<HBox alignment="CENTER" prefHeight="341.0" prefWidth="256.0" spacing="1.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.ItemsDisplayController">
+<HBox alignment="CENTER" spacing="1.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.ItemsDisplayController">
    <children>
       <VBox alignment="CENTER" prefHeight="321.0" prefWidth="237.0" style="-fx-background-color: #FFFFFE;" styleClass="form_border_color">
          <children>
             <StackPane>
                <children>
-                  <ImageView fx:id="itemsimage" fitHeight="140.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
+                  <ImageView fx:id="itemsimage" fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
                   <HBox alignment="CENTER_RIGHT">
                      <children>
                         <HBox fx:id="outofstockbackground" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.78" prefHeight="18.0" prefWidth="62.0" style="-fx-background-color: RED;" HBox.hgrow="NEVER">
@@ -42,7 +42,7 @@
                   <Insets left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
             </StackPane>
-            <HBox alignment="CENTER" layoutX="11.0" layoutY="201.0" prefHeight="25.0" prefWidth="247.0">
+            <HBox alignment="CENTER" layoutX="11.0" layoutY="201.0">
                <children>
                   <Label fx:id="itembcode" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" prefHeight="22.0" prefWidth="227.0" style="-fx-border-color: #f5f0f0; -fx-border-width: 1;" text="Label" textAlignment="CENTER" textFill="#797878" wrapText="true" HBox.hgrow="ALWAYS">
                      <font>
@@ -57,7 +57,7 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="247.0" VBox.vgrow="ALWAYS">
+            <HBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -87,7 +87,7 @@
                   <Insets bottom="5.0" top="5.0" />
                </padding>
             </HBox>
-            <TextFlow prefHeight="13.0" prefWidth="247.0" textAlignment="CENTER">
+            <TextFlow textAlignment="CENTER">
                <children>
                   <Text fx:id="qty" strokeType="OUTSIDE" strokeWidth="0.0" text=" CURR ">
                      <font>
@@ -108,7 +108,7 @@
                   <Line endX="143.2928924560547" endY="0.2928932309150696" fill="#e1dcdc" opacity="0.13" startX="-100.0" stroke="#4a4848" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="245.0">
+            <HBox alignment="CENTER">
                <children>
                   <Label fx:id="curr" alignment="BOTTOM_CENTER" contentDisplay="CENTER" graphicTextGap="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.47" prefHeight="18.0" prefWidth="27.0" text="c" HBox.hgrow="ALWAYS">
                      <font>

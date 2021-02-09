@@ -53,13 +53,13 @@
             <Line endX="170.7347412109375" startX="-1009.5581665039062" styleClass="linecolor" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
-      <ScrollPane style="-fx-background-color: transpaarent;">
+      <ScrollPane style="-fx-background-color: white;">
          <content>
             <VBox style="-fx-background-color: transparent;">
                <children>
                   <HBox minHeight="-Infinity" prefHeight="250.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <TableView fx:id="salestable" style="-fx-background-color: transparent;">
+                        <TableView fx:id="salestable" style="-fx-background-color: white;">
                            <columns>
                               <TableColumn fx:id="salescodetb" prefWidth="100.0" text="Sales Code" />
                               <TableColumn fx:id="saledatetb" prefWidth="150.0" text="Date" />
@@ -85,7 +85,7 @@
                   </HBox>
                   <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="200.0">
                      <children>
-                        <TableView fx:id="salesdetailstable" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                        <TableView fx:id="salesdetailstable" style="-fx-background-color: white;" HBox.hgrow="ALWAYS">
                            <columns>
                               <TableColumn fx:id="salesdetailsdate" prefWidth="100.0" resizable="false" text="Date" />
                               <TableColumn fx:id="sditemcode" minWidth="30.0" prefWidth="150.0" resizable="false" styleClass="align_table_left" text="Barcode" />
@@ -125,7 +125,7 @@
                   </HBox>
                   <HBox alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="200.0">
                      <children>
-                        <TableView fx:id="paymenttable" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                        <TableView fx:id="paymenttable" style="-fx-background-color: white;" HBox.hgrow="ALWAYS">
                            <columns>
                               <TableColumn fx:id="receiptno" prefWidth="97.0" resizable="false" text="Receipt #" />
                               <TableColumn fx:id="receiptdate" prefWidth="150.0" resizable="false" text="Date" />
@@ -134,7 +134,7 @@
                               <TableColumn fx:id="preview" prefWidth="200.0" text="Preview" />
                            </columns>
                         </TableView>
-                        <TableView fx:id="returnstable" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                        <TableView fx:id="returnstable" style="-fx-background-color: white;" HBox.hgrow="ALWAYS">
                           <columns>
                             <TableColumn fx:id="rdate" prefWidth="150.0" text="Returned Date" />
                             <TableColumn fx:id="rqty" prefWidth="150.0" text="Qty" />
