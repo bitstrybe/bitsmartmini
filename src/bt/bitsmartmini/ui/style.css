@@ -2,6 +2,7 @@
     Created on : Feb 9, 2020, 8:04:47 PM
     Author     : Bitstrybe Inc www.bitstrybe.com
 */
+
 #rootPane{
     -fx-background-image:url(bitmartsmini.jpg);
     -fx-background-size: cover;
@@ -129,6 +130,9 @@
 }
 .closebtn{
     -fx-background-color: #cccccc;
+}
+.closebtn:hover{
+    -fx-background-color: #999999;
 }
 /*.button{
     -fx-border-color: transparent;

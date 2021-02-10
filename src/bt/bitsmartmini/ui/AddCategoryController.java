@@ -343,7 +343,7 @@ public class AddCategoryController implements Initializable {
 
     }
 
-    private void saveTemplate() {
+    public void saveTemplate() {
         displayinfo.textProperty().unbind();
         Category cat = new Category();
         cat.setCategoryName(cattextfield.getText());
@@ -352,7 +352,6 @@ public class AddCategoryController implements Initializable {
         int result = new InsertUpdateBL().insertData(cat);
         switch (result) {
             case 1:
-
                 closeTransition();
                 break;
             default:

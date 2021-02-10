@@ -62,6 +62,7 @@ import bt.bitsmartmini.entity.Users;
 import bt.bitsmartmini.tablemodel.ItemTableModel;
 import bt.bitsmartmini.utils.FilterComboBox;
 import bt.bitsmartmini.utils.Utilities;
+import javafx.scene.paint.Color;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.text.WordUtils;
@@ -129,7 +130,7 @@ public class AddItemsController implements Initializable {
     @FXML
     private TableColumn<ItemTableModel, String> barcode;
     @FXML
-    private JFXTextField barcodetxt;
+    public JFXTextField barcodetxt;
     @FXML
     private JFXTextField cptxt;
     @FXML
@@ -297,6 +298,42 @@ public class AddItemsController implements Initializable {
 //        clientTable.getColumns().add(action);
         itemtableview.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
 
+    }
+
+    @FXML
+    private void addCategoryAction(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddCategory.fxml"));
+        Parent parent = (Parent) fxmlLoader.load();
+        AddCategoryController childController = fxmlLoader.getController();
+        childController.saveTemplate();
+        getCategory();
+        Scene scene = new Scene(parent);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setMaximized(true);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(parent.getScene().getWindow());
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.show();
+    }
+
+    @FXML
+    private void addBrandsAction(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddBrand.fxml"));
+        Parent parent = (Parent) fxmlLoader.load();
+        AddBrandController childController = fxmlLoader.getController();
+        childController.saveTemplate();
+        getBrands();
+        Scene scene = new Scene(parent);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setMaximized(true);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(parent.getScene().getWindow());
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.show();
     }
 
     public class AddPersonCell extends TableCell<ItemTableModel, Boolean> {

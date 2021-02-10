@@ -37,6 +37,8 @@ import static bt.bitsmartmini.ui.MainAppController.cart;
 import static bt.bitsmartmini.ui.MainAppController.static_label;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
+import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import lxe.utility.math.DecimalUtil;
 
 /**
@@ -285,12 +287,16 @@ public class CatalogController extends MainAppController implements Initializabl
     public void initialize(URL url, ResourceBundle rb) {
         getStockingItemList("");
         repeatFocus(itemsearch);
+//        itemsearch.textProperty().addListener(v -> {
+//            if (displaypane.getChildren().isEmpty()) {
+//                System.out.println("Empty List");
+//            }
+//        });
 
-        itemsearch.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("textfield changed from " + oldValue + " to " + newValue);
-            itemsearch.clear();
-            itemsearch.setText(newValue);
-        });
+//        itemsearch.textProperty().addListener((observable, oldValue, newValue) -> {
+//            System.out.println(newValue);
+//
+//        });
     }
 
     private void repeatFocus(Node node) {
@@ -316,9 +322,27 @@ public class CatalogController extends MainAppController implements Initializabl
     }
 
     @FXML
-    private void searchitemsaction(ActionEvent event) {
-//        String text = itemsearch.getText();
-//        itemsearch.clear();
+    private void searchitemsaction(ActionEvent event) throws IOException {
+        itemsearch.selectAll();
         getStockingItemList(itemsearch.getText());
+        List<Items> list = new ItemsBL().searchAllItems(itemsearch.getText());
+        if (list.isEmpty()) {
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddItems.fxml"));
+            Parent parent = (Parent) fxmlLoader.load();
+            AddItemsController childContorller = fxmlLoader.getController();
+            childContorller.barcodetxt.setText(itemsearch.getText());
+            Scene scene = new Scene(parent);
+            scene.setFill(Color.TRANSPARENT);
+            stage.setMaximized(true);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(parent.getScene().getWindow());
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.show();
+        } else {
+
+        }
+
     }
 }
