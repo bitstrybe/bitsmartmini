@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="226" pageHeight="504" whenNoDataType="BlankPage" columnWidth="212" leftMargin="7" rightMargin="7" topMargin="7" bottomMargin="7" isIgnorePagination="true" uuid="eca1266b-c5c3-49a6-99eb-a3da2e599c35">
 	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="806"/>
+	<property name="ireport.y" value="784"/>
 	<style name="balance">
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$V{BAL} < 0.00]]></conditionExpression>
@@ -37,6 +37,8 @@
 	<parameter name="CUSTOMER" class="java.lang.String"/>
 	<parameter name="CUSTMOBILE" class="java.lang.String"/>
 	<parameter name="RECEIPTDATE" class="java.lang.String"/>
+	<parameter name="REFUND_POLICY" class="java.lang.String"/>
+	<parameter name="SOLDBY" class="java.lang.String"/>
 	<field name="COLUMN_0" class="java.lang.String"/>
 	<field name="COLUMN_1" class="java.lang.String"/>
 	<field name="COLUMN_2" class="java.lang.Integer"/>
@@ -307,7 +309,7 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="140" splitType="Stretch">
+		<band height="170" splitType="Stretch">
 			<textField pattern="#,##0.00">
 				<reportElement style="tableHead" x="128" y="0" width="84" height="12" uuid="3b53c9b0-59ee-404e-a253-b344cdeb8f01"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -365,14 +367,13 @@
 				</textElement>
 				<textFieldExpression><![CDATA[0.00]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="0" y="125" width="212" height="9" forecolor="#666666" uuid="29b68550-83c0-45bb-b3bc-55cb2c7935ae"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+			<textField>
+				<reportElement x="0" y="125" width="212" height="9" forecolor="#666666" uuid="2f0ea041-1ae1-41a5-be3f-ac4e08772688"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
 					<font size="6"/>
-					<paragraph leftIndent="1"/>
 				</textElement>
-				<text><![CDATA[Sold By :]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA["Sold By :"+$P{SOLDBY}]]></textFieldExpression>
+			</textField>
 			<textField>
 				<reportElement x="499" y="103" width="47" height="0" uuid="b24a0b73-5e16-4e16-87b3-65bf05ddd139"/>
 				<textFieldExpression><![CDATA[$F{COLUMN_9}]]></textFieldExpression>
@@ -440,6 +441,22 @@
 				</textElement>
 				<text><![CDATA[Amount Paid :]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="139" width="212" height="9" forecolor="#999999" uuid="4dec0ea2-dce7-43d1-8594-3a5feb4851bd"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<text><![CDATA[Return Policy]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="148" width="212" height="17" forecolor="#666666" uuid="c2d108d1-45d8-423d-866e-48244c7e8af0"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="none">
+					<font size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REFUND_POLICY}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

@@ -40,7 +40,6 @@ public class ReceiptReportModel extends AbstractTableModel implements Runnable {
             data[x][1] = c.getUpc().getItemDesc();
             data[x][2] = c.getQuantity();
             data[x][3] = Utilities.roundToTwoDecimalPlace(c.getSalesPrice(), 2);
-            //Sales sl = sb.getAllSalesbySalesCode(c.getSaleId().getSalesId());
             data[x][4] = null;
             double totalsalestb;
             int aqty;

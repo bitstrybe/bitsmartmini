@@ -12,8 +12,10 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import bt.bitsmartmini.bl.CustomerBL;
 import bt.bitsmartmini.bl.ReceiptBL;
+import bt.bitsmartmini.bl.ReturnBL;
 import bt.bitsmartmini.entity.Customers;
 import bt.bitsmartmini.entity.Receipt;
+import bt.bitsmartmini.entity.RefundPolicy;
 import bt.bitsmartmini.reportmodel.DebtorsByCustomerReportModel;
 import bt.bitsmartmini.reportmodel.DebtorsBySalesReportModel;
 import bt.bitsmartmini.reportmodel.ItemListReportModel;
@@ -58,10 +60,12 @@ public class PrintReport extends JFrame {
     public void showReceiptReport(String id) throws JRException, ClassNotFoundException, SQLException, IOException {
         ReceiptBL rbl = new ReceiptBL();
         CustomerBL cb = new CustomerBL();
+        ReturnBL rb = new ReturnBL();
         Receipt r = rbl.getReciptbyCode(Integer.parseInt(id));
         param = setBasiParam();
         Customers c = cb.getCustomersBySales(r.getSalesId().getSalesId());
-        //String reportSrcFile = "data/Blank_A4.jrxml";
+        RefundPolicy f = rb.findRefundPolicy();
+        System.out.println("F: "+f.getRefundCustomMsg());
         // First, compile jrxml file.
         InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/TerminalReceiptReport.jasper");
         // Fields for report
@@ -76,6 +80,9 @@ public class PrintReport extends JFrame {
         param.put("MODE", r.getPayMode());
         param.put("CUSTOMER", c.getFullname());
         param.put("CUSTMOBILE", c.getMobile());
+        param.put("CUSTMOBILE", c.getMobile());
+        param.put("REFUND_POLICY", f.getRefundCustomMsg().replace("?", f.getRefundPeriodVal() + " " + f.getRefundPeriod()));
+        param.put("SOLDBY", r.getUsers().getUserid().toString());
         ReceiptReportModel sm = new ReceiptReportModel(r.getSalesId().getSalesId());
         //sm.salesId = r.getSalesId().getSalesId();
         //Thread t = new Thread(sm);
@@ -91,7 +98,7 @@ public class PrintReport extends JFrame {
     }
 
     public void showSalesReceipteport(Date start, Date end) throws JRException, ClassNotFoundException, SQLException, IOException {
-        
+
         try {
             InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/SalesReceiptReport.jasper");
             // Fields for report
@@ -136,10 +143,6 @@ public class PrintReport extends JFrame {
         param.put("UROLE", LoginController.u.getRoles());
         //param.put("SP", LoginController.u.getRoles());
         SalesReportModel sm = new SalesReportModel(start, end);
-        //sm.edate = end;
-        //sm.start = start;
-        //Thread t = new Thread(sm);
-        //t.start();
         JRTableModelDataSource jrtmds = new JRTableModelDataSource(sm);
         JasperPrint print = JasperFillManager.fillReport(inputStream, param, jrtmds);
         JRViewer viewer = new JRViewer(print);
@@ -165,21 +168,14 @@ public class PrintReport extends JFrame {
         param.put("SD", DateUtil.format3(start));
         param.put("ED", DateUtil.format3(end));
         SalesReportModel sm = new SalesReportModel(start, end);
-        //sm.edate = end;
-        //sm.start = start;
-        //Thread t = new Thread(sm);
-        //t.start();
         JRTableModelDataSource jrtmds = new JRTableModelDataSource(sm);
         JasperPrint print = JasperFillManager.fillReport(inputStream, param, jrtmds);
         JRViewer viewer = new JRViewer(print);
         viewer.setOpaque(true);
         viewer.setVisible(true);
-//        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         this.add(viewer);
         this.setSize(dim);
         this.setVisible(true);
-        // System.out.print("Done!");
-
     }
 
     public void showStockReorderReport() throws JRException, ClassNotFoundException, SQLException, IOException {

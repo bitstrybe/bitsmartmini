@@ -114,7 +114,7 @@ public class ReturnBL extends DdsBL {
             return 0.00;
         }
     }
-    
+
     public List<RtdItem> getAllRtdItembyBarcode(String u, int page) {
         TypedQuery<RtdItem> q = em.createQuery("SELECT s FROM RtdItem s WHERE s.salesDetails.upc.upc = :itemDesc AND s.salesDetails IS NOT NULL", RtdItem.class);
         q.setParameter("u", u);
@@ -163,11 +163,12 @@ public class ReturnBL extends DdsBL {
     }
 
     public RefundPolicy findRefundPolicy() {
-        try{
-        TypedQuery<RefundPolicy> q = em.createQuery("SELECT f FROM RefundPolicy f", RefundPolicy.class);
-        q.setMaxResults(1);
-        return q.getResultList().get(0);
-        }catch(Exception ex){
+        try {
+            TypedQuery<RefundPolicy> q = em.createQuery("SELECT f FROM RefundPolicy f", RefundPolicy.class);
+            //q.setMaxResults(1);
+            return q.getResultList().get(0);
+        } catch (Exception ex) {
+            System.out.println(ex);
             return null;
         }
     }

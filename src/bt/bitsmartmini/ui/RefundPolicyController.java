@@ -48,6 +48,7 @@ public class RefundPolicyController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         getDuration();
         getDurationValue();
+        refundmsg.setText("Based on our return policy terms, we will accept a return of this item only within a ? period, and an undisputed reason for such.");
     }
 
     @FXML
