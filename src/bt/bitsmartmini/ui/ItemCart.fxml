@@ -55,10 +55,10 @@
                      <children>
                         <Button mnemonicParsing="false" onAction="#minusqnty" prefHeight="75.0" prefWidth="65.0">
                            <graphic>
-                              <FontAwesomeIcon glyphName="MINUS" />
+                              <FontAwesomeIcon glyphName="MINUS" size="1.5em" />
                            </graphic>
                         </Button>
-                        <JFXTextField fx:id="qnttextfield" alignment="CENTER" prefHeight="75.0" prefWidth="201.0" promptText="1" styleClass="form_field">
+                        <JFXTextField fx:id="qnttextfield" alignment="CENTER" prefHeight="75.0" prefWidth="121.0" promptText="1" styleClass="form_field">
                            <font>
                               <Font size="31.0" />
                            </font>
@@ -73,7 +73,7 @@
                         </JFXTextField>
                         <Button mnemonicParsing="false" onAction="#plusqnty" prefHeight="75.0" prefWidth="56.0">
                            <graphic>
-                              <FontAwesomeIcon glyphName="PLUS" />
+                              <FontAwesomeIcon glyphName="PLUS" size="1.5em" />
                            </graphic>
                         </Button>
                      </children>
