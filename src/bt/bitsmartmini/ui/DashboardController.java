@@ -208,6 +208,7 @@ public class DashboardController implements Initializable {
                     DateTime today = new DateTime(System.currentTimeMillis());
                     DateTime sd = new DateTime().withYear(year).withDayOfWeek(DateTimeConstants.MONDAY);
                     double val = rc.getDurationSalesReceipt(sd.toDate(), today.toDate());
+                    System.out.println("wks: "+val);
                     weeklySalesCurr.setText(MainAppController.B.getBCurrency());
                     if (val > 0) {
                         weeklysales.setText(String.valueOf(df.format(val)));

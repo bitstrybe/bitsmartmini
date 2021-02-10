@@ -5,7 +5,6 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -13,65 +12,80 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="homebackground" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.ItemCartController">
+<VBox id="homebackground" alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.ItemCartController">
    <children>
-      <HBox>
+      <HBox alignment="TOP_CENTER" spacing="15.0">
          <children>
-            <VBox prefHeight="592.0" prefWidth="298.0">
+            <VBox alignment="TOP_CENTER" prefHeight="592.0" prefWidth="298.0">
                <children>
-                  <HBox>
+                  <VBox alignment="TOP_CENTER">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="234.0" prefWidth="195.0">
+                        <HBox>
                            <children>
-                              <ImageView fx:id="sideitemimage" fitHeight="208.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS" />
+                              <JFXTextField fx:id="itembarcode" focusColor="#ededee" labelFloat="true" onAction="#searchitemsaction" promptText="Barcode" unFocusColor="#fcf8f8" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Open Sans" size="14.0" />
+                                 </font>
+                              </JFXTextField>
                            </children>
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </HBox.margin>
                         </HBox>
-                        <VBox alignment="CENTER" prefHeight="234.0" prefWidth="250.0" spacing="2.0">
+                        <HBox>
                            <children>
-                              <Label fx:id="itembarcode" layoutX="20.0" layoutY="32.0" prefHeight="30.0" prefWidth="300.0" VBox.vgrow="ALWAYS" />
-                              <Label fx:id="itemcartname" prefHeight="55.0" prefWidth="300.0" wrapText="true" VBox.vgrow="ALWAYS" />
-                              <Label fx:id="itembrand" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="300.0" />
-                              <Label fx:id="itemqty" layoutX="20.0" layoutY="49.0" prefHeight="27.0" prefWidth="300.0" />
-                              <Label fx:id="itemsp" layoutX="20.0" layoutY="66.0" prefHeight="27.0" prefWidth="300.0" textFill="#f20404" />
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <ImageView fx:id="itemimage1" fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                              <VBox alignment="CENTER" spacing="2.0">
+                                 <children>
+                                    <Label fx:id="itemcartname" prefHeight="55.0" prefWidth="300.0" wrapText="true" VBox.vgrow="ALWAYS">
+                                       <font>
+                                          <Font name="Open Sans Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="itembrand" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="300.0">
+                                       <font>
+                                          <Font name="Open Sans Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="itemqty" layoutX="20.0" layoutY="49.0" prefHeight="27.0" prefWidth="300.0">
+                                       <font>
+                                          <Font name="Open Sans Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="itemsp" layoutX="20.0" layoutY="66.0" prefHeight="27.0" prefWidth="300.0" textFill="#f20404">
+                                       <font>
+                                          <Font name="Open Sans Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
                            </children>
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </HBox.margin>
-                        </VBox>
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
                      </children>
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="87.0" prefWidth="551.0">
+                  </VBox>
+                  <HBox alignment="TOP_CENTER" prefHeight="87.0" prefWidth="551.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#minusqnty" prefHeight="75.0" prefWidth="65.0">
+                        <Button mnemonicParsing="false" onAction="#minusqnty" prefHeight="75.0" prefWidth="85.0">
                            <graphic>
                               <FontAwesomeIcon glyphName="MINUS" size="1.5em" />
                            </graphic>
                         </Button>
-                        <JFXTextField fx:id="qnttextfield" alignment="CENTER" prefHeight="75.0" prefWidth="121.0" promptText="1" styleClass="form_field">
+                        <JFXTextField fx:id="qnttextfield" alignment="CENTER" focusColor="#eee9ea" prefHeight="73.0" prefWidth="121.0" promptText="1" styleClass="form_field" unFocusColor="#c9c6c6">
                            <font>
                               <Font size="31.0" />
                            </font>
-                           <focusColor>
-                              <LinearGradient endX="1.0" endY="1.0">
-                                 <stops>
-                                    <Stop color="#0a8e90" />
-                                    <Stop color="#8e203d" offset="1.0" />
-                                 </stops>
-                              </LinearGradient>
-                           </focusColor>
                         </JFXTextField>
-                        <Button mnemonicParsing="false" onAction="#plusqnty" prefHeight="75.0" prefWidth="56.0">
+                        <Button mnemonicParsing="false" onAction="#plusqnty" prefHeight="75.0" prefWidth="85.0">
                            <graphic>
                               <FontAwesomeIcon glyphName="PLUS" size="1.5em" />
                            </graphic>
@@ -81,23 +95,31 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="63.0" prefWidth="533.0">
+                  <HBox alignment="TOP_CENTER" prefHeight="63.0" prefWidth="533.0">
                      <children>
-                        <JFXButton id="action-btn" fx:id="add" prefHeight="30.0" prefWidth="110.0" stylesheets="@style.css" text="Add" textFill="#323232">
+                        <JFXButton id="action-btn" fx:id="add" prefHeight="54.0" prefWidth="250.0" stylesheets="@style.css" text="Add" textFill="#323232">
                            <HBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </HBox.margin>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
                         </JFXButton>
                      </children>
                   </HBox>
                </children>
                <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" />
+                  <Insets />
                </HBox.margin>
+            </VBox>
+            <VBox alignment="TOP_CENTER">
+               <children>
+                  <Line endX="-100.70710754394531" endY="570.2929077148438" startX="-100.0" styleClass="linecolor-dark" />
+               </children>
             </VBox>
             <VBox>
                <children>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="91.0" prefWidth="916.0" spacing="200.0" styleClass="window-title">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="91.0" prefWidth="916.0" styleClass="window-title">
                      <children>
                         <HBox alignment="CENTER_LEFT" spacing="15.0" HBox.hgrow="ALWAYS">
                            <children>
@@ -109,8 +131,8 @@
                               <ChoiceBox fx:id="customerdroplist" prefHeight="71.0" />
                            </children>
                         </HBox>
-                        <ButtonBar buttonMinWidth="82.0" prefHeight="55.0" prefWidth="188.0">
-                           <buttons>
+                        <HBox alignment="CENTER" spacing="10.0">
+                           <children>
                               <JFXButton id="action-btn" buttonType="RAISED" contentDisplay="TOP" minWidth="-Infinity" onAction="#addDiscountbtn" prefHeight="55.0" prefWidth="82.0" styleClass="alldefaultbtn" text="Discount">
                                  <graphic>
                                     <FontAwesomeIcon fill="#fcfcfc" glyphName="TAG" size="1.5em" />
@@ -127,8 +149,8 @@
                                     <Font name="Open Sans" size="12.0" />
                                  </font>
                               </JFXButton>
-                           </buttons>
-                        </ButtonBar>
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER">
@@ -140,14 +162,14 @@
                      <children>
                         <TableView fx:id="carttable" styleClass="table-cell" stylesheets="@style.css" HBox.hgrow="ALWAYS">
                            <columns>
-                              <TableColumn fx:id="itemimage" prefWidth="100.0" resizable="false" text="Item Image" />
-                              <TableColumn fx:id="itemcode" minWidth="0.0" prefWidth="140.0" resizable="false" text="Barcode" />
+                              <TableColumn fx:id="itemimage" resizable="false" text="Item Image" />
+                              <TableColumn fx:id="itemcode" minWidth="0.0" prefWidth="100.0" resizable="false" text="Barcode" />
                               <TableColumn fx:id="itemname" minWidth="0.0" prefWidth="250.0" resizable="false" text="Items" />
                               <TableColumn fx:id="quantity" resizable="false" styleClass="align-table" text="Quantity" />
                               <TableColumn fx:id="itemprice" resizable="false" styleClass="align-table" text="Item Price" />
-                              <TableColumn fx:id="total" prefWidth="100.0" resizable="false" text="Total" />
+                              <TableColumn fx:id="total" resizable="false" text="Total" />
                               <TableColumn fx:id="Discount" prefWidth="77.0" resizable="false" text="Discount" />
-                              <TableColumn fx:id="Discountcent" prefWidth="107.0" resizable="false" text="Discount(%)" />
+                              <TableColumn fx:id="Discountcent" resizable="false" text="Discount(%)" />
                               <TableColumn fx:id="action" resizable="false" text="Action" />
                            </columns>
                         </TableView>
@@ -157,14 +179,14 @@
                      <children>
                         <HBox alignment="CENTER_LEFT" prefWidth="620.0">
                            <children>
-                              <Label prefHeight="38.0" prefWidth="179.0" text="Take Amount:" textFill="#a19797">
+                              <Label prefHeight="38.0" prefWidth="89.0" text="Pay:" textFill="#a19797">
                                  <font>
                                     <Font name="Open Sans" size="27.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="curr" alignment="CENTER" contentDisplay="CENTER" layoutX="202.0" layoutY="38.0" text="C" textFill="#7c7b7b">
+                              <Label fx:id="curr" alignment="CENTER" contentDisplay="CENTER" layoutX="202.0" layoutY="38.0" text="GHC" textFill="#7c7b7b">
                                  <font>
-                                    <Font name="Open Sans" size="30.0" />
+                                    <Font name="Open Sans" size="26.0" />
                                  </font>
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" />
@@ -172,7 +194,7 @@
                               </Label>
                               <Label fx:id="totalprice" layoutX="291.0" layoutY="28.0" text="0.00" textFill="#f80202">
                                  <font>
-                                    <Font name="Open Sans" size="45.0" />
+                                    <Font name="Open Sans" size="55.0" />
                                  </font>
                               </Label>
                            </children>

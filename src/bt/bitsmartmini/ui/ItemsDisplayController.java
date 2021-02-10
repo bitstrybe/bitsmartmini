@@ -20,10 +20,6 @@ public class ItemsDisplayController implements Initializable {
     @FXML
     public ImageView itemsimage;
     @FXML
-    public Label medsname;
-    public Label uom;
-    public Label man;
-    @FXML
     public Label exp;
     @FXML
     public Button addtocart;
@@ -40,11 +36,13 @@ public class ItemsDisplayController implements Initializable {
     @FXML
     public HBox outofstockbackground;
     @FXML
-    public Label brand;
+    public Text brand;
     @FXML
     public Text qty;
     @FXML
-    public Label itembcode;
+    public Text itembcode;
+    @FXML
+    public Text itemsdesc;
 
     /**
      * Initializes the controller class.
@@ -55,6 +53,7 @@ public class ItemsDisplayController implements Initializable {
         catalogstaus.getChildren().remove(adminstockin);
         catalogstaus.getChildren().remove(adminstockout);
         catalogstaus.getChildren().remove(addtocart);
+        //itemsdesc.wrappingWidthProperty().bind(tabPane.widthProperty());
 
 //        if ("Administrator".equals(LoginController.u.getRoles())) {
 //            catalogstaus.getChildren().add(adminstockin);

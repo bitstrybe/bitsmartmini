@@ -47,6 +47,7 @@ import bt.bitsmartmini.bl.InsertUpdateBL;
 import bt.bitsmartmini.bl.ItemsBL;
 import bt.bitsmartmini.bl.ReceiptBL;
 import bt.bitsmartmini.bl.SalesBL;
+import bt.bitsmartmini.bl.StockinBL;
 import bt.bitsmartmini.entity.Customers;
 import bt.bitsmartmini.entity.Items;
 import bt.bitsmartmini.entity.Receipt;
@@ -59,6 +60,11 @@ import bt.bitsmartmini.utils.PrintReport;
 import bt.bitsmartmini.utils.Utilities;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import javafx.application.Platform;
+import javafx.scene.Node;
+import javafx.scene.control.TextField;
 import lxe.utility.math.DecimalUtil;
 import net.sf.jasperreports.engine.JRException;
 import org.apache.commons.text.WordUtils;
@@ -102,15 +108,13 @@ public class ItemCartController extends MainAppController implements Initializab
 
     InsertUpdateBL insert = new InsertUpdateBL();
     @FXML
-    private TableColumn<SelectItemSaleTableModel, ImageView> itemimage;
+    private TableColumn<?, ?> itemimage;
     @FXML
     private Label curr;
     @FXML
     private TableColumn<SelectItemSaleTableModel, String> itemcode;
     @FXML
-    private ImageView sideitemimage;
-    @FXML
-    private Label itembarcode;
+    private TextField itembarcode;
     @FXML
     private Label itemcartname;
     @FXML
@@ -123,6 +127,8 @@ public class ItemCartController extends MainAppController implements Initializab
     private JFXTextField qnttextfield;
     @FXML
     private JFXButton add;
+    @FXML
+    private ImageView itemimage1;
 
     /**
      * Initializes the controller class.
@@ -134,6 +140,7 @@ public class ItemCartController extends MainAppController implements Initializab
         getCustomer();
         getTotalprice();
         customerdroplist.getSelectionModel().selectFirst();
+        repeatFocus(itembarcode);
 //        text1.textProperty().addListener(
 //                (observable, oldvalue, newvalue)
 //                -> // code goes here
@@ -164,8 +171,6 @@ public class ItemCartController extends MainAppController implements Initializab
             imageitems.scaleYProperty();
             imageitems.setSmooth(true);
             imageitems.setCache(true);
-            //System.out.println("i: " + c.getItemCode());
-            //System.out.println("i: " + c.getItemCode());
             data.add(new SelectItemSaleTableModel(item.getUpc(), item.getItemDesc(), c.getQuantity(), c.getCost(), c.getPrice(), c.getTotal(), c.getDiscountValue(), imageitems));
             itemcode.setCellValueFactory(cell -> cell.getValue().getItemCodeProperty());
             itemname.setCellValueFactory(cell -> cell.getValue().getItemNameProperty());
@@ -231,14 +236,12 @@ public class ItemCartController extends MainAppController implements Initializab
     }
 
     public class AddPersonDiscountCell extends TableCell<SelectItemSaleTableModel, Boolean> {
-
         //Image img = new Image(getClass().getResourceAsStream("edit.png"));
         Image img2 = new Image(getClass().getResourceAsStream("/bt/resources/discount.png"));
         // a button for adding a new person.
         Button discountButton = new Button();
         // pads and centers the add button in the cell.
         HBox paddedButton = new HBox();
-
         // records the y pos of the last button press so that the add person dialog can be shown next to the cell.
         final DoubleProperty buttonY = new SimpleDoubleProperty();
 
@@ -252,19 +255,14 @@ public class ItemCartController extends MainAppController implements Initializab
             paddedButton.setStyle("-fx-alignment: CENTER;");
             paddedButton.getChildren().add(discountButton);
             discountButton.setGraphic(new ImageView(img2));
-
-//            delButton.setRipplerFill(Paint.valueOf("#D8E1DC"));
-//            nhisButton.setCheckedColor(Paint.valueOf("#6699ff"));
             discountButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-//
                     try {
                         Stage stage = new Stage();
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddDiscount.fxml"));
                         Parent parent = (Parent) fxmlLoader.load();
                         AddDiscountController childController = fxmlLoader.getController();
-
                         childController.discountbtn.addEventHandler(MouseEvent.MOUSE_CLICKED, a -> {
                             int selectdIndex = getTableRow().getIndex();
                             //Create a new table show details of the selected item
@@ -308,7 +306,6 @@ public class ItemCartController extends MainAppController implements Initializab
     }
 
     public class AddPersonRemoveCell extends TableCell<SelectItemSaleTableModel, Boolean> {
-
         //Image img = new Image(getClass().getResourceAsStream("edit.png"));
         Image img2 = new Image(getClass().getResourceAsStream("delete.png"));
         // a button for adding a new person.
@@ -317,7 +314,6 @@ public class ItemCartController extends MainAppController implements Initializab
         HBox paddedButton = new HBox();
         // records the y pos of the last button press so that the add person dialog can be shown next to the cell.
         final DoubleProperty buttonY = new SimpleDoubleProperty();
-
         /**
          * AddPersonCell constructor
          *
@@ -328,9 +324,6 @@ public class ItemCartController extends MainAppController implements Initializab
             paddedButton.setStyle("-fx-alignment: CENTER;");
             paddedButton.getChildren().add(discountButton);
             discountButton.setGraphic(new ImageView(img2));
-
-//            delButton.setRipplerFill(Paint.valueOf("#D8E1DC"));
-//            nhisButton.setCheckedColor(Paint.valueOf("#6699ff"));
             discountButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -572,6 +565,39 @@ public class ItemCartController extends MainAppController implements Initializab
         totalp = Float.parseFloat(DecimalUtil.format2(Utilities.sumList(getPrice())));
         totalprice.setText(DecimalUtil.format2(totalp));
         curr.setText(MainAppController.B.getBCurrency());
+    }
+
+    private void repeatFocus(Node node) {
+        Platform.runLater(() -> {
+            if (!node.isFocused()) {
+                node.requestFocus();
+                repeatFocus(node);
+            }
+        });
+    }
+
+    @FXML
+    private void searchitemsaction(ActionEvent event) throws IOException {
+        StockinBL sbl = new StockinBL();
+        itembarcode.selectAll();
+        System.out.println("cod: " + itembarcode.getText());
+        Items item = new ItemsBL().getImageItembyCode(itembarcode.getText());
+        itembarcode.setText(item.getUpc());
+        itemcartname.setText(item.getItemDesc());
+        itembrand.setText(item.getBrand().getBrandName());
+        long qty = sbl.getStockBalance(itembarcode.getText());
+        itemqty.setText(Long.toString(qty) + " Remaining");
+        itemsp.setText(MainAppController.B.getBCurrency() + " " + item.getSp());
+        FileInputStream input;
+        try {
+            input = new FileInputStream(item.getItemImg());
+            Image image = new Image(input);
+            itemimage1.setImage(image);
+            //save.setDisable(false);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddStockInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        itembarcode.selectAll();
     }
 
 }

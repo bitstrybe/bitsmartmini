@@ -109,7 +109,7 @@ public class CatalogController extends MainAppController implements Initializabl
                                 }
                             }
                             childController.itembcode.setText(items.getUpc());
-                            childController.medsname.setText(items.getItemDesc());
+                            childController.itemsdesc.setText(items.getItemDesc());
                             childController.brand.setText(items.getBrand().getBrandName());
                             Long bal = sk.getStockBalance(items.getUpc());
                             childController.qty.setText(bal.toString());
@@ -119,8 +119,8 @@ public class CatalogController extends MainAppController implements Initializabl
                             FileInputStream ifile = new FileInputStream(items.getItemImg());
                             Image image = new Image(ifile);
                             childController.itemsimage.setImage(image);
-                            childController.itemsimage.setFitHeight(150);
-                            childController.itemsimage.setFitWidth(150);
+                            childController.itemsimage.setFitHeight(120);
+                            childController.itemsimage.setFitWidth(120);
                             if (bal > 0) {
                                 childController.outofstockbackground.setVisible(false);
                             } else {
@@ -135,7 +135,7 @@ public class CatalogController extends MainAppController implements Initializabl
                                     AdminStockinController childControllersk = fxmlLoadersk.getController();
                                     childControllersk.itemname.setText(items.getItemDesc());
                                     childControllersk.itembarcode.setText(childController.itembcode.getText());
-                                    childControllersk.itemname.setText(childController.medsname.getText());
+                                    childControllersk.itemname.setText(childController.itemsdesc.getText());
                                     childControllersk.itembrand.setText(childController.brand.getText());
                                     long qty = st.getStockBalance(childController.itembcode.getText());
                                     childControllersk.itemqty.setText(Long.toString(qty) + " Remaining");
@@ -185,7 +185,7 @@ public class CatalogController extends MainAppController implements Initializabl
                                     AdminStockoutController childControllersk = fxmlLoadersk.getController();
                                     childControllersk.itemname.setText(items.getItemDesc());
                                     childControllersk.itembarcode.setText(childController.itembcode.getText());
-                                    childControllersk.itemname.setText(childController.medsname.getText());
+                                    childControllersk.itemname.setText(childController.itemsdesc.getText());
                                     childControllersk.itembrand.setText(childController.brand.getText());
                                     long qty = st.getStockBalance(childController.itembcode.getText());
                                     childControllersk.itemqty.setText(Long.toString(qty) + " Remaining");
@@ -336,7 +336,5 @@ public class CatalogController extends MainAppController implements Initializabl
         } else {
 
         }
-
     }
-
 }

@@ -26,7 +26,7 @@
                <children>
                   <MenuBar prefHeight="50.0" prefWidth="800.0" style="-fx-background-color: transparent;" styleClass="menu-b" stylesheets="@style.css">
                      <menus>
-                        <Menu fx:id="pharmabits" mnemonicParsing="false" text="Pharmabits">
+                        <Menu fx:id="pharmabits" mnemonicParsing="false" text="BitsmartMini">
                           <items>
                             <MenuItem mnemonicParsing="false" onAction="#getbusiness" text="License" />
                           </items>
@@ -112,23 +112,23 @@
                            <children>
                               <Label text="bitsmartMini" textFill="WHITE" HBox.hgrow="ALWAYS">
                                  <font>
-                                    <Font name="Open Sans" size="20.0" />
+                                    <Font name="Open Sans" size="18.0" />
                                  </font>
                               </Label>
                            </children>
                         </HBox>
                         <HBox>
                            <children>
-                              <Label fx:id="user" text="Label" textFill="WHITE" HBox.hgrow="ALWAYS">
+                              <Label fx:id="user" opacity="0.86" text="Label" textFill="WHITE" HBox.hgrow="ALWAYS">
                                  <font>
-                                    <Font name="Arial" size="12.0" />
+                                    <Font name="Arial" size="14.0" />
                                  </font>
                               </Label>
                            </children>
                         </HBox>
                         <HBox>
                            <children>
-                              <Label fx:id="user_role" opacity="0.92" text="Label" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS">
+                              <Label fx:id="user_role" opacity="0.86" text="Label" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
