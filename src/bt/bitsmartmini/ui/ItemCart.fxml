@@ -19,19 +19,19 @@
    <children>
       <HBox alignment="CENTER_RIGHT" spacing="200.0" styleClass="window-title">
          <children>
-            <HBox alignment="CENTER_LEFT" spacing="15.0" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                <children>
-                  <JFXButton id="action-btn" buttonType="RAISED" contentDisplay="TOP" minWidth="36.0" onAction="#addcustomer" prefHeight="60.0" prefWidth="78.0" styleClass="alldefaultbtn" text="Customer">
+                  <JFXButton id="action-btn" buttonType="RAISED" contentDisplay="TOP" minWidth="36.0" onAction="#addcustomer" styleClass="alldefaultbtn" text="Customer">
                      <graphic>
                         <FontAwesomeIcon fill="#fcfcfc" glyphName="USER_PLUS" size="1.5em" />
                      </graphic>
                   </JFXButton>
-                  <ChoiceBox fx:id="customerdroplist" prefHeight="71.0" />
+                  <ChoiceBox fx:id="customerdroplist" />
                </children>
             </HBox>
             <ButtonBar buttonMinWidth="82.0" prefHeight="55.0" prefWidth="188.0">
                <buttons>
-                  <JFXButton id="action-btn" buttonType="RAISED" contentDisplay="TOP" minWidth="-Infinity" onAction="#addDiscountbtn" prefHeight="55.0" prefWidth="82.0" styleClass="alldefaultbtn" text="Discount">
+                  <JFXButton id="action-btn" buttonType="RAISED" contentDisplay="TOP" minWidth="-Infinity" onAction="#addDiscountbtn" styleClass="alldefaultbtn" text="Discount">
                      <graphic>
                         <FontAwesomeIcon fill="#fcfcfc" glyphName="TAG" size="1.5em" />
                      </graphic>
@@ -51,7 +51,7 @@
             </ButtonBar>
          </children>
          <VBox.margin>
-            <Insets top="10.0" />
+            <Insets />
          </VBox.margin>
       </HBox>
       <HBox alignment="CENTER" prefWidth="1086.0" VBox.vgrow="ALWAYS">
