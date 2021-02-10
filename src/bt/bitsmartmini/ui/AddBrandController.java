@@ -379,7 +379,7 @@ public class AddBrandController implements Initializable {
 
     }
 
-    private void saveTemplate() {
+    public void saveTemplate() {
 
         displayinfo.textProperty().unbind();
         Manufacturer cat = new Manufacturer();

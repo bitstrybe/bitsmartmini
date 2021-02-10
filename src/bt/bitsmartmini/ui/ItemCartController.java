@@ -57,6 +57,8 @@ import bt.bitsmartmini.tablemodel.SelectItemSaleTableModel;
 import static bt.bitsmartmini.ui.MainAppController.cart;
 import bt.bitsmartmini.utils.PrintReport;
 import bt.bitsmartmini.utils.Utilities;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import lxe.utility.math.DecimalUtil;
 import net.sf.jasperreports.engine.JRException;
 import org.apache.commons.text.WordUtils;
@@ -105,6 +107,22 @@ public class ItemCartController extends MainAppController implements Initializab
     private Label curr;
     @FXML
     private TableColumn<SelectItemSaleTableModel, String> itemcode;
+    @FXML
+    private ImageView sideitemimage;
+    @FXML
+    private Label itembarcode;
+    @FXML
+    private Label itemcartname;
+    @FXML
+    private Label itembrand;
+    @FXML
+    private Label itemqty;
+    @FXML
+    private Label itemsp;
+    @FXML
+    private JFXTextField qnttextfield;
+    @FXML
+    private JFXButton add;
 
     /**
      * Initializes the controller class.
@@ -116,6 +134,10 @@ public class ItemCartController extends MainAppController implements Initializab
         getCustomer();
         getTotalprice();
         customerdroplist.getSelectionModel().selectFirst();
+//        text1.textProperty().addListener(
+//                (observable, oldvalue, newvalue)
+//                -> // code goes here
+//);
     }
 
     public void getCustomer() {
@@ -198,6 +220,14 @@ public class ItemCartController extends MainAppController implements Initializab
 
     @FXML
     private void addDiscountbtn(ActionEvent event) {
+    }
+
+    @FXML
+    private void minusqnty(ActionEvent event) {
+    }
+
+    @FXML
+    private void plusqnty(ActionEvent event) {
     }
 
     public class AddPersonDiscountCell extends TableCell<SelectItemSaleTableModel, Boolean> {
