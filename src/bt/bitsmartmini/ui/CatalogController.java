@@ -284,15 +284,13 @@ public class CatalogController extends MainAppController implements Initializabl
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         getStockingItemList("");
-
-//        Platform.runLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                itemsearch.requestFocus();
-//            }
-//        });
         repeatFocus(itemsearch);
 
+        itemsearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("textfield changed from " + oldValue + " to " + newValue);
+            itemsearch.clear();
+            itemsearch.setText(newValue);
+        });
     }
 
     private void repeatFocus(Node node) {
@@ -319,6 +317,8 @@ public class CatalogController extends MainAppController implements Initializabl
 
     @FXML
     private void searchitemsaction(ActionEvent event) {
-          getStockingItemList(itemsearch.getText());
+//        String text = itemsearch.getText();
+//        itemsearch.clear();
+        getStockingItemList(itemsearch.getText());
     }
 }
