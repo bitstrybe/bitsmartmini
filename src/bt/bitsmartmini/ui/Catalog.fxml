@@ -15,7 +15,7 @@
       <HBox alignment="TOP_CENTER" styleClass="window-title">
          <children>
             <FontAwesomeIcon fill="#ababab" glyphName="SEARCH" size="2em" wrappingWidth="25.142857551574707" />
-            <JFXTextField fx:id="itemsearch" focusColor="#313132" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="500.0" promptText="Search for an item" unFocusColor="#a8a5a5">
+            <JFXTextField fx:id="itemsearch" focusColor="#313132" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#searchitemsaction" prefHeight="34.0" prefWidth="500.0" promptText="Search for an item" unFocusColor="#a8a5a5">
                <font>
                   <Font name="Open Sans" size="16.0" />
                </font>

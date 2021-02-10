@@ -35,6 +35,7 @@ import bt.bitsmartmini.tablemodel.SalesTableModel;
 import bt.bitsmartmini.tablemodel.SelectItemSaleTableModel;
 import static bt.bitsmartmini.ui.MainAppController.cart;
 import static bt.bitsmartmini.ui.MainAppController.static_label;
+import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import lxe.utility.math.DecimalUtil;
 
@@ -283,10 +284,7 @@ public class CatalogController extends MainAppController implements Initializabl
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         getStockingItemList("");
-        itemsearch.textProperty().addListener(e -> {
-            //if (itemsearch.getText().length() > 4) {
-            getStockingItemList(itemsearch.getText());
-        });
+
 //        Platform.runLater(new Runnable() {
 //            @Override
 //            public void run() {
@@ -317,5 +315,10 @@ public class CatalogController extends MainAppController implements Initializabl
                     }
             );
         }
+    }
+
+    @FXML
+    private void searchitemsaction(ActionEvent event) {
+          getStockingItemList(itemsearch.getText());
     }
 }

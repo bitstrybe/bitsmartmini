@@ -260,6 +260,10 @@
 .dashbord-card-color {
     -fx-background-color: #f7f7f7;
 }
+.dashboard-card-text-color{
+  -fx-text-fill: #FFFFFF;  
+  -fx-fill: #FFFFFF;
+}
 
 add-to-cart-btn{
     -fx-background-color: #090a0c;
