@@ -65,6 +65,7 @@ import java.io.FileNotFoundException;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import lxe.utility.math.DecimalUtil;
 import net.sf.jasperreports.engine.JRException;
 import org.apache.commons.text.WordUtils;
@@ -116,19 +117,25 @@ public class ItemCartController extends MainAppController implements Initializab
     @FXML
     private TextField itembarcode;
     @FXML
-    private Label itemcartname;
+    private Text itemcartname;
     @FXML
-    private Label itembrand;
+    private Text itembrand;
     @FXML
-    private Label itemqty;
+    private Text itemqty;
     @FXML
-    private Label itemsp;
+    private Text itemsp;
     @FXML
     private JFXTextField qnttextfield;
     @FXML
     private JFXButton add;
     @FXML
     private ImageView itemimage1;
+    @FXML
+    private Text curry;
+    @FXML
+    private Text qtyrem;
+    @FXML
+    private HBox qtyHbox;
 
     /**
      * Initializes the controller class.
@@ -141,10 +148,6 @@ public class ItemCartController extends MainAppController implements Initializab
         getTotalprice();
         customerdroplist.getSelectionModel().selectFirst();
         repeatFocus(itembarcode);
-//        text1.textProperty().addListener(
-//                (observable, oldvalue, newvalue)
-//                -> // code goes here
-//);
     }
 
     public void getCustomer() {
@@ -180,7 +183,6 @@ public class ItemCartController extends MainAppController implements Initializab
             total.setCellValueFactory(cell -> cell.getValue().getTotalProperty());
             itemimage.setCellValueFactory(new PropertyValueFactory<>("image"));
             itemimage.setPrefWidth(80);
-
             Discount.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SelectItemSaleTableModel, Boolean>, ObservableValue<Boolean>>() {
                 @Override
                 public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<SelectItemSaleTableModel, Boolean> features) {
@@ -200,18 +202,14 @@ public class ItemCartController extends MainAppController implements Initializab
                     return new SimpleBooleanProperty(features.getValue() != null);
                 }
             });
-
             action.setCellFactory(new Callback<TableColumn<SelectItemSaleTableModel, Boolean>, TableCell<SelectItemSaleTableModel, Boolean>>() {
                 @Override
                 public TableCell<SelectItemSaleTableModel, Boolean> call(TableColumn<SelectItemSaleTableModel, Boolean> personBooleanTableColumn) {
                     return new AddPersonRemoveCell();
                 }
             });
-
             carttable.setItems(data);
-
         }
-
     }
 
     @FXML
@@ -236,6 +234,7 @@ public class ItemCartController extends MainAppController implements Initializab
     }
 
     public class AddPersonDiscountCell extends TableCell<SelectItemSaleTableModel, Boolean> {
+
         //Image img = new Image(getClass().getResourceAsStream("edit.png"));
         Image img2 = new Image(getClass().getResourceAsStream("/bt/resources/discount.png"));
         // a button for adding a new person.
@@ -306,6 +305,7 @@ public class ItemCartController extends MainAppController implements Initializab
     }
 
     public class AddPersonRemoveCell extends TableCell<SelectItemSaleTableModel, Boolean> {
+
         //Image img = new Image(getClass().getResourceAsStream("edit.png"));
         Image img2 = new Image(getClass().getResourceAsStream("delete.png"));
         // a button for adding a new person.
@@ -314,6 +314,7 @@ public class ItemCartController extends MainAppController implements Initializab
         HBox paddedButton = new HBox();
         // records the y pos of the last button press so that the add person dialog can be shown next to the cell.
         final DoubleProperty buttonY = new SimpleDoubleProperty();
+
         /**
          * AddPersonCell constructor
          *
@@ -582,20 +583,43 @@ public class ItemCartController extends MainAppController implements Initializab
         itembarcode.selectAll();
         System.out.println("cod: " + itembarcode.getText());
         Items item = new ItemsBL().getImageItembyCode(itembarcode.getText());
-        itembarcode.setText(item.getUpc());
-        itemcartname.setText(item.getItemDesc());
-        itembrand.setText(item.getBrand().getBrandName());
-        long qty = sbl.getStockBalance(itembarcode.getText());
-        itemqty.setText(Long.toString(qty) + " Remaining");
-        itemsp.setText(MainAppController.B.getBCurrency() + " " + item.getSp());
-        FileInputStream input;
-        try {
-            input = new FileInputStream(item.getItemImg());
-            Image image = new Image(input);
-            itemimage1.setImage(image);
-            //save.setDisable(false);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(AddStockInController.class.getName()).log(Level.SEVERE, null, ex);
+        if (item != null) {
+            itembarcode.setText(item.getUpc());
+            itemcartname.setText(item.getItemDesc());
+            itembrand.setText(item.getBrand().getBrandName());
+            long qty = sbl.getStockBalance(itembarcode.getText());
+            itemqty.setText(Long.toString(qty));
+            if (qty > 0) {
+                qtyrem.setText("Remaining");
+                qtyHbox.setStyle("-fx-background-color:#1faa00");
+                add.setDisable(false);
+            } else {
+                qtyrem.setText("Out of Stock");
+                qtyHbox.setStyle("-fx-background-color:#ba000d");
+                add.setDisable(true);
+            }
+            itemsp.setText(DecimalUtil.format2(item.getSp()));
+            curry.setText(MainAppController.B.getBCurrency());
+            FileInputStream input;
+            try {
+                input = new FileInputStream(item.getItemImg());
+                Image image = new Image(input);
+                itemimage1.setImage(image);
+                //save.setDisable(false);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(AddStockInController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            itembarcode.setText(null);
+            itemcartname.setText(null);
+            itembrand.setText(null);
+            //long qty = sbl.getStockBalance(itembarcode.getText());
+            itemqty.setText(null);
+            itemsp.setText(null);
+            curry.setText(null);
+            itemimage1.setImage(null);
+            qtyrem.setText(null);
+            qtyHbox.setStyle("-fx-background-color:#fff");
         }
         itembarcode.selectAll();
     }

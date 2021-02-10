@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <VBox id="homebackground" alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.ItemCartController">
    <children>
@@ -25,7 +26,7 @@
                      <children>
                         <HBox>
                            <children>
-                              <JFXTextField fx:id="itembarcode" focusColor="#ededee" labelFloat="true" onAction="#searchitemsaction" promptText="Barcode" unFocusColor="#fcf8f8" HBox.hgrow="ALWAYS">
+                              <JFXTextField fx:id="itembarcode" focusColor="#6a6a6b" labelFloat="true" onAction="#searchitemsaction" promptText="Barcode" unFocusColor="#dddcdc" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Open Sans" size="14.0" />
                                  </font>
@@ -42,28 +43,59 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
                               </HBox>
-                              <VBox alignment="CENTER" spacing="2.0">
+                              <VBox alignment="TOP_CENTER" spacing="5.0">
                                  <children>
-                                    <Label fx:id="itemcartname" prefHeight="55.0" prefWidth="300.0" wrapText="true" VBox.vgrow="ALWAYS">
+                                    <Text fx:id="itemcartname" fill="#1106ab" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="150.0">
                                        <font>
-                                          <Font name="Open Sans Bold" size="13.0" />
+                                          <Font name="Open Sans" size="14.0" />
                                        </font>
-                                    </Label>
-                                    <Label fx:id="itembrand" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="300.0">
+                                    </Text>
+                                    <Text fx:id="itembrand" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="150.0">
                                        <font>
-                                          <Font name="Open Sans Bold" size="13.0" />
+                                          <Font name="Open Sans" size="14.0" />
                                        </font>
-                                    </Label>
-                                    <Label fx:id="itemqty" layoutX="20.0" layoutY="49.0" prefHeight="27.0" prefWidth="300.0">
-                                       <font>
-                                          <Font name="Open Sans Bold" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="itemsp" layoutX="20.0" layoutY="66.0" prefHeight="27.0" prefWidth="300.0" textFill="#f20404">
-                                       <font>
-                                          <Font name="Open Sans Bold" size="13.0" />
-                                       </font>
-                                    </Label>
+                                    </Text>
+                                    <HBox alignment="CENTER_LEFT">
+                                       <children>
+                                          <HBox fx:id="qtyHbox" alignment="CENTER" style="-fx-border-width: 0.5;">
+                                             <children>
+                                                <Text fx:id="itemqty" fill="#fcfcfc" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                                                   <font>
+                                                      <Font name="Open Sans" size="13.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets bottom="3.0" left="4.0" right="4.0" top="3.0" />
+                                                   </HBox.margin>
+                                                </Text>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                             </padding>
+                                          </HBox>
+                                          <Text fx:id="qtyrem" fill="#757474" strokeType="OUTSIDE" strokeWidth="0.0">
+                                             <font>
+                                                <Font name="Open Sans" size="13.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER">
+                                       <children>
+                                          <Text fx:id="curry" fill="#797878" strokeType="OUTSIDE" strokeWidth="0.0">
+                                             <font>
+                                                <Font name="Open Sans" size="13.0" />
+                                             </font>
+                                          </Text>
+                                          <Text fx:id="itemsp" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="120.0">
+                                             <font>
+                                                <Font name="Open Sans" size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
                                  </children>
                               </VBox>
                            </children>
@@ -97,7 +129,7 @@
                   </HBox>
                   <HBox alignment="TOP_CENTER" prefHeight="63.0" prefWidth="533.0">
                      <children>
-                        <JFXButton id="action-btn" fx:id="add" prefHeight="54.0" prefWidth="250.0" stylesheets="@style.css" text="Add" textFill="#323232">
+                        <JFXButton id="action-btn" fx:id="add" prefHeight="54.0" prefWidth="250.0" stylesheets="@style.css" text="Add &gt;&gt;" textFill="#323232">
                            <HBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </HBox.margin>
@@ -222,6 +254,6 @@
       </HBox>
    </children>
    <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
    </padding>
 </VBox>

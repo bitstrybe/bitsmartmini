@@ -4,6 +4,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -27,7 +28,10 @@
       </HBox>
       <HBox alignment="CENTER">
          <children>
-            <Line endX="-528.0581665039062" startX="-1009.5581665039062" styleClass="linecolor" />
+            <Line endX="-528.0581665039062" startX="-1009.5581665039062" styleClass="linecolor" HBox.hgrow="ALWAYS">
+               <effect>
+                  <DropShadow />
+               </effect></Line>
          </children>
       </HBox>
       <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: transparent;">
