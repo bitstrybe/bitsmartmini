@@ -235,10 +235,6 @@
     -fx-border-color: transparent;
 }
 
-#my-table .table-column {
-    -fx-alignment: CENTER;
-}
-
 .popupbackground{
     -fx-background-color:  #00000099;
 }
@@ -261,8 +257,8 @@
     -fx-background-color: #f7f7f7;
 }
 .dashboard-card-text-color{
-  -fx-text-fill: #FFFFFF;  
-  -fx-fill: #FFFFFF;
+    -fx-text-fill: #FFFFFF;  
+    -fx-fill: #FFFFFF;
 }
 
 add-to-cart-btn{
@@ -289,125 +285,12 @@ add-to-cart-btn{
 }
 
 
-.table-view{
-    -fx-background-color: #ffffff;
-    /*-fx-table-cell-border-color: transparent;*/
-    -fx-font-family: 'Open Sans'; 
-    -fx-background-color: white;
-    -fx-font-size: 13px;
-    /*-fx-border-color: derive(black, -60%);*/
-    -fx-border-color:transparent;
-    -fx-border-width:0px;
-}
-
-.table-view:focused{
-    -fx-background-color: transparent;
-}
-
-.table-view .column-header,
-.table-view .column-header .filler,
-.table-view .column-header-background .filler{
-    -fx-background-color: transparent;
-    -fx-border-width:1px;
-    -fx-size:55;
-} 
-
-.table-view .column-header-background{
-   /* -fx-background-color: linear-gradient(#888888 0.0%, #cccccc 100.0%);*/
-    -fx-background-color:transparent;
-}
-
-.table-view .column-header-background .label{
-    -fx-background-color: transparent; 
-}
-
-.table-view .table-column{
-    -fx-alignment:center;
-}
-
-.table-row-cell{
-    -fx-cell-size: 45px;
-}
-
-/* .table-row-cell */
-
-.table-row-cell:disabled{
-    -fx-opacity:0.5;
-    -fx-background-color:darkgray; 
-    -fx-cell-size: 50px;
-}
-
-.table-row-cell:disabled .text{
-    /*-fx-strikethrough:  true ;*/
-}
-
-.table-view .table-row-cell:hover .text , .table-row-cell:selected .text{
-    -fx-fill: #777777; 
-}
-
-.table-view .table-row-cell:hover:selected .text,.table-row-cell:focused:selected .text{
-    -fx-fill:rgb(0,0,0);
-}
-
-.table-view .table-row-cell {
-    -fx-background-color:white;
-    -fx-size:50;
-    -fx-table-cell-border-color: transparent;
-    -fx-border-width: 1;
-}
-
-.table-view .table-row-cell:focused:disabled{ 
-    -fx-background-color:darkgray;
-}
-
-
-.table-view .table-row-cell:hover , .table-view .table-row-cell:selected{
-    /*-fx-background-color:rgb(0.0,191.0,255.0);*/
-    -fx-background-color:#f3f3f3;
-}
-
-.align_table_center{
-    -fx-alignment: CENTER;
-}
-
-.table-view .align_table_left{
-    -fx-alignment: CENTER_LEFT;
-}
-
-.table-view .align_table_right{
-    -fx-alignment: CENTER_RIGHT;
-}
-
-.table-view .table-row-small{
-    -fx-fixed-cell-size: 30;
-}
-
-.table-view .table-row-norm{
-    -fx-fixed-cell-size: 40;
-}
-
-.table-view .table-row-large{
-    -fx-fixed-cell-size: 50;
-}
-
-.table-view .table-row-xlarge{
-    -fx-fixed-cell-size: 60;
-}
-
 #carttable .table-row-cell:filled:hover {
     -fx-size:50;
     -fx-alignment: CENTER;
     -fx-text-alignment: center;
 }
 
-/*#carttable:row-selection {
-    -fx-background-color: transparent;
-    -fx-text-fill: white;
-    -fx-fixed-cell-size: 50;
-    -fx-alignment: CENTER;
-    -fx-text-alignment: center;
-
-}*/
 
 #carttable .table-column{
     -fx-text-alignment: center;
@@ -440,13 +323,6 @@ add-to-cart-btn{
     -fx-text-fill: white;
 }
 
-/*Raised button example 
-.jfx-button {
-     -jfx-button-type: RAISED;
-     -fx-background-color: blue;
-     -fx-text-fill: white;
-}
-*/
 
 .scrollpane-view{
     -fx-pref-width: 1700px;
@@ -498,4 +374,28 @@ VBox .hoverVbox:hover .hovericons{
 }
 VBox .hoverVboxActive{
     -fx-background-color: #FFFFFF;
+}
+
+
+/* table */
+
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-background-color:  #333333; 
+}
+
+.table-view .column-header .label{
+    -fx-text-fill: white;
+    /*   -fx-font-weight: bold; */
+    /*   -fx-alignment: CENTER_LEFT;*/
+}
+
+.table-view .cell{
+    -fx-cell-size: 45;
+    -fx-alignment: center-left;
+/*    -fx-background-color: #29292D;*/
+/*    -fx-border-color: #29292D;*/
+/*    -fx-text-fill: lightgray;*/
+    -fx-alignment: CENTER_LEFT;
+
 }

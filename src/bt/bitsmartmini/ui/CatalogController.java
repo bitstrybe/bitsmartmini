@@ -37,6 +37,7 @@ import static bt.bitsmartmini.ui.MainAppController.cart;
 import static bt.bitsmartmini.ui.MainAppController.static_label;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
+import javafx.scene.layout.VBox;
 import lxe.utility.math.DecimalUtil;
 
 /**
@@ -67,6 +68,8 @@ public class CatalogController extends MainAppController implements Initializabl
     String lsv;
     @FXML
     private FlowPane displaypane;
+    @FXML
+    private VBox catalogvbox;
 
     public void getStockingItemList(String p) {
         Task<Void> longRunningTask = new Task<Void>() {
@@ -286,11 +289,11 @@ public class CatalogController extends MainAppController implements Initializabl
         getStockingItemList("");
         repeatFocus(itemsearch);
 
-        itemsearch.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("textfield changed from " + oldValue + " to " + newValue);
-            itemsearch.clear();
-            itemsearch.setText(newValue);
-        });
+//        itemsearch.textProperty().addListener((observable, oldValue, newValue) -> {
+//            System.out.println("textfield changed from " + oldValue + " to " + newValue);
+//            //itemsearch.clear();
+//            //itemsearch.setText(newValue);
+//        });
     }
 
     private void repeatFocus(Node node) {
@@ -317,8 +320,9 @@ public class CatalogController extends MainAppController implements Initializabl
 
     @FXML
     private void searchitemsaction(ActionEvent event) {
-//        String text = itemsearch.getText();
-//        itemsearch.clear();
+        //if(event.getEventType().getName())
         getStockingItemList(itemsearch.getText());
+        itemsearch.selectAll();
     }
+
 }
