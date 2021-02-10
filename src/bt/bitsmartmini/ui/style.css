@@ -154,24 +154,6 @@
 .top-menu{
     -fx-text-fill: #ffffff;
 }
-.dashboard-color{
-    -fx-text-fill: #000000;
-    -fx-fill: #000000;
-}
-
-.dashboard-card{
-    -fx-pref-width:170px;
-    -fx-max-width:170px;
-    -fx-border-width: 0.1px;
-    -fx-border-color: #999999;
-
-}
-
-.dashboard-label{
-    -fx-font-family: 'Open Sans';
-    -fx-font-size: 24px;
-}
-
 .sidebar-color{
     -fx-fill: #dddee0;
 
@@ -253,12 +235,41 @@
     -fx-stroke:#ccc;
 }
 
+.dashboard-card{
+    -fx-font-family: 'Open Sans';
+    -fx-pref-width:170px;
+    -fx-max-width:170px;
+    -fx-border-width: 0.1px;
+    -fx-border-color: #999999;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0.6, 0.0, 0.0);
+    -fx-background-color: #252525;
+}
+
+.dashboard-card .dashboard-currency{
+    -fx-font-size: 16px;
+    -fx-text-fill:#ffffff;
+    -fx-opacity: 0.25;
+}
+
+.dashboard-card .dashboard-amnt{
+    -fx-font-size: 30px;
+    -fx-margin: 20px;
+}
+
+.dashboard-card .dashboard-status{
+    -fx-font-size: 9px;
+    -fx-fill:#ffffff;
+    -fx-opacity: 0.7;
+}
+
 .dashbord-card-color {
     -fx-background-color: #f7f7f7;
 }
-.dashboard-card-text-color{
-    -fx-text-fill: #FFFFFF;  
-    -fx-fill: #FFFFFF;
+
+.dashboard-card-title{
+    -fx-font-family: "Open Sans"; 
+    font-size: 18px;
+
 }
 
 add-to-cart-btn{
@@ -370,7 +381,6 @@ VBox .hoverVbox:hover{
 VBox .hoverVbox:hover .hovericons{
     -fx-background-color: #FFFFFF;
     -fx-fill: #000000;
-
 }
 VBox .hoverVboxActive{
     -fx-background-color: #FFFFFF;
@@ -378,6 +388,14 @@ VBox .hoverVboxActive{
 
 
 /* table */
+
+.table-view {
+    -fx-table-cell-border-color: transparent;
+}
+
+.table-view .table-row-cell {
+    -fx-border-width: 1;
+}
 
 .table-view .column-header,
 .table-view .column-header-background .filler {
@@ -393,9 +411,45 @@ VBox .hoverVboxActive{
 .table-view .cell{
     -fx-cell-size: 45;
     -fx-alignment: center-left;
-/*    -fx-background-color: #29292D;*/
-/*    -fx-border-color: #29292D;*/
-/*    -fx-text-fill: lightgray;*/
+    /*    -fx-background-color: #29292D;*/
+    /*    -fx-border-color: #29292D;*/
+    /*    -fx-text-fill: lightgray;*/
     -fx-alignment: CENTER_LEFT;
+}
 
+/* The increment and decrement button CSS class of scrollbar */
+.table-view .increment-button ,.table-view .decrement-button {
+    -fx-background-color:transparent;
+    -fx-background-radius: 2em;
+}
+
+.table-view .scroll-bar:horizontal .track,
+.table-view .scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color:derive( #333,90%);
+    -fx-background-radius: 2em;
+    -fx-border-radius:2em;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.table-view .scroll-bar:horizontal .thumb,
+.table-view .scroll-bar:vertical .thumb {
+    -fx-background-color:derive( #333,90%);
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color:derive( #333,90%);
+    -fx-background-radius: 2em;
+    -fx-border-radius:2em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color:derive( #777,90%);
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
 }

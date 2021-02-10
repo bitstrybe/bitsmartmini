@@ -62,14 +62,14 @@
                         <TableView fx:id="salestable" style="-fx-background-color: white;">
                            <columns>
                               <TableColumn fx:id="salescodetb" text="Sales Code" />
-                              <TableColumn fx:id="saledatetb" text="Date" />
-                              <TableColumn fx:id="customertb" prefWidth="200.0" styleClass="align_table_left" text="Customer" />
-                              <TableColumn fx:id="salespricetb" prefWidth="90.0" text="Sales" />
-                              <TableColumn fx:id="saleamountpaidtb" text="Amount" />
+                              <TableColumn fx:id="saledatetb" prefWidth="90.0" text="Date" />
+                              <TableColumn fx:id="customertb" prefWidth="220.0" styleClass="align_table_left" text="Customer" />
+                              <TableColumn fx:id="salespricetb" prefWidth="100.0" text="Sales" />
+                              <TableColumn fx:id="saleamountpaidtb" prefWidth="100.0" text="Amount" />
                               <TableColumn fx:id="balancetb" prefWidth="100.0" text="Outstandings" />
-                              <TableColumn fx:id="refunds" text="Refunds" />
-                              <TableColumn fx:id="actuals" text="Actuals" />
-                              <TableColumn fx:id="action" prefWidth="60.0" text="Action" />
+                              <TableColumn fx:id="refunds" prefWidth="100.0" text="Refunds" />
+                              <TableColumn fx:id="actuals" prefWidth="100.0" text="Actuals" />
+                              <TableColumn fx:id="action" prefWidth="100.0" text="Action" />
                            </columns>
                         </TableView>
                      </children>
