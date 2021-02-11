@@ -53,20 +53,6 @@ public class ItemsDisplayController implements Initializable {
         catalogstaus.getChildren().remove(adminstockin);
         catalogstaus.getChildren().remove(adminstockout);
         catalogstaus.getChildren().remove(addtocart);
-        //itemsdesc.wrappingWidthProperty().bind(tabPane.widthProperty());
-
-//        if ("Administrator".equals(LoginController.u.getRoles())) {
-//            catalogstaus.getChildren().add(adminstockin);
-//            //catalogstaus.getChildren().add(adminstockout);
-//            catalogstaus.getChildren().remove(addtocart);
-//        } else {
-//            catalogstaus.getChildren().add(addtocart);
-//            //addtocart.setVisible(true);
-////            adminstockin.setVisible(false);
-//            catalogstaus.getChildren().remove(adminstockin);
-//            catalogstaus.getChildren().remove(adminstockout);
-//            //returns.setVisible(true);
-//        }
     }
 
 }

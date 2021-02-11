@@ -29,7 +29,6 @@ import bt.bitsmartmini.bl.ReceiptBL;
 import bt.bitsmartmini.bl.SalesBL;
 import bt.bitsmartmini.bl.StockinBL;
 import bt.bitsmartmini.entity.Items;
-//import bt.bitsmartmini.entity.UomDef;
 import bt.bitsmartmini.tablemodel.SalesDetailsTableModel;
 import bt.bitsmartmini.tablemodel.SalesTableModel;
 import bt.bitsmartmini.tablemodel.SelectItemSaleTableModel;
@@ -37,7 +36,6 @@ import static bt.bitsmartmini.ui.MainAppController.cart;
 import static bt.bitsmartmini.ui.MainAppController.static_label;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import lxe.utility.math.DecimalUtil;
 
@@ -69,8 +67,6 @@ public class CatalogController extends MainAppController implements Initializabl
     String lsv;
     @FXML
     private FlowPane displaypane;
-    @FXML
-    private VBox catalogvbox;
 
     public void getStockingItemList(String p) {
         Task<Void> longRunningTask = new Task<Void>() {
