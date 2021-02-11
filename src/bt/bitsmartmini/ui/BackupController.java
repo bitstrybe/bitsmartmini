@@ -25,7 +25,9 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import org.joda.time.DateTime;
@@ -38,8 +40,6 @@ import org.joda.time.DateTime;
 public class BackupController implements Initializable {
 
     @FXML
-    private JFXButton backup;
-    @FXML
     private Label displayinfo;
     @FXML
     private JFXSpinner spinner;
@@ -47,6 +47,10 @@ public class BackupController implements Initializable {
     private FontAwesomeIcon check;
     @FXML
     private FontAwesomeIcon duplicatelock;
+    @FXML
+    private Button closebtn;
+    @FXML
+    private HBox statushbox;
 
     /**
      * Initializes the controller class.
@@ -57,40 +61,7 @@ public class BackupController implements Initializable {
 
     }
 
-    @FXML
-    public void backupDB() {
-        Task<Void> task = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
-                spinner.setVisible(true);
-                updateMessage("PROCESSING PLS WAIT.....");
-                Thread.sleep(2000);
-                return null;
-            }
-        };
-        displayinfo.textProperty().bind(task.messageProperty());
-        task.setOnSucceeded(s -> {
-            displayinfo.textProperty().unbind();
-            if (Backupdbtosql() == 0) {
-                displayinfo.setText("BACKUP SUCESSFUL");
-                spinner.setVisible(false);
-                check.setVisible(true);
-                closebtn();
-            } else {
-
-            }
-        });
-        Thread d = new Thread(task);
-        d.setDaemon(true);
-        d.start();
-    }
-
-    @FXML
-    private void closebtn() {
-        Stage stage = (Stage) displayinfo.getScene().getWindow();
-        stage.close();
-    }
-
+  
     public static int Backupdbtosql() {
         try {
 
@@ -107,7 +78,7 @@ public class BackupController implements Initializable {
             String dbPass = "bitstrybe@21";
 
             /*NOTE: Creating Path Constraints for folder saving*/
-            /*NOTE: Here the backup folder is created for saving inside it*/
+ /*NOTE: Here the backup folder is created for saving inside it*/
             String folderPath = path + "\\backup";
 
             /*NOTE: Creating Folder if it does not exist*/
@@ -115,8 +86,7 @@ public class BackupController implements Initializable {
             f1.mkdir();
 
             /*NOTE: Creating Path Constraints for backup saving*/
-            /*NOTE: Here the backup is saved in a folder called backup with the name backup.sql*/
-            
+ /*NOTE: Here the backup is saved in a folder called backup with the name backup.sql*/
             String savePath = "\"" + path + "\\backup\\" + "LastBackup.sql\"";
 
             /*NOTE: Used to create a cmd command*/
@@ -140,5 +110,39 @@ public class BackupController implements Initializable {
             JOptionPane.showMessageDialog(null, "Error at Backuprestore" + ex.getMessage());
         }
         return 0;
+    }
+
+    @FXML
+    private void closefrom() {
+        Stage stage = (Stage) displayinfo.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void backupAction(ActionEvent event) {
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                spinner.setVisible(true);
+                updateMessage("PROCESSING PLS WAIT.....");
+                Thread.sleep(500);
+                return null;
+            }
+        };
+        displayinfo.textProperty().bind(task.messageProperty());
+        task.setOnSucceeded(s -> {
+            displayinfo.textProperty().unbind();
+            if (Backupdbtosql() == 0) {
+                displayinfo.setText("BACKUP SUCESSFUL");
+                spinner.setVisible(false);
+                check.setVisible(true);
+                closefrom();
+            } else {
+
+            }
+        });
+        Thread d = new Thread(task);
+        d.setDaemon(true);
+        d.start();
     }
 }
