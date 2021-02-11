@@ -6,6 +6,9 @@ import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import bt.bitsmartmini.entity.RtdItem;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.RollbackException;
 
 /**
  *
@@ -15,12 +18,39 @@ public class ReturnBL extends DdsBL {
 
     @Override
     public int insertData(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            em.getTransaction().begin();
+            em.persist(object);
+            em.getTransaction().commit();
+            em.refresh(object);
+            em.getFlushMode();
+            return 1;
+        } catch (RollbackException ex) {
+            Logger.getLogger(InsertUpdateBL.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
     }
 
     @Override
     public int updateData(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.getTransaction().begin();
+        em.merge(object);
+        em.getTransaction().commit();
+        return 1;
+    }
+
+    public int insertUpdate(Object o, Object a) {
+        try {
+            em.getTransaction().begin();
+            em.merge(o);
+            em.merge(a);
+            em.getTransaction().commit();
+            //em.refresh(o);
+            //em.refresh(a);
+            return 1;
+        } catch (Exception ex) {
+            return 0;
+        }
     }
 
     @Override

@@ -15,7 +15,6 @@ import bt.bitsmartmini.bl.ReceiptBL;
 import bt.bitsmartmini.bl.ReturnBL;
 import bt.bitsmartmini.entity.Customers;
 import bt.bitsmartmini.entity.Receipt;
-import bt.bitsmartmini.entity.RefundPolicy;
 import bt.bitsmartmini.reportmodel.DebtorsByCustomerReportModel;
 import bt.bitsmartmini.reportmodel.DebtorsBySalesReportModel;
 import bt.bitsmartmini.reportmodel.ItemListReportModel;
@@ -64,12 +63,7 @@ public class PrintReport extends JFrame {
         Receipt r = rbl.getReciptbyCode(Integer.parseInt(id));
         param = setBasiParam();
         Customers c = cb.getCustomersBySales(r.getSalesId().getSalesId());
-        RefundPolicy f = rb.findRefundPolicy();
-        System.out.println("F: "+f.getRefundCustomMsg());
-        // First, compile jrxml file.
         InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/TerminalReceiptReport.jasper");
-        // Fields for report
-
         BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/bt/resources/logo.png"));
         BufferedImage imageback = ImageIO.read(getClass().getResourceAsStream("/bt/resources/logoback.png"));
         param.put("LOGO", image);
@@ -81,7 +75,7 @@ public class PrintReport extends JFrame {
         param.put("CUSTOMER", c.getFullname());
         param.put("CUSTMOBILE", c.getMobile());
         param.put("CUSTMOBILE", c.getMobile());
-        param.put("REFUND_POLICY", f.getRefundCustomMsg().replace("?", f.getRefundPeriodVal() + " " + f.getRefundPeriod()));
+        param.put("REFUND_POLICY", r.getReturnPolicy());
         param.put("SOLDBY", r.getUsers().getUserid().toString());
         ReceiptReportModel sm = new ReceiptReportModel(r.getSalesId().getSalesId());
         //sm.salesId = r.getSalesId().getSalesId();
@@ -108,10 +102,6 @@ public class PrintReport extends JFrame {
             param.put("SD", DateUtil.format3(start));
             param.put("ED", DateUtil.format3(end));
             SalesReceiptReportModel sm = new SalesReceiptReportModel(start, end);
-            //sm.sd = start;
-            //sm.ed = end;
-            //Thread t = new Thread(sm);
-            //t.start();
             JRTableModelDataSource jrtmds = new JRTableModelDataSource(sm);
             JasperPrint print = JasperFillManager.fillReport(inputStream, param, jrtmds);
             JRViewer viewer = new JRViewer(print);
@@ -157,11 +147,7 @@ public class PrintReport extends JFrame {
     }
 
     public void showUserSalesDateRangeReport(Date start, Date end) throws JRException, ClassNotFoundException, SQLException, IOException {
-
-        //String reportSrcFile = "data/Blank_A4.jrxml";
-        // First, compile jrxml file.
         InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/SalesReportB.jasper");
-        // Fields for report
         param = setBasiParam();
         BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/bt/resources/logo.png"));
         param.put("LOGO", image);
@@ -179,11 +165,7 @@ public class PrintReport extends JFrame {
     }
 
     public void showStockReorderReport() throws JRException, ClassNotFoundException, SQLException, IOException {
-
-        //String reportSrcFile = "data/Blank_A4.jrxml";
-        // First, compile jrxml file.
         InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/StockReorderLevelReport.jasper");
-        // Fields for report
         param = setBasiParam();
 //        BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/bt/resources/dodtitle1.png"));
 //        BufferedImage image1 = ImageIO.read(getClass().getResourceAsStream("/bt/resources/dodtitle2.png"));

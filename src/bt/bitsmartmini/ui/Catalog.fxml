@@ -28,9 +28,9 @@
       </HBox>
       <HBox alignment="CENTER">
          <children>
-            <Line endX="-528.0581665039062" startX="-1009.5581665039062" styleClass="linecolor" HBox.hgrow="ALWAYS">
+            <Line endX="-1455.6109619140625" startX="-980.5581665039062" styleClass="linecolor" HBox.hgrow="ALWAYS">
                <effect>
-                  <DropShadow />
+                  <DropShadow height="3.13" radius="1.0325" width="3.0" />
                </effect></Line>
          </children>
       </HBox>

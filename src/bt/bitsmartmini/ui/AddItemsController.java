@@ -436,7 +436,7 @@ public class AddItemsController implements Initializable {
     }
 
     private void closeTransition() {
-        displayinfo.setText("Successfully Saved");
+        displayinfo.setText(MainAppController.SUCCESS_MESSAGE);
         spinner.setVisible(false);
         check.setVisible(true);
         TableData(searchbtn.getText());
@@ -478,7 +478,7 @@ public class AddItemsController implements Initializable {
                 }
                 closeTransition();
             } else {
-                displayinfo.setText(" There is an error please check and try again");
+                displayinfo.setText(MainAppController.ERROR_MESSAGE);
                 spinner.setVisible(false);
                 check.setVisible(false);
             }

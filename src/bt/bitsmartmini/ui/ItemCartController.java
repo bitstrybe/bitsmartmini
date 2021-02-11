@@ -46,11 +46,13 @@ import bt.bitsmartmini.bl.CustomerBL;
 import bt.bitsmartmini.bl.InsertUpdateBL;
 import bt.bitsmartmini.bl.ItemsBL;
 import bt.bitsmartmini.bl.ReceiptBL;
+import bt.bitsmartmini.bl.ReturnBL;
 import bt.bitsmartmini.bl.SalesBL;
 import bt.bitsmartmini.bl.StockinBL;
 import bt.bitsmartmini.entity.Customers;
 import bt.bitsmartmini.entity.Items;
 import bt.bitsmartmini.entity.Receipt;
+import bt.bitsmartmini.entity.RefundPolicy;
 import bt.bitsmartmini.entity.Sales;
 import bt.bitsmartmini.entity.SalesDetails;
 import bt.bitsmartmini.entity.Users;
@@ -334,14 +336,11 @@ public class ItemCartController extends MainAppController implements Initializab
                     static_label.setText(String.valueOf(cart.size()));
                     carttable.getItems().remove(selectedRecord);
                     AllCartToTable();
-                    //selection.refresh();
                     getTotalprice();
 
                 }
 
             });
-//            checkbox.setSelected(true);
-
         }
 
         /**
@@ -361,6 +360,7 @@ public class ItemCartController extends MainAppController implements Initializab
 
     @FXML
     private void checkout(ActionEvent event) throws IOException {
+        ReturnBL r = new ReturnBL();
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddCheckoutPayment.fxml"));
         Parent parent = (Parent) fxmlLoader.load();
@@ -438,6 +438,8 @@ public class ItemCartController extends MainAppController implements Initializab
                     receipt.setUsers(new Users(LoginController.u.getUserid()));
                     receipt.setReceiptDate(new Date(System.currentTimeMillis()));
                     receipt.setReceiptTime(new Date(System.currentTimeMillis()));
+                    RefundPolicy y = r.findRefundPolicy();
+                    receipt.setReturnPolicy(y.getRefundCustomMsg().replace("?", y.getRefundPeriodVal() + " " + y.getRefundPeriod()));
                     rds.add(receipt);
                     sale.setReceiptCollection(rds);
                     int checkresult = insert.insertData(sale);
@@ -480,10 +482,7 @@ public class ItemCartController extends MainAppController implements Initializab
                         } catch (IOException ex) {
                             Logger.getLogger(ItemCartController.class.getName()).log(Level.SEVERE, null, ex);
                         }
-
                     }
-                    //System.out.println("Saved");
-
                 } else {
                     System.out.println("Unable to save");
                 }
@@ -544,11 +543,8 @@ public class ItemCartController extends MainAppController implements Initializab
         List<Number> columnData = new ArrayList<>();
         for (SelectItemSaleTableModel item : carttable.getItems()) {
             String qunt = quantity.getCellObservableValue(item).getValue();
-//            Number nhisps = nhisvalprice.getCellObservableValue(item).getValue();
             double actualprice = Integer.valueOf(quantity.getCellObservableValue(item).getValue()) * Double.valueOf(itemprice.getCellObservableValue(item).getValue());
             double discount = Double.valueOf(Discountcent.getCellObservableValue(item).getValue());
-//            double nhistopup = actualprice - qunt.intValue();
-
             if (discount > 0) {
                 double discountval2 = discount / 100;
                 double disactval = actualprice * discountval2;
@@ -605,7 +601,6 @@ public class ItemCartController extends MainAppController implements Initializab
                 input = new FileInputStream(item.getItemImg());
                 Image image = new Image(input);
                 itemimage1.setImage(image);
-                //save.setDisable(false);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(AddStockInController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -613,7 +608,6 @@ public class ItemCartController extends MainAppController implements Initializab
             itembarcode.setText(null);
             itemcartname.setText(null);
             itembrand.setText(null);
-            //long qty = sbl.getStockBalance(itembarcode.getText());
             itemqty.setText(null);
             itemsp.setText(null);
             curry.setText(null);
@@ -625,3 +619,4 @@ public class ItemCartController extends MainAppController implements Initializab
     }
 
 }
+

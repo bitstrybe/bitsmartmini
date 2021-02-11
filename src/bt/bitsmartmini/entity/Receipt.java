@@ -32,6 +32,7 @@ import javax.persistence.TemporalType;
     , @NamedQuery(name = "Receipt.findByReceiptTime", query = "SELECT r FROM Receipt r WHERE r.receiptTime = :receiptTime")
     , @NamedQuery(name = "Receipt.findByAmountPaid", query = "SELECT r FROM Receipt r WHERE r.amountPaid = :amountPaid")
     , @NamedQuery(name = "Receipt.findByPayMode", query = "SELECT r FROM Receipt r WHERE r.payMode = :payMode")
+    , @NamedQuery(name = "Receipt.findByReturnPolicy", query = "SELECT r FROM Receipt r WHERE r.returnPolicy = :returnPolicy")
     , @NamedQuery(name = "Receipt.findByRemarks", query = "SELECT r FROM Receipt r WHERE r.remarks = :remarks")
     , @NamedQuery(name = "Receipt.findByEntryLog", query = "SELECT r FROM Receipt r WHERE r.entryLog = :entryLog")
     , @NamedQuery(name = "Receipt.findByModifiedDate", query = "SELECT r FROM Receipt r WHERE r.modifiedDate = :modifiedDate")})
@@ -56,6 +57,8 @@ public class Receipt implements Serializable {
     @Basic(optional = false)
     @Column(name = "pay_mode", nullable = false, length = 25)
     private String payMode;
+    @Column(name = "return_policy", length = 545)
+    private String returnPolicy;
     @Column(name = "remarks", length = 500)
     private String remarks;
     @Column(name = "entry_log")
@@ -124,6 +127,14 @@ public class Receipt implements Serializable {
 
     public void setPayMode(String payMode) {
         this.payMode = payMode;
+    }
+
+    public String getReturnPolicy() {
+        return returnPolicy;
+    }
+
+    public void setReturnPolicy(String returnPolicy) {
+        this.returnPolicy = returnPolicy;
     }
 
     public String getRemarks() {

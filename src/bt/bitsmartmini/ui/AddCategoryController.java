@@ -329,7 +329,7 @@ public class AddCategoryController implements Initializable {
     private void closeTransition() {
         save.setDisable(true);
         clearAllCategory();
-        displayinfo.setText("SUCCESSFULLY SAVED");
+        displayinfo.setText(MainAppController.SUCCESS_MESSAGE);
         spinner.setVisible(false);
         check.setVisible(true);
         TableData();
@@ -361,7 +361,6 @@ public class AddCategoryController implements Initializable {
                 break;
 
         }
-
     }
 
 }

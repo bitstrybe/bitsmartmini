@@ -106,6 +106,12 @@ public class MainAppController implements Initializable {
     private HBox topmenu;
     @FXML
     private VBox cartbox;
+    
+    public static final String SUCCESS_MESSAGE = "Saved";
+    public static final String ERROR_MESSAGE = "There is an error please check and try again";
+    //public static final String INFO_MESSAGE = "";
+    //public static final String WARNING_MESSAGE;
+    
 
     public void setScene(String scenechange) throws IOException {
         Parent root;
