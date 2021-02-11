@@ -63,11 +63,6 @@ public class AddToCartController implements Initializable {
 
     @FXML
     public void IncrementValue(ActionEvent event) {
-        //StockinBL s = new StockinBL();
-        //Qty = s.getStockBalance(itemnamelabel.getText());
-        //Qty = itemqty.getText()//s.getStockBalance(itemnamelabel.getText());
-        //System.out.println("itemname: " + itemnamelabel.getText());
-        //System.out.println("qty: " + itemqty.getText());
         if (rowCounter.get() < Integer.valueOf(itemqty.getText())) {
             qnttextfield.setText(Integer.toString(rowCounter.incrementAndGet()));
         }

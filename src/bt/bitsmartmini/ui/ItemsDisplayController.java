@@ -20,7 +20,7 @@ public class ItemsDisplayController implements Initializable {
     @FXML
     public ImageView itemsimage;
     @FXML
-    public Label exp;
+    public Text exp;
     @FXML
     public Button addtocart;
     public ImageView outofstockshape;

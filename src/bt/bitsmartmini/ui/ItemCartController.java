@@ -58,12 +58,14 @@ import bt.bitsmartmini.entity.SalesDetails;
 import bt.bitsmartmini.entity.Users;
 import bt.bitsmartmini.tablemodel.SelectItemSaleTableModel;
 import static bt.bitsmartmini.ui.MainAppController.cart;
+import static bt.bitsmartmini.ui.MainAppController.static_label;
 import bt.bitsmartmini.utils.PrintReport;
 import bt.bitsmartmini.utils.Utilities;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.concurrent.atomic.AtomicInteger;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
@@ -103,6 +105,8 @@ public class ItemCartController extends MainAppController implements Initializab
     @FXML
     private TableColumn<SelectItemSaleTableModel, String> Discountcent;
 
+    AtomicInteger rowCounter = new AtomicInteger(0);
+
     double totalp;
     DecimalFormat df = new DecimalFormat("0.00");
 
@@ -129,8 +133,6 @@ public class ItemCartController extends MainAppController implements Initializab
     @FXML
     private JFXTextField qnttextfield;
     @FXML
-    private JFXButton add;
-    @FXML
     private ImageView itemimage1;
     @FXML
     private Text curry;
@@ -138,6 +140,10 @@ public class ItemCartController extends MainAppController implements Initializab
     private Text qtyrem;
     @FXML
     private HBox qtyHbox;
+    @FXML
+    private JFXButton addtocartbtn;
+    @FXML
+    private Label addtocartinfo;
 
     /**
      * Initializes the controller class.
@@ -145,11 +151,49 @@ public class ItemCartController extends MainAppController implements Initializab
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        qnttextfield.setText("1");
         AllCartToTable();
         getCustomer();
         getTotalprice();
         customerdroplist.getSelectionModel().selectFirst();
         repeatFocus(itembarcode);
+    }
+
+    @FXML
+    private void addItemToCart() {
+        Task<Void> longRunningTask = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                Platform.runLater(() -> {
+                    try {
+                        long stockinqty = new StockinBL().getStockInTotal(itembarcode.getText());
+                        long qntfield = Long.valueOf(itemqty.getText());
+                        if (Long.valueOf(qnttextfield.getText()) <= qntfield) {
+                            double totalqnt = Long.valueOf(qnttextfield.getText()) * Double.valueOf(itemsp.getText());
+                            double price = Double.valueOf(itemsp.getText());
+                            SelectItemSaleTableModel item = new SelectItemSaleTableModel(itembarcode.getText(), itemname.getText(), qnttextfield.getText(), "0", DecimalUtil.format2(price), DecimalUtil.format2(totalqnt), "0");
+                            cart.put(itembarcode.getText(), item);
+                            static_label.setText(String.valueOf(cart.size()));
+                            addtocartinfo.setText("Added to cart");
+                            AllCartToTable();
+                            resetItemDisplay();
+                        } else {
+                            addtocartinfo.setText("Not enough Quantity");
+                        }
+                    } catch (Exception ex) {
+                        addtocartinfo.setText("Invalid Format");
+                        Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
+                    } 
+                });
+                return null;
+            }
+        };
+        new Thread(longRunningTask).start();
+    }
+
+    public void clearAllCartItem() {
+        cart.clear();
+        static_label.setText(String.valueOf(cart.size()));
     }
 
     public void getCustomer() {
@@ -163,7 +207,7 @@ public class ItemCartController extends MainAppController implements Initializab
     public void AllCartToTable() {
         data = FXCollections.observableArrayList();
         for (SelectItemSaleTableModel c : cart.values()) {
-            System.out.println("i: " + c.getItemCode());
+            //System.out.println("i: " + c.getItemCode());
             Items item = ib.getImageItembyCode(c.getItemCode());
             ImageView imageitems = new ImageView();
             File file = new File(item.getItemImg());
@@ -211,6 +255,7 @@ public class ItemCartController extends MainAppController implements Initializab
                 }
             });
             carttable.setItems(data);
+            getTotalprice();
         }
     }
 
@@ -219,7 +264,7 @@ public class ItemCartController extends MainAppController implements Initializab
         cart.clear();
         static_label.setText(String.valueOf(cart.size()));
         carttable.getItems().clear();
-        totalprice.setText(" 0");
+        totalprice.setText("0");
         curr.setText(MainAppController.B.getBCurrency());
     }
 
@@ -229,10 +274,18 @@ public class ItemCartController extends MainAppController implements Initializab
 
     @FXML
     private void minusqnty(ActionEvent event) {
+        if (rowCounter.get() > 1) {
+            qnttextfield.setText(Integer.toString(rowCounter.decrementAndGet()));
+        } else {
+            rowCounter.set(1);
+        }
     }
 
     @FXML
     private void plusqnty(ActionEvent event) {
+        if (rowCounter.get() < Integer.valueOf(itemqty.getText())) {
+            qnttextfield.setText(Integer.toString(rowCounter.incrementAndGet()));
+        }
     }
 
     public class AddPersonDiscountCell extends TableCell<SelectItemSaleTableModel, Boolean> {
@@ -337,7 +390,6 @@ public class ItemCartController extends MainAppController implements Initializab
                     carttable.getItems().remove(selectedRecord);
                     AllCartToTable();
                     getTotalprice();
-
                 }
 
             });
@@ -542,7 +594,7 @@ public class ItemCartController extends MainAppController implements Initializab
     public List getPrice() {
         List<Number> columnData = new ArrayList<>();
         for (SelectItemSaleTableModel item : carttable.getItems()) {
-            String qunt = quantity.getCellObservableValue(item).getValue();
+            //String qunt = quantity.getCellObservableValue(item).getValue();
             double actualprice = Integer.valueOf(quantity.getCellObservableValue(item).getValue()) * Double.valueOf(itemprice.getCellObservableValue(item).getValue());
             double discount = Double.valueOf(Discountcent.getCellObservableValue(item).getValue());
             if (discount > 0) {
@@ -552,7 +604,6 @@ public class ItemCartController extends MainAppController implements Initializab
             } else {
                 columnData.add(actualprice);
             }
-
         }
 
         return columnData;
@@ -573,11 +624,24 @@ public class ItemCartController extends MainAppController implements Initializab
         });
     }
 
+    private void resetItemDisplay() {
+        itembarcode.setText(null);
+        itemcartname.setText(null);
+        itembrand.setText(null);
+        itemqty.setText(null);
+        itemsp.setText(null);
+        curry.setText(null);
+        itemimage1.setImage(null);
+        qtyrem.setText(null);
+        qtyHbox.setStyle("-fx-background-color:#fff");
+        qnttextfield.setText("1");
+    }
+
     @FXML
     private void searchitemsaction(ActionEvent event) throws IOException {
         StockinBL sbl = new StockinBL();
         itembarcode.selectAll();
-        System.out.println("cod: " + itembarcode.getText());
+        //System.out.println("cod: " + itembarcode.getText());
         Items item = new ItemsBL().getImageItembyCode(itembarcode.getText());
         if (item != null) {
             itembarcode.setText(item.getUpc());
@@ -588,11 +652,11 @@ public class ItemCartController extends MainAppController implements Initializab
             if (qty > 0) {
                 qtyrem.setText("Remaining");
                 qtyHbox.setStyle("-fx-background-color:#1faa00");
-                add.setDisable(false);
+                addtocartbtn.setDisable(false);
             } else {
                 qtyrem.setText("Out of Stock");
                 qtyHbox.setStyle("-fx-background-color:#ba000d");
-                add.setDisable(true);
+                addtocartbtn.setDisable(true);
             }
             itemsp.setText(DecimalUtil.format2(item.getSp()));
             curry.setText(MainAppController.B.getBCurrency());
@@ -605,18 +669,8 @@ public class ItemCartController extends MainAppController implements Initializab
                 Logger.getLogger(AddStockInController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            itembarcode.setText(null);
-            itemcartname.setText(null);
-            itembrand.setText(null);
-            itemqty.setText(null);
-            itemsp.setText(null);
-            curry.setText(null);
-            itemimage1.setImage(null);
-            qtyrem.setText(null);
-            qtyHbox.setStyle("-fx-background-color:#fff");
+            resetItemDisplay();
         }
         itembarcode.selectAll();
     }
-
 }
-
