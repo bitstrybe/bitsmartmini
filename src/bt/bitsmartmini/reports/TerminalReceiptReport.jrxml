@@ -445,9 +445,9 @@
 				<reportElement x="0" y="139" width="212" height="9" forecolor="#999999" uuid="4dec0ea2-dce7-43d1-8594-3a5feb4851bd"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="6"/>
-					<paragraph leftIndent="1"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
-				<text><![CDATA[Return Policy]]></text>
+				<text><![CDATA[Return Policy:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="0" y="148" width="212" height="17" forecolor="#666666" uuid="c2d108d1-45d8-423d-866e-48244c7e8af0"/>
