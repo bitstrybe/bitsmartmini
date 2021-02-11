@@ -38,11 +38,13 @@ public class Utilities {
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/YYYY");
         return df.format(date);
     }
+    
 
     public static Date convertStringToDate(String date) throws ParseException {
         Date dateval = new SimpleDateFormat("dd/MM/yyyy").parse(date);
         return dateval;
     }
+    
 
     public static LocalDate convertDateToLocalDate(Date dateToConvert) {
         return dateToConvert.toInstant()

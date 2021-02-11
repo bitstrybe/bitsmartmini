@@ -9,17 +9,25 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
 import com.smattme.MysqlImportService;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import java.awt.HeadlessException;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -29,8 +37,6 @@ import javafx.scene.control.Label;
 public class RestoreController implements Initializable {
 
     @FXML
-    private JFXButton backup;
-    @FXML
     private Label displayinfo;
     @FXML
     private JFXSpinner spinner;
@@ -38,6 +44,8 @@ public class RestoreController implements Initializable {
     private FontAwesomeIcon check;
     @FXML
     private FontAwesomeIcon duplicatelock;
+    @FXML
+    private JFXButton restore;
 
     /**
      * Initializes the controller class.
@@ -49,24 +57,60 @@ public class RestoreController implements Initializable {
 
     @FXML
     private void closebtn(ActionEvent event) {
+        Stage stage = (Stage) displayinfo.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
-    private void backupDB(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
-        String username = System.getProperty("user.name");
-        String sql = new String(Files.readAllBytes(Paths.get("C:\\Users\\", username, "\\Desktop\\Backup\\Restore\\6_5_2020_12_07_26_drugstore_database_dump.sql")));
+    private void restoreAction(ActionEvent event) {
+        Restoredbfromsql("LastBackup.sql");
+    }
 
-        boolean res = MysqlImportService.builder()
-                .setDatabase("drugstore")
-                .setSqlString(sql)
-                .setUsername("root")
-                .setPassword("1234")
-                .setDeleteExisting(true)
-                .setDropExisting(true)
-                .importDatabase();
+    public static void Restoredbfromsql(String s) {
+        try {
+            /*NOTE: String s is the mysql file name including the .sql in its name*/
+ /*NOTE: Getting path to the Jar file being executed*/
+ /*NOTE: YourImplementingClass-> replace with the class executing the code*/
+            String username = System.getProperty("user.name");
+            Path path = FileSystems.getDefault().getPath("C:\\Users\\", username, "\\AppData\\Roaming\\Backup");
+            Path databasepath = FileSystems.getDefault().getPath("C:\\Program Files (x86)\\Bitsmartsmini\\DatabaseFiles\\bin\\mysql.exe");
+            System.out.println(path.toString());
 
-        assert(res);
-        System.out.println("restore successfully");
+            /*NOTE: Creating Database Constraints*/
+            String dbName = "bitsmartmini";
+            String dbUser = "root";
+            String dbPass = "bitstrybe@21";
+
+            /*NOTE: Creating Path Constraints for restoring*/
+            String restorePath = path + "\\backup" + "\\" + s;
+            System.out.println(restorePath);
+            
+            System.out.println(databasepath.toString());
+
+            /*NOTE: Used to create a cmd command*/
+ /*NOTE: Do not create a single large string, this will cause buffer locking, use string array*/
+            String[] executeCmd = new String[]{databasepath.toString(), dbName, "-u" + dbUser, "-p" + dbPass, "-e", " source " + restorePath};
+
+            /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
+            Process runtimeProcess = null;
+            try {
+                runtimeProcess = Runtime.getRuntime().exec(executeCmd);
+            } catch (IOException ex) {
+                Logger.getLogger(RestoreController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            int processComplete = runtimeProcess.waitFor();
+
+            /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
+            if (processComplete == 0) {
+                JOptionPane.showMessageDialog(null, "Successfully restored from SQL : " + s);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error at restoring");
+            }
+
+        } catch (InterruptedException | HeadlessException ex) {
+            JOptionPane.showMessageDialog(null, "Error at Restoredbfromsql" + ex.getMessage());
+        }
+
     }
 
 }

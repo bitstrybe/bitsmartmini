@@ -106,12 +106,11 @@ public class MainAppController implements Initializable {
     private HBox topmenu;
     @FXML
     private VBox cartbox;
-    
+
     public static final String SUCCESS_MESSAGE = "Saved";
     public static final String ERROR_MESSAGE = "There is an error please check and try again";
     //public static final String INFO_MESSAGE = "";
     //public static final String WARNING_MESSAGE;
-    
 
     public void setScene(String scenechange) throws IOException {
         Parent root;
@@ -367,15 +366,15 @@ public class MainAppController implements Initializable {
         backup.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             try {
                 Stage stage = new Stage();
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Backup.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DataMgnt.fxml"));
                 Parent parent = (Parent) fxmlLoader.load();
                 Scene scene = new Scene(parent);
-                // stage.initModality(Modality.APPLICATION_MODAL);
-                stage.initOwner(parent.getScene().getWindow());
+                scene.setFill(Color.TRANSPARENT);
                 stage.setScene(scene);
-                stage.initStyle(StageStyle.UNDECORATED);
-                stage.resizableProperty().setValue(false);
-                stage.showAndWait();
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setMaximized(true);
+                stage.show();
             } catch (IOException ex) {
                 Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
             }

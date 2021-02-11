@@ -250,11 +250,10 @@ public class StockinBL extends DdsBL {
         return q.getResultList();
     }
 
-    public List getStockinFromItems(String itemname) {
+    public List getItemsListFromStockin(String upc) {
         try {
-            TypedQuery<String> q = em.createQuery("SELECT r.items.itemCodeFullname FROM Stockin r WHERE r.items.itemDesc = :itemname", String.class);
-            q.setParameter("itemname", itemname);
-//        System.out.println(q.getResultList());
+            TypedQuery<String> q = em.createQuery("SELECT r FROM Stockin r WHERE r.upc.upc = :upc", String.class);
+            q.setParameter("upc", upc);
             q.setMaxResults(1);
             return q.getResultList();
         } catch (Exception ex) {

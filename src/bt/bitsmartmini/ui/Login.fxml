@@ -42,9 +42,9 @@
       </HBox>
       <VBox alignment="TOP_CENTER" layoutX="22.0" layoutY="41.0" prefHeight="442.0" prefWidth="573.0" spacing="10.0">
          <children>
-            <ImageView fitHeight="60.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="60.0" fitWidth="65.0" opacity="0.66" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../resources/bitstrybe-final-white.png" />
+                  <Image url="@../../resources/bitsmart-logo.png" />
                </image>
             </ImageView>
             <VBox alignment="CENTER" VBox.vgrow="NEVER">
@@ -100,20 +100,27 @@
                   <Insets bottom="30.0" />
                </padding>
             </Label>
-            <AnchorPane stylesheets="@style.css">
+            <HBox alignment="CENTER">
                <children>
-                  <Hyperlink fx:id="hyperlink" layoutX="471.0" layoutY="10.0" text="www.bitstrybe.com">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Hyperlink>
-                      <Text fill="WHITE" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Copyright @ 2020 Bitstrybe Inc. All Rights Reserved." wrappingWidth="259.22900390625">
+                      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text=" Copyright @ 2020 Bitstrybe Inc. All Rights Reserved." wrappingWidth="452.22900390625">
                      <font>
                         <Font name="Open Sans" size="10.0" />
                      </font>
                   </Text>
+                  <Hyperlink fx:id="hyperlink" style="-fx-text-fill: #FFFFFF;" text="www.bitstrybe.com">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="12.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/bitstrybe-final-white.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Hyperlink>
                </children>
-            </AnchorPane>
+            </HBox>
          </children>
       </VBox>
     </children>

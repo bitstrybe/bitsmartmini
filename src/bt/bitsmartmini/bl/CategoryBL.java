@@ -40,9 +40,9 @@ public class CategoryBL extends DdsBL {
         return q.getResultList();
     }
 
-    public String getCategoryById(String categoryName) {
+    public Category getCategoryById(String categoryName) {
         try {
-            TypedQuery<String> q = em.createQuery("SELECT s.formName FROM Category s WHERE s.formName = :formName", String.class);
+            TypedQuery<Category> q = em.createQuery("SELECT s FROM Category s WHERE s.formName = :formName", Category.class);
             q.setParameter("formName", categoryName);
             return q.getSingleResult();
         } catch (NoResultException ex) {

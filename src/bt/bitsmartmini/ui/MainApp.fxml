@@ -172,7 +172,7 @@
                   <VBox fx:id="backup" alignment="CENTER" maxWidth="-Infinity" prefWidth="120.0" spacing="1.0" HBox.hgrow="NEVER">
                      <children>
                         <FontAwesomeIcon fx:id="backupawesome" fill="#dddee0" glyphName="DATABASE" size="2.5em" textAlignment="CENTER" wrappingWidth="68.62142753601074" />
-                        <Text fx:id="backuptext" fill="#dddee0" strokeType="OUTSIDE" strokeWidth="0.0" text="Backup" textAlignment="CENTER" wrappingWidth="70.1962890625" />
+                        <Text fx:id="backuptext" fill="#dddee0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data" textAlignment="CENTER" wrappingWidth="70.1962890625" />
                      </children>
                   </VBox>
                   <VBox layoutX="268.0" layoutY="9.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="1.0">

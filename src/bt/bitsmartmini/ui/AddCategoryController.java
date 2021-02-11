@@ -89,12 +89,12 @@ public class AddCategoryController implements Initializable {
 //            check.setVisible(false);
             if (cattextfield.getLength() > 0) {
                 save.setDisable(false);
-                String value = form.getCategoryById(cattextfield.getText());
-                if (value != null) {
+                Category value = form.getCategoryById(cattextfield.getText());
+                if (value.getCategoryName() != null) {
                     save.setDisable(true);
                     displayinfo.setText("DUPLICATE FORUND!!!");
                     duplicatelock.setVisible(true);
-                } else if (value == null) {
+                } else if (value.getCategoryName() == null) {
                     save.setDisable(false);
                     displayinfo.setText(null);
                     duplicatelock.setVisible(false);
