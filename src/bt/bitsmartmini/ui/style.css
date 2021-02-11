@@ -3,6 +3,11 @@
     Author     : Bitstrybe Inc www.bitstrybe.com
 */
 
+.root { 
+    -fx-focus-color: transparent; 
+    -fx-faint-focus-color: transparent;
+}
+
 #rootPane{
     -fx-background-image:url(bitmartsmini.jpg);
     -fx-background-size: cover;
@@ -398,12 +403,18 @@ VBox .hoverVboxActive{
 }
 
 .table-view .table-row-cell {
-    -fx-border-width: 1;
+    -fx-border-width: 0.3;
 }
 
 .table-view .column-header,
 .table-view .column-header-background .filler {
     -fx-background-color:  #333333; 
+}
+
+/* focused cell (keyboard navigation) */
+.table-view:focused:row-selection > .virtual-flow > .clipped-container > .sheet > .table-row-cell:focused {
+    -fx-background-color: #3395ed;
+    /*-fx-background-insets: 1, 0, 1;*/
 }
 
 .table-view .column-header .label{
@@ -412,13 +423,24 @@ VBox .hoverVboxActive{
     /*   -fx-alignment: CENTER_LEFT;*/
 }
 
+.table-row-cell{
+    /*-fx-background-color: -fx-primary;*/
+    -fx-border-color: transparent;
+    -fx-table-cell-border-color: transparent;
+ }
+
+.table-row-cell:empty{
+/*    -fx-background-color:white;*/
+    -fx-border-color: transparent;
+    -fx-table-cell-border-color: transparent;
+ }
+
 .table-view .cell{
     -fx-cell-size: 45;
     -fx-alignment: center-left;
-    /*    -fx-background-color: #29292D;*/
+    /*-fx-background-color: #111;*/
     /*    -fx-border-color: #29292D;*/
     /*    -fx-text-fill: lightgray;*/
-    -fx-alignment: CENTER_LEFT;
 }
 
 /* The increment and decrement button CSS class of scrollbar */
@@ -426,22 +448,6 @@ VBox .hoverVboxActive{
     -fx-background-color:transparent;
     -fx-background-radius: 2em;
 }
-
-/*.table-view .scroll-bar:horizontal .track,
-.table-view .scroll-bar:vertical .track{
-    -fx-background-color: transparent;
-    -fx-border-color:derive( #333,90%);
-    -fx-background-radius: 2em;
-    -fx-border-radius:2em;
-}*/
-
-/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
-/*.table-view .scroll-bar:horizontal .thumb,
-.table-view .scroll-bar:vertical .thumb {
-    -fx-background-color:derive( #333,90%);
-    -fx-background-insets: 2, 0, 0;
-    -fx-background-radius: 2em;
-}*/
 
 .table-view .virtual-flow .scroll-bar:vertical,
 .table-view .virtual-flow .scroll-bar:vertical .track,
