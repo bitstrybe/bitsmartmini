@@ -4,11 +4,10 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <VBox id="homebackground" alignment="TOP_CENTER" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.CatalogController">
@@ -28,10 +27,7 @@
       </HBox>
       <HBox alignment="CENTER">
          <children>
-            <Line endX="-1455.6109619140625" startX="-980.5581665039062" styleClass="linecolor" HBox.hgrow="ALWAYS">
-               <effect>
-                  <DropShadow height="3.13" radius="1.0325" width="3.0" />
-               </effect></Line>
+            <Separator styleClass="linecolor-dark" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: transparent;">

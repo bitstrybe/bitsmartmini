@@ -29,17 +29,17 @@ public class ItemInfoController implements Initializable {
     @FXML
     public Label outofstocklabel;
     @FXML
-    public Label itembcode;
+    public Text itembcode;
     @FXML
-    public Label medsname;
+    public Text medsname;
     @FXML
-    public Label brand;
+    public Text brand;
     @FXML
     public Text qty;
     @FXML
     public Label curr;
     @FXML
-    public Label exp;
+    public Text exp;
 
     /**
      * Initializes the controller class.
