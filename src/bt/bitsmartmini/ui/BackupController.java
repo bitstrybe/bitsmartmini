@@ -1,6 +1,6 @@
 package bt.bitsmartmini.ui;
 
-import bt.bitsmartmini.bl.BackupLogBL;
+import bt.bitsmartmini.bl.InsertUpdateBL;
 import bt.bitsmartmini.entity.BackupLog;
 import com.jfoenix.controls.JFXSpinner;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
@@ -12,15 +12,24 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.zip.ZipException;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javax.swing.JOptionPane;
+import net.lingala.zip4j.ZipFile;
+import net.lingala.zip4j.model.ZipParameters;
+import net.lingala.zip4j.model.enums.AesKeyStrength;
+import net.lingala.zip4j.model.enums.EncryptionMethod;
 
 /**
  * FXML Controller class
@@ -40,7 +49,9 @@ public class BackupController implements Initializable {
     @FXML
     private Button closebtn;
     @FXML
-    private HBox statushbox; 
+    private HBox statushbox;
+    @FXML
+    private TextField dirtextfield;
 
     /**
      * Initializes the controller class.
@@ -51,68 +62,72 @@ public class BackupController implements Initializable {
 
     }
 
-    public static int Backupdbtosql() {
-        try {
-            BackupLogBL b = new BackupLogBL();
+    public void Backupdbtosql(File path) throws IOException {
+        Path databasepath = FileSystems.getDefault().getPath("C:\\Program Files (x86)\\Bitsmartsmini\\DatabaseFiles\\bin\\mysqldump.exe");
+        String savePath = "\"" + path + "\\backup\\" + "LastBackup.sql\"";
+        InsertUpdateBL b = new InsertUpdateBL();
 
-            /*NOTE: Getting path to the Jar file being executed*/
- /*NOTE: YourImplementingClass-> replace with the class executing the code*/
-            String username = System.getProperty("user.name");
-            Path path = FileSystems.getDefault().getPath("C:\\Users\\", username, "\\AppData\\Roaming");
-            Path databasepath = FileSystems.getDefault().getPath("C:\\Program Files (x86)\\Bitsmartsmini\\DatabaseFiles\\bin\\mysqldump.exe");
-            System.out.println(path.toString());
+        String dbName = "bitsmartmini";
+        String dbUser = "root";
+        String dbPass = "bitstrybe@21";
 
-            /*NOTE: Creating Database Constraints*/
-            String dbName = "bitsmartmini";
-            String dbUser = "root";
-            String dbPass = "bitstrybe@21";
+        String folderPath = path + "\\backup";
 
-            /*NOTE: Creating Path Constraints for folder saving*/
- /*NOTE: Here the backup folder is created for saving inside it*/
-            String folderPath = path + "\\backup";
-
-            /*NOTE: Creating Folder if it does not exist*/
-            File f1 = new File(folderPath);
-            boolean bool = f1.mkdir();
-            Files.setAttribute(f1.toPath(), "dos:hidden", true);
-            if (bool) {
-                System.out.println("Directory created successfully");
-            } else {
-                System.out.println("Sorry couldn’t create specified directory");
-            }
-
-            /*NOTE: Creating Path Constraints for backup saving*/
- /*NOT      E: Here the backup is saved in a folder called backup with the name backup.sql*/
-            String savePath = "\"" + path + "\\backup\\" + "LastBackup.sql\"";
-
-            /*NOTE: Used to create a cmd command*/
-            String executeCmd = databasepath + " -u" + dbUser + " -p" + dbPass + " --opt --routines --triggers --databases " + dbName + " -r " + savePath;
-            System.out.println(executeCmd);
-
-            /*NOTE: Executing the command here*/
-            Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
-            int processComplete = runtimeProcess.waitFor();
-            System.out.println(processComplete);
-
-            /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
-            if (processComplete == 0) {
-                b.insertData(new BackupLog(null, new Date(System.currentTimeMillis())));
-                if (processComplete == 1) {
-                    processComplete = 0;
-                    System.out.println("Backup process was successful");
-                } else {
-                    processComplete = 1;
-                }
-            } else {
-                processComplete = 1;
-                System.out.println("Backup process failed");
-            }
-            return processComplete;
-
-        } catch (IOException | InterruptedException ex) {
-            JOptionPane.showMessageDialog(null, "Error at Backuprestore" + ex.getMessage());
+        File f1 = new File(folderPath);
+        boolean bool = f1.mkdir();
+//        Files.setAttribute(f1.toPath(), "dos:hidden", true);
+        if (bool) {
+            System.out.println("Directory created successfully");
+        } else {
+            System.out.println("Sorry couldn’t create specified directory");
         }
-        return 0;
+
+        String executeCmd = databasepath + " -u" + dbUser + " -p" + dbPass + " --opt --routines --triggers --databases " + dbName + " -r " + savePath;
+
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                spinner.setVisible(true);
+//                restore.setDisable(true);
+                closebtn.setDisable(true);
+                updateMessage("BACKING UP DATA PLEASE WAIT");
+                try {
+                    b.insertData(new BackupLog(null, new Date(System.currentTimeMillis())));
+                    Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
+                    runtimeProcess.waitFor();
+                } catch (IOException ex) {
+                    Logger.getLogger(RestoreController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return null;
+            }
+        };
+        displayinfo.textProperty().bind(task.messageProperty());
+        task.setOnSucceeded(e -> {
+            displayinfo.textProperty().unbind();
+            displayinfo.setText("BACK UP COMPLETE");
+            spinner.setVisible(false);
+            check.setVisible(true);
+            closebtn.setDisable(false);
+            try {
+                ZipParameters zipParameters = new ZipParameters();
+                zipParameters.setEncryptFiles(true);
+                zipParameters.setEncryptionMethod(EncryptionMethod.AES);
+                zipParameters.setAesKeyStrength(AesKeyStrength.KEY_STRENGTH_256);
+
+                ZipFile zipFile = new ZipFile(path+"/backup/LastBackup.zip", "bitstrybe@21".toCharArray());
+                zipFile.addFile(path+"/backup/LastBackup.sql", zipParameters);
+                File f = new File(path+"/backup/LastBackup.sql");
+                f.delete();
+                
+            } catch (net.lingala.zip4j.exception.ZipException ex) {
+                Logger.getLogger(BackupController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        });
+        Thread d = new Thread(task);
+        d.setDaemon(true);
+        d.start();
+
     }
 
     @FXML
@@ -122,43 +137,17 @@ public class BackupController implements Initializable {
     }
 
     @FXML
-    private void backupAction(ActionEvent event) {
-        Task<Void> task = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
-                spinner.setVisible(true);
-                updateMessage("Processing...");
-                Thread.sleep(500);
-                return null;
-            }
-        };
-        displayinfo.textProperty().bind(task.messageProperty());
-        task.setOnSucceeded(s -> {
-            displayinfo.textProperty().unbind();
-            if (Backupdbtosql() == 0) {
-                displayinfo.setText("Backup process was successful");
-                spinner.setVisible(false);
-                check.setVisible(true);
-                closefrom();
-            } else {
-                displayinfo.setText("Backup process failed");
-            }
-        });
-        Thread d = new Thread(task);
-        d.setDaemon(true);
-        d.start();
+    private void backupAction(ActionEvent event) throws IOException {
+        Backupdbtosql(new File(dirtextfield.getText()));
+
     }
 
-//    private static void setHiddenAttrib(Path filePath) {
-//        try {
-//            DosFileAttributes attr = Files.readAttributes(filePath, DosFileAttributes.class);
-//            System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
-//            Files.setAttribute(filePath, "dos:hidden", true);
-//            attr = Files.readAttributes(filePath, DosFileAttributes.class);
-//            System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
-//        } catch (IOException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//    }
+    @FXML
+    private void backupfilechooser(ActionEvent event) {
+        DirectoryChooser dir = new DirectoryChooser();
+        File file = dir.showDialog(null);
+        dirtextfield.setText(file.getAbsolutePath());
+
+    }
+
 }
