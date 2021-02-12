@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="226" pageHeight="504" whenNoDataType="BlankPage" columnWidth="212" leftMargin="7" rightMargin="7" topMargin="7" bottomMargin="7" isIgnorePagination="true" uuid="eca1266b-c5c3-49a6-99eb-a3da2e599c35">
 	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="144"/>
+	<property name="ireport.y" value="736"/>
 	<style name="balance">
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$V{BAL} < 0.00]]></conditionExpression>
@@ -314,6 +314,7 @@
 				<reportElement style="tableHead" mode="Transparent" x="128" y="0" width="84" height="12" forecolor="#000000" uuid="3b53c9b0-59ee-404e-a253-b344cdeb8f01"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="6" isBold="true"/>
+					<paragraph rightIndent="4"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{SUBTOTAL}]]></textFieldExpression>
 			</textField>
@@ -357,6 +358,7 @@
 				<reportElement style="tableHead" mode="Transparent" x="123" y="26" width="89" height="12" forecolor="#000000" uuid="3076169e-71c1-4299-a8b7-72cc5021a877"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7" isBold="true"/>
+					<paragraph rightIndent="4"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{TOTALDUE}]]></textFieldExpression>
 			</textField>
@@ -364,6 +366,7 @@
 				<reportElement x="128" y="14" width="84" height="12" uuid="18c12885-b044-463e-9496-95db5a078379"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="6" isBold="true"/>
+					<paragraph rightIndent="4"/>
 				</textElement>
 				<textFieldExpression><![CDATA[0.00]]></textFieldExpression>
 			</textField>
@@ -382,6 +385,7 @@
 				<reportElement style="balance" x="113" y="67" width="100" height="12" uuid="5706b3b3-5145-4b41-ab9c-e6193459ffcd"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7" isBold="true"/>
+					<paragraph rightIndent="4"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{BAL}]]></textFieldExpression>
 			</textField>
@@ -399,9 +403,10 @@
 				<text><![CDATA[Amount Paid in words :]]></text>
 			</staticText>
 			<textField pattern="GH¢#,##0.00">
-				<reportElement x="87" y="41" width="126" height="25" forecolor="#33CC00" uuid="bea75921-302c-4bc5-be6d-56f461b98364"/>
+				<reportElement x="87" y="41" width="126" height="25" forecolor="#006600" uuid="bea75921-302c-4bc5-be6d-56f461b98364"/>
 				<textElement textAlignment="Right" verticalAlignment="Top">
 					<font size="15" isBold="true"/>
+					<paragraph rightIndent="4"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{AMNT}]]></textFieldExpression>
 			</textField>
@@ -409,7 +414,7 @@
 				<reportElement x="87" y="91" width="125" height="27" uuid="db83c7a2-52cf-451d-9f61-c6d54dd79cd6"/>
 				<textElement verticalAlignment="Top">
 					<font size="6" isBold="true" isUnderline="false"/>
-					<paragraph lineSpacing="1_1_2"/>
+					<paragraph lineSpacing="1_1_2" rightIndent="4"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{COLUMN_10}]]></textFieldExpression>
 			</textField>
@@ -431,6 +436,7 @@
 				<reportElement x="113" y="79" width="99" height="12" uuid="74265e86-4d73-4d4f-a69e-7c46f028c6f2"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font size="7" isBold="true"/>
+					<paragraph rightIndent="4"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{MODE}]]></textFieldExpression>
 			</textField>

@@ -159,13 +159,17 @@ public class ItemCartController extends MainAppController implements Initializab
         getTotalprice();
         customerdroplist.getSelectionModel().selectFirst();
         repeatFocus(itembarcode);
-        System.out.println("cart size: " + cart);
+        //System.out.println("cart size: " + cart);
+        controlbtn();
+        addtocartbtn.setDisable(true);
+    }
+
+    public void controlbtn() {
         if (cart.size() > 0) {
             checkoutbtn.setDisable(false);
         } else {
             checkoutbtn.setDisable(true);
         }
-        addtocartbtn.setDisable(true);
     }
 
     @FXML
@@ -186,6 +190,7 @@ public class ItemCartController extends MainAppController implements Initializab
                             addtocartinfo.setText("Added to cart");
                             AllCartToTable();
                             resetItemDisplay();
+                            controlbtn();
                         } else {
                             addtocartinfo.setText("Not enough Quantity");
                         }
@@ -411,7 +416,6 @@ public class ItemCartController extends MainAppController implements Initializab
         protected void updateItem(Boolean item, boolean empty) {
             super.updateItem(item, empty);
             if (!empty) {
-//                setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
                 setGraphic(paddedButton);
             } else {
                 setGraphic(null);
@@ -645,7 +649,7 @@ public class ItemCartController extends MainAppController implements Initializab
         qtyHbox.setStyle("-fx-background-color:#fff");
         qnttextfield.setText("1");
         repeatFocus(itembarcode);
-        
+
     }
 
     @FXML
