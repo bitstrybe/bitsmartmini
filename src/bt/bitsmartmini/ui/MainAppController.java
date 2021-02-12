@@ -51,7 +51,7 @@ public class MainAppController implements Initializable {
     @FXML
     private MenuButton mainmenu;
     @FXML
-    private Label user;
+    private MenuItem user;
 
     @FXML
     private VBox sales;
@@ -62,7 +62,7 @@ public class MainAppController implements Initializable {
     @FXML
     private Menu admintopmenu;
     @FXML
-    private Label user_role;
+    private MenuItem user_role;
     @FXML
     private VBox backup;
     @FXML

@@ -8,6 +8,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -83,12 +84,23 @@
                   </MenuBar>
                   <MenuButton fx:id="mainmenu" alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: transparent;" textFill="WHITE">
                      <items>
+                        <MenuItem fx:id="user" mnemonicParsing="false">
+                           <graphic>
+                              <FontAwesomeIcon glyphName="USER" />
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem fx:id="user_role" mnemonicParsing="false">
+                           <graphic>
+                              <FontAwesomeIcon fill="#00a419" glyphName="CHECK" />
+                           </graphic>
+                        </MenuItem>
+                        <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" text="Profile" />
                         <MenuItem mnemonicParsing="false" text="Settings" />
                         <MenuItem mnemonicParsing="false" onAction="#signOut" text="Sign out" />
                      </items>
                      <graphic>
-                        <FontAwesomeIcon fill="WHITE" glyphName="USER" />
+                        <FontAwesomeIcon fill="WHITE" glyphName="USERS" />
                      </graphic>
                      <StackPane.margin>
                         <Insets right="30.0" />
@@ -106,9 +118,9 @@
             </StackPane>
             <HBox id="rootPane" fx:id="topmenu" alignment="CENTER_LEFT">
                <children>
-                  <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="79.0" prefWidth="150.0" spacing="1.0" HBox.hgrow="ALWAYS">
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="79.0" prefWidth="150.0" spacing="1.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <HBox alignment="CENTER_LEFT">
+                        <HBox alignment="CENTER">
                            <children>
                               <ImageView fitHeight="24.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -118,24 +130,6 @@
                               <Label text="bitsMart" textFill="WHITE" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Open Sans" size="18.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox>
-                           <children>
-                              <Label fx:id="user" opacity="0.86" text="Label" textFill="WHITE" HBox.hgrow="ALWAYS">
-                                 <font>
-                                    <Font name="Arial" size="14.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox>
-                           <children>
-                              <Label fx:id="user_role" opacity="0.86" text="Label" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS">
-                                 <font>
-                                    <Font size="12.0" />
                                  </font>
                               </Label>
                            </children>
