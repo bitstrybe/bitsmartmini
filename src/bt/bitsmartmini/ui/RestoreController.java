@@ -51,6 +51,8 @@ public class RestoreController implements Initializable {
     private JFXButton restore;
     @FXML
     private TextField restoretextfield;
+    
+    FileChooser files = new FileChooser();
 
     /**
      * Initializes the controller class.
@@ -66,10 +68,9 @@ public class RestoreController implements Initializable {
     }
 
     public void Restoredbfromsql(File s) throws IOException {
-        String username = System.getProperty("user.name");
+        String dbpath = new File(".").getCanonicalPath();
 
-//        Path path = FileSystems.getDefault().getPath("C:\\Users\\", username, "\\AppData\\Roaming");
-        Path databasepath = FileSystems.getDefault().getPath("C:\\Program Files (x86)\\Bitsmartsmini\\DatabaseFiles\\bin\\mysql.exe");
+        Path databasepath = FileSystems.getDefault().getPath(dbpath + "\\DatabaseFiles\\bin\\mysql.exe");
 //        System.out.println(path.toString());
         System.out.println("File " + s);
         System.out.println("Path " + s.getParent());
@@ -128,7 +129,6 @@ public class RestoreController implements Initializable {
 
     @FXML
     private void chooseRestoreFile(ActionEvent event) {
-        FileChooser files = new FileChooser();
         File file = files.showOpenDialog(null);
         restoretextfield.setText(file.getAbsolutePath());
 

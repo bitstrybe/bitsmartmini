@@ -133,7 +133,7 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" />
                      </VBox.margin>
                      <children>
-                        <JFXButton id="action-btn" buttonType="RAISED" onAction="#RestoreAction" prefHeight="0.0" prefWidth="200.0" text="Restore your data" />
+                        <JFXButton id="action-btn" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#RestoreAction" prefHeight="36.0" prefWidth="200.0" text="Restore your data" />
                      </children>
                   </HBox>
                   <TextFlow layoutX="30.0" layoutY="99.0" lineSpacing="1.0">
