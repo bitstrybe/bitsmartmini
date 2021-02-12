@@ -15,7 +15,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <VBox id="rootPane" prefHeight="404.0" prefWidth="573.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.LoginController">
    <children>
       <HBox alignment="CENTER">
@@ -41,23 +40,31 @@
       </HBox>
       <VBox alignment="CENTER" spacing="5.0">
          <children>
-            <ImageView fitHeight="76.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../resources/bitsmart-logo-small.png" />
                </image>
             </ImageView>
             <VBox alignment="CENTER" prefHeight="44.0" prefWidth="573.0">
                <children>
-                    <Label alignment="CENTER" opacity="0.66" prefHeight="30.0" prefWidth="573.0" text="BitsMart" textFill="WHITE">
-                        <font>
-                            <Font name="Open Sans" size="28.0" />
-                        </font>
-                    </Label>
-                    <Label alignment="CENTER_RIGHT" opacity="0.66" prefHeight="16.0" prefWidth="107.0" text="Mini Retail" textFill="#ff1209">
-                        <font>
-                            <Font name="Open Sans" size="10.0" />
-                        </font>
-                    </Label>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Text fill="#f5f4f4" strokeType="OUTSIDE" strokeWidth="0.0" text="BitsMart">
+                           <font>
+                              <Font name="Open Sans" size="28.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER">
+                     <children>
+                          <Label alignment="CENTER" contentDisplay="CENTER" opacity="0.66" prefHeight="16.0" prefWidth="107.0" text="Mini Mart" textFill="#f7e905">
+                              <font>
+                                  <Font name="Open Sans" size="11.0" />
+                              </font>
+                          </Label>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
               <JFXTextField fx:id="username" focusColor="WHITE" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#resetElem" prefHeight="28.0" prefWidth="200.0" promptText="Username" styleClass="login-text-fill" unFocusColor="#3f3f3f">

@@ -144,6 +144,8 @@ public class ItemCartController extends MainAppController implements Initializab
     private JFXButton addtocartbtn;
     @FXML
     private Label addtocartinfo;
+    @FXML
+    private Button checkoutbtn;
 
     /**
      * Initializes the controller class.
@@ -157,6 +159,13 @@ public class ItemCartController extends MainAppController implements Initializab
         getTotalprice();
         customerdroplist.getSelectionModel().selectFirst();
         repeatFocus(itembarcode);
+        System.out.println("cart size: " + cart);
+        if (cart.size() > 0) {
+            checkoutbtn.setDisable(false);
+        } else {
+            checkoutbtn.setDisable(true);
+        }
+        addtocartbtn.setDisable(true);
     }
 
     @FXML
@@ -183,7 +192,7 @@ public class ItemCartController extends MainAppController implements Initializab
                     } catch (Exception ex) {
                         addtocartinfo.setText("Invalid Format");
                         Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
-                    } 
+                    }
                 });
                 return null;
             }
