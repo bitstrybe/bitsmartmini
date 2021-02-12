@@ -644,6 +644,8 @@ public class ItemCartController extends MainAppController implements Initializab
         qtyrem.setText(null);
         qtyHbox.setStyle("-fx-background-color:#fff");
         qnttextfield.setText("1");
+        repeatFocus(itembarcode);
+        
     }
 
     @FXML
