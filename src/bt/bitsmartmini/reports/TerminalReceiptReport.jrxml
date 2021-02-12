@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="206" pageHeight="504" whenNoDataType="BlankPage" columnWidth="192" leftMargin="7" rightMargin="7" topMargin="7" bottomMargin="7" isIgnorePagination="true" uuid="eca1266b-c5c3-49a6-99eb-a3da2e599c35">
 	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="2144"/>
 	<style name="balance">
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$V{BAL} < 0.00]]></conditionExpression>
@@ -73,7 +73,7 @@
 	<background>
 		<band height="473">
 			<image scaleImage="FillFrame">
-				<reportElement mode="Transparent" x="1" y="108" width="211" height="246" uuid="5ffe6685-1e84-4d7f-b3f4-c18e862d1651"/>
+				<reportElement mode="Transparent" x="1" y="108" width="191" height="246" uuid="5ffe6685-1e84-4d7f-b3f4-c18e862d1651"/>
 				<imageExpression><![CDATA[$P{LOGO1}]]></imageExpression>
 			</image>
 		</band>
