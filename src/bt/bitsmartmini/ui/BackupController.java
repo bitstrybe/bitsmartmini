@@ -1,5 +1,7 @@
 package bt.bitsmartmini.ui;
 
+import bt.bitsmartmini.bl.BackupLogBL;
+import bt.bitsmartmini.entity.BackupLog;
 import com.jfoenix.controls.JFXSpinner;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.io.File;
@@ -8,6 +10,7 @@ import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -37,19 +40,20 @@ public class BackupController implements Initializable {
     @FXML
     private Button closebtn;
     @FXML
-    private HBox statushbox;
+    private HBox statushbox; 
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // TODO        
 
     }
 
     public static int Backupdbtosql() {
         try {
+            BackupLogBL b = new BackupLogBL();
 
             /*NOTE: Getting path to the Jar file being executed*/
  /*NOTE: YourImplementingClass-> replace with the class executing the code*/
@@ -92,9 +96,16 @@ public class BackupController implements Initializable {
 
             /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
             if (processComplete == 0) {
-                System.out.println("Backup Complete");
+                b.insertData(new BackupLog(null, new Date(System.currentTimeMillis())));
+                if (processComplete == 1) {
+                    processComplete = 0;
+                    System.out.println("Backup process was successful");
+                } else {
+                    processComplete = 1;
+                }
             } else {
-                System.out.println("Backup Failure");
+                processComplete = 1;
+                System.out.println("Backup process failed");
             }
             return processComplete;
 
@@ -116,7 +127,7 @@ public class BackupController implements Initializable {
             @Override
             protected Void call() throws Exception {
                 spinner.setVisible(true);
-                updateMessage("PROCESSING PLS WAIT.....");
+                updateMessage("Processing...");
                 Thread.sleep(500);
                 return null;
             }
@@ -125,12 +136,12 @@ public class BackupController implements Initializable {
         task.setOnSucceeded(s -> {
             displayinfo.textProperty().unbind();
             if (Backupdbtosql() == 0) {
-                displayinfo.setText("BACKUP SUCESSFUL");
+                displayinfo.setText("Backup process was successful");
                 spinner.setVisible(false);
                 check.setVisible(true);
                 closefrom();
             } else {
-
+                displayinfo.setText("Backup process failed");
             }
         });
         Thread d = new Thread(task);

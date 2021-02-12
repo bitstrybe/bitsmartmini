@@ -82,12 +82,12 @@
                         <JFXButton id="action-btn" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#backupAction" prefHeight="36.0" prefWidth="200.0" text="Backup Data Now" />
                         <TextFlow lineSpacing="2.0">
                            <children>
-                              <Text fill="#222121" strokeType="OUTSIDE" strokeWidth="0.0" text="Last backup time:">
+                              <Text fill="#222121" strokeType="OUTSIDE" strokeWidth="0.0" text="Last backup time: ">
                                  <font>
                                     <Font name="Open Sans Italic" size="14.0" />
                                  </font>
                               </Text>
-                              <Text fill="#5e5e5e" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" 2021-02-12 13:59:28">
+                              <Text fx:id="lastbackup" fill="#5e5e5e" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" 2021-02-12 13:59:28">
                                  <font>
                                     <Font name="Open Sans Italic" size="14.0" />
                                  </font>

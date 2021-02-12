@@ -36,7 +36,6 @@ import bt.bitsmartmini.entity.Business;
 import bt.bitsmartmini.entity.Userlogs;
 import bt.bitsmartmini.tablemodel.SelectItemSaleTableModel;
 import bt.bitsmartmini.utils.PrintReport;
-import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import net.sf.jasperreports.engine.JRException;
@@ -425,21 +424,6 @@ public class MainAppController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-//            try {
-//                Stage stage = new Stage();
-//                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DataMgnt.fxml"));
-//                Parent parent = (Parent) fxmlLoader.load();
-//                Scene scene = new Scene(parent);
-//                scene.setFill(Color.TRANSPARENT);
-//                stage.setScene(scene);
-//                stage.initStyle(StageStyle.TRANSPARENT);
-//                stage.initModality(Modality.APPLICATION_MODAL);
-//                stage.setMaximized(true);
-//                stage.show();
-//            } catch (IOException ex) {
-//                Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
         });
 
         cartbox.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
