@@ -1,26 +1,14 @@
 package bt.bitsmartmini.ui;
 
-import bt.bitsmartmini.utils.Utilities;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
-import com.smattme.MysqlExportService;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.security.CodeSource;
-import java.sql.SQLException;
-import java.util.Date;
-import java.util.Properties;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,7 +18,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
-import org.joda.time.DateTime;
 
 /**
  * FXML Controller class
@@ -61,14 +48,13 @@ public class BackupController implements Initializable {
 
     }
 
-  
     public static int Backupdbtosql() {
         try {
 
             /*NOTE: Getting path to the Jar file being executed*/
  /*NOTE: YourImplementingClass-> replace with the class executing the code*/
             String username = System.getProperty("user.name");
-            Path path = FileSystems.getDefault().getPath("C:\\Users\\", username, "\\AppData\\Roaming\\Backup");
+            Path path = FileSystems.getDefault().getPath("C:\\Users\\", username, "\\AppData\\Roaming");
             Path databasepath = FileSystems.getDefault().getPath("C:\\Program Files (x86)\\Bitsmartsmini\\DatabaseFiles\\bin\\mysqldump.exe");
             System.out.println(path.toString());
 
@@ -83,10 +69,16 @@ public class BackupController implements Initializable {
 
             /*NOTE: Creating Folder if it does not exist*/
             File f1 = new File(folderPath);
-            f1.mkdir();
+            boolean bool = f1.mkdir();
+            Files.setAttribute(f1.toPath(), "dos:hidden", true);
+            if (bool) {
+                System.out.println("Directory created successfully");
+            } else {
+                System.out.println("Sorry couldn’t create specified directory");
+            }
 
             /*NOTE: Creating Path Constraints for backup saving*/
- /*NOTE: Here the backup is saved in a folder called backup with the name backup.sql*/
+ /*NOT      E: Here the backup is saved in a folder called backup with the name backup.sql*/
             String savePath = "\"" + path + "\\backup\\" + "LastBackup.sql\"";
 
             /*NOTE: Used to create a cmd command*/
@@ -145,4 +137,17 @@ public class BackupController implements Initializable {
         d.setDaemon(true);
         d.start();
     }
+
+//    private static void setHiddenAttrib(Path filePath) {
+//        try {
+//            DosFileAttributes attr = Files.readAttributes(filePath, DosFileAttributes.class);
+//            System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
+//            Files.setAttribute(filePath, "dos:hidden", true);
+//            attr = Files.readAttributes(filePath, DosFileAttributes.class);
+//            System.out.println(filePath.getFileName() + " Hidden attribute is " + attr.isHidden());
+//        } catch (IOException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//    }
 }

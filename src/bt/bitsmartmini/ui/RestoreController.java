@@ -76,7 +76,7 @@ public class RestoreController implements Initializable {
  /*NOTE: YourImplementingClass-> replace with the class executing the code*/
         String username = System.getProperty("user.name");
 
-        Path path = FileSystems.getDefault().getPath("C:\\Users\\", username, "\\AppData\\Roaming\\Backup");
+        Path path = FileSystems.getDefault().getPath("C:\\Users\\", username, "\\AppData\\Roaming");
         Path databasepath = FileSystems.getDefault().getPath("C:\\Program Files (x86)\\Bitsmartsmini\\DatabaseFiles\\bin\\mysql.exe");
         System.out.println(path.toString());
 

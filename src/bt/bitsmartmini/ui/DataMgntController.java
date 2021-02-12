@@ -6,8 +6,6 @@
 package bt.bitsmartmini.ui;
 
 import bt.bitsmartmini.utils.Utilities;
-import com.jfoenix.controls.JFXSpinner;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,8 +15,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -30,22 +26,10 @@ import javafx.stage.StageStyle;
  */
 public class DataMgntController {
 
-    @FXML
     private Button closebtn;
-    @FXML
-    private HBox statushbox;
-    @FXML
-    private Label displayinfo;
-    @FXML
-    private FontAwesomeIcon check;
-    @FXML
-    private FontAwesomeIcon duplicatelock;
-    @FXML
-    private JFXSpinner spinner;
     
     Utilities utl = new Utilities();
 
-    @FXML
     private void closefrom(ActionEvent event) {
         Stage s = (Stage) closebtn.getScene().getWindow();
         s.close();

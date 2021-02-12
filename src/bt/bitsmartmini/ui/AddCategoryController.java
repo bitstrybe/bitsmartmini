@@ -51,7 +51,7 @@ public class AddCategoryController implements Initializable {
 
     ObservableList<CategoryTableModel> data;
     @FXML
-    private Button closebtn;
+    public Button closebtn;
     @FXML
     private JFXTextField cattextfield;
     @FXML
@@ -90,7 +90,8 @@ public class AddCategoryController implements Initializable {
             if (cattextfield.getLength() > 0) {
                 save.setDisable(false);
                 Category value = form.getCategoryById(cattextfield.getText());
-                if (value.getCategoryName() != null) {
+                System.out.println(value.getCategoryName());
+                if (value.getCategoryName() == null) {
                     save.setDisable(true);
                     displayinfo.setText("DUPLICATE FORUND!!!");
                     duplicatelock.setVisible(true);
@@ -335,7 +336,7 @@ public class AddCategoryController implements Initializable {
         TableData();
         PauseTransition delay = new PauseTransition(Duration.seconds(3));
         delay.setOnFinished(closevnt -> {
-            displayinfo.setText("");
+            displayinfo.setText("SAVED");
             spinner.setVisible(false);
             check.setVisible(false);
         });
@@ -352,6 +353,9 @@ public class AddCategoryController implements Initializable {
         int result = new InsertUpdateBL().insertData(cat);
         switch (result) {
             case 1:
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddItems.fxml"));
+                AddItemsController childController = fxmlLoader.getController();
+                childController.getCategory();
                 closeTransition();
                 break;
             default:

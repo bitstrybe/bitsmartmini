@@ -49,7 +49,7 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="298.0" prefWidth="285.0" spacing="20.0">
                      <children>
-                        <ImageView fx:id="itemimages" fitHeight="195.0" fitWidth="210.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="itemimages" fitHeight="195.0" fitWidth="210.0" opacity="0.42" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../resources/DEFAULT.png" />
                            </image>

@@ -42,8 +42,8 @@ public class CategoryBL extends DdsBL {
 
     public Category getCategoryById(String categoryName) {
         try {
-            TypedQuery<Category> q = em.createQuery("SELECT s FROM Category s WHERE s.formName = :formName", Category.class);
-            q.setParameter("formName", categoryName);
+            TypedQuery<Category> q = em.createQuery("SELECT s FROM Category s WHERE s.categoryName = :categoryName", Category.class);
+            q.setParameter("categoryName", categoryName);
             return q.getSingleResult();
         } catch (NoResultException ex) {
             return null;

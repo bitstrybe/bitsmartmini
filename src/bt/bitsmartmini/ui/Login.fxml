@@ -42,9 +42,9 @@
       </HBox>
       <VBox alignment="TOP_CENTER" layoutX="22.0" layoutY="41.0" prefHeight="442.0" prefWidth="573.0" spacing="10.0">
          <children>
-            <ImageView fitHeight="60.0" fitWidth="65.0" opacity="0.66" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="76.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../resources/bitsmart-logo.png" />
+                  <Image url="@../../resources/bitsmart-logo-small.png" />
                </image>
             </ImageView>
             <VBox alignment="CENTER" VBox.vgrow="NEVER">
@@ -114,7 +114,7 @@
                      <graphic>
                         <ImageView fitHeight="12.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/bitstrybe-final-white.png" />
+                              <Image url="@../../resources/bitstrybe-final-white-small.png" />
                            </image>
                         </ImageView>
                      </graphic>
