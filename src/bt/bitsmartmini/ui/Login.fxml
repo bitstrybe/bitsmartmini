@@ -10,63 +10,55 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="rootPane" prefHeight="502.0" prefWidth="623.0" styleClass="button" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.LoginController">
-    <children>
-      <HBox layoutX="22.0" layoutY="14.0" prefHeight="26.0" prefWidth="573.0">
+
+<VBox id="rootPane" prefHeight="404.0" prefWidth="573.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.LoginController">
+   <children>
+      <HBox alignment="CENTER">
          <children>
-            <AnchorPane prefHeight="26.0" prefWidth="575.0">
-               <children>
-                  <ImageView fitHeight="23.0" fitWidth="65.0" opacity="0.66" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../resources/bitstrybe_social_white.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="65.0" layoutY="2.0" opacity="0.66" text="\@bitstrybe" textFill="WHITE" />
-                 
-                                      <Button layoutX="546.0" layoutY="-2.0" mnemonicParsing="false" onAction="#exit" prefHeight="9.0" prefWidth="9.0" styleClass="homebtn" stylesheets="@style.css">
-                        <graphic>
+            <ImageView fitHeight="23.0" fitWidth="65.0" opacity="0.66" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/bitstrybe_social_white.png" />
+               </image>
+            </ImageView>
+            <Label opacity="0.66" prefHeight="17.0" prefWidth="482.0" text="\@bitstrybe" textFill="WHITE" />
+           
+                                                  <Button mnemonicParsing="false" onAction="#exit" prefHeight="9.0" prefWidth="9.0" styleClass="homebtn" stylesheets="@style.css">
+                  <graphic>
             </graphic>
-                        <graphic>
-                            <FontAwesomeIcon fill="WHITE" glyphName="CLOSE" />
-                        </graphic>
-                    </Button>
-               </children>
-            </AnchorPane>
+                  <graphic>
+                      <FontAwesomeIcon fill="WHITE" glyphName="CLOSE" />
+                  </graphic>
+              </Button>
          </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
       </HBox>
-      <VBox alignment="TOP_CENTER" layoutX="22.0" layoutY="41.0" prefHeight="442.0" prefWidth="573.0" spacing="10.0">
+      <VBox alignment="CENTER" spacing="5.0">
          <children>
             <ImageView fitHeight="76.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../resources/bitsmart-logo-small.png" />
                </image>
             </ImageView>
-            <VBox alignment="CENTER" VBox.vgrow="NEVER">
+            <VBox alignment="CENTER" prefHeight="44.0" prefWidth="573.0">
                <children>
-                  <AnchorPane VBox.vgrow="NEVER">
-                     <children>
-                          <Label alignment="CENTER" layoutX="-2.0" opacity="0.66" prefHeight="40.0" prefWidth="575.0" text="BitsmartMini" textFill="WHITE">
-                              <font>
-                                  <Font name="Open Sans" size="28.0" />
-                              </font>
-                          </Label>
-                          <Label alignment="CENTER" layoutX="267.0" layoutY="31.0" opacity="0.66" prefHeight="17.0" prefWidth="146.0" text="Mini Retail" textFill="#ff1209">
-                              <font>
-                                  <Font name="Open Sans" size="10.0" />
-                              </font>
-                          </Label>
-                     </children>
-                  </AnchorPane>
+                    <Label alignment="CENTER" opacity="0.66" prefHeight="30.0" prefWidth="573.0" text="BitsMart" textFill="WHITE">
+                        <font>
+                            <Font name="Open Sans" size="28.0" />
+                        </font>
+                    </Label>
+                    <Label alignment="CENTER_RIGHT" opacity="0.66" prefHeight="16.0" prefWidth="107.0" text="Mini Retail" textFill="#ff1209">
+                        <font>
+                            <Font name="Open Sans" size="10.0" />
+                        </font>
+                    </Label>
                </children>
-               <padding>
-                  <Insets bottom="20.0" />
-               </padding>
             </VBox>
               <JFXTextField fx:id="username" focusColor="WHITE" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#resetElem" prefHeight="28.0" prefWidth="200.0" promptText="Username" styleClass="login-text-fill" unFocusColor="#3f3f3f">
                   <font>
@@ -102,12 +94,12 @@
             </Label>
             <HBox alignment="CENTER">
                <children>
-                      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text=" Copyright @ 2020 Bitstrybe Inc. All Rights Reserved." wrappingWidth="452.22900390625">
+                      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text=" Copyright @ 2020 Bitstrybe Inc. All Rights Reserved." wrappingWidth="439.22900390625">
                      <font>
                         <Font name="Open Sans" size="10.0" />
                      </font>
                   </Text>
-                  <Hyperlink fx:id="hyperlink" style="-fx-text-fill: #FFFFFF;" text="www.bitstrybe.com">
+                  <Hyperlink fx:id="hyperlink" prefHeight="21.0" prefWidth="135.0" style="-fx-text-fill: #FFFFFF;" text="www.bitstrybe.com">
                      <font>
                         <Font size="10.0" />
                      </font>
@@ -120,8 +112,11 @@
                      </graphic>
                   </Hyperlink>
                </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>
-    </children>
-</AnchorPane>
+   </children>
+</VBox>

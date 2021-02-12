@@ -108,9 +108,14 @@
                <children>
                   <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="79.0" prefWidth="150.0" spacing="1.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <HBox>
+                        <HBox alignment="CENTER_LEFT">
                            <children>
-                              <Label text="bitsmartMini" textFill="WHITE" HBox.hgrow="ALWAYS">
+                              <ImageView fitHeight="24.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../resources/bitsmart-logo-small.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="bitsMart" textFill="WHITE" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Open Sans" size="18.0" />
                                  </font>
