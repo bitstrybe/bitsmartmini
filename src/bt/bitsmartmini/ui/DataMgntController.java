@@ -44,9 +44,7 @@ public class DataMgntController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        if (d == null) {
-            lastbackup.setText("you havent done any backup");
-        } else {
+        if (d != null) {
             lastbackup.setText(DateUtil.formatDate(d, "yyyy-MM-dd HH:mm:ss"));
         }
 
