@@ -87,7 +87,7 @@
                   <TableView fx:id="brandtable" prefHeight="200.0" prefWidth="680.0" styleClass="table-cell" stylesheets="@style.css" HBox.hgrow="ALWAYS">
                      <columns>
                         <TableColumn fx:id="brand" maxWidth="1.7976931348623157E308" prefWidth="386.0" resizable="false" styleClass="align_table_left" text="Brand name" />
-                        <TableColumn fx:id="action" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="0.0" resizable="false" text="Action" />
+                        <TableColumn fx:id="action" minWidth="0.0" prefWidth="100.0" resizable="false" text="Action" />
                      </columns>
                   </TableView>
                </children>

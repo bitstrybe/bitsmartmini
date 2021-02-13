@@ -46,6 +46,9 @@ import bt.bitsmartmini.bl.InsertUpdateBL;
 import bt.bitsmartmini.bl.ItemsBL;
 import bt.bitsmartmini.entity.Category;
 import bt.bitsmartmini.tablemodel.CategoryTableModel;
+import bt.bitsmartmini.utils.Utilities;
+import javafx.event.EventHandler;
+import javafx.stage.WindowEvent;
 
 public class AddCategoryController implements Initializable {
 
@@ -84,18 +87,20 @@ public class AddCategoryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        save.setDisable(true);
+        Utilities.repeatFocus(cattextfield);
         CategoryBL form = new CategoryBL();
         cattextfield.textProperty().addListener(e -> {
 //            check.setVisible(false);
             if (cattextfield.getLength() > 0) {
                 save.setDisable(false);
                 Category value = form.getCategoryById(cattextfield.getText());
-                System.out.println(value.getCategoryName());
-                if (value.getCategoryName() == null) {
+                System.out.println(value);
+                if (value != null) {
                     save.setDisable(true);
                     displayinfo.setText("DUPLICATE FORUND!!!");
                     duplicatelock.setVisible(true);
-                } else if (value.getCategoryName() == null) {
+                } else if (value == null) {
                     save.setDisable(false);
                     displayinfo.setText(null);
                     duplicatelock.setVisible(false);
@@ -214,6 +219,7 @@ public class AddCategoryController implements Initializable {
     private void closefrom(ActionEvent event) {
         Stage stage = (Stage) closebtn.getScene().getWindow();
         stage.close();
+
     }
 
     public class AddPersonCell extends TableCell<CategoryTableModel, Boolean> {
@@ -353,9 +359,6 @@ public class AddCategoryController implements Initializable {
         int result = new InsertUpdateBL().insertData(cat);
         switch (result) {
             case 1:
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddItems.fxml"));
-                AddItemsController childController = fxmlLoader.getController();
-                childController.getCategory();
                 closeTransition();
                 break;
             default:

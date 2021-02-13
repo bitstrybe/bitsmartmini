@@ -100,7 +100,7 @@ public class AddBrandController implements Initializable {
             //  System.out.println(cattextfield.getText());
 //            check.setVisible(false);
             if (manutextfield.getLength() > 0) {
-                String value = man.getBrandsbyId(manutextfield.getText());
+                Brands value = man.getBrandsbyId(manutextfield.getText());
                 if (value != null) {
                     save.setDisable(true);
                     displayinfo.setText("Duplicate Found!!!");
@@ -382,8 +382,8 @@ public class AddBrandController implements Initializable {
     public void saveTemplate() {
 
         displayinfo.textProperty().unbind();
-        Manufacturer cat = new Manufacturer();
-        cat.setManufacturer(WordUtils.capitalizeFully(manutextfield.getText()));
+        Brands cat = new Brands();
+        cat.setBrandName(WordUtils.capitalizeFully(manutextfield.getText()));
         int result = new InsertUpdateBL().insertData(cat);
         switch (result) {
             case 1:

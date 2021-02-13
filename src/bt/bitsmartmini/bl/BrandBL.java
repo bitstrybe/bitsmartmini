@@ -36,9 +36,9 @@ public class BrandBL extends DdsBL{
         return q.getResultList();
     }
     
-    public String getBrandsbyId(String Brands){
+    public Brands getBrandsbyId(String Brands){
         try{
-        TypedQuery<String> q = em.createQuery("SELECT m.brand FROM Brands m WHERE m.brand = :brand", String.class);
+        TypedQuery<Brands> q = em.createQuery("SELECT m FROM Brands m WHERE m.brandName = :brand", Brands.class);
         q.setParameter("brand", Brands);
         return q.getSingleResult();
         }catch(NoResultException ex){
@@ -48,7 +48,7 @@ public class BrandBL extends DdsBL{
     }
     
     public List<Brands> searchAllBrands(String p) {
-        TypedQuery<Brands> q = em.createQuery("SELECT s FROM Brands s WHERE s.brand LIKE :p", Brands.class);
+        TypedQuery<Brands> q = em.createQuery("SELECT s FROM Brands s WHERE s.brandName LIKE :p", Brands.class);
         q.setParameter("p", "%" + p + "%");
         return q.getResultList();
     }

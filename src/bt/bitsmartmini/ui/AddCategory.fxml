@@ -96,7 +96,7 @@
                   <TableView fx:id="cattableview" prefHeight="297.0" prefWidth="289.0" styleClass="table-cell" stylesheets="@style.css" HBox.hgrow="ALWAYS">
                      <columns>
                         <TableColumn fx:id="category" maxWidth="1.7976931348623157E308" prefWidth="291.0" resizable="false" styleClass="align_table_left" text="Form name" />
-                        <TableColumn fx:id="action" maxWidth="1.7976931348623157E308" prefWidth="95.0" resizable="false" text="Action" />
+                        <TableColumn fx:id="action" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="100.0" resizable="false" text="Action" />
                      </columns>
                   </TableView>
                </children>

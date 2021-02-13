@@ -18,6 +18,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXMLLoader;
@@ -47,13 +49,11 @@ public class Utilities {
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/YYYY");
         return df.format(date);
     }
-    
 
     public static Date convertStringToDate(String date) throws ParseException {
         Date dateval = new SimpleDateFormat("dd/MM/yyyy").parse(date);
         return dateval;
     }
-    
 
     public static LocalDate convertDateToLocalDate(Date dateToConvert) {
         return dateToConvert.toInstant()
@@ -76,7 +76,7 @@ public class Utilities {
     public static Date convertToDateViaSqlDate(LocalDate dateToConvert) {
         return java.sql.Date.valueOf(dateToConvert);
     }
-  
+
 //    public static void clearAllField(AnchorPane pane) {
 //        for (Node node : pane.getChildren()) {
 //            if (node instanceof JFXTextField) {
@@ -90,16 +90,16 @@ public class Utilities {
 //            } 
 //        }
 //    }
-    
-    public static ArrayList<Node> getAllNode(Parent root){
+    public static ArrayList<Node> getAllNode(Parent root) {
         ArrayList<Node> nodes = new ArrayList<>();
         addAllDecendant(root, nodes);
         return nodes;
     }
-    private static void addAllDecendant(Parent parent, ArrayList<Node> nodes){
-        for(Node node:parent.getChildrenUnmodifiable()){
-            if(node instanceof JFXTextField){
-              ((JFXTextField) node).clear();
+
+    private static void addAllDecendant(Parent parent, ArrayList<Node> nodes) {
+        for (Node node : parent.getChildrenUnmodifiable()) {
+            if (node instanceof JFXTextField) {
+                ((JFXTextField) node).clear();
             }
         }
     }
@@ -233,6 +233,14 @@ public class Utilities {
 
         return resizedImage;
     }
-    
-   
+
+    public static void repeatFocus(Node node) {
+        Platform.runLater(() -> {
+            if (!node.isFocused()) {
+                node.requestFocus();
+                repeatFocus(node);
+            }
+        });
+    }
+
 }

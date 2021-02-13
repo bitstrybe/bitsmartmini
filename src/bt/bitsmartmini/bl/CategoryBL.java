@@ -1,4 +1,3 @@
-
 package bt.bitsmartmini.bl;
 
 import bt.bitsmartmini.entity.Category;
@@ -35,9 +34,19 @@ public class CategoryBL extends DdsBL {
         }
     }
 
+//    public List<Category> getAllCategory() {
+//        TypedQuery<Category> q = em.createNamedQuery("Category.findAll", Category.class);
+//        return q.getResultList();
+//    }
     public List<Category> getAllCategory() {
-        TypedQuery<Category> q = em.createNamedQuery("Category.findAll", Category.class);
+        TypedQuery<Category> q = em.createQuery("SELECT c FROM Category c", Category.class);
         return q.getResultList();
+
+    }
+    public List<String> getAllCategoryasString() {
+        TypedQuery<String> q = em.createQuery("SELECT c.categoryName FROM Category c", String.class);
+        return q.getResultList();
+
     }
 
     public Category getCategoryById(String categoryName) {

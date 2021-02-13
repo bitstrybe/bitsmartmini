@@ -64,7 +64,9 @@ import bt.bitsmartmini.utils.FilterComboBox;
 import bt.bitsmartmini.utils.Utilities;
 import javafx.application.Platform;
 import javafx.scene.Node;
+import javafx.scene.control.ListCell;
 import javafx.scene.paint.Color;
+import javafx.util.StringConverter;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.text.WordUtils;
@@ -75,11 +77,11 @@ import org.apache.commons.text.WordUtils;
  * @author JScare
  */
 public class AddItemsController implements Initializable {
-    
+
     final FileChooser fileChooser = new FileChooser();
-    
+
     ObservableList<ItemTableModel> data;
-    
+
     @FXML
     private ComboBox<String> categorycombo;
     @FXML
@@ -110,9 +112,9 @@ public class AddItemsController implements Initializable {
     private Button browse;
     @FXML
     private ImageView itemimages;
-    
+
     byte[] item_image = null;
-    
+
     InputStream initialStream;
     ItemsBL itembl = new ItemsBL();
     UomBL uombl = new UomBL();
@@ -141,7 +143,7 @@ public class AddItemsController implements Initializable {
     private JFXTextField roltxt;
     @FXML
     private JFXTextField itemdesctxt;
-    
+
     public void getBrands() {
         brandscombo.getItems().clear();
         List<Brands> list = new BrandBL().getAllBrands();
@@ -150,13 +152,13 @@ public class AddItemsController implements Initializable {
             brandscombo.getItems().add(WordUtils.capitalizeFully(man.getBrandName()));
         });
     }
-    
+
     public void getCategory() {
         categorycombo.getItems().clear();
         List<Category> list = new CategoryBL().getAllCategory();
         ObservableList<Category> result = FXCollections.observableArrayList(list);
-        result.forEach((cat) -> {
-            categorycombo.getItems().add(WordUtils.capitalizeFully(cat.getCategoryName()));
+        result.forEach(e->{
+            categorycombo.getItems().add(WordUtils.capitalizeFully(e.getCategoryName()));
         });
     }
 
@@ -168,8 +170,13 @@ public class AddItemsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        getCategory();
-        getBrands();
+        categorycombo.setOnShown(e->{
+             getCategory();
+        });
+        brandscombo.setOnShown(v->{
+            getBrands();
+        });
+       
         repeatFocus(barcodetxt);
 //        getVolumeValue();
 //        getUOM();
@@ -181,7 +188,7 @@ public class AddItemsController implements Initializable {
         searchbtn.textProperty().addListener((e, oldValue, newValue) -> {
             //searchbtn.setText(newValue.toUpperCase());
             TableData(searchbtn.getText());
-            
+
         });
         brandscombo.setOnKeyReleased((KeyEvent event) -> {
             String s = FilterComboBox.jumpTo(event.getText(), brandscombo.getValue(), brandscombo.getItems());
@@ -189,17 +196,16 @@ public class AddItemsController implements Initializable {
                 brandscombo.setValue(s);
             }
         });
-        
-        categorycombo.setOnKeyReleased((KeyEvent event) -> {
-            String s = FilterComboBox.jumpTo(event.getText(), categorycombo.getValue(), categorycombo.getItems());
-            if (s != null) {
-                categorycombo.setValue(s);
-            }
-        });
-        
+
+//        categorycombo.setOnKeyReleased((KeyEvent event) -> {
+//            String s = FilterComboBox.jumpTo(event.getText(), categorycombo.getValue(), categorycombo.getItems());
+//            if (s != null) {
+//                categorycombo.setValue(s);
+//            }
+//        });
         browse.setOnAction(new EventHandler<ActionEvent>() {
             Stage st = new Stage();
-            
+
             @Override
             public void handle(ActionEvent event) {
                 FileChooser fileChooser = new FileChooser();
@@ -214,7 +220,7 @@ public class AddItemsController implements Initializable {
                     BufferedImage bufferedImage = ImageIO.read(ifile);
                     int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
                     resizeImage = Utilities.resizeImage(bufferedImage, type, 450, 340);
-                    
+
                     Image image = SwingFXUtils.toFXImage(resizeImage, null);
                     itemimages.setImage(image);
                     itemimages.setPreserveRatio(true);
@@ -227,12 +233,12 @@ public class AddItemsController implements Initializable {
             }
         });
     }
-    
+
     private void closemtd(ActionEvent event) {
         Stage stage = (Stage) closebtn.getScene().getWindow();
         stage.close();
     }
-    
+
     @FXML
     public void saveAction() {
         Task<Void> task = new Task<Void>() {
@@ -253,7 +259,7 @@ public class AddItemsController implements Initializable {
         d.setDaemon(true);
         d.start();
     }
-    
+
     public void TableData(String p) {
         List<Items> c;
         if (p.length() > 0) {
@@ -290,21 +296,20 @@ public class AddItemsController implements Initializable {
         itemimage.setCellValueFactory(new PropertyValueFactory<>("image"));
         itemimage.setPrefWidth(65);
         action.setSortable(false);
-        
+
         action.setCellValueFactory((TableColumn.CellDataFeatures<ItemTableModel, Boolean> features) -> new SimpleBooleanProperty(features.getValue() != null));
         action.setCellFactory((TableColumn<ItemTableModel, Boolean> personBooleanTableColumn) -> new AddPersonCell());
         itemtableview.setItems(data);
         itemtableview.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
-        
+
     }
-    
+
     @FXML
     private void addCategoryAction(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddCategory.fxml"));
         Parent parent = (Parent) fxmlLoader.load();
         AddCategoryController childController = fxmlLoader.getController();
-        getCategory();
         Scene scene = new Scene(parent);
         scene.setFill(Color.TRANSPARENT);
         stage.setMaximized(true);
@@ -314,7 +319,7 @@ public class AddItemsController implements Initializable {
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
     }
-    
+
     @FXML
     private void addBrandsAction(ActionEvent event) throws IOException {
         Stage stage = new Stage();
@@ -330,7 +335,7 @@ public class AddItemsController implements Initializable {
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
     }
-    
+
     public class AddPersonCell extends TableCell<ItemTableModel, Boolean> {
 
         //Image img = new Image(getClass().getResourceAsStream("edit.png"));
@@ -341,7 +346,7 @@ public class AddItemsController implements Initializable {
 
         // pads and centers the add button in the cell.
         HBox paddedButton = new HBox();
-        
+
         JFXButton delButton = new JFXButton();
         // records the y pos of the last button press so that the add person dialog can be shown next to the cell.
         final DoubleProperty buttonY = new SimpleDoubleProperty();
@@ -383,7 +388,7 @@ public class AddItemsController implements Initializable {
                         Thread d = new Thread(task);
                         d.setDaemon(true);
                         d.start();
-                        
+
                     });
                     Scene scene1 = new Scene(parent1);
                     stage.initModality(Modality.APPLICATION_MODAL);
@@ -396,7 +401,7 @@ public class AddItemsController implements Initializable {
                     Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
-            
+
         }
 
         /**
@@ -404,7 +409,7 @@ public class AddItemsController implements Initializable {
          */
         @Override
         protected void updateItem(Boolean item, boolean empty) {
-            
+
             super.updateItem(item, empty);
             if (!empty) {
                 setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
@@ -414,13 +419,13 @@ public class AddItemsController implements Initializable {
             }
         }
     }
-    
+
     @FXML
     public void closefrom() {
         Stage stage = (Stage) closebtn.getScene().getWindow();
         stage.close();
     }
-    
+
     private void clearAllCategory() {
         itmtextfield.clear();
         categorycombo.getSelectionModel().clearSelection();
@@ -429,7 +434,7 @@ public class AddItemsController implements Initializable {
         selltextfield.clear();
         roltxt.clear();
     }
-    
+
     private void closeTransition() {
         displayinfo.setText(MainAppController.SUCCESS_MESSAGE);
         spinner.setVisible(false);
@@ -444,7 +449,7 @@ public class AddItemsController implements Initializable {
         });
         delay.play();
     }
-    
+
     private void saveTemplate() {
         displayinfo.textProperty().unbind();
         try {
@@ -492,7 +497,7 @@ public class AddItemsController implements Initializable {
             }
         }
     }
-    
+
     private void repeatFocus(Node node) {
         Platform.runLater(() -> {
             if (!node.isFocused()) {
@@ -501,5 +506,21 @@ public class AddItemsController implements Initializable {
             }
         });
     }
-    
+
+    private static class SimpleTableObjectListCell extends ListCell<String> {
+
+        @Override
+        public void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty);
+            if (item != null) {
+
+                setText(item);//return String, actuall name of material
+
+            } else {
+                setText(null);
+            }
+        }
+
+    }
+
 }
