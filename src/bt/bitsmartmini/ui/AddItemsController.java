@@ -54,6 +54,7 @@ import bt.bitsmartmini.bl.CategoryBL;
 import bt.bitsmartmini.bl.InsertUpdateBL;
 import bt.bitsmartmini.bl.ItemsBL;
 import bt.bitsmartmini.bl.BrandBL;
+import bt.bitsmartmini.bl.StockinBL;
 import bt.bitsmartmini.bl.UomBL;
 import bt.bitsmartmini.entity.Brands;
 import bt.bitsmartmini.entity.Category;
@@ -62,11 +63,11 @@ import bt.bitsmartmini.entity.Users;
 import bt.bitsmartmini.tablemodel.ItemTableModel;
 import bt.bitsmartmini.utils.FilterComboBox;
 import bt.bitsmartmini.utils.Utilities;
+import java.io.FileNotFoundException;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.ListCell;
 import javafx.scene.paint.Color;
-import javafx.util.StringConverter;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.text.WordUtils;
@@ -157,7 +158,7 @@ public class AddItemsController implements Initializable {
         categorycombo.getItems().clear();
         List<Category> list = new CategoryBL().getAllCategory();
         ObservableList<Category> result = FXCollections.observableArrayList(list);
-        result.forEach(e->{
+        result.forEach(e -> {
             categorycombo.getItems().add(WordUtils.capitalizeFully(e.getCategoryName()));
         });
     }
@@ -170,14 +171,14 @@ public class AddItemsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        categorycombo.setOnShown(e->{
-             getCategory();
+        categorycombo.setOnShown(e -> {
+            getCategory();
         });
-        brandscombo.setOnShown(v->{
+        brandscombo.setOnShown(v -> {
             getBrands();
         });
-       
-        repeatFocus(barcodetxt);
+
+        Utilities.repeatFocus(barcodetxt);
 //        getVolumeValue();
 //        getUOM();
         TableData(searchbtn.getText());
@@ -234,26 +235,26 @@ public class AddItemsController implements Initializable {
         });
     }
 
-    private void closemtd(ActionEvent event) {
-        Stage stage = (Stage) closebtn.getScene().getWindow();
-        stage.close();
-    }
-
     @FXML
     public void saveAction() {
-        Task<Void> task = new Task<Void>() {
+        Task<Integer> task = new Task<Integer>() {
             @Override
-            protected Void call() throws Exception {
+            protected Integer call() throws Exception {
                 spinner.setVisible(true);
                 check.setVisible(false);
                 updateMessage("PROCESSING PLS WAIT.....");
-                Thread.sleep(1000);
-                return null;
+                Thread.sleep(500);
+                return saveTemplate();
             }
         };
         displayinfo.textProperty().bind(task.messageProperty());
         task.setOnSucceeded(s -> {
-            saveTemplate();
+            if (task.getValue() == 1) {
+                saveTrans();
+            } else {
+                errorTrans();
+
+            }
         });
         Thread d = new Thread(task);
         d.setDaemon(true);
@@ -372,18 +373,36 @@ public class AddItemsController implements Initializable {
                     Parent parent1 = (Parent) fxmlLoader.load();
                     DeleteController childController = fxmlLoader.getController();
                     childController.delete.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-                        Task<Void> task = new Task<Void>() {
+                        Task<Integer> task = new Task<Integer>() {
                             @Override
-                            protected Void call() throws Exception {
+                            protected Integer call() throws Exception {
                                 childController.spinner.setVisible(true);
                                 updateMessage("PROCESSING PLS WAIT.....");
-                                Thread.sleep(1000);
-                                return null;
+                                Thread.sleep(500);
+                                List list = new StockinBL().getItemStockinByBarcode(selectedRecord.getBarcode());
+                                if (list.isEmpty()) {
+                                    return deleteTemplate(selectedRecord.getBarcode());
+                                } else {
+                                    return 0;
+                                }
                             }
                         };
                         childController.displayinfo.textProperty().bind(task.messageProperty());
                         task.setOnSucceeded(f -> {
                             childController.displayinfo.textProperty().unbind();
+                            if (task.getValue() == 1) {
+                                childController.displayinfo.setText(MainAppController.DELETE_MESSAGE);
+                                childController.spinner.setVisible(false);
+                                childController.check.setVisible(true);
+                                TableData("");
+                                stage.close();
+                            } else {
+                                childController.displayinfo.setText(MainAppController.ERROR_MESSAGE);
+                                childController.spinner.setVisible(false);
+                                childController.check.setVisible(false);
+
+                            }
+
                         });
                         Thread d = new Thread(task);
                         d.setDaemon(true);
@@ -426,21 +445,18 @@ public class AddItemsController implements Initializable {
         stage.close();
     }
 
-    private void clearAllCategory() {
-        itmtextfield.clear();
-        categorycombo.getSelectionModel().clearSelection();
-        brandscombo.getSelectionModel().clearSelection();
-        costtextfield.clear();
-        selltextfield.clear();
-        roltxt.clear();
+    private void clearAllForms() {
+        barcodetxt.clear();
+        itemdesctxt.clear();
+        closefrom();
     }
 
-    private void closeTransition() {
+    private void saveTrans() {
         displayinfo.setText(MainAppController.SUCCESS_MESSAGE);
+        clearAllForms();
         spinner.setVisible(false);
         check.setVisible(true);
-        TableData(searchbtn.getText());
-        clearAllCategory();
+        TableData("");
         PauseTransition delay = new PauseTransition(Duration.seconds(3));
         delay.setOnFinished(closevnt -> {
             displayinfo.setText("");
@@ -448,79 +464,61 @@ public class AddItemsController implements Initializable {
             check.setVisible(false);
         });
         delay.play();
+
     }
 
-    private void saveTemplate() {
-        displayinfo.textProperty().unbind();
-        try {
-            Items cat = new Items();
-            cat.setUpc(barcodetxt.getText());
-            cat.setItemDesc(itemdesctxt.getText());
-            cat.setCategory(new Category(categorycombo.getValue()));
-            cat.setBrand(new Brands(brandscombo.getValue()));
-            cat.setRol(Integer.parseInt(roltxt.getText()));
-            cat.setUsers(new Users(LoginController.u.getUserid()));
-            cat.setEntryLog(new Date());
-            cat.setLastModified(new Date());
-            cat.setCp(Double.parseDouble(cptxt.getText()));
-            cat.setSp(Double.parseDouble(sptxt.getText()));
-            //adding image file to directory
-            initialStream = new FileInputStream(ifile);
-            if (!ifile.getName().equals("DEFAULT.png")) {
-                cat.setItemImg("./img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
-            } else {
-                cat.setItemImg("./img/DEFAULT.png");
-            }
-            int result = new InsertUpdateBL().insertData(cat);
-            if (result == 1) {
-                if (!ifile.getName().equals("DEFAULT.png")) {
-                    ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File("./img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName())));
-                }
-                closeTransition();
-            } else {
-                displayinfo.setText(MainAppController.ERROR_MESSAGE);
-                spinner.setVisible(false);
-                check.setVisible(false);
-            }
-        } catch (NumberFormatException ex) {
+    private void errorTrans() {
+        displayinfo.setText(MainAppController.ERROR_MESSAGE);
+        spinner.setVisible(false);
+        check.setVisible(false);
+        TableData("");
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(closevnt -> {
+            displayinfo.setText("");
             spinner.setVisible(false);
-            Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                IOUtils.close(initialStream);
-            } catch (IOException ex) {
-                Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-
-    private void repeatFocus(Node node) {
-        Platform.runLater(() -> {
-            if (!node.isFocused()) {
-                node.requestFocus();
-                repeatFocus(node);
-            }
+            check.setVisible(false);
         });
+        delay.play();
+
     }
 
-    private static class SimpleTableObjectListCell extends ListCell<String> {
-
-        @Override
-        public void updateItem(String item, boolean empty) {
-            super.updateItem(item, empty);
-            if (item != null) {
-
-                setText(item);//return String, actuall name of material
-
-            } else {
-                setText(null);
-            }
+    private int saveTemplate() throws FileNotFoundException, IOException {
+        displayinfo.textProperty().unbind();
+        Items cat = new Items();
+        cat.setUpc(barcodetxt.getText());
+        cat.setItemDesc(itemdesctxt.getText());
+        cat.setCategory(new Category(categorycombo.getValue()));
+        cat.setBrand(new Brands(brandscombo.getValue()));
+        cat.setRol(Integer.parseInt(roltxt.getText()));
+        cat.setUsers(new Users(LoginController.u.getUserid()));
+        cat.setEntryLog(new Date());
+        cat.setLastModified(new Date());
+        cat.setCp(Double.parseDouble(cptxt.getText()));
+        cat.setSp(Double.parseDouble(sptxt.getText()));
+        //adding image file to directory
+        initialStream = new FileInputStream(ifile);
+        if (!ifile.getName().equals("DEFAULT.png")) {
+            cat.setItemImg("./img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+        } else {
+            cat.setItemImg("./img/DEFAULT.png");
         }
+        int result = new InsertUpdateBL().insertData(cat);
+//            if (result == 1) {
+        if (!ifile.getName().equals("DEFAULT.png")) {
+            ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File("./img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName())));
+        }
+//            } else {
+//                displayinfo.setText(MainAppController.ERROR_MESSAGE);
+//                spinner.setVisible(false);
+//                check.setVisible(false);
+//            }
 
+        return result;
+    }
+
+    public int deleteTemplate(String value) {
+        int result = new ItemsBL().removeData(value);
+        return result;
     }
 
 }

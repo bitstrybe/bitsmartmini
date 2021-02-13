@@ -29,6 +29,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -242,5 +243,20 @@ public class Utilities {
             }
         });
     }
+
+//    public FXMLLoader popUpMethod(String fxml , Stage ) throws IOException {
+//        Stage stage = new Stage();
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
+//        Parent parent = (Parent) fxmlLoader.load();
+//        Scene scene = new Scene(parent);
+//        scene.setFill(Color.TRANSPARENT);
+//        stage.setMaximized(true);
+//        stage.initModality(Modality.APPLICATION_MODAL);
+//        stage.initOwner(parent.getScene().getWindow());
+//        stage.setScene(scene);
+//        stage.initStyle(StageStyle.TRANSPARENT);
+//        stage.show();
+//        return fxmlLoader;
+//    }
 
 }

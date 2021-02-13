@@ -107,7 +107,11 @@ public class MainAppController implements Initializable {
     private VBox cartbox;
 
     public static final String SUCCESS_MESSAGE = "Saved";
-    public static final String ERROR_MESSAGE = "There is an error please check and try again";
+    public static final String DELETE_MESSAGE = "Deleted";
+    public static final String EMPTY_FIELD = "This field can not be empty";
+     public static final String INUSE_MESSAGE = "Sorry record is in use try again";
+    public static final String ERROR_MESSAGE = "There was an error try again...";
+    
     //public static final String INFO_MESSAGE = "";
     //public static final String WARNING_MESSAGE;
 

@@ -36,7 +36,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
@@ -48,15 +47,10 @@ import bt.bitsmartmini.bl.InsertUpdateBL;
 import bt.bitsmartmini.bl.ItemsBL;
 import bt.bitsmartmini.bl.BrandBL;
 import bt.bitsmartmini.entity.Brands;
-import bt.bitsmartmini.entity.Manufacturer;
 import bt.bitsmartmini.tablemodel.BrandTableModel;
+import javafx.scene.paint.Color;
 import org.apache.commons.text.WordUtils;
 
-/**
- * FXML Controller class
- *
- * @author JScare
- */
 public class AddBrandController implements Initializable {
 
     ObservableList<BrandTableModel> data;
@@ -69,7 +63,7 @@ public class AddBrandController implements Initializable {
     public FontAwesomeIcon duplicatelock;
     @FXML
     private JFXTextField searchbtn;
-     @FXML
+    @FXML
     private TableView<BrandTableModel> brandtable;
     @FXML
     private TableColumn<BrandTableModel, String> brand;
@@ -79,28 +73,26 @@ public class AddBrandController implements Initializable {
     private JFXButton save;
     @FXML
     private Button closebtn;
-    private AnchorPane clearpane;
     @FXML
     private HBox statushbox;
     @FXML
     private FontAwesomeIcon check;
     @FXML
     private JFXSpinner spinner;
-   
 
+//    BrandBL bbl = new BrandBL();
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        BrandBL man = new BrandBL();
         // TODO
         manutextfield.textProperty().addListener(e -> {
             //  System.out.println(cattextfield.getText());
 //            check.setVisible(false);
             if (manutextfield.getLength() > 0) {
-                Brands value = man.getBrandsbyId(manutextfield.getText());
+                Brands value = new BrandBL().getBrandsbyId(manutextfield.getText());
                 if (value != null) {
                     save.setDisable(true);
                     displayinfo.setText("Duplicate Found!!!");
@@ -115,13 +107,9 @@ public class AddBrandController implements Initializable {
             }
 
         });
-        TableData();
+        TableData("");
         searchbtn.textProperty().addListener(e -> {
-            if (searchbtn.getText().length() > 1) {
-                TableData(searchbtn.getText());
-            } else {
-                TableData();
-            }
+            TableData(searchbtn.getText());
         });
 
         manutextfield.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -129,25 +117,7 @@ public class AddBrandController implements Initializable {
             public void handle(KeyEvent event) {
                 if (!manutextfield.getText().isEmpty()) {
                     if (event.getCode() == KeyCode.ENTER) {
-
-                        save.setDisable(true);
-                        Task<Void> task = new Task<Void>() {
-                            @Override
-                            protected Void call() throws Exception {
-//                            spinner.setVisible(true);
-                                updateMessage("PROCESSING PLS WAIT.....");
-                                Thread.sleep(1000);
-                                return null;
-                            }
-                        };
-                        displayinfo.textProperty().bind(task.messageProperty());
-                        task.setOnSucceeded(s -> {
-                            saveTemplate();
-                        });
-                        Thread d = new Thread(task);
-                        d.setDaemon(true);
-                        d.start();
-
+                        saveAction(null);
                     }
                 } else {
                     displayinfo.setText("!FIELD IS EMPTY");
@@ -163,53 +133,38 @@ public class AddBrandController implements Initializable {
     @FXML
     private void saveAction(ActionEvent event) {
         save.setDisable(true);
-        Task<Void> task = new Task<Void>() {
+        Task<Integer> task = new Task<Integer>() {
             @Override
-            protected Void call() throws Exception {
+            protected Integer call() throws Exception {
                 spinner.setVisible(true);
                 updateMessage("PROCESSING PLS WAIT.....");
-                Thread.sleep(1000);
-                return null;
+                Thread.sleep(500);
+                return saveTemplate();
             }
         };
         displayinfo.textProperty().bind(task.messageProperty());
         task.setOnSucceeded(s -> {
-            saveTemplate();
+            displayinfo.textProperty().unbind();
+            if (task.getValue() == 1) {
+                saveTrans();
+            } else {
+                errorTrans();
+            }
+
         });
         Thread d = new Thread(task);
         d.setDaemon(true);
         d.start();
     }
 
-    public void TableData() {
-        List<Brands> c = new BrandBL().getAllBrands();
-        data = FXCollections.observableArrayList();
-        c.forEach((brand) -> {
-            data.add(new BrandTableModel(brand.getBrandName()));
-        });
-        brand.setCellValueFactory(cell -> cell.getValue().getBrandProperty());
-        action.setSortable(false);
-        action.setMaxWidth(480);
-        action.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<BrandTableModel, Boolean>, ObservableValue<Boolean>>() {
-            @Override
-            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<BrandTableModel, Boolean> features) {
-                return new SimpleBooleanProperty(features.getValue() != null);
-            }
-        });
-        action.setCellFactory(new Callback<TableColumn<BrandTableModel, Boolean>, TableCell<BrandTableModel, Boolean>>() {
-            @Override
-            public TableCell<BrandTableModel, Boolean> call(TableColumn<BrandTableModel, Boolean> personBooleanTableColumn) {
-                return new AddPersonCell();
-            }
-        });
-        brandtable.setItems(data);
-//        clientTable.getColumns().add(action);
-        brandtable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
-    }
-
     public void TableData(String p) {
-        List<Brands> c = new BrandBL().searchAllBrands(p);
+        List<Brands> c;
+        BrandBL bbl = new BrandBL();
+        if (searchbtn.getLength() > 0) {
+            c = bbl.searchAllBrands(p);
+        } else {
+            c = bbl.getAllBrands();
+        }
         data = FXCollections.observableArrayList();
 
         c.forEach((brand) -> {
@@ -284,39 +239,34 @@ public class AddBrandController implements Initializable {
                         Parent parent = (Parent) fxmlLoader.load();
                         DeleteController childController = fxmlLoader.getController();
                         childController.delete.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-                            Task<Void> task = new Task<Void>() {
+                            Task<Integer> task = new Task<Integer>() {
                                 @Override
-                                protected Void call() throws Exception {
+                                protected Integer call() throws Exception {
                                     childController.spinner.setVisible(true);
                                     childController.check.setVisible(false);
                                     updateMessage("PROCESSING PLS WAIT.....");
-                                    Thread.sleep(1000);
-                                    return null;
+                                    Thread.sleep(500);
+                                    List man = new ItemsBL().findItemsbyBrand(selectedRecord.getBrand());
+                                    if (man.isEmpty()) {
+                                        return deleteTemplate(selectedRecord.getBrand());
+                                    } else {
+                                        return 0;
+                                    }
+
                                 }
                             };
                             childController.displayinfo.textProperty().bind(task.messageProperty());
                             task.setOnSucceeded(f -> {
+//                                System.out.println("Value" + task.getValue());
                                 childController.displayinfo.textProperty().unbind();
-                                List man = new ItemsBL().findItemsbyBrand(selectedRecord.getBrand());
-                                if (man.isEmpty()) {
-                                    int result = new BrandBL().removeData(selectedRecord.getBrand());
-                                    switch (result) {
-                                        case 1:
-                                            childController.displayinfo.setText("SUCCESSFULLY DELETED");
-                                            childController.spinner.setVisible(false);
-                                            childController.check.setVisible(true);
-                                            TableData();
-                                            stage.close();
-                                            break;
-                                        default:
-                                            childController.displayinfo.setText("NOTICE! AN ERROR OCCURED");
-                                            childController.spinner.setVisible(false);
-                                            childController.check.setVisible(false);
-                                            break;
-
-                                    }
+                                if (task.getValue() == 1) {
+                                    childController.displayinfo.setText(MainAppController.DELETE_MESSAGE);
+                                    childController.spinner.setVisible(false);
+                                    childController.check.setVisible(true);
+                                    TableData("");
+                                    stage.close();
                                 } else {
-                                    childController.displayinfo.setText("UNABLE TO DELETE RECORD");
+                                    childController.displayinfo.setText(MainAppController.ERROR_MESSAGE);
                                     childController.spinner.setVisible(false);
                                     childController.check.setVisible(false);
                                 }
@@ -328,12 +278,13 @@ public class AddBrandController implements Initializable {
 
                         });
                         Scene scene = new Scene(parent);
+                        scene.setFill(Color.TRANSPARENT);
+                        stage.setMaximized(true);
                         stage.initModality(Modality.APPLICATION_MODAL);
                         stage.initOwner(parent.getScene().getWindow());
                         stage.setScene(scene);
-                        stage.initStyle(StageStyle.UNDECORATED);
-                        stage.resizableProperty().setValue(false);
-                        stage.showAndWait();
+                        stage.initStyle(StageStyle.TRANSPARENT);
+                        stage.show();
 
                     } catch (IOException ex) {
                         Logger.getLogger(AddBrandController.class.getName()).log(Level.SEVERE, null, ex);
@@ -363,12 +314,12 @@ public class AddBrandController implements Initializable {
         manutextfield.clear();
     }
 
-    private void closeTransition() {
-        displayinfo.setText("SUCCESSFULLY SAVED");
+    private void saveTrans() {
+        displayinfo.setText(MainAppController.SUCCESS_MESSAGE);
         clearAllForms();
         spinner.setVisible(false);
         check.setVisible(true);
-        TableData();
+        TableData("");
         PauseTransition delay = new PauseTransition(Duration.seconds(3));
         delay.setOnFinished(closevnt -> {
             displayinfo.setText("");
@@ -379,23 +330,31 @@ public class AddBrandController implements Initializable {
 
     }
 
-    public void saveTemplate() {
+    private void errorTrans() {
+        displayinfo.setText(MainAppController.ERROR_MESSAGE);
+        spinner.setVisible(false);
+        check.setVisible(false);
+        TableData("");
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(closevnt -> {
+            displayinfo.setText("");
+            spinner.setVisible(false);
+            check.setVisible(false);
+        });
+        delay.play();
 
-        displayinfo.textProperty().unbind();
+    }
+
+    public int saveTemplate() {
         Brands cat = new Brands();
         cat.setBrandName(WordUtils.capitalizeFully(manutextfield.getText()));
         int result = new InsertUpdateBL().insertData(cat);
-        switch (result) {
-            case 1:
-                closeTransition();
-                break;
-            default:
-                displayinfo.setText("NOTICE! AN ERROR OCCURED");
-                spinner.setVisible(false);
-                check.setVisible(false);
-                break;
+        return result;
+    }
 
-        }
+    public int deleteTemplate(String brand) {
+        int result = new BrandBL().removeData(brand);
+        return result;
 
     }
 

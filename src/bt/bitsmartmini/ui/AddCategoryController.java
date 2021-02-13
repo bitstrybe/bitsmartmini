@@ -48,6 +48,7 @@ import bt.bitsmartmini.entity.Category;
 import bt.bitsmartmini.tablemodel.CategoryTableModel;
 import bt.bitsmartmini.utils.Utilities;
 import javafx.event.EventHandler;
+import javafx.scene.paint.Color;
 import javafx.stage.WindowEvent;
 
 public class AddCategoryController implements Initializable {
@@ -110,44 +111,23 @@ public class AddCategoryController implements Initializable {
             }
 
         });
-        TableData();
+        TableData("");
 
         searchbtn.textProperty().addListener(e -> {
             if (searchbtn.getText().length() > 1) {
                 TableData(searchbtn.getText());
             } else {
-                TableData();
+                TableData("");
             }
         });
 
         cattextfield.setOnKeyPressed((KeyEvent event) -> {
             if (!cattextfield.getText().isEmpty()) {
                 if (event.getCode() == KeyCode.ENTER) {
-
-                    save.setDisable(true);
-                    Task<Void> task = new Task<Void>() {
-                        @Override
-                        protected Void call() throws Exception {
-                            spinner.setVisible(true);
-                            check.setVisible(false);
-                            updateMessage("PROCESSING PLS WAIT.....");
-                            Thread.sleep(1000);
-                            return null;
-                        }
-                    };
-                    displayinfo.textProperty().bind(task.messageProperty());
-                    task.setOnSucceeded((WorkerStateEvent s) -> {
-                        saveTemplate();
-                    });
-                    Thread d = new Thread(task);
-                    d.setDaemon(true);
-                    d.start();
-
+                    saveAction(null);
                 }
             } else {
                 displayinfo.setText("!FIELD IS EMPTY");
-//                spinner.setVisible(false);
-//                check.setVisible(false);
             }
         });
 
@@ -162,44 +142,37 @@ public class AddCategoryController implements Initializable {
     @FXML
     private void saveAction(ActionEvent event) {
         save.setDisable(true);
-        Task<Void> task = new Task<Void>() {
+        Task<Integer> task = new Task<Integer>() {
             @Override
-            protected Void call() throws Exception {
+            protected Integer call() throws Exception {
                 spinner.setVisible(true);
                 check.setVisible(false);
                 updateMessage("PROCESSING PLS WAIT.....");
-                Thread.sleep(1000);
-                return null;
+                Thread.sleep(500);
+                return saveTemplate();
             }
         };
         displayinfo.textProperty().bind(task.messageProperty());
         task.setOnSucceeded(s -> {
-            saveTemplate();
+            if (task.getValue() == 1) {
+                saveTrans();
+            } else {
+                errorTrans();
+            }
         });
         Thread d = new Thread(task);
         d.setDaemon(true);
         d.start();
     }
 
-    public void TableData() {
-        List<Category> c = new CategoryBL().getAllCategory();
-        data = FXCollections.observableArrayList();
-        c.forEach((form) -> {
-            data.add(new CategoryTableModel(form.getCategoryName()));
-        });
-        category.setCellValueFactory(cell -> cell.getValue().getCategoryNameProperty());
-        action.setSortable(false);
-        action.setMaxWidth(120);
-
-        action.setCellValueFactory((TableColumn.CellDataFeatures<CategoryTableModel, Boolean> features) -> new SimpleBooleanProperty(features.getValue() != null));
-        action.setCellFactory((TableColumn<CategoryTableModel, Boolean> personBooleanTableColumn) -> new AddPersonCell());
-        cattableview.setItems(data);
-        cattableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
-    }
-
     public void TableData(String p) {
-        List<Category> c = new CategoryBL().searchAllCategory(p);
+        List<Category> c;
+        if (searchbtn.getLength() > 2) {
+            c = new CategoryBL().searchAllCategory(p);
+        } else {
+            c = new CategoryBL().getAllCategory();
+        }
+
         data = FXCollections.observableArrayList();
         c.forEach((form) -> {
             data.add(new CategoryTableModel(form.getCategoryName()));
@@ -255,58 +228,54 @@ public class AddCategoryController implements Initializable {
                     CategoryTableModel selectedRecord = (CategoryTableModel) cattableview.getItems().get(selectdIndex);
                     Stage stage = new Stage();
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Delete.fxml"));
-                    Parent parent1 = (Parent) fxmlLoader.load();
+                    Parent parent = (Parent) fxmlLoader.load();
                     DeleteController childController = fxmlLoader.getController();
                     childController.delete.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 
-                        Task<Void> task = new Task<Void>() {
+                        Task<Integer> task = new Task<Integer>() {
                             @Override
-                            protected Void call() throws Exception {
+                            protected Integer call() throws Exception {
                                 childController.spinner.setVisible(true);
                                 updateMessage("PROCESSING PLS WAIT.....");
-                                Thread.sleep(1000);
-                                return null;
+                                Thread.sleep(500);
+                                List catname = new ItemsBL().getItemsFromForm(selectedRecord.getCategoryName());
+                                if (catname.isEmpty()) {
+                                    return deleteTemplate(selectedRecord.getCategoryName());
+                                } else {
+                                    return 0;
+                                }
+
                             }
                         };
                         childController.displayinfo.textProperty().bind(task.messageProperty());
                         task.setOnSucceeded(f -> {
                             childController.displayinfo.textProperty().unbind();
-                            List catname = new ItemsBL().getItemsFromForm(selectedRecord.getCategoryName());
-                            if (catname.isEmpty()) {
-                                int result = new CategoryBL().removeData(selectedRecord.getCategoryName());
-                                switch (result) {
-                                    case 1:
-                                        childController.displayinfo.setText("SUCCESSFULLY DELETED");
-                                        childController.spinner.setVisible(false);
-                                        childController.check.setVisible(true);
-                                        TableData();
-                                        stage.close();
-                                        break;
-                                    default:
-                                        childController.displayinfo.setText("NOTICE! AN ERROR OCCURED");
-                                        childController.spinner.setVisible(false);
-                                        childController.check.setVisible(false);
-                                        break;
-
-                                }
+                            if (task.getValue() == 1) {
+                                childController.displayinfo.setText(MainAppController.DELETE_MESSAGE);
+                                childController.spinner.setVisible(false);
+                                childController.check.setVisible(true);
+                                TableData("");
+                                stage.close();
                             } else {
-                                childController.displayinfo.setText("UNABLE TO DELETE RECORD");
+                                childController.displayinfo.setText(MainAppController.ERROR_MESSAGE);
                                 childController.spinner.setVisible(false);
                                 childController.check.setVisible(false);
                             }
+
                         });
                         Thread d = new Thread(task);
                         d.setDaemon(true);
                         d.start();
 
                     });
-                    Scene scene1 = new Scene(parent1);
+                    Scene scene = new Scene(parent);
+                    scene.setFill(Color.TRANSPARENT);
+                    stage.setMaximized(true);
                     stage.initModality(Modality.APPLICATION_MODAL);
-                    stage.initOwner(parent1.getScene().getWindow());
-                    stage.setScene(scene1);
-                    stage.initStyle(StageStyle.UNDECORATED);
-                    stage.resizableProperty().setValue(false);
-                    stage.showAndWait();
+                    stage.initOwner(parent.getScene().getWindow());
+                    stage.setScene(scene);
+                    stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.show();
                 } catch (IOException ex) {
                     Logger.getLogger(AddCategoryController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -329,20 +298,19 @@ public class AddCategoryController implements Initializable {
         }
     }
 
-    private void clearAllCategory() {
+    private void clearAllForms() {
         cattextfield.clear();
     }
 
-    private void closeTransition() {
-        save.setDisable(true);
-        clearAllCategory();
+    private void saveTrans() {
         displayinfo.setText(MainAppController.SUCCESS_MESSAGE);
+        clearAllForms();
         spinner.setVisible(false);
         check.setVisible(true);
-        TableData();
+        TableData("");
         PauseTransition delay = new PauseTransition(Duration.seconds(3));
         delay.setOnFinished(closevnt -> {
-            displayinfo.setText("SAVED");
+            displayinfo.setText("");
             spinner.setVisible(false);
             check.setVisible(false);
         });
@@ -350,24 +318,32 @@ public class AddCategoryController implements Initializable {
 
     }
 
-    public void saveTemplate() {
+    private void errorTrans() {
+        displayinfo.setText(MainAppController.ERROR_MESSAGE);
+        spinner.setVisible(false);
+        check.setVisible(false);
+        TableData("");
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(closevnt -> {
+            displayinfo.setText("");
+            spinner.setVisible(false);
+            check.setVisible(false);
+        });
+        delay.play();
+
+    }
+
+    public int saveTemplate() {
         displayinfo.textProperty().unbind();
         Category cat = new Category();
         cat.setCategoryName(cattextfield.getText());
-        //cat.setUsers(new Users(LoginController.u.getUserid()));
-        //cat.setEntryLog(new Date());
         int result = new InsertUpdateBL().insertData(cat);
-        switch (result) {
-            case 1:
-                closeTransition();
-                break;
-            default:
-                displayinfo.setText("NOTICE! AN ERROR OCCURED");
-                spinner.setVisible(false);
-                check.setVisible(false);
-                break;
+        return result;
+    }
 
-        }
+    public int deleteTemplate(String value) {
+        int result = new CategoryBL().removeData(value);
+        return result;
     }
 
 }

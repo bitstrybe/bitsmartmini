@@ -60,7 +60,7 @@ public class CategoryBL extends DdsBL {
     }
 
     public List<Category> searchAllCategory(String p) {
-        TypedQuery<Category> q = em.createQuery("SELECT s FROM Category s WHERE s.formName LIKE :p", Category.class);
+        TypedQuery<Category> q = em.createQuery("SELECT s FROM Category s WHERE s.categoryName LIKE :p", Category.class);
         q.setParameter("p", "%" + p + "%");
         return q.getResultList();
     }

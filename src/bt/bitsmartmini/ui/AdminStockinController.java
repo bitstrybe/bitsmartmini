@@ -23,6 +23,7 @@ import bt.bitsmartmini.bl.StockinBL;
 import bt.bitsmartmini.entity.Items;
 import bt.bitsmartmini.entity.Stockin;
 import bt.bitsmartmini.entity.Users;
+import bt.bitsmartmini.utils.Utilities;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -132,7 +133,7 @@ public class AdminStockinController implements Initializable {
     }
 
     private void closeTransition() {
-        displayinfo.setText("SUCCESSFULLY SAVED");
+        displayinfo.setText(MainAppController.DELETE_MESSAGE);
         spinner.setVisible(false);
         check.setVisible(true);
         refreshView();
@@ -172,7 +173,7 @@ public class AdminStockinController implements Initializable {
                 }
                 break;
             default:
-                displayinfo.setText("There was an error, check and try again.");
+                displayinfo.setText(MainAppController.ERROR_MESSAGE);
                 spinner.setVisible(false);
                 check.setVisible(false);
                 break;
