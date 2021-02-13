@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="206" pageHeight="504" whenNoDataType="BlankPage" columnWidth="192" leftMargin="7" rightMargin="7" topMargin="7" bottomMargin="7" isIgnorePagination="true" uuid="eca1266b-c5c3-49a6-99eb-a3da2e599c35">
 	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="2144"/>
+	<property name="ireport.y" value="1103"/>
 	<style name="balance">
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$V{BAL} < 0.00]]></conditionExpression>
@@ -296,7 +296,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font size="5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Generated from PharambitsMini-Retail | www.bitstrybe.com/bitsmart "]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Generated from BitsMart | www.bitstrybe.com/bitsmart "]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="1" width="192" height="13" uuid="744fe9a2-6b5a-4e68-bca4-fefd7cb0a6cf"/>
@@ -334,7 +334,7 @@
 				<text><![CDATA[Amount Payable:]]></text>
 			</staticText>
 			<line>
-				<reportElement style="linecolorLight" x="0" y="123" width="192" height="1" uuid="33f8ed75-bae2-4c0d-925a-d48825fa9353"/>
+				<reportElement style="linecolorLight" x="0" y="127" width="192" height="1" uuid="33f8ed75-bae2-4c0d-925a-d48825fa9353"/>
 				<graphicElement>
 					<pen lineWidth="0.5"/>
 				</graphicElement>
@@ -368,7 +368,7 @@
 				<textFieldExpression><![CDATA[0.00]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="125" width="192" height="9" forecolor="#000000" uuid="2f0ea041-1ae1-41a5-be3f-ac4e08772688"/>
+				<reportElement x="0" y="129" width="192" height="9" forecolor="#000000" uuid="2f0ea041-1ae1-41a5-be3f-ac4e08772688"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
 					<font size="6"/>
 				</textElement>
@@ -406,7 +406,7 @@
 				<textFieldExpression><![CDATA[$P{AMNT}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="87" y="91" width="105" height="27" uuid="db83c7a2-52cf-451d-9f61-c6d54dd79cd6"/>
+				<reportElement x="87" y="91" width="105" height="36" uuid="db83c7a2-52cf-451d-9f61-c6d54dd79cd6"/>
 				<textElement verticalAlignment="Top">
 					<font size="6" isBold="true" isUnderline="false"/>
 					<paragraph lineSpacing="1_1_2" rightIndent="4"/>
@@ -442,7 +442,7 @@
 				<text><![CDATA[Amount Paid :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="139" width="192" height="9" forecolor="#999999" uuid="4dec0ea2-dce7-43d1-8594-3a5feb4851bd"/>
+				<reportElement x="0" y="143" width="192" height="9" forecolor="#999999" uuid="4dec0ea2-dce7-43d1-8594-3a5feb4851bd"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="6"/>
 					<paragraph leftIndent="2"/>
@@ -450,7 +450,7 @@
 				<text><![CDATA[Return Policy:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="0" y="148" width="192" height="17" forecolor="#666666" uuid="c2d108d1-45d8-423d-866e-48244c7e8af0"/>
+				<reportElement x="0" y="152" width="192" height="17" forecolor="#666666" uuid="c2d108d1-45d8-423d-866e-48244c7e8af0"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" markup="none">
 					<font size="6"/>
 					<paragraph leftIndent="2"/>
