@@ -63,8 +63,8 @@ public class BackupController implements Initializable {
 
     public void Backupdbtosql(File path) throws IOException {
         String dbpath = new File(".").getCanonicalPath();
-//        System.out.println("Application Folder: "+pathc);
         Path databasepath = FileSystems.getDefault().getPath(dbpath + "\\DatabaseFiles\\bin\\mysqldump.exe");
+//        Path databasepath = FileSystems.getDefault().getPath("C:\\Program Files (x86)\\Bitsmartsmini\\DatabaseFiles\\bin\\mysqldump.exe");
         String savePath = "\"" + path + "\\backup\\" + "LastBackup.sql\"";
         InsertUpdateBL b = new InsertUpdateBL();
 

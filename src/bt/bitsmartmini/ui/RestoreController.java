@@ -51,7 +51,7 @@ public class RestoreController implements Initializable {
     private JFXButton restore;
     @FXML
     private TextField restoretextfield;
-    
+
     FileChooser files = new FileChooser();
 
     /**
@@ -63,25 +63,28 @@ public class RestoreController implements Initializable {
     }
 
     @FXML
-    private void restoreAction(ActionEvent event) throws IOException {
+    private void restoreAction(ActionEvent event) throws IOException, InterruptedException {
         Restoredbfromsql(new File(restoretextfield.getText()));
     }
 
-    public void Restoredbfromsql(File s) throws IOException {
+    public void Restoredbfromsql(File s) throws IOException, InterruptedException {
         String dbpath = new File(".").getCanonicalPath();
-
         Path databasepath = FileSystems.getDefault().getPath(dbpath + "\\DatabaseFiles\\bin\\mysql.exe");
+//        Path databasepath = FileSystems.getDefault().getPath("C:\\Program Files (x86)\\Bitsmartsmini\\DatabaseFiles\\bin\\mysql.exe");
 //        System.out.println(path.toString());
         System.out.println("File " + s);
         System.out.println("Path " + s.getParent());
         new ZipFile(s, "bitstrybe@21".toCharArray()).extractFile("LastBackup.sql", s.getParent());
-
+        File hiddenfile = new File(s.getParent() + "\\LastBackup.sql");
+        setHiddenAttrib(hiddenfile);
+        
+        
         String dbName = "bitsmartmini";
         String dbUser = "root";
         String dbPass = "bitstrybe@21";
 
         String restorePath = s.getParent() + "\\LastBackup.sql";
-        System.out.println("Restore Path : "+restorePath);
+        System.out.println("Restore Path : " + restorePath);
 
         System.out.println(databasepath.toString());
 
@@ -132,6 +135,20 @@ public class RestoreController implements Initializable {
         File file = files.showOpenDialog(null);
         restoretextfield.setText(file.getAbsolutePath());
 
+    }
+
+    private static void setHiddenAttrib(File file) {
+        try {
+            Process p = Runtime.getRuntime().exec("attrib +H " + file.getPath());
+            p.waitFor();
+            if (file.isHidden()) {
+                System.out.println(file.getName() + " hidden attribute is set to true");
+            } else {
+                System.out.println(file.getName() + " hidden attribute not set to true");
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 }
