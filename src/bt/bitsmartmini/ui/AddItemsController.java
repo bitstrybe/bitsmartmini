@@ -171,25 +171,17 @@ public class AddItemsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Utilities.repeatFocus(barcodetxt);
         categorycombo.setOnShown(e -> {
             getCategory();
         });
         brandscombo.setOnShown(v -> {
             getBrands();
         });
-
-        Utilities.repeatFocus(barcodetxt);
-//        getVolumeValue();
-//        getUOM();
-        TableData(searchbtn.getText());
         ifile = new File("./img/DEFAULT.png");
-//        Image itim = new Image(ifile);
-//        itemimages.setImage(itim);
-
+        TableData("");
         searchbtn.textProperty().addListener((e, oldValue, newValue) -> {
-            //searchbtn.setText(newValue.toUpperCase());
             TableData(searchbtn.getText());
-
         });
         brandscombo.setOnKeyReleased((KeyEvent event) -> {
             String s = FilterComboBox.jumpTo(event.getText(), brandscombo.getValue(), brandscombo.getItems());
@@ -446,9 +438,9 @@ public class AddItemsController implements Initializable {
     }
 
     private void clearAllForms() {
-        barcodetxt.clear();
-        itemdesctxt.clear();
-        closefrom();
+//        barcodetxt.clear();
+//        itemdesctxt.clear();
+//        closefrom();
     }
 
     private void saveTrans() {
