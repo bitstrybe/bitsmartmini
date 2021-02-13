@@ -503,15 +503,9 @@ public class AddItemsController implements Initializable {
             cat.setItemImg("./img/DEFAULT.png");
         }
         int result = new InsertUpdateBL().insertData(cat);
-//            if (result == 1) {
         if (!ifile.getName().equals("DEFAULT.png")) {
             ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File("./img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName())));
         }
-//            } else {
-//                displayinfo.setText(MainAppController.ERROR_MESSAGE);
-//                spinner.setVisible(false);
-//                check.setVisible(false);
-//            }
 
         return result;
     }

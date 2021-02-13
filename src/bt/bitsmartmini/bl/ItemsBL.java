@@ -56,10 +56,11 @@ public class ItemsBL extends DdsBL {
     }
 
     public List<Items> searchAllItems(String p) {
-        TypedQuery<Items> q = em.createQuery("SELECT s FROM Items s WHERE s.upc LIKE :p OR s.itemDesc LIKE :p1 ", Items.class);
+        TypedQuery<Items> q = em.createQuery("SELECT s FROM Items s WHERE s.upc LIKE :p OR s.itemDesc LIKE :p1 OR s.brand.brandName LIKE :p2 OR s.category.categoryName LIKE :p3", Items.class);
         q.setParameter("p", "%" + p + "%");
         q.setParameter("p1", "%" + p + "%");
-        //q.setParameter("p2", "%" + p + "%");
+        q.setParameter("p2", "%" + p + "%");
+        q.setParameter("p3", "%" + p + "%");
         q.setMaxResults(10);
         return q.getResultList();
     }
