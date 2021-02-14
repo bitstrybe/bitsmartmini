@@ -22,7 +22,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -34,6 +33,8 @@ import bt.bitsmartmini.bl.StockinBL;
 import bt.bitsmartmini.entity.Items;
 import bt.bitsmartmini.entity.Stockout;
 import bt.bitsmartmini.entity.Users;
+import bt.bitsmartmini.utils.Utilities;
+import com.jfoenix.controls.JFXTextArea;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -43,16 +44,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class AddStockOutController implements Initializable {
 
-    public DatePicker stockoutdate;
     @FXML
     public JFXTextField qnttextfield;
-    public JFXButton save;
-    private Button closeButton;
-    public Label displayinfo;
-    public JFXSpinner spinner;
-    public FontAwesomeIcon check;
-    public FontAwesomeIcon duplicatelock;
-    public Label itemname;
     @FXML
     private Button closebtn;
     @FXML
@@ -61,7 +54,6 @@ public class AddStockOutController implements Initializable {
     private JFXListView<String> itemlist;
     @FXML
     private ImageView itemimage;
-    public TextArea remarks;
     @FXML
     public Label itembarcode;
     @FXML
@@ -71,21 +63,27 @@ public class AddStockOutController implements Initializable {
     @FXML
     private Label itemsp;
     @FXML
-    private Label displayinfo1;
+    public JFXButton save;
     @FXML
-    private FontAwesomeIcon check1;
+    public FontAwesomeIcon check;
     @FXML
-    private FontAwesomeIcon duplicatelock1;
+    public FontAwesomeIcon duplicatelock;
     @FXML
-    private JFXSpinner spinner1;
-    AtomicInteger rowCounter = new AtomicInteger(0);
+    public JFXSpinner spinner;
+    @FXML
+    public Label displayinfo;
+    @FXML
+    public Label itemname;
 
+    AtomicInteger rowCounter = new AtomicInteger(0);
     ItemsBL ib = new ItemsBL();
     StockinBL sb = new StockinBL();
+    @FXML
+    private JFXTextArea remarks;
 
     public void getItemList(String p) {
         List<String> item;
-        if (p!= null && p.length() > 0) {
+        if (p != null && p.length() > 0) {
             item = new ItemsBL().searchItemsForList(p);
         } else {
             item = new ItemsBL().getAllItemsForList();
@@ -110,6 +108,7 @@ public class AddStockOutController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        Utilities.repeatFocus(search);
         getItemList(search.getText());
         search.textProperty().addListener(e -> {
             getItemList(search.getText());
@@ -132,9 +131,9 @@ public class AddStockOutController implements Initializable {
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(AddStockInController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if(qty > 0){
+            if (qty > 0) {
                 save.setDisable(false);
-            }else{
+            } else {
                 save.setDisable(true);
             }
         });
@@ -174,7 +173,7 @@ public class AddStockOutController implements Initializable {
 
     }
 
-    public void saveTemplate() {
+    public int saveTemplate() {
         displayinfo.textProperty().unbind();
         Stockout cat = new Stockout();
         cat.setUpc(new Items(itembarcode.getText()));
@@ -185,16 +184,46 @@ public class AddStockOutController implements Initializable {
         cat.setEntryLog(new Date());
         cat.setModifiedDate(new Date());
         int result = new InsertUpdateBL().insertData(cat);
-        switch (result) {
-            case 1:
-                closeTransition();
-                break;
-            default:
-                displayinfo.setText("There was an error, check and try again.");
-                spinner.setVisible(false);
-                check.setVisible(false);
-                break;
-        }
+        return result;
+//        switch (result) {
+//            case 1:
+//                closeTransition();
+//                break;
+//            default:
+//                displayinfo.setText("There was an error, check and try again.");
+//                spinner.setVisible(false);
+//                check.setVisible(false);
+//                break;
+//        }
+
+    }
+
+    public void saveTrans() {
+        displayinfo.setText(MainAppController.SUCCESS_MESSAGE);
+        clearAllForms();
+        spinner.setVisible(false);
+        check.setVisible(true);
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(closevnt -> {
+            displayinfo.setText("");
+            spinner.setVisible(false);
+            check.setVisible(false);
+        });
+        delay.play();
+
+    }
+
+    public void errorTrans() {
+        displayinfo.setText(MainAppController.ERROR_MESSAGE);
+        spinner.setVisible(false);
+        check.setVisible(false);
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(closevnt -> {
+            displayinfo.setText("");
+            spinner.setVisible(false);
+            check.setVisible(false);
+        });
+        delay.play();
 
     }
 

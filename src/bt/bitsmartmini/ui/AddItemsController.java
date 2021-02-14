@@ -64,12 +64,8 @@ import bt.bitsmartmini.tablemodel.ItemTableModel;
 import bt.bitsmartmini.utils.FilterComboBox;
 import bt.bitsmartmini.utils.Utilities;
 import java.io.FileNotFoundException;
-import javafx.application.Platform;
-import javafx.scene.Node;
-import javafx.scene.control.ListCell;
 import javafx.scene.paint.Color;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.text.WordUtils;
 
 /**
@@ -144,6 +140,8 @@ public class AddItemsController implements Initializable {
     private JFXTextField roltxt;
     @FXML
     private JFXTextField itemdesctxt;
+    @FXML
+    private JFXButton save;
 
     public void getBrands() {
         brandscombo.getItems().clear();
@@ -171,7 +169,26 @@ public class AddItemsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Utilities.repeatFocus(barcodetxt);
+        barcodetxt.textProperty().addListener(e -> {
+            //  System.out.println(cattextfield.getText());
+//            check.setVisible(false);
+            if (barcodetxt.getLength() > 0) {
+                Items value = new ItemsBL().getImageItembyCode(barcodetxt.getText());
+                if (value != null) {
+                    save.setDisable(true);
+                    displayinfo.setText(MainAppController.DUPLICATE_MESSAGE);
+                    duplicatelock.setVisible(true);
+                } else if (value == null) {
+                    save.setDisable(false);
+                    displayinfo.setText(null);
+                    duplicatelock.setVisible(false);
+                }
+            } else {
+                save.setDisable(true);
+            }
+
+        });
+
         categorycombo.setOnShown(e -> {
             getCategory();
         });
@@ -234,7 +251,7 @@ public class AddItemsController implements Initializable {
             protected Integer call() throws Exception {
                 spinner.setVisible(true);
                 check.setVisible(false);
-                updateMessage("PROCESSING PLS WAIT.....");
+                updateMessage(MainAppController.PROCESS_MESSAGE);
                 Thread.sleep(500);
                 return saveTemplate();
             }
@@ -329,6 +346,12 @@ public class AddItemsController implements Initializable {
         stage.show();
     }
 
+    @FXML
+    private void barcodetxtAction(ActionEvent event) {
+        barcodetxt.selectAll();
+        Utilities.repeatFocus(barcodetxt);
+    }
+
     public class AddPersonCell extends TableCell<ItemTableModel, Boolean> {
 
         //Image img = new Image(getClass().getResourceAsStream("edit.png"));
@@ -369,7 +392,7 @@ public class AddItemsController implements Initializable {
                             @Override
                             protected Integer call() throws Exception {
                                 childController.spinner.setVisible(true);
-                                updateMessage("PROCESSING PLS WAIT.....");
+                                updateMessage(MainAppController.PROCESS_MESSAGE);
                                 Thread.sleep(500);
                                 List list = new StockinBL().getItemStockinByBarcode(selectedRecord.getBarcode());
                                 if (list.isEmpty()) {
@@ -438,9 +461,9 @@ public class AddItemsController implements Initializable {
     }
 
     private void clearAllForms() {
-//        barcodetxt.clear();
-//        itemdesctxt.clear();
-//        closefrom();
+        barcodetxt.clear();
+        itemdesctxt.clear();
+        closefrom();
     }
 
     private void saveTrans() {
@@ -491,10 +514,10 @@ public class AddItemsController implements Initializable {
         initialStream = new FileInputStream(ifile);
         String dbpath = new File(".").getCanonicalPath();
         if (!ifile.getName().equals("DEFAULT.png")) {
-            System.out.println("Image File: "+ dbpath + "/img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+            System.out.println("Image File: " + dbpath + "/img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
             cat.setItemImg(dbpath + "/img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
         } else {
-             
+
             cat.setItemImg(dbpath + "/img/DEFAULT.png");
         }
         int result = new InsertUpdateBL().insertData(cat);

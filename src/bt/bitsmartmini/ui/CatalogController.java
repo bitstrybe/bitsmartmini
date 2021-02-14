@@ -129,7 +129,6 @@ public class CatalogController extends MainAppController implements Initializabl
                                     FXMLLoader fxmlLoadersk = new FXMLLoader(getClass().getResource("AdminStockin.fxml"));
                                     Parent parentsk = (Parent) fxmlLoadersk.load();
                                     AdminStockinController childControllersk = fxmlLoadersk.getController();
-                                    childControllersk.itemname.setText(items.getItemDesc());
                                     childControllersk.itembarcode.setText(childController.itembcode.getText());
                                     childControllersk.itemname.setText(childController.itemsdesc.getText());
                                     childControllersk.itembrand.setText(childController.brand.getText());
@@ -144,20 +143,25 @@ public class CatalogController extends MainAppController implements Initializabl
                                     childControllersk.save.setDisable(false);
                                     childControllersk.save.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
                                         childControllersk.save.setDisable(true);
-                                        Task<Void> task = new Task<Void>() {
+                                        Task<Integer> task = new Task<Integer>() {
                                             @Override
-                                            protected Void call() throws Exception {
+                                            protected Integer call() throws Exception {
                                                 childControllersk.spinner.setVisible(true);
                                                 childControllersk.check.setVisible(false);
-                                                updateMessage("PROCESSING PLS WAIT.....");
-                                                Thread.sleep(1000);
-                                                return null;
+                                                updateMessage(MainAppController.PROCESS_MESSAGE);
+                                                Thread.sleep(500);
+                                                return childControllersk.saveTemplate();
                                             }
                                         };
                                         childControllersk.displayinfo.textProperty().bind(task.messageProperty());
                                         task.setOnSucceeded(s -> {
-                                            childControllersk.saveTemplate();
-                                            getStockingItemList(itemsearch.getText());
+                                            if (childControllersk.saveTemplate() == 1) {
+                                                childControllersk.saveTrans();
+                                                getStockingItemList(itemsearch.getText());
+                                            } else {
+                                                childControllersk.errorTrans();
+                                            }
+
                                         });
                                         Thread d = new Thread(task);
                                         d.setDaemon(true);
@@ -179,7 +183,6 @@ public class CatalogController extends MainAppController implements Initializabl
                                     FXMLLoader fxmlLoadersk = new FXMLLoader(getClass().getResource("AdminStockout.fxml"));
                                     Parent parentsk = (Parent) fxmlLoadersk.load();
                                     AdminStockoutController childControllersk = fxmlLoadersk.getController();
-                                    childControllersk.itemname.setText(items.getItemDesc());
                                     childControllersk.itembarcode.setText(childController.itembcode.getText());
                                     childControllersk.itemname.setText(childController.itemsdesc.getText());
                                     childControllersk.itembrand.setText(childController.brand.getText());
@@ -194,20 +197,25 @@ public class CatalogController extends MainAppController implements Initializabl
                                     childControllersk.save.setDisable(false);
                                     childControllersk.save.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
                                         childControllersk.save.setDisable(true);
-                                        Task<Void> task = new Task<Void>() {
+                                        Task<Integer> task = new Task<Integer>() {
                                             @Override
-                                            protected Void call() throws Exception {
+                                            protected Integer call() throws Exception {
                                                 childControllersk.spinner.setVisible(true);
                                                 childControllersk.check.setVisible(false);
-                                                updateMessage("PROCESSING PLS WAIT.....");
-                                                Thread.sleep(1000);
-                                                return null;
+                                                updateMessage(MainAppController.PROCESS_MESSAGE);
+                                                Thread.sleep(500);
+                                                return childControllersk.saveTemplate();
                                             }
                                         };
                                         childControllersk.displayinfo.textProperty().bind(task.messageProperty());
                                         task.setOnSucceeded(s -> {
-                                            childControllersk.saveTemplate();
-                                            getStockingItemList(itemsearch.getText());
+                                            if (task.getValue() == 1) {
+                                                childControllersk.saveTrans();
+                                                getStockingItemList(itemsearch.getText());
+                                            } else {
+                                                childControllersk.errorTrans();
+                                            }
+
                                         });
                                         Thread d = new Thread(task);
                                         d.setDaemon(true);

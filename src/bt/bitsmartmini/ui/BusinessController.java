@@ -156,7 +156,7 @@ public class BusinessController implements Initializable {
             @Override
             protected Void call() throws Exception {
                 //childController.spinner.setVisible(true);
-                updateMessage("Data Processing...");
+                updateMessage(MainAppController.PROCESS_MESSAGE);
                 Thread.sleep(500);
                 return null;
             }

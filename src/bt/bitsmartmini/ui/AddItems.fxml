@@ -78,7 +78,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                            <children>
-                              <JFXTextField fx:id="barcodetxt" focusColor="#5e5d5d" labelFloat="true" opacity="0.93" prefHeight="35.0" prefWidth="391.0" promptText="Barcode*" styleClass="form_field" unFocusColor="#cccaca" HBox.hgrow="ALWAYS">
+                              <JFXTextField fx:id="barcodetxt" focusColor="#5e5d5d" labelFloat="true" onAction="#barcodetxtAction" opacity="0.93" prefHeight="35.0" prefWidth="391.0" promptText="Barcode*" styleClass="form_field" unFocusColor="#cccaca" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Open Sans" size="12.0" />
                                  </font>
@@ -163,7 +163,7 @@
                         </HBox>
                         <HBox alignment="CENTER" spacing="10.0" VBox.vgrow="NEVER">
                            <children>
-                              <JFXButton id="action-btn" onAction="#saveAction" prefHeight="34.0" prefWidth="180.0" stylesheets="@style.css" text="Save" textFill="#323232">
+                              <JFXButton id="action-btn" fx:id="save" onAction="#saveAction" prefHeight="34.0" prefWidth="180.0" stylesheets="@style.css" text="Save" textFill="#323232">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>

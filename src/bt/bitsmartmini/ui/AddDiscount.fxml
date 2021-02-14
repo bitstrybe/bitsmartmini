@@ -5,11 +5,11 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <StackPane prefHeight="221.0" prefWidth="362.0" styleClass="popupbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.AddDiscountController">
@@ -35,11 +35,7 @@
             </HBox>
             <HBox>
                <children>
-                  <Line endX="255.2928924560547" startX="-100.0" stroke="#c5c5c5">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Line>
+                  <Separator prefWidth="200.0" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox>
@@ -64,7 +60,7 @@
             </HBox>
             <HBox>
                <children>
-                  <Line endX="255.2928924560547" startX="-100.0" stroke="#c5c5c5" />
+                  <Separator prefWidth="200.0" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox alignment="CENTER" layoutX="11.0" layoutY="142.0" prefHeight="24.0" prefWidth="340.0">

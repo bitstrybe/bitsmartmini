@@ -61,6 +61,7 @@ import static bt.bitsmartmini.ui.MainAppController.cart;
 import static bt.bitsmartmini.ui.MainAppController.static_label;
 import bt.bitsmartmini.utils.PrintReport;
 import bt.bitsmartmini.utils.Utilities;
+import com.jfoenix.controls.JFXTextField;
 import lxe.utility.date.DateUtil;
 import lxe.utility.math.DecimalUtil;
 import net.sf.jasperreports.engine.JRException;
@@ -170,6 +171,8 @@ public class SalesController implements Initializable {
 
     ReceiptBL rb = new ReceiptBL();
     ReturnBL rn = new ReturnBL();
+    @FXML
+    private JFXTextField salesbtn;
 
     /**
      * Initializes the controller class.
@@ -178,6 +181,8 @@ public class SalesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         getTodaysDate();
+        Utilities.repeatFocus(salesbtn);
+        salesbtn.selectAll();
     }
 
     public void getTodaysDate() {
@@ -377,6 +382,13 @@ public class SalesController implements Initializable {
         rdate.setCellValueFactory(cell -> cell.getValue().getDateProperty());
         returnstable.setItems(rtddata);
         returnstable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    }
+
+    @FXML
+    private void salesbtnAction(ActionEvent event) {
+         Utilities.repeatFocus(salesbtn);
+        salesbtn.selectAll();
+        
     }
 
     public class AddPersonCellPayment extends TableCell<SalesTableModel, Boolean> {

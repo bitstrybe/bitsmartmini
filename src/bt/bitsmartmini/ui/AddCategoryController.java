@@ -147,7 +147,7 @@ public class AddCategoryController implements Initializable {
             protected Integer call() throws Exception {
                 spinner.setVisible(true);
                 check.setVisible(false);
-                updateMessage("PROCESSING PLS WAIT.....");
+                updateMessage(MainAppController.PROCESS_MESSAGE);
                 Thread.sleep(500);
                 return saveTemplate();
             }
@@ -236,7 +236,7 @@ public class AddCategoryController implements Initializable {
                             @Override
                             protected Integer call() throws Exception {
                                 childController.spinner.setVisible(true);
-                                updateMessage("PROCESSING PLS WAIT.....");
+                                updateMessage(MainAppController.PROCESS_MESSAGE);
                                 Thread.sleep(500);
                                 List catname = new ItemsBL().getItemsFromForm(selectedRecord.getCategoryName());
                                 if (catname.isEmpty()) {

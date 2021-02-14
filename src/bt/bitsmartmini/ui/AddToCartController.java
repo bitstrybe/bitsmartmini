@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import bt.bitsmartmini.bl.StockinBL;
+import bt.bitsmartmini.utils.Utilities;
 
 /**
  * FXML Controller class
@@ -49,8 +50,6 @@ public class AddToCartController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //TODO
-        //itemqty.setText(Qty.toString());
         s = new StockinBL();
 
     }

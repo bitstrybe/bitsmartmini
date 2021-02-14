@@ -18,7 +18,7 @@
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin></FontAwesomeIcon>
-            <JFXTextField fx:id="itemsearch" focusColor="#d8d8da" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#searchitemsaction" prefHeight="34.0" prefWidth="500.0" promptText="Search for an item" unFocusColor="#d7d6d6">
+            <JFXTextField fx:id="itemsearch" focusColor="#d8d8da" labelFloat="true" onAction="#searchitemsaction" promptText="Search for an item" unFocusColor="#d7d6d6" HBox.hgrow="ALWAYS">
                <font>
                   <Font name="Open Sans" size="16.0" />
                </font>

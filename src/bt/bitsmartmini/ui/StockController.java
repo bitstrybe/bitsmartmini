@@ -131,7 +131,6 @@ public class StockController implements Initializable {
     private JFXButton stockoutbtn;
     @FXML
     private JFXTextField stocksearch;
-    private JFXTextField stockinsearch;
 
     static StockTableModel list;
 
@@ -167,6 +166,8 @@ public class StockController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        stocksearch.selectAll();
+        Utilities.repeatFocus(stocksearch);
 
         itembl = new ItemsBL();
         salesbl = new SalesBL();
@@ -359,7 +360,7 @@ public class StockController implements Initializable {
         stkaction.setCellFactory(new Callback<TableColumn<StockinTableModel, Boolean>, TableCell<StockinTableModel, Boolean>>() {
             @Override
             public TableCell<StockinTableModel, Boolean> call(TableColumn<StockinTableModel, Boolean> personBooleanTableColumn) {
-                return new AddPersonCell();
+                return new StockinDeleteCell();
             }
         });
 
@@ -460,31 +461,37 @@ public class StockController implements Initializable {
         AddStockInController childController = fxmlLoader.getController();
         childController.save.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             childController.save.setDisable(true);
-            Task<Void> task = new Task<Void>() {
+            Task<Integer> task = new Task<Integer>() {
                 @Override
-                protected Void call() throws Exception {
+                protected Integer call() throws Exception {
                     childController.spinner.setVisible(true);
                     childController.check.setVisible(false);
-                    updateMessage("PROCESSING PLS WAIT.....");
-                    Thread.sleep(1000);
-                    return null;
+                    updateMessage(MainAppController.PROCESS_MESSAGE);
+                    Thread.sleep(500);
+                    return childController.saveTemplate();
                 }
             };
             childController.displayinfo.textProperty().bind(task.messageProperty());
             task.setOnSucceeded(s -> {
-                childController.saveTemplate();
-                //list = stock.getSelectionModel().getSelectedItem();
-                AllStockTableData(childController.itembarcode.getText());
-                StockinTableData(childController.itembarcode.getText());
-                stocksearch.setText(childController.itemname.getText());
+                if (childController.saveTemplate() == 1) {
+                    childController.saveTrans();
+                    AllStockTableData(childController.itembarcode.getText());
+                    StockinTableData(childController.itembarcode.getText());
+                    stocksearch.setText(childController.itemname.getText());
+                } else {
+                    childController.errorTrans();
+                }
+
             });
             Thread d = new Thread(task);
             d.setDaemon(true);
             d.start();
         });
         Scene scene = new Scene(parent);
-        stage.setMaximized(true);
         scene.setFill(Color.TRANSPARENT);
+        stage.setMaximized(true);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(parent.getScene().getWindow());
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
@@ -497,22 +504,25 @@ public class StockController implements Initializable {
         Parent parent = (Parent) fxmlLoader.load();
         AddStockOutController childController = fxmlLoader.getController();
         childController.save.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            Task<Void> task = new Task<Void>() {
+            Task<Integer> task = new Task<Integer>() {
                 @Override
-                protected Void call() throws Exception {
+                protected Integer call() throws Exception {
                     childController.spinner.setVisible(true);
                     updateMessage("PROCESSING PLS WAIT.....");
-                    Thread.sleep(1000);
-                    return null;
+                    Thread.sleep(500);
+                    return childController.saveTemplate();
                 }
             };
             childController.displayinfo.textProperty().bind(task.messageProperty());
             task.setOnSucceeded(s -> {
-                childController.saveTemplate();
-                //list = stock.getSelectionModel().getSelectedItem();
-                AllStockTableData(childController.itembarcode.getText());
-                StockoutTableData(childController.itembarcode.getText());
-                stocksearch.setText(childController.itemname.getText());
+                if (childController.saveTemplate() == 1) {
+                    childController.saveTrans();
+                    AllStockTableData(childController.itembarcode.getText());
+                    StockinTableData(childController.itembarcode.getText());
+                    stocksearch.setText(childController.itemname.getText());
+                } else {
+                    childController.errorTrans();
+                }
             });
             Thread d = new Thread(task);
             d.setDaemon(true);
@@ -530,7 +540,14 @@ public class StockController implements Initializable {
 
     }
 
-    public class AddPersonCell extends TableCell<StockinTableModel, Boolean> {
+    @FXML
+    private void stocksearchAction(ActionEvent event) {
+        stocksearch.selectAll();
+        Utilities.repeatFocus(stocksearch);
+
+    }
+
+    public class StockinDeleteCell extends TableCell<StockinTableModel, Boolean> {
 //        Image img = new Image(getClass().getResourceAsStream("edit.png"));
 
         Image img2 = new Image(getClass().getResourceAsStream("delete.png"));
@@ -546,7 +563,7 @@ public class StockController implements Initializable {
          * @param stage the stage in which the table is placed.
          * @param table the table to which a new person can be added.
          */
-        AddPersonCell() {
+        StockinDeleteCell() {
             paddedButton.setStyle("-fx-alignment: CENTER;");
 //            paddedButton.getChildren().add(editButton);
             paddedButton.getChildren().add(delButton);
@@ -569,7 +586,7 @@ public class StockController implements Initializable {
                         Parent parent = (Parent) fxmlLoader.load();
                         DeleteController childController = fxmlLoader.getController();
                         childController.delete.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-                            childController.displayinfo.setText("PROCESSING PLS WAIT.....");
+                            childController.displayinfo.setText(MainAppController.PROCESS_MESSAGE);
                             Task<Void> task = new Task<Void>() {
                                 @Override
                                 protected Void call() throws Exception {
@@ -639,96 +656,6 @@ public class StockController implements Initializable {
             }
         }
 
-        private class EventHandlerImpl implements EventHandler<ActionEvent> {
-
-            public EventHandlerImpl() {
-            }
-
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    int selectedIndex = getTableRow().getIndex();
-                    StockinTableModel selectedRecord = (StockinTableModel) stockin.getItems().get(selectedIndex);
-                    Stage stage = new Stage();
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditSkockIn.fxml"));
-                    Parent parent = (Parent) fxmlLoader.load();
-                    EditSkockInController childController = fxmlLoader.getController();
-                    childController.itemname.setText(selectedRecord.getItem());
-                    childController.batchtextfield.setText(selectedRecord.getBatchNo());
-                    LocalDate expdate = Utilities.LOCAL_DATE(selectedRecord.getExpiryDate());
-                    childController.expirydate.setValue(expdate);
-                    childController.costtextfield.setText(String.valueOf(selectedRecord.getCostPrice()));
-                    double costtotal = selectedRecord.getCostPrice() * selectedRecord.getQuantity();
-                    childController.costpiecestextfield.setText(String.valueOf(costtotal));
-                    childController.salestextfield.setText(String.valueOf(selectedRecord.getSalesPrice()));
-                    double salestotal = selectedRecord.getSalesPrice() * selectedRecord.getQuantity();
-                    childController.salespiecetextfield.setText(String.valueOf(salestotal));
-                    childController.qnttextfield.setText(String.valueOf(selectedRecord.getQuantity()));
-                    childController.save.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-                        Task<Void> task = new Task<Void>() {
-                            @Override
-                            protected Void call() throws Exception {
-                                childController.spinner.setVisible(true);
-                                updateMessage("Processing...");
-                                Thread.sleep(1000);
-                                return null;
-                            }
-                        };
-                        childController.displayinfo.textProperty().bind(task.messageProperty());
-                        task.setOnSucceeded(s -> {
-                            try {
-                                childController.displayinfo.textProperty().unbind();
-                                Stockin st = new Stockin();
-                                st.setStockinId(selectedRecord.getStockinCode());
-                                st.setUpc(new Items(childController.itemname.getText()));
-                                st.setExpiryDate(Utilities.convertToDateViaSqlDate(childController.expirydate.getValue()));
-                                st.setQuantity(Integer.parseInt(childController.qnttextfield.getText()));
-                                Date date = Utilities.convertStringToDate(selectedRecord.getStockinDate());
-                                st.setStockinDate(date);
-                                st.setUsers(new Users(LoginController.u.getUserid()));
-                                st.setEntryLog(new Date());
-                                st.setLastModified(new Date());
-                                int result = new InsertUpdateBL().updateData(st);
-                                switch (result) {
-                                    case 1:
-                                        childController.displayinfo.setText("SUCCESSFULLY SAVED");
-//                                        Utilities.clearAllField(childController.stockpane);
-                                        childController.spinner.setVisible(false);
-                                        childController.check.setVisible(true);
-                                        list = stock.getSelectionModel().getSelectedItem();
-                                        AllStockTableData(stocksearch.getText());
-                                        stockin.getItems().clear();
-                                        stockout.getItems().clear();
-                                        stage.close();
-                                        break;
-                                    default:
-                                        childController.displayinfo.setText("NOTICE! AN ERROR OCCURED");
-                                        childController.spinner.setVisible(false);
-                                        childController.check.setVisible(false);
-                                        break;
-
-                                }
-                            } catch (ParseException ex) {
-                                Logger.getLogger(StockController.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-
-                        });
-                        Thread d = new Thread(task);
-                        d.setDaemon(true);
-                        d.start();
-                    });
-                    Scene scene = new Scene(parent);
-                    stage.initModality(Modality.APPLICATION_MODAL);
-                    stage.initOwner(parent.getScene().getWindow());
-                    stage.setScene(scene);
-                    stage.initStyle(StageStyle.UNDECORATED);
-                    stage.resizableProperty().setValue(false);
-                    stage.showAndWait();
-                } catch (IOException ex) {
-                    Logger.getLogger(StockController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
     }
 
     public class AddPersonCellStockout extends TableCell<StockoutTableModel, Boolean> {

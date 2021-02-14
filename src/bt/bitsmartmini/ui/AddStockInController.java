@@ -35,6 +35,7 @@ import bt.bitsmartmini.bl.StockinBL;
 import bt.bitsmartmini.entity.Items;
 import bt.bitsmartmini.entity.Stockin;
 import bt.bitsmartmini.entity.Users;
+import bt.bitsmartmini.utils.Utilities;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -99,6 +100,7 @@ public class AddStockInController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        Utilities.repeatFocus(search);
         getItemList(search.getText());
         search.textProperty().addListener(e -> {
             getItemList(search.getText());
@@ -157,7 +159,7 @@ public class AddStockInController implements Initializable {
         //itemname.setText(null);
         // itembrand.setText(null);
         Long qty = sb.getStockBalance(itembarcode.getText());
-        itemqty.setText(qty.toString()+ " Remainig");
+        itemqty.setText(qty.toString() + " Remainig");
     }
 
     private void closeTransition() {
@@ -175,7 +177,7 @@ public class AddStockInController implements Initializable {
 
     }
 
-    public void saveTemplate() {
+    public int saveTemplate() {
         displayinfo.textProperty().unbind();
         Stockin cat = new Stockin();
         List<Integer> stcinid = new StockinBL().getStockinCount();
@@ -194,18 +196,48 @@ public class AddStockInController implements Initializable {
         cat.setEntryLog(new Date());
         cat.setLastModified(new Date());
         int result = new InsertUpdateBL().insertData(cat);
-        switch (result) {
-            case 1:
-                if (result == 1) {
-                    closeTransition();
-                }
-                break;
-            default:
-                displayinfo.setText("There was an error, check and try again.");
-                spinner.setVisible(false);
-                check.setVisible(false);
-                break;
-        }
+        return result;
+//        switch (result) {
+//            case 1:
+//                if (result == 1) {
+//                    closeTransition();
+//                }
+//                break;
+//            default:
+//                displayinfo.setText("There was an error, check and try again.");
+//                spinner.setVisible(false);
+//                check.setVisible(false);
+//                break;
+//        }
+    }
+
+    public void saveTrans() {
+        displayinfo.setText(MainAppController.SUCCESS_MESSAGE);
+        clearAllForms();
+        spinner.setVisible(false);
+        check.setVisible(true);
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(closevnt -> {
+            displayinfo.setText("");
+            spinner.setVisible(false);
+            check.setVisible(false);
+        });
+        delay.play();
+
+    }
+
+    public void errorTrans() {
+        displayinfo.setText(MainAppController.ERROR_MESSAGE);
+        spinner.setVisible(false);
+        check.setVisible(false);
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(closevnt -> {
+            displayinfo.setText("");
+            spinner.setVisible(false);
+            check.setVisible(false);
+        });
+        delay.play();
+
     }
 
     @FXML

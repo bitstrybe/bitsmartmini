@@ -18,21 +18,12 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import bt.bitsmartmini.bl.InsertUpdateBL;
-import bt.bitsmartmini.bl.ItemsBL;
 import bt.bitsmartmini.bl.StockinBL;
 import bt.bitsmartmini.entity.Items;
 import bt.bitsmartmini.entity.Stockin;
 import bt.bitsmartmini.entity.Users;
-import bt.bitsmartmini.utils.Utilities;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.image.Image;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -41,38 +32,35 @@ import javafx.scene.image.Image;
  */
 public class AdminStockinController implements Initializable {
 
+    StockinBL sb = new StockinBL();
     @FXML
     private Button closebtn;
-    public ImageView itemimage;
-    public Label itemname;
-    public Label uomitem;
     @FXML
-    private JFXTextField qnttextfield;
-    private JFXTextField costtextfield;
-    private JFXTextField salestextfield;
+    public ImageView itemimage;
+    @FXML
+    public Text itembarcode;
+    @FXML
+    public Text itemname;
+    @FXML
+    public Text itembrand;
+    @FXML
+    public Text itemqty;
+    @FXML
+    public Text itemsp;
+    @FXML
+    public JFXTextField qnttextfield;
     @FXML
     public JFXButton save;
-    @FXML
-    public Label displayinfo;
     @FXML
     public FontAwesomeIcon check;
     @FXML
     public FontAwesomeIcon duplicatelock;
     @FXML
     public JFXSpinner spinner;
+    @FXML
+    public Label displayinfo;
 
-    AtomicInteger rowCounter = new AtomicInteger(0);
-    @FXML
-    public Label itembarcode;
-    @FXML
-    public Label itembrand;
-    @FXML
-    public Label itemqty;
-    @FXML
-    public Label itemsp;
-
-    //ItemsBL ib = new ItemsBL();
-    StockinBL sb = new StockinBL();
+    AtomicInteger rowCounter = new AtomicInteger(1);
 
     /**
      * Initializes the controller class.
@@ -80,29 +68,6 @@ public class AdminStockinController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         qnttextfield.setText("1");
-//        try {
-//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ItemsDisplay.fxml"));
-//            Parent parent = (Parent) fxmlLoader.load();
-//            ItemsDisplayController childController = fxmlLoader.getController();
-//            itembarcode.setText(childController.itembcode.getText());
-//            itemname.setText(childController.medsname.getText());
-//            itembrand.setText(childController.brand.getText());
-//            long qty = sb.getStockBalance(childController.itembcode.getText());
-//            itemqty.setText(Long.valueOf(qty).toString() + " Remaining");
-//            itemsp.setText(MainAppController.B.getBCurrency() + " " + childController.qty.getText());
-//            Items its = new ItemsBL().getImageItembyCode(childController.itembcode.getText());
-//            FileInputStream input;
-//            try {
-//                input = new FileInputStream(its.getItemImg());
-//                Image image = new Image(input);
-//                itemimage.setImage(image);
-//                save.setDisable(false);
-//            } catch (FileNotFoundException ex) {
-//                Logger.getLogger(AddStockInController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        } catch (IOException ex) {
-//            Logger.getLogger(AdminStockinController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
     }
 
     @FXML
@@ -122,7 +87,7 @@ public class AdminStockinController implements Initializable {
 //        salestextfield.clear();
 //        itemimage.setImage(null);
 //    }
-    private void refreshView() {
+    private void clearAllForms() {
         qnttextfield.setText("1");
         //itemimage.setImage(null);
         //itembarcode.setText(null);
@@ -132,11 +97,12 @@ public class AdminStockinController implements Initializable {
         itemqty.setText(qty.toString() + " Remainig");
     }
 
-    private void closeTransition() {
-        displayinfo.setText(MainAppController.DELETE_MESSAGE);
+    public void saveTrans() {
+        displayinfo.setText(MainAppController.SUCCESS_MESSAGE);
+        clearAllForms();
         spinner.setVisible(false);
         check.setVisible(true);
-        refreshView();
+//        TableData("");
         PauseTransition delay = new PauseTransition(Duration.seconds(3));
         delay.setOnFinished(closevnt -> {
             displayinfo.setText("");
@@ -147,7 +113,22 @@ public class AdminStockinController implements Initializable {
 
     }
 
-    public void saveTemplate() {
+    public void errorTrans() {
+        displayinfo.setText(MainAppController.ERROR_MESSAGE);
+        spinner.setVisible(false);
+        check.setVisible(false);
+//        TableData("");
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(closevnt -> {
+            displayinfo.setText("");
+            spinner.setVisible(false);
+            check.setVisible(false);
+        });
+        delay.play();
+
+    }
+
+    public int saveTemplate() {
         displayinfo.textProperty().unbind();
         Stockin cat = new Stockin();
         List<Integer> stcinid = new StockinBL().getStockinCount();
@@ -166,19 +147,7 @@ public class AdminStockinController implements Initializable {
         cat.setEntryLog(new Date());
         cat.setLastModified(new Date());
         int result = new InsertUpdateBL().insertData(cat);
-        switch (result) {
-            case 1:
-                if (result == 1) {
-                    closeTransition();
-                }
-                break;
-            default:
-                displayinfo.setText(MainAppController.ERROR_MESSAGE);
-                spinner.setVisible(false);
-                check.setVisible(false);
-                break;
-        }
-
+        return result;
     }
 
     @FXML

@@ -48,6 +48,7 @@ import bt.bitsmartmini.bl.ItemsBL;
 import bt.bitsmartmini.bl.BrandBL;
 import bt.bitsmartmini.entity.Brands;
 import bt.bitsmartmini.tablemodel.BrandTableModel;
+import bt.bitsmartmini.utils.Utilities;
 import javafx.scene.paint.Color;
 import org.apache.commons.text.WordUtils;
 
@@ -86,7 +87,7 @@ public class AddBrandController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        Utilities.repeatFocus(manutextfield);
         // TODO
         manutextfield.textProperty().addListener(e -> {
             //  System.out.println(cattextfield.getText());
@@ -137,7 +138,7 @@ public class AddBrandController implements Initializable {
             @Override
             protected Integer call() throws Exception {
                 spinner.setVisible(true);
-                updateMessage("PROCESSING PLS WAIT.....");
+                updateMessage(MainAppController.PROCESS_MESSAGE);
                 Thread.sleep(500);
                 return saveTemplate();
             }
@@ -244,7 +245,7 @@ public class AddBrandController implements Initializable {
                                 protected Integer call() throws Exception {
                                     childController.spinner.setVisible(true);
                                     childController.check.setVisible(false);
-                                    updateMessage("PROCESSING PLS WAIT.....");
+                                    updateMessage(MainAppController.PROCESS_MESSAGE);
                                     Thread.sleep(500);
                                     List man = new ItemsBL().findItemsbyBrand(selectedRecord.getBrand());
                                     if (man.isEmpty()) {

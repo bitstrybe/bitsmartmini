@@ -91,7 +91,7 @@ public class BackupController implements Initializable {
                 spinner.setVisible(true);
 //                restore.setDisable(true);
                 closebtn.setDisable(true);
-                updateMessage("BACKING UP DATA PLEASE WAIT");
+                updateMessage(MainAppController.PROCESS_MESSAGE);
                 try {
                     b.insertData(new BackupLog(null, new Date(System.currentTimeMillis())));
                     Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);

@@ -7,30 +7,30 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <VBox id="homebackground" alignment="TOP_CENTER" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.StockController">
    <children>
-      <HBox alignment="TOP_CENTER" styleClass="window-title" VBox.vgrow="ALWAYS">
+      <HBox alignment="CENTER" styleClass="window-title" VBox.vgrow="ALWAYS">
          <children>
-            <JFXTextField fx:id="stocksearch" focusColor="#656568" labelFloat="true" prefHeight="34.0" prefWidth="542.0" promptText="Search Stock" unFocusColor="#b5b2b2">
+            <JFXTextField fx:id="stocksearch" focusColor="#656568" labelFloat="true" onAction="#stocksearchAction" promptText="Search Stock" unFocusColor="#b5b2b2" HBox.hgrow="ALWAYS">
                <font>
                   <Font name="Open Sans" size="14.0" />
                </font>
             </JFXTextField>
             <ButtonBar buttonMinWidth="0.0" prefHeight="48.0" prefWidth="185.0" HBox.hgrow="NEVER">
                <buttons>
-                  <JFXButton id="action-btn" fx:id="stockoutbtn" buttonType="RAISED" minWidth="36.0" onAction="#addstockoutpopup" prefHeight="48.0" prefWidth="50.0" styleClass="alldefaultbtn">
+                  <JFXButton id="action-btn" fx:id="stockinbtn" buttonType="RAISED" minWidth="36.0" onAction="#addstockinpopup" prefHeight="48.0" prefWidth="50.0" styleClass="alldefaultbtn">
                      <graphic>
                         <FontAwesomeIcon fill="#fcfcfc" glyphName="PLUS" size="2.5em" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton id="action-btn" fx:id="stockinbtn" buttonType="RAISED" minWidth="28.0" onAction="#addstockinpopup" prefHeight="48.0" prefWidth="50.0">
+                  <JFXButton id="action-btn" fx:id="stockoutbtn" buttonType="RAISED" minWidth="28.0" onAction="#addstockoutpopup" prefHeight="48.0" prefWidth="50.0">
                      <font>
                         <Font size="10.0" />
                      </font>
@@ -47,7 +47,7 @@
       </HBox>
       <HBox alignment="TOP_CENTER">
          <children>
-            <Line endX="-278.05816650390625" startX="-1009.5581665039062" styleClass="linecolor" HBox.hgrow="ALWAYS" />
+            <Separator prefWidth="200.0" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="TOP_CENTER">
