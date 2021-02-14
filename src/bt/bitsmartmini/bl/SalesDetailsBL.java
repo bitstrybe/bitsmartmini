@@ -37,7 +37,7 @@ public class SalesDetailsBL extends DdsBL {
     }
 
     public List getStockinFromSalesDetails(String batchno) {
-        TypedQuery<String> q = em.createQuery("SELECT s FROM SalesDetails s WHERE s.item.itemDesc = :itemName", String.class);
+        TypedQuery<String> q = em.createQuery("SELECT s FROM SalesDetails s WHERE s.upc.itemDesc = :itemName", String.class);
         q.setParameter("itemName", batchno);
         q.setMaxResults(1);
         return q.getResultList();

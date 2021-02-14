@@ -61,10 +61,10 @@ public class StockoutBL extends DdsBL{
     }
     
     
-    public Long getTotalStockoutbyItemDesc(String itemDesc){
+    public Long getTotalStockoutbyItemDesc(String upc){
         try{
-        TypedQuery<Long> q = em.createQuery("SELECT SUM(s.quantity) FROM Stockout s WHERE s.upc.itemDesc = :itemDesc", Long.class);
-        q.setParameter("itemDesc", itemDesc);
+        TypedQuery<Long> q = em.createQuery("SELECT SUM(s.quantity) FROM Stockout s WHERE s.upc.upc = :upc", Long.class);
+        q.setParameter("upc", upc);
         return q.getSingleResult();
         }catch(NullPointerException ex){
             return 0l;

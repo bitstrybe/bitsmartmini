@@ -407,14 +407,9 @@ public class AddItemsController implements Initializable {
                             childController.displayinfo.textProperty().unbind();
                             if (task.getValue() == 1) {
                                 childController.displayinfo.setText(MainAppController.DELETE_MESSAGE);
-                                childController.spinner.setVisible(false);
-                                childController.check.setVisible(true);
-                                TableData("");
-                                stage.close();
+                                childController.deleteTrans();
                             } else {
-                                childController.displayinfo.setText(MainAppController.ERROR_MESSAGE);
-                                childController.spinner.setVisible(false);
-                                childController.check.setVisible(false);
+                                childController.errorTrans();
 
                             }
 

@@ -6,9 +6,6 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.text.ParseException;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -44,7 +41,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import bt.bitsmartmini.bl.InsertUpdateBL;
 import bt.bitsmartmini.bl.ItemsBL;
 import bt.bitsmartmini.bl.ReturnBL;
 import bt.bitsmartmini.bl.SalesBL;
@@ -57,7 +53,6 @@ import bt.bitsmartmini.entity.SalesDetails;
 import bt.bitsmartmini.entity.Stockin;
 import bt.bitsmartmini.entity.Stockout;
 //import bt.bitsmartmini.entity.UomDef;
-import bt.bitsmartmini.entity.Users;
 import bt.bitsmartmini.tablemodel.ReturnTableModel;
 import bt.bitsmartmini.tablemodel.SalesDetailsTableModel;
 import bt.bitsmartmini.tablemodel.StockTableModel;
@@ -367,90 +362,76 @@ public class StockController implements Initializable {
     }
 
     public void StockoutTableData(String itemsDesc) {
-        List<Stockout> v;
-        if (itemsDesc.length() > 0) {
-            v = stkobl.searchAllStockout(itemsDesc);
-//        } else {
-//            v = stkobl.getAllStockoutbyBarcode(itemsDesc, 10);
-//        }
-            stkoutdata = FXCollections.observableArrayList();
-            v.forEach((out) -> {
-                List<Stockin> batchno = new StockinBL().getItemStockinByBarcode(out.getUpc().getUpc());
-                stkoutdata.add(new StockoutTableModel(out.getStockoutId(), out.getUpc().getItemDesc(), out.getQuantity(), out.getRemarks(), Utilities.convertDateToString(out.getStkDate())));
-            });
-            stkoutitems.setCellValueFactory(cell -> cell.getValue().getItemProperty());
-            stkoutqtytb.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
-            stkoutdate.setCellValueFactory(cell -> cell.getValue().getDateProperty());
-            stkoutaction.setSortable(false);
-            stockout.setItems(stkoutdata);
-            stockout.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
-            stkoutaction.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<StockoutTableModel, Boolean>, ObservableValue<Boolean>>() {
-                @Override
-                public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<StockoutTableModel, Boolean> features) {
-                    return new SimpleBooleanProperty(features.getValue() != null);
-                }
-            });
-            stkoutaction.setCellFactory(new Callback<TableColumn<StockoutTableModel, Boolean>, TableCell<StockoutTableModel, Boolean>>() {
-                @Override
-                public TableCell<StockoutTableModel, Boolean> call(TableColumn<StockoutTableModel, Boolean> personBooleanTableColumn) {
-                    return new AddPersonCellStockout();
-                }
-            });
-        }
+        List<Stockout> v = stkobl.searchAllStockout(itemsDesc);
+        stkoutdata = FXCollections.observableArrayList();
+        v.forEach((out) -> {
+            List<Stockin> batchno = new StockinBL().getItemStockinByBarcode(out.getUpc().getUpc());
+            stkoutdata.add(new StockoutTableModel(out.getStockoutId(), out.getUpc().getItemDesc(), out.getQuantity(), out.getRemarks(), Utilities.convertDateToString(out.getStkDate())));
+        });
+        stkoutitems.setCellValueFactory(cell -> cell.getValue().getItemProperty());
+        stkoutqtytb.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
+        stkoutdate.setCellValueFactory(cell -> cell.getValue().getDateProperty());
+        stkoutaction.setSortable(false);
+        stockout.setItems(stkoutdata);
+        stockout.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+        stkoutaction.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<StockoutTableModel, Boolean>, ObservableValue<Boolean>>() {
+            @Override
+            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<StockoutTableModel, Boolean> features) {
+                return new SimpleBooleanProperty(features.getValue() != null);
+            }
+        });
+        stkoutaction.setCellFactory(new Callback<TableColumn<StockoutTableModel, Boolean>, TableCell<StockoutTableModel, Boolean>>() {
+            @Override
+            public TableCell<StockoutTableModel, Boolean> call(TableColumn<StockoutTableModel, Boolean> personBooleanTableColumn) {
+                return new StockoutDeleteCell();
+            }
+        });
 
     }
 
     public void ReturnsTableData(String itemsDesc) {
-        List<RtdItem> v;
-        if (itemsDesc.length() > 0) {
-            v = retbl.searchAllReturnItems(itemsDesc);
-            //} else {
-            // v = retbl.getAllRtdItembyBarcode(itemsDesc, 10);
-            //}
-            returndata = FXCollections.observableArrayList();
-            v.forEach((out) -> {
-                double totalA = (out.getRtdQty() * out.getSalesDetails().getSalesPrice());
-                returndata.add(new ReturnTableModel(out.getSalesDetails().getSalesDetailsId(), out.getSalesDetails().getUpc().getItemDesc(), out.getRtdQty(), DecimalUtil.format2(out.getSalesDetails().getSalesPrice()), DecimalUtil.format2(totalA), out.getRemarks(), Utilities.convertDateToString(out.getRtdDate())));
-            });
-            returnitemstb.setCellValueFactory(cell -> cell.getValue().getItemProperty());
-            returnqtytb.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
-            returndatetb.setCellValueFactory(cell -> cell.getValue().getDateProperty());
-            returnaction.setSortable(false);
-            returnstable.setItems(returndata);
-            returnstable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
-            returnaction.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ReturnTableModel, Boolean>, ObservableValue<Boolean>>() {
-                @Override
-                public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<ReturnTableModel, Boolean> features) {
-                    return new SimpleBooleanProperty(features.getValue() != null);
-                }
-            });
-            returnaction.setCellFactory(new Callback<TableColumn<ReturnTableModel, Boolean>, TableCell<ReturnTableModel, Boolean>>() {
-                @Override
-                public TableCell<ReturnTableModel, Boolean> call(TableColumn<ReturnTableModel, Boolean> personBooleanTableColumn) {
-                    return new AddPersonCellReturns();
-                }
-            });
-        }
+        List<RtdItem> v = retbl.searchAllReturnItems(itemsDesc);
+        returndata = FXCollections.observableArrayList();
+        v.forEach((out) -> {
+            double totalA = (out.getRtdQty() * out.getSalesDetails().getSalesPrice());
+            returndata.add(new ReturnTableModel(out.getSalesDetails().getSalesDetailsId(), out.getSalesDetails().getUpc().getItemDesc(), out.getRtdQty(), DecimalUtil.format2(out.getSalesDetails().getSalesPrice()), DecimalUtil.format2(totalA), out.getRemarks(), Utilities.convertDateToString(out.getRtdDate())));
+        });
+        returnitemstb.setCellValueFactory(cell -> cell.getValue().getItemProperty());
+        returnqtytb.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
+        returndatetb.setCellValueFactory(cell -> cell.getValue().getDateProperty());
+        returnaction.setSortable(false);
+        returnstable.setItems(returndata);
+        returnstable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+        returnaction.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ReturnTableModel, Boolean>, ObservableValue<Boolean>>() {
+            @Override
+            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<ReturnTableModel, Boolean> features) {
+                return new SimpleBooleanProperty(features.getValue() != null);
+            }
+        });
+        returnaction.setCellFactory(new Callback<TableColumn<ReturnTableModel, Boolean>, TableCell<ReturnTableModel, Boolean>>() {
+            @Override
+            public TableCell<ReturnTableModel, Boolean> call(TableColumn<ReturnTableModel, Boolean> personBooleanTableColumn) {
+                return new ReturnDeleteCell();
+            }
+        });
     }
 
     public void SalesTableData(String itemsDesc) {
         List<SalesDetails> s;
-        if (itemsDesc.length() > 0) {
-            s = salesbl.getAllSalesDetailsbyBarcode(itemsDesc, 10);
-            salesdata = FXCollections.observableArrayList();
-            s.forEach((sales) -> {
-                try {
-                    salesdata.add(new SalesDetailsTableModel(sales.getUpc().getUpc(), sales.getUpc().getItemDesc(), sales.getQuantity(), DecimalUtil.format2(sales.getSalesPrice()), DecimalUtil.format2(sales.getDiscount()), Utilities.convertDateToString(sales.getEntryDate())));
-                } catch (Exception ex) {
-                    Logger.getLogger(StockController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-            salesitemstb.setCellValueFactory(cell -> cell.getValue().getItemsnameProperty());
-            salesqyttb.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
-            salesdatetb.setCellValueFactory(cell -> cell.getValue().getDateProperty());
-            salestable.setItems(salesdata);
-            salestable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
-        }
+        s = salesbl.getAllSalesDetailsbyBarcode(itemsDesc, 10);
+        salesdata = FXCollections.observableArrayList();
+        s.forEach((sales) -> {
+            try {
+                salesdata.add(new SalesDetailsTableModel(sales.getUpc().getUpc(), sales.getUpc().getItemDesc(), sales.getQuantity(), DecimalUtil.format2(sales.getSalesPrice()), DecimalUtil.format2(sales.getDiscount()), Utilities.convertDateToString(sales.getEntryDate())));
+            } catch (Exception ex) {
+                Logger.getLogger(StockController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        salesitemstb.setCellValueFactory(cell -> cell.getValue().getItemsnameProperty());
+        salesqyttb.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
+        salesdatetb.setCellValueFactory(cell -> cell.getValue().getDateProperty());
+        salestable.setItems(salesdata);
+        salestable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
     }
 
     @FXML
@@ -473,7 +454,7 @@ public class StockController implements Initializable {
             };
             childController.displayinfo.textProperty().bind(task.messageProperty());
             task.setOnSucceeded(s -> {
-                if (childController.saveTemplate() == 1) {
+                if (task.getValue() == 1) {
                     childController.saveTrans();
                     AllStockTableData(childController.itembarcode.getText());
                     StockinTableData(childController.itembarcode.getText());
@@ -515,7 +496,7 @@ public class StockController implements Initializable {
             };
             childController.displayinfo.textProperty().bind(task.messageProperty());
             task.setOnSucceeded(s -> {
-                if (childController.saveTemplate() == 1) {
+                if (task.getValue() == 1) {
                     childController.saveTrans();
                     AllStockTableData(childController.itembarcode.getText());
                     StockinTableData(childController.itembarcode.getText());
@@ -548,7 +529,6 @@ public class StockController implements Initializable {
     }
 
     public class StockinDeleteCell extends TableCell<StockinTableModel, Boolean> {
-//        Image img = new Image(getClass().getResourceAsStream("edit.png"));
 
         Image img2 = new Image(getClass().getResourceAsStream("delete.png"));
         HBox paddedButton = new HBox();
@@ -586,40 +566,33 @@ public class StockController implements Initializable {
                         Parent parent = (Parent) fxmlLoader.load();
                         DeleteController childController = fxmlLoader.getController();
                         childController.delete.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-                            childController.displayinfo.setText(MainAppController.PROCESS_MESSAGE);
-                            Task<Void> task = new Task<Void>() {
+                            Task<Integer> task = new Task<Integer>() {
                                 @Override
-                                protected Void call() throws Exception {
+                                protected Integer call() throws Exception {
                                     childController.spinner.setVisible(true);
-                                    updateMessage("Processing...");
-                                    Thread.sleep(1000);
-                                    return null;
-                                }
-                            };
-                            task.setOnSucceeded(f -> {
-                                List st = new SalesDetailsBL().getStockinFromSalesDetails(selectedRecord.getItem());
-                                if (st.isEmpty()) {
-                                    int result = new StockinBL().removeData(selectedRecord.getStockinCode());
-                                    switch (result) {
-                                        case 1:
-                                            childController.displayinfo.setText("SUCCESSFULLY DELETED");
-                                            childController.spinner.setVisible(false);
-                                            childController.check.setVisible(true);
-                                            AllStockTableData(stocksearch.getText());
-                                            StockinTableData(selectedRecord.getItem());
-                                            stage.close();
-                                            break;
-                                        default:
-                                            childController.displayinfo.setText("NOTICE! AN ERROR OCCURED");
-                                            childController.spinner.setVisible(false);
-                                            childController.check.setVisible(false);
-                                            break;
-
+                                    updateMessage(MainAppController.PROCESS_MESSAGE);
+                                    Thread.sleep(500);
+                                    List st = new SalesDetailsBL().getStockinFromSalesDetails(selectedRecord.getItem());
+                                    if (st.isEmpty()) {
+                                        return stockinDeleteTemplate(selectedRecord.getStockinCode());
+                                    } else {
+                                        return 0;
                                     }
+                                }
+                                
+                            };
+                            childController.displayinfo.textProperty().bind(task.messageProperty());
+                            task.setOnSucceeded(f -> {
+                            childController.displayinfo.textProperty().unbind();
+                                if (task.getValue() == 1) {
+                                    AllStockTableData(stocksearch.getText());
+                                    StockinTableData(stocksearch.getText());
+                                    StockoutTableData(stocksearch.getText());
+                                    ReturnsTableData(stocksearch.getText());
+                                    SalesTableData(stocksearch.getText());
+                                    childController.deleteTrans();
                                 } else {
-                                    childController.displayinfo.setText("UNABLE TO DELETE RECORD");
-                                    childController.spinner.setVisible(false);
-                                    childController.check.setVisible(false);
+                                    childController.errorTrans();
                                 }
                             });
                             Thread d = new Thread(task);
@@ -628,12 +601,13 @@ public class StockController implements Initializable {
 
                         });
                         Scene scene = new Scene(parent);
+                        scene.setFill(Color.TRANSPARENT);
+                        stage.setMaximized(true);
                         stage.initModality(Modality.APPLICATION_MODAL);
                         stage.initOwner(parent.getScene().getWindow());
                         stage.setScene(scene);
-                        stage.initStyle(StageStyle.UNDECORATED);
-                        stage.resizableProperty().setValue(false);
-                        stage.showAndWait();
+                        stage.initStyle(StageStyle.TRANSPARENT);
+                        stage.show();
 
                     } catch (IOException ex) {
                         Logger.getLogger(StockController.class.getName()).log(Level.SEVERE, null, ex);
@@ -658,7 +632,7 @@ public class StockController implements Initializable {
 
     }
 
-    public class AddPersonCellStockout extends TableCell<StockoutTableModel, Boolean> {
+    public class StockoutDeleteCell extends TableCell<StockoutTableModel, Boolean> {
 
         Image img2 = new Image(getClass().getResourceAsStream("delete.png"));
 
@@ -677,7 +651,7 @@ public class StockController implements Initializable {
          * @param stage the stage in which the table is placed.
          * @param table the table to which a new person can be added.
          */
-        AddPersonCellStockout() {
+        StockoutDeleteCell() {
             paddedButton.setStyle("-fx-alignment: CENTER;");
             paddedButton.getChildren().add(delButton);
             delButton.setGraphic(new ImageView(img2));
@@ -696,31 +670,27 @@ public class StockController implements Initializable {
                         DeleteController childController = fxmlLoader.getController();
                         childController.delete.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
                             childController.displayinfo.setText("PROCESSING PLS WAIT.....");
-                            Task<Void> task = new Task<Void>() {
+                            Task<Integer> task = new Task<Integer>() {
                                 @Override
-                                protected Void call() throws Exception {
+                                protected Integer call() throws Exception {
                                     childController.spinner.setVisible(true);
                                     updateMessage("Processing...");
-                                    Thread.sleep(1000);
-                                    return null;
+                                    Thread.sleep(500);
+                                    return stockoutDeleteTemplate(selectedRecord.getStockoutId());
                                 }
                             };
+                            childController.displayinfo.textProperty().bind(task.messageProperty());
                             task.setOnSucceeded(f -> {
-                                int result = new StockoutBL().removeData(selectedRecord.getStockoutId());
-                                switch (result) {
-                                    case 1:
-                                        childController.displayinfo.setText("SUCCESSFULLY DELETED");
-                                        childController.spinner.setVisible(false);
-                                        childController.check.setVisible(true);
-                                        AllStockTableData(stocksearch.getText());
-                                        StockoutTableData(selectedRecord.getItem());
-                                        stage.close();
-                                        break;
-                                    default:
-                                        childController.displayinfo.setText("NOTICE! AN ERROR OCCURED");
-                                        childController.spinner.setVisible(false);
-                                        childController.check.setVisible(false);
-                                        break;
+                                childController.displayinfo.textProperty().unbind();
+                                if (task.getValue() == 1) {
+                                    childController.deleteTrans();
+                                    AllStockTableData(stocksearch.getText());
+                                    StockinTableData(stocksearch.getText());
+                                    StockoutTableData(stocksearch.getText());
+                                    ReturnsTableData(stocksearch.getText());
+                                    SalesTableData(stocksearch.getText());
+                                } else {
+                                    childController.errorTrans();
                                 }
                             });
                             Thread d = new Thread(task);
@@ -729,12 +699,13 @@ public class StockController implements Initializable {
 
                         });
                         Scene scene = new Scene(parent);
+                        scene.setFill(Color.TRANSPARENT);
+                        stage.setMaximized(true);
                         stage.initModality(Modality.APPLICATION_MODAL);
                         stage.initOwner(parent.getScene().getWindow());
                         stage.setScene(scene);
-                        stage.initStyle(StageStyle.UNDECORATED);
-                        stage.resizableProperty().setValue(false);
-                        stage.showAndWait();
+                        stage.initStyle(StageStyle.TRANSPARENT);
+                        stage.show();
 
                     } catch (IOException ex) {
                         Logger.getLogger(StockController.class.getName()).log(Level.SEVERE, null, ex);
@@ -760,7 +731,7 @@ public class StockController implements Initializable {
         }
     }
 
-    public class AddPersonCellReturns extends TableCell<ReturnTableModel, Boolean> {
+    public class ReturnDeleteCell extends TableCell<ReturnTableModel, Boolean> {
 
 //        Image img = new Image(getClass().getResourceAsStream("edit.png"));
         Image img2 = new Image(getClass().getResourceAsStream("delete.png"));
@@ -780,7 +751,7 @@ public class StockController implements Initializable {
          * @param stage the stage in which the table is placed.
          * @param table the table to which a new person can be added.
          */
-        AddPersonCellReturns() {
+        ReturnDeleteCell() {
             paddedButton.setStyle("-fx-alignment: CENTER;");
             paddedButton.getChildren().add(delButton);
             delButton.setGraphic(new ImageView(img2));
@@ -798,33 +769,24 @@ public class StockController implements Initializable {
                         Parent parent = (Parent) fxmlLoader.load();
                         DeleteController childController = fxmlLoader.getController();
                         childController.delete.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-                            childController.displayinfo.setText("PROCESSING PLS WAIT.....");
-                            Task<Void> task = new Task<Void>() {
+                            Task<Integer> task = new Task<Integer>() {
                                 @Override
-                                protected Void call() throws Exception {
+                                protected Integer call() throws Exception {
                                     childController.spinner.setVisible(true);
-                                    updateMessage("Processing...");
-                                    Thread.sleep(1000);
-                                    return null;
+                                    updateMessage(MainAppController.PROCESS_MESSAGE);
+                                    Thread.sleep(500);
+                                    return returnDeleteTemplate(selectedRecord.getReturnsId());
                                 }
                             };
+                            childController.displayinfo.textProperty().bind(task.messageProperty());
                             task.setOnSucceeded(f -> {
-                                int result = new ReturnBL().removeData(selectedRecord.getReturnsId());
-                                switch (result) {
-                                    case 1:
-                                        childController.displayinfo.setText("SUCCESSFULLY DELETED");
-                                        childController.spinner.setVisible(false);
-                                        childController.check.setVisible(true);
-                                        AllStockTableData(stocksearch.getText());
-                                        ReturnsTableData(selectedRecord.getItem());
-                                        stage.close();
-                                        break;
-                                    default:
-                                        childController.displayinfo.setText("NOTICE! AN ERROR OCCURED");
-                                        childController.spinner.setVisible(false);
-                                        childController.check.setVisible(false);
-                                        break;
+                                childController.displayinfo.textProperty().unbind();
+                                if (task.getValue() == 1) {
+                                    childController.deleteTrans();
+                                } else {
+                                    childController.errorTrans();
                                 }
+
                             });
                             Thread d = new Thread(task);
                             d.setDaemon(true);
@@ -832,12 +794,13 @@ public class StockController implements Initializable {
 
                         });
                         Scene scene = new Scene(parent);
+                        scene.setFill(Color.TRANSPARENT);
+                        stage.setMaximized(true);
                         stage.initModality(Modality.APPLICATION_MODAL);
                         stage.initOwner(parent.getScene().getWindow());
                         stage.setScene(scene);
-                        stage.initStyle(StageStyle.UNDECORATED);
-                        stage.resizableProperty().setValue(false);
-                        stage.showAndWait();
+                        stage.initStyle(StageStyle.TRANSPARENT);
+                        stage.show();
 
                     } catch (IOException ex) {
                         Logger.getLogger(StockController.class.getName()).log(Level.SEVERE, null, ex);
@@ -861,5 +824,21 @@ public class StockController implements Initializable {
                 setGraphic(null);
             }
         }
+    }
+
+    public int stockinDeleteTemplate(Integer value) {
+        int result = new StockinBL().removeData(value);
+        System.out.println("Result:" + result);
+        return result;
+    }
+
+    public int stockoutDeleteTemplate(Integer value) {
+        int result = new StockoutBL().removeData(value);
+        return result;
+    }
+
+    public int returnDeleteTemplate(Integer value) {
+        int result = new ReturnBL().removeData(value);
+        return result;
     }
 }
