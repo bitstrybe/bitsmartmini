@@ -169,6 +169,8 @@ public class AddItemsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        barcodetxt.selectAll();
+       Utilities.repeatFocus(barcodetxt);
         barcodetxt.textProperty().addListener(e -> {
             //  System.out.println(cattextfield.getText());
 //            check.setVisible(false);
@@ -184,9 +186,9 @@ public class AddItemsController implements Initializable {
         });
         ifile = new File("./img/DEFAULT.png");
         TableData("");
-        searchbtn.textProperty().addListener((e, oldValue, newValue) -> {
-            TableData(searchbtn.getText());
-        });
+//        searchbtn.textProperty().addListener((e, oldValue, newValue) -> {
+//            TableData(searchbtn.getText());
+//        });
         brandscombo.setOnKeyReleased((KeyEvent event) -> {
             String s = FilterComboBox.jumpTo(event.getText(), brandscombo.getValue(), brandscombo.getItems());
             if (s != null) {
@@ -337,6 +339,12 @@ public class AddItemsController implements Initializable {
     private void barcodetxtAction(ActionEvent event) {
         barcodetxt.selectAll();
         Utilities.repeatFocus(barcodetxt);
+    }
+
+    @FXML
+    private void itemsearchAction(ActionEvent event) {
+        searchbtn.selectAll();
+        TableData(searchbtn.getText());
     }
 
     public class AddPersonCell extends TableCell<ItemTableModel, Boolean> {
@@ -519,7 +527,6 @@ public class AddItemsController implements Initializable {
     }
 
     private void duplicateMTD() {
-        if (barcodetxt.getLength() > 0) {
             Items value = new ItemsBL().getImageItembyCode(barcodetxt.getText());
             if (value != null) {
                 save.setDisable(true);
@@ -530,9 +537,7 @@ public class AddItemsController implements Initializable {
                 displayinfo.setText(null);
                 duplicatelock.setVisible(false);
             }
-        } else {
             save.setDisable(true);
-        }
     }
 
 }

@@ -155,7 +155,7 @@ public class CatalogController extends MainAppController implements Initializabl
                                         };
                                         childControllersk.displayinfo.textProperty().bind(task.messageProperty());
                                         task.setOnSucceeded(s -> {
-                                            if (childControllersk.saveTemplate() == 1) {
+                                            if (task.getValue() == 1) {
                                                 childControllersk.saveTrans();
                                                 getStockingItemList(itemsearch.getText());
                                             } else {

@@ -21,16 +21,20 @@
 
 <StackPane styleClass="popupbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.AddItemsController">
    <children>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="form_background">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="form_background" StackPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER">
                <children>
-                  <Label prefHeight="21.0" prefWidth="651.0" text="CATALOG" textFill="#464444">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="closebtn" mnemonicParsing="false" onAction="#closefrom" prefHeight="24.0" prefWidth="18.0" styleClass="closeform">
+                  <StackPane HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="ITEM" textFill="#464444" StackPane.alignment="CENTER_LEFT">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </StackPane>
+                  <Button fx:id="closebtn" mnemonicParsing="false" onAction="#closefrom" styleClass="closeform">
                      <graphic>
                         <FontAwesomeIcon glyphName="CLOSE" />
                      </graphic>
@@ -40,45 +44,48 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="701.0" VBox.vgrow="ALWAYS">
+            <HBox alignment="TOP_CENTER">
                <children>
-                  <Separator prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Separator HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <HBox alignment="CENTER">
+            <HBox alignment="CENTER" spacing="5.0">
                <children>
                   <VBox alignment="CENTER" spacing="20.0">
                      <children>
                         <HBox alignment="CENTER" styleClass="form_border_color">
                            <VBox.margin>
-                              <Insets bottom="10.0" />
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
                            <children>
-                              <ImageView fx:id="itemimages" fitHeight="195.0" fitWidth="210.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="itemimages" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../resources/DEFAULT.png" />
                                  </image>
                                  <viewport>
                                     <Rectangle2D />
                                  </viewport>
+                                 <HBox.margin>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </HBox.margin>
                               </ImageView>
                            </children>
                         </HBox>
-                        <Button fx:id="browse" mnemonicParsing="false" prefHeight="32.0" prefWidth="33.0">
+                        <Button fx:id="browse" mnemonicParsing="false">
                            <graphic>
-                              <FontAwesomeIcon glyphName="FILE" />
+                              <FontAwesomeIcon glyphName="FILE" size="1.5em" />
                            </graphic>
                         </Button>
                      </children>
                   </VBox>
-                  <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="278.0" prefWidth="383.0" spacing="15.0">
+                  <VBox alignment="TOP_CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="NEVER">
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                            <children>
-                              <JFXTextField fx:id="barcodetxt" focusColor="#5e5d5d" labelFloat="true" onAction="#barcodetxtAction" opacity="0.93" prefHeight="35.0" prefWidth="391.0" promptText="Barcode*" styleClass="form_field" unFocusColor="#cccaca" HBox.hgrow="ALWAYS">
+                              <JFXTextField fx:id="barcodetxt" focusColor="#5e5d5d" labelFloat="true" onAction="#barcodetxtAction" opacity="0.93" prefHeight="32.0" promptText="Barcode*" styleClass="form_field" unFocusColor="#cccaca" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Open Sans" size="12.0" />
                                  </font>
@@ -88,40 +95,9 @@
                               </JFXTextField>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" VBox.vgrow="NEVER">
+                        <HBox alignment="CENTER_LEFT">
                            <children>
-                              <JFXTextField fx:id="itemdesctxt" focusColor="#5e5d5d" labelFloat="true" opacity="0.93" prefHeight="35.0" prefWidth="380.0" promptText="Item Description *" styleClass="form_field" unFocusColor="#cccaca" HBox.hgrow="ALWAYS">
-                                 <font>
-                                    <Font name="Open Sans" size="12.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </JFXTextField>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox spacing="10.0" VBox.vgrow="NEVER">
-                           <children>
-                              <JFXTextField fx:id="cptxt" focusColor="#5e5d5d" labelFloat="true" opacity="0.93" prefHeight="35.0" prefWidth="266.0" promptText="Cost Price *" styleClass="form_field" text="0.00" unFocusColor="#cccaca">
-                                 <font>
-                                    <Font name="Open Sans" size="12.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </JFXTextField>
-                              <JFXTextField fx:id="sptxt" focusColor="#5e5d5d" labelFloat="true" layoutX="10.0" layoutY="10.0" opacity="0.93" prefHeight="35.0" prefWidth="266.0" promptText="Sales Price *" styleClass="form_field" text="0.00" unFocusColor="#cccaca">
-                                 <font>
-                                    <Font name="Open Sans" size="12.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </JFXTextField>
-                              <JFXTextField fx:id="roltxt" focusColor="#5e5d5d" labelFloat="true" layoutX="163.0" layoutY="10.0" opacity="0.93" prefHeight="35.0" prefWidth="266.0" promptText="ROL*" styleClass="form_field" text="10" unFocusColor="#cccaca">
+                              <JFXTextField fx:id="itemdesctxt" focusColor="#5e5d5d" labelFloat="true" opacity="0.93" prefHeight="32.0" promptText="Item Description *" styleClass="form_field" unFocusColor="#cccaca" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Open Sans" size="12.0" />
                                  </font>
@@ -134,15 +110,46 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </HBox>
-                        <HBox alignment="CENTER" spacing="10.0" VBox.vgrow="NEVER">
+                        <HBox spacing="10.0">
+                           <children>
+                              <JFXTextField fx:id="cptxt" focusColor="#5e5d5d" labelFloat="true" opacity="0.93" prefColumnCount="8" prefHeight="32.0" promptText="Cost Price *" styleClass="form_field" text="0.00" unFocusColor="#cccaca" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Open Sans" size="12.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </JFXTextField>
+                              <JFXTextField fx:id="sptxt" focusColor="#5e5d5d" labelFloat="true" layoutX="10.0" layoutY="10.0" opacity="0.93" prefColumnCount="8" prefHeight="32.0" promptText="Sales Price *" styleClass="form_field" text="0.00" unFocusColor="#cccaca" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Open Sans" size="12.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </JFXTextField>
+                              <JFXTextField fx:id="roltxt" focusColor="#5e5d5d" labelFloat="true" layoutX="163.0" layoutY="10.0" opacity="0.93" prefColumnCount="8" prefHeight="32.0" promptText="ROL*" styleClass="form_field" text="10" unFocusColor="#cccaca" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Open Sans" size="12.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </JFXTextField>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" spacing="10.0" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                            <children>
                               <HBox alignment="CENTER">
                                  <children>
-                                    <ComboBox fx:id="categorycombo" prefHeight="35.0" prefWidth="400.0" promptText="Category*" />
-                                    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addCategoryAction" styleClass="closebtn">
+                                    <ComboBox fx:id="categorycombo" prefHeight="32.0" prefWidth="110.0" promptText="Category*" HBox.hgrow="ALWAYS" />
+                                    <Button minHeight="-Infinity" mnemonicParsing="false" onAction="#addCategoryAction" prefHeight="32.0" styleClass="closebtn">
                                        <graphic>
                                           <FontAwesomeIcon glyphName="PLUS" />
                                        </graphic>
@@ -151,8 +158,8 @@
                               </HBox>
                               <HBox alignment="CENTER">
                                  <children>
-                                    <ComboBox fx:id="brandscombo" prefHeight="35.0" prefWidth="400.0" promptText="Brands*" />
-                                    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addBrandsAction" styleClass="closebtn">
+                                    <ComboBox fx:id="brandscombo" prefHeight="32.0" prefWidth="110.0" promptText="Brands*" HBox.hgrow="ALWAYS" />
+                                    <Button minHeight="-Infinity" mnemonicParsing="false" onAction="#addBrandsAction" prefHeight="32.0" styleClass="closebtn">
                                        <graphic>
                                           <FontAwesomeIcon glyphName="PLUS" />
                                        </graphic>
@@ -161,19 +168,22 @@
                               </HBox>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" spacing="10.0" VBox.vgrow="NEVER">
+                        <HBox alignment="CENTER" spacing="10.0">
                            <children>
-                              <JFXButton id="action-btn" fx:id="save" onAction="#saveAction" prefHeight="34.0" prefWidth="180.0" stylesheets="@style.css" text="Save" textFill="#323232">
+                              <JFXButton id="action-btn" fx:id="save" onAction="#saveAction" prefHeight="34.0" prefWidth="88.0" stylesheets="@style.css" text="Save" textFill="#323232">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </JFXButton>
-                              <JFXButton contentDisplay="CENTER" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #cccccc;" text="Clear">
+                              <JFXButton contentDisplay="CENTER" prefHeight="34.0" prefWidth="88.0" style="-fx-background-color: #cccccc;" text="Clear">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </JFXButton>
                            </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
                         </HBox>
                      </children>
                      <HBox.margin>
@@ -184,15 +194,15 @@
             </HBox>
             <HBox>
                <children>
-                  <JFXTextField fx:id="searchbtn" prefHeight="25.0" prefWidth="217.0" promptText="Search Item" HBox.hgrow="ALWAYS" />
+                  <JFXTextField fx:id="searchbtn" onAction="#itemsearchAction" promptText="Search Item" HBox.hgrow="ALWAYS" />
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </HBox>
-            <HBox prefHeight="205.0" prefWidth="681.0">
+            <HBox>
                <children>
-                  <TableView fx:id="itemtableview" prefHeight="287.0" prefWidth="681.0" styleClass="table-cell" stylesheets="@style.css">
+                  <TableView fx:id="itemtableview" prefHeight="180.0" prefWidth="523.0" styleClass="table-cell" stylesheets="@style.css">
                      <columns>
                         <TableColumn fx:id="itemimage" editable="false" prefWidth="125.0" resizable="false" text="Image" />
                         <TableColumn fx:id="barcode" editable="false" prefWidth="150.0" text="Barcode" />
@@ -215,7 +225,7 @@
             </HBox>
             <HBox>
                <children>
-                  <Separator prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Separator HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="5.0">
