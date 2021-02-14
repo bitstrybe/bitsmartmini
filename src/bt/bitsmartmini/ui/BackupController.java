@@ -115,9 +115,9 @@ public class BackupController implements Initializable {
                 zipParameters.setEncryptionMethod(EncryptionMethod.AES);
                 zipParameters.setAesKeyStrength(AesKeyStrength.KEY_STRENGTH_256);
 
-                ZipFile zipFile = new ZipFile(path+"/backup/LastBackup.zip", "bitstrybe@21".toCharArray());
-                zipFile.addFile(path+"/backup/LastBackup.sql", zipParameters);
-                File f = new File(path+"/backup/LastBackup.sql");
+                ZipFile zipFile = new ZipFile(path+"\\backup\\LastBackup.zip", "bitstrybe@21".toCharArray());
+                zipFile.addFile(path+"\\backup\\LastBackup.sql", zipParameters);
+                File f = new File(path+"\\backup\\LastBackup.sql");
                 f.delete();
                 
             } catch (net.lingala.zip4j.exception.ZipException ex) {
@@ -145,7 +145,6 @@ public class BackupController implements Initializable {
 
     @FXML
     private void backupfilechooser(ActionEvent event) {
-        
         File file = dir.showDialog(null);
         dirtextfield.setText(file.getAbsolutePath());
 

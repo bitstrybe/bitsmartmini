@@ -172,20 +172,7 @@ public class AddItemsController implements Initializable {
         barcodetxt.textProperty().addListener(e -> {
             //  System.out.println(cattextfield.getText());
 //            check.setVisible(false);
-            if (barcodetxt.getLength() > 0) {
-                Items value = new ItemsBL().getImageItembyCode(barcodetxt.getText());
-                if (value != null) {
-                    save.setDisable(true);
-                    displayinfo.setText(MainAppController.DUPLICATE_MESSAGE);
-                    duplicatelock.setVisible(true);
-                } else if (value == null) {
-                    save.setDisable(false);
-                    displayinfo.setText(null);
-                    duplicatelock.setVisible(false);
-                }
-            } else {
-                save.setDisable(true);
-            }
+            duplicateMTD();
 
         });
 
@@ -408,6 +395,8 @@ public class AddItemsController implements Initializable {
                             if (task.getValue() == 1) {
                                 childController.displayinfo.setText(MainAppController.DELETE_MESSAGE);
                                 childController.deleteTrans();
+                                duplicateMTD();
+                                TableData("");
                             } else {
                                 childController.errorTrans();
 
@@ -509,15 +498,16 @@ public class AddItemsController implements Initializable {
         initialStream = new FileInputStream(ifile);
         String dbpath = new File(".").getCanonicalPath();
         if (!ifile.getName().equals("DEFAULT.png")) {
-            System.out.println("Image File: " + dbpath + "/img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
-            cat.setItemImg(dbpath + "/img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+            System.out.println("Image File: "+".\\img" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+//            cat.setItemImg(dbpath + "\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+            cat.setItemImg(".\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
         } else {
 
-            cat.setItemImg(dbpath + "/img/DEFAULT.png");
+            cat.setItemImg(".\\img\\DEFAULT.png");
         }
         int result = new InsertUpdateBL().insertData(cat);
         if (!ifile.getName().equals("DEFAULT.png")) {
-            ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File(dbpath + "/img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName())));
+            ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File(".\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName())+"\\"));
         }
 
         return result;
@@ -526,6 +516,23 @@ public class AddItemsController implements Initializable {
     public int deleteTemplate(String value) {
         int result = new ItemsBL().removeData(value);
         return result;
+    }
+
+    private void duplicateMTD() {
+        if (barcodetxt.getLength() > 0) {
+            Items value = new ItemsBL().getImageItembyCode(barcodetxt.getText());
+            if (value != null) {
+                save.setDisable(true);
+                displayinfo.setText(MainAppController.DUPLICATE_MESSAGE);
+                duplicatelock.setVisible(true);
+            } else if (value == null) {
+                save.setDisable(false);
+                displayinfo.setText(null);
+                duplicatelock.setVisible(false);
+            }
+        } else {
+            save.setDisable(true);
+        }
     }
 
 }
