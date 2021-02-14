@@ -197,8 +197,8 @@
                         <TableColumn fx:id="itemimage" editable="false" prefWidth="125.0" resizable="false" text="Image" />
                         <TableColumn fx:id="barcode" editable="false" prefWidth="150.0" text="Barcode" />
                         <TableColumn fx:id="itemname" editable="false" prefWidth="364.0" text="Item Name" />
-                        <TableColumn fx:id="category" editable="false" prefWidth="76.0" text="Category" />
-                        <TableColumn fx:id="brand" editable="false" prefWidth="196.0" text="Brand" />
+                        <TableColumn fx:id="category" editable="false" prefWidth="120.0" text="Category" />
+                        <TableColumn fx:id="brand" editable="false" prefWidth="120.0" text="Brand" />
                         <TableColumn fx:id="costpricetb" prefWidth="62.0" text="Cost Price" />
                         <TableColumn fx:id="salespricetb" prefWidth="62.0" text="Sales Price" />
                         <TableColumn fx:id="rol" prefWidth="62.0" text="ROL" />

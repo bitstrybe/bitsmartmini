@@ -489,14 +489,17 @@ public class AddItemsController implements Initializable {
         cat.setSp(Double.parseDouble(sptxt.getText()));
         //adding image file to directory
         initialStream = new FileInputStream(ifile);
+        String dbpath = new File(".").getCanonicalPath();
         if (!ifile.getName().equals("DEFAULT.png")) {
-            cat.setItemImg("./img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+            System.out.println("Image File: "+ dbpath + "/img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+            cat.setItemImg(dbpath + "/img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
         } else {
-            cat.setItemImg("./img/DEFAULT.png");
+             
+            cat.setItemImg(dbpath + "/img/DEFAULT.png");
         }
         int result = new InsertUpdateBL().insertData(cat);
         if (!ifile.getName().equals("DEFAULT.png")) {
-            ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File("./img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName())));
+            ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File(dbpath + "/img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName())));
         }
 
         return result;
