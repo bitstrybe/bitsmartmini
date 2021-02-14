@@ -46,9 +46,9 @@
                   </HBox>
                       <HBox alignment="CENTER" spacing="10.0">
                           <children>
-                        <FlowPane fx:id="dashboardcards" alignment="CENTER" columnHalignment="CENTER" hgap="9.0" vgap="9.0" HBox.hgrow="ALWAYS">
+                        <FlowPane fx:id="dashboardcards" alignment="CENTER" columnHalignment="CENTER" hgap="9.0" prefWrapLength="600.0" vgap="9.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <HBox fx:id="dailysalescard" styleClass="dashboard-card">
+                              <HBox fx:id="dailysalescard" alignment="CENTER" styleClass="dashboard-card">
                                  <children>
                                           <VBox alignment="CENTER" styleClass="dashboard-card" HBox.hgrow="ALWAYS">
                                               <children>
@@ -61,7 +61,7 @@
                                                 </Label>
                                                       </children>
                                              <padding>
-                                                <Insets right="30.0" />
+                                                <Insets right="10.0" />
                                              </padding>
                                                   </HBox>
                                                   <HBox alignment="CENTER">
@@ -92,7 +92,7 @@
                                           </VBox>
                                  </children>
                               </HBox>
-                              <HBox fx:id="weeklysalescard" styleClass="dashboard-card">
+                              <HBox fx:id="weeklysalescard" alignment="CENTER" styleClass="dashboard-card">
                                  <children>
                                           <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                                               <children>
@@ -105,7 +105,7 @@
                                                 </Label>
                                              </children>
                                              <padding>
-                                                <Insets right="30.0" />
+                                                <Insets right="10.0" />
                                              </padding>
                                           </HBox>
                                                   <HBox alignment="CENTER" styleClass="dashboard-card-label">
@@ -149,7 +149,7 @@
                                                 </Label>
                                              </children>
                                              <padding>
-                                                <Insets right="30.0" />
+                                                <Insets right="10.0" />
                                              </padding>
                                           </HBox>
                                                   <HBox alignment="CENTER" styleClass="dashboard-card-label">
@@ -193,7 +193,7 @@
                                                 </Label>
                                              </children>
                                              <padding>
-                                                <Insets right="30.0" />
+                                                <Insets right="10.0" />
                                              </padding>
                                           </HBox>
                                                   <HBox alignment="CENTER">
@@ -237,7 +237,7 @@
                                                 </Label>
                                              </children>
                                              <padding>
-                                                <Insets right="30.0" />
+                                                <Insets right="10.0" />
                                              </padding>
                                           </HBox>
                                           <HBox alignment="CENTER">
@@ -281,7 +281,7 @@
                                                 </Label>
                                              </children>
                                              <padding>
-                                                <Insets right="30.0" />
+                                                <Insets right="10.0" />
                                              </padding>
                                           </HBox>
                                           <HBox alignment="CENTER">
@@ -325,7 +325,7 @@
                                                 </Label>
                                              </children>
                                              <padding>
-                                                <Insets right="30.0" />
+                                                <Insets right="10.0" />
                                              </padding>
                                           </HBox>
                                           <HBox alignment="CENTER">
@@ -356,7 +356,7 @@
                         </FlowPane>
                           </children>
                      <VBox.margin>
-                        <Insets bottom="30.0" top="30.0" />
+                        <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
                       </HBox>
                   <HBox fx:id="chartbox" alignment="CENTER" spacing="10.0" VBox.vgrow="ALWAYS">
@@ -385,7 +385,7 @@
                         </LineChart>
                      </children>
                      <VBox.margin>
-                        <Insets top="30.0" />
+                        <Insets top="10.0" />
                      </VBox.margin>
                   </HBox>
                </children>

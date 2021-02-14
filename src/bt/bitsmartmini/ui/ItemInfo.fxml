@@ -4,77 +4,100 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<StackPane prefWidth="240.0" style="-fx-background-color: #00000044;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.ItemInfoController">
+<StackPane style="-fx-background-color: #00000044;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.ItemInfoController">
    <children>
-      <VBox alignment="CENTER" style="-fx-background-color: #FFFFFE;" styleClass="form_border_color">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="282.0" prefWidth="229.0" style="-fx-background-color: #FFFFFE;" styleClass="form_border_color">
          <children>
             <HBox alignment="CENTER_RIGHT">
                <children>
-                  <Button fx:id="closebtn" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#closefrom" styleClass="closeform">
+                  <Button fx:id="closebtn" mnemonicParsing="false" onAction="#closefrom" styleClass="closeform">
                      <graphic>
-                        <FontAwesomeIcon glyphName="CLOSE" size="1.3em" />
+                        <FontAwesomeIcon glyphName="CLOSE" />
                      </graphic>
-                     <font>
-                        <Font size="12.0" />
-                     </font>
                   </Button>
                </children>
-               <padding>
+               <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
+               </VBox.margin>
+            </HBox>
+            <HBox>
+               <children>
+                  <Separator prefWidth="200.0" HBox.hgrow="ALWAYS" />
+               </children>
             </HBox>
             <StackPane>
                <children>
-                  <ImageView fx:id="itemsimage" fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
+                  <ImageView fx:id="itemsimage" fitHeight="80.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
                   <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <HBox fx:id="outofstockbackground" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.78" prefHeight="18.0" prefWidth="62.0" style="-fx-background-color: RED;" HBox.hgrow="NEVER">
+                        <HBox fx:id="outofstockbackground" alignment="CENTER" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.78" prefHeight="20.0" prefWidth="65.0" style="-fx-background-color: #ba000d;" HBox.hgrow="NEVER">
                            <children>
-                              <Label fx:id="outofstocklabel" text="out of stock" textFill="WHITE">
+                              <Label fx:id="outofstocklabel" graphicTextGap="2.0" opacity="0.93" text="out of stock" textFill="WHITE">
                                  <graphic>
-                                    <FontAwesomeIcon fill="WHITE" glyphName="CLOSE" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="CLOSE" size="1.2em" />
                                  </graphic>
                                  <font>
                                     <Font name="Open Sans Bold" size="8.0" />
                                  </font>
+                                 <padding>
+                                    <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                 </padding>
+                                 <HBox.margin>
+                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                 </HBox.margin>
                               </Label>
                            </children>
+                           <HBox.margin>
+                              <Insets bottom="1.0" left="1.0" right="20.0" top="50.0" />
+                           </HBox.margin>
+                           <effect>
+                              <DropShadow height="4.7" radius="1.85" width="4.7" />
+                           </effect>
                         </HBox>
                      </children>
                   </HBox>
                </children>
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
                </VBox.margin>
             </StackPane>
-            <HBox alignment="CENTER">
+            <HBox alignment="CENTER" layoutX="11.0" layoutY="201.0">
                <children>
                   <Text fx:id="itembcode" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
-            <VBox alignment="CENTER">
+            <VBox alignment="CENTER" VBox.vgrow="ALWAYS">
                <children>
-                  <Text fx:id="medsname" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="190.0" VBox.vgrow="ALWAYS">
+                  <Text fx:id="itemsdesc" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="190.0" VBox.vgrow="ALWAYS">
                      <font>
-                        <Font name="Open Sans Bold" size="13.0" />
+                        <Font name="Open Sans Bold" size="12.0" />
                      </font>
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </Text>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </VBox>
             <HBox alignment="CENTER" spacing="1.0">
+               <VBox.margin>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </VBox.margin>
                <children>
                   <Text fx:id="brand" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                </children>
@@ -93,40 +116,44 @@
                   </Text>
                </children>
                <VBox.margin>
-                  <Insets bottom="7.0" left="5.0" right="5.0" top="5.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </TextFlow>
             <HBox alignment="CENTER">
                <children>
-                  <Line endX="130.2928924560547" endY="-0.002187073230743408" fill="#e1dcdc" opacity="0.13" startX="-100.0" stroke="#4a4848" />
+                  <Separator prefWidth="200.0" styleClass="linecolor" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </HBox.margin>
+                  </Separator>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+            <HBox alignment="CENTER">
                <children>
-                  <Label fx:id="curr" alignment="BOTTOM_CENTER" contentDisplay="CENTER" graphicTextGap="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.47" prefHeight="18.0" prefWidth="27.0" text="c" HBox.hgrow="ALWAYS">
+                  <Label fx:id="curr" contentDisplay="CENTER" graphicTextGap="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.98" text="c" textFill="#a8a5a5">
                      <font>
-                        <Font name="Open Sans Light" size="13.0" />
+                        <Font name="Open Sans Light" size="12.0" />
                      </font>
+                     <padding>
+                        <Insets right="1.0" />
+                     </padding>
                   </Label>
-                  <Text fx:id="exp" fill="#eb4242" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" HBox.hgrow="ALWAYS">
+                  <Text fx:id="exp" fill="#eb4242" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                      <font>
-                        <Font name="Open Sans" size="17.0" />
+                        <Font name="Open Sans" size="15.0" />
                      </font>
                      <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Text>
                </children>
                <VBox.margin>
-                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
                </VBox.margin>
-               <padding>
-                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-               </padding>
             </HBox>
          </children>
          <effect>
-            <DropShadow color="#7a797967" />
+            <DropShadow color="#7a797967" height="5.82" radius="3.17" width="8.86" />
          </effect>
       </VBox>
    </children>

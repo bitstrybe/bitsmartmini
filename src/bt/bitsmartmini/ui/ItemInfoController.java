@@ -31,8 +31,6 @@ public class ItemInfoController implements Initializable {
     @FXML
     public Text itembcode;
     @FXML
-    public Text medsname;
-    @FXML
     public Text brand;
     @FXML
     public Text qty;
@@ -40,6 +38,8 @@ public class ItemInfoController implements Initializable {
     public Label curr;
     @FXML
     public Text exp;
+    @FXML
+    public Text itemsdesc;
 
     /**
      * Initializes the controller class.

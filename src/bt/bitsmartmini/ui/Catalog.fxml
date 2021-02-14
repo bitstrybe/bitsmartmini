@@ -12,9 +12,12 @@
 
 <VBox id="homebackground" alignment="TOP_CENTER" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.CatalogController">
    <children>
-      <HBox alignment="TOP_CENTER" styleClass="window-title">
+      <HBox alignment="TOP_CENTER" styleClass="window-title" VBox.vgrow="NEVER">
          <children>
-            <FontAwesomeIcon fill="#ababab" glyphName="SEARCH" size="2em" wrappingWidth="25.142857551574707" />
+            <FontAwesomeIcon fill="#ababab" glyphName="SEARCH" size="1.5em" wrappingWidth="25.142857551574707" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin></FontAwesomeIcon>
             <JFXTextField fx:id="itemsearch" focusColor="#d8d8da" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#searchitemsaction" prefHeight="34.0" prefWidth="500.0" promptText="Search for an item" unFocusColor="#d7d6d6">
                <font>
                   <Font name="Open Sans" size="16.0" />

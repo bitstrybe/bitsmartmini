@@ -285,9 +285,9 @@ public class StockController implements Initializable {
                                 }
                                 Items i = ib.getImageItembyCode(person.getBarcode());
                                 childController.itembcode.setText(person.getBarcode());
-                                childController.medsname.setText(person.getItems());
+                                childController.itemsdesc.setText(person.getItems());
                                 childController.brand.setText(person.getBrand());
-                                childController.brand.setText(person.getItems());
+                                //childController.brand.setText(person.getItems());
                                 childController.qty.setText(balance.toString());
                                 childController.exp.setText(DecimalUtil.format2(i.getSp()));
                                 childController.curr.setText(MainAppController.B.getBCurrency());

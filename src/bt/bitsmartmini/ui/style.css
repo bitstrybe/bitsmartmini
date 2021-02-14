@@ -407,7 +407,7 @@ VBox .hoverVboxActive{
 
 /* focused cell (keyboard navigation) */
 .table-view:focused:row-selection > .virtual-flow > .clipped-container > .sheet > .table-row-cell:focused {
-    -fx-background-color: #3395ed;
+    -fx-background-color: #026ab5;
     /*-fx-background-insets: 1, 0, 1;*/
 }
 

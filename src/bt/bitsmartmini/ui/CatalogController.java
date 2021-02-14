@@ -115,8 +115,8 @@ public class CatalogController extends MainAppController implements Initializabl
                             FileInputStream ifile = new FileInputStream(items.getItemImg());
                             Image image = new Image(ifile);
                             childController.itemsimage.setImage(image);
-                            childController.itemsimage.setFitHeight(120);
-                            childController.itemsimage.setFitWidth(120);
+                            childController.itemsimage.setFitHeight(100);
+                            childController.itemsimage.setFitWidth(85);
                             if (bal > 0) {
                                 childController.outofstockbackground.setVisible(false);
                             } else {
@@ -184,7 +184,7 @@ public class CatalogController extends MainAppController implements Initializabl
                                     childControllersk.itemname.setText(childController.itemsdesc.getText());
                                     childControllersk.itembrand.setText(childController.brand.getText());
                                     long qty = st.getStockBalance(childController.itembcode.getText());
-                                    childControllersk.itemqty.setText(Long.toString(qty) + " Remaining");
+                                    childControllersk.itemqty.setText(Long.toString(qty) + " In Stock");
                                     childControllersk.itemsp.setText(MainAppController.B.getBCurrency() + " " + childController.exp.getText());
                                     Items its = new ItemsBL().getImageItembyCode(childController.itembcode.getText());
                                     FileInputStream input;
