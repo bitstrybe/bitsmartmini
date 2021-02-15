@@ -81,32 +81,12 @@ public class AddBrandController implements Initializable {
     @FXML
     private JFXSpinner spinner;
 
-//    BrandBL bbl = new BrandBL();
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Utilities.repeatFocus(manutextfield);
-        // TODO
+        save.setDisable(true);
         manutextfield.textProperty().addListener(e -> {
-            //  System.out.println(cattextfield.getText());
-//            check.setVisible(false);
-            if (manutextfield.getLength() > 0) {
-                Brands value = new BrandBL().getBrandsbyId(manutextfield.getText());
-                if (value != null) {
-                    save.setDisable(true);
-                    displayinfo.setText("Duplicate Found!!!");
-                    duplicatelock.setVisible(true);
-                } else if (value == null) {
-                    save.setDisable(false);
-                    displayinfo.setText(null);
-                    duplicatelock.setVisible(false);
-                }
-            } else {
-                save.setDisable(true);
-            }
-
+            duplicateCheck();
         });
         TableData("");
         searchbtn.textProperty().addListener(e -> {
@@ -121,7 +101,7 @@ public class AddBrandController implements Initializable {
                         saveAction(null);
                     }
                 } else {
-                    displayinfo.setText("!FIELD IS EMPTY");
+                    displayinfo.setText(MainAppController.EMPTY_FIELD);
                     spinner.setVisible(false);
                     check.setVisible(false);
                 }
@@ -258,12 +238,12 @@ public class AddBrandController implements Initializable {
                             };
                             childController.displayinfo.textProperty().bind(task.messageProperty());
                             task.setOnSucceeded(f -> {
-//                                System.out.println("Value" + task.getValue());
                                 childController.displayinfo.textProperty().unbind();
                                 if (task.getValue() == 1) {
                                     childController.deleteTrans();
+                                    TableData("");
                                 } else {
-                                   childController.errorTrans();
+                                    childController.errorTrans();
                                 }
 
                             });
@@ -342,6 +322,7 @@ public class AddBrandController implements Initializable {
 
     public int saveTemplate() {
         Brands cat = new Brands();
+        displayinfo.textProperty().unbind();
         cat.setBrandName(WordUtils.capitalizeFully(manutextfield.getText()));
         int result = new InsertUpdateBL().insertData(cat);
         return result;
@@ -350,6 +331,24 @@ public class AddBrandController implements Initializable {
     public int deleteTemplate(String brand) {
         int result = new BrandBL().removeData(brand);
         return result;
+
+    }
+
+    public void duplicateCheck() {
+        if (manutextfield.getLength() > 0) {
+            Brands value = new BrandBL().getBrandsbyId(manutextfield.getText());
+            if (value != null) {
+                save.setDisable(true);
+                displayinfo.setText(MainAppController.DUPLICATE_MESSAGE);
+                duplicatelock.setVisible(true);
+            } else if (value == null) {
+                save.setDisable(false);
+                displayinfo.setText(null);
+                duplicatelock.setVisible(false);
+            }
+        } else {
+            save.setDisable(true);
+        }
 
     }
 

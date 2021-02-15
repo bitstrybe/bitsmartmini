@@ -320,11 +320,11 @@ public class CatalogController extends MainAppController implements Initializabl
         getStockingItemList(itemsearch.getText());
         itemsearch.selectAll();
         List<Items> list = new ItemsBL().searchAllItems(itemsearch.getText());
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddItems.fxml"));
+        Parent parent = (Parent) fxmlLoader.load();
+        AddItemsController childContorller = fxmlLoader.getController();
         if (list.isEmpty()) {
             Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddItems.fxml"));
-            Parent parent = (Parent) fxmlLoader.load();
-            AddItemsController childContorller = fxmlLoader.getController();
             childContorller.barcodetxt.setText(itemsearch.getText());
             Scene scene = new Scene(parent);
             scene.setFill(Color.TRANSPARENT);
@@ -335,6 +335,7 @@ public class CatalogController extends MainAppController implements Initializabl
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.show();
         } else {
+            childContorller.barcodetxt.setText(itemsearch.getText());
 
         }
     }

@@ -163,18 +163,12 @@ public class StockController implements Initializable {
         // TODO
         stocksearch.selectAll();
         Utilities.repeatFocus(stocksearch);
-
         itembl = new ItemsBL();
         salesbl = new SalesBL();
         stkinbl = new StockinBL();
         stkobl = new StockoutBL();
         retbl = new ReturnBL();
-
         AllStockTableData("");
-        stocksearch.textProperty().addListener(e -> {
-            AllStockTableData(stocksearch.getText());
-        });
-
         stock.addEventHandler(MouseEvent.MOUSE_CLICKED, v -> {
             try {
                 list = stock.getSelectionModel().getSelectedItem();
@@ -525,6 +519,7 @@ public class StockController implements Initializable {
     private void stocksearchAction(ActionEvent event) {
         stocksearch.selectAll();
         Utilities.repeatFocus(stocksearch);
+        AllStockTableData(stocksearch.getText());
 
     }
 

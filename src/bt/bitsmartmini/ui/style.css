@@ -183,10 +183,23 @@
     -fx-background-color: #090a0c;
     -fx-text-fill: white;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
-    -fx-font-family: "Arial";
+    -fx-font-family: "Open Sans";
     -fx-text-fill: linear-gradient(white, #d0d0d0);
     -fx-font-size: 11px;
     -fx-padding: 10 15 10 15;
+    -fx-pref-width:90px;
+    -fx-pref-height:40px;
+}
+
+#clear-btn {
+    -fx-background-color: #cccccc;
+    -fx-text-fill: white;
+    -fx-font-family: "Open Sans";
+    -fx-text-fill: linear-gradient(#666666, #000000);
+    -fx-font-size: 11px;
+    -fx-padding: 10 15 10 15;
+    -fx-pref-width: 90px;
+    -fx-pref-height:40px;
 }
 
 #cart-btn {
@@ -418,12 +431,12 @@ VBox .hoverVboxActive{
 .table-row-cell{
     -fx-border-color: transparent;
     -fx-table-cell-border-color: transparent;
- }
+}
 
 .table-row-cell:empty{
     -fx-border-color: transparent;
     -fx-table-cell-border-color: transparent;
- }
+}
 
 .table-view .cell{
     -fx-cell-size: 45;

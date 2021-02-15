@@ -19,15 +19,19 @@
 
 <StackPane styleClass="popupbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.AddBrandController">
    <children>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="700.0" styleClass="form_background">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="form_background">
          <children>
-            <HBox alignment="CENTER" prefHeight="39.0" prefWidth="700.0">
+            <HBox alignment="CENTER">
                <children>
-                  <Label prefHeight="19.0" prefWidth="647.0" text="Brands" textFill="#544848" HBox.hgrow="ALWAYS">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Label>
+                  <StackPane HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Brands" textFill="#544848" StackPane.alignment="CENTER_LEFT">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </StackPane>
                   <Button fx:id="closebtn" mnemonicParsing="false" onAction="#closefrom" styleClass="closeform">
                      <graphic>
                         <FontAwesomeIcon glyphName="CLOSE" />
@@ -43,9 +47,9 @@
                   <Separator prefWidth="200.0" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="680.0" spacing="10.0">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="10.0">
                <children>
-                  <JFXTextField fx:id="manutextfield" labelFloat="true" opacity="0.93" prefHeight="32.0" prefWidth="384.0" promptText="Brand Name*" styleClass="form_field" HBox.hgrow="ALWAYS">
+                  <JFXTextField fx:id="manutextfield" labelFloat="true" opacity="0.93" promptText="Brand Name*" styleClass="form_field" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -59,15 +63,15 @@
                      </focusColor>
                   </JFXTextField>
                   <JFXButton id="action-btn" fx:id="save" onAction="#saveAction" prefHeight="34.0" prefWidth="88.0" stylesheets="@style.css" text="Save" textFill="#323232" HBox.hgrow="ALWAYS" />
-                  <JFXButton contentDisplay="CENTER" prefHeight="30.0" prefWidth="84.0" style="-fx-background-color: #cccccc;" text="Clear" HBox.hgrow="ALWAYS" />
+                  <JFXButton id="clear-btn" contentDisplay="CENTER" text="Clear" HBox.hgrow="ALWAYS" />
                </children>
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </HBox>
             <HBox>
                <children>
-                  <JFXTextField fx:id="searchbtn" labelFloat="true" prefHeight="27.0" prefWidth="288.0" promptText="Search brand" HBox.hgrow="ALWAYS">
+                  <JFXTextField fx:id="searchbtn" labelFloat="true" promptText="Search brand" HBox.hgrow="ALWAYS">
                      <focusColor>
                         <LinearGradient endX="1.0" endY="0.7380952380952381">
                            <stops>
@@ -79,20 +83,23 @@
                   </JFXTextField>
                </children>
                <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="10.0" top="20.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </HBox>
-            <HBox>
+            <HBox prefHeight="200.0" prefWidth="500.0">
                <children>
-                  <TableView fx:id="brandtable" prefHeight="200.0" prefWidth="680.0" styleClass="table-cell" stylesheets="@style.css" HBox.hgrow="ALWAYS">
+                  <TableView fx:id="brandtable" styleClass="table-cell" stylesheets="@style.css" HBox.hgrow="ALWAYS">
                      <columns>
                         <TableColumn fx:id="brand" maxWidth="1.7976931348623157E308" prefWidth="386.0" resizable="false" styleClass="align_table_left" text="Brand name" />
                         <TableColumn fx:id="action" minWidth="0.0" prefWidth="100.0" resizable="false" text="Action" />
                      </columns>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
                   </TableView>
                </children>
                <VBox.margin>
-                  <Insets left="10.0" right="10.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </HBox>
             <HBox VBox.vgrow="ALWAYS">

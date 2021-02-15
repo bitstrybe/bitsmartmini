@@ -170,7 +170,7 @@ public class AddItemsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         barcodetxt.selectAll();
-       Utilities.repeatFocus(barcodetxt);
+        Utilities.repeatFocus(barcodetxt);
         barcodetxt.textProperty().addListener(e -> {
             //  System.out.println(cattextfield.getText());
 //            check.setVisible(false);
@@ -297,7 +297,7 @@ public class AddItemsController implements Initializable {
         action.setSortable(false);
 
         action.setCellValueFactory((TableColumn.CellDataFeatures<ItemTableModel, Boolean> features) -> new SimpleBooleanProperty(features.getValue() != null));
-        action.setCellFactory((TableColumn<ItemTableModel, Boolean> personBooleanTableColumn) -> new AddPersonCell());
+        action.setCellFactory((TableColumn<ItemTableModel, Boolean> personBooleanTableColumn) -> new ItemDeleteCell());
         itemtableview.setItems(data);
         itemtableview.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
 
@@ -347,7 +347,7 @@ public class AddItemsController implements Initializable {
         TableData(searchbtn.getText());
     }
 
-    public class AddPersonCell extends TableCell<ItemTableModel, Boolean> {
+    public class ItemDeleteCell extends TableCell<ItemTableModel, Boolean> {
 
         //Image img = new Image(getClass().getResourceAsStream("edit.png"));
         Image img2 = new Image(getClass().getResourceAsStream("delete.png"));
@@ -368,7 +368,7 @@ public class AddItemsController implements Initializable {
          * @param stage the stage in which the table is placed.
          * @param table the table to which a new person can be added.
          */
-        AddPersonCell() {
+        ItemDeleteCell() {
             paddedButton.setStyle("-fx-alignment: CENTER;");
             paddedButton.getChildren().add(delButton);
             delButton.setGraphic(new ImageView(img2));
@@ -380,7 +380,7 @@ public class AddItemsController implements Initializable {
                 try {
                     Stage stage = new Stage();
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Delete.fxml"));
-                    Parent parent1 = (Parent) fxmlLoader.load();
+                    Parent parent = (Parent) fxmlLoader.load();
                     DeleteController childController = fxmlLoader.getController();
                     childController.delete.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
                         Task<Integer> task = new Task<Integer>() {
@@ -416,13 +416,14 @@ public class AddItemsController implements Initializable {
                         d.start();
 
                     });
-                    Scene scene1 = new Scene(parent1);
+                    Scene scene = new Scene(parent);
+                    scene.setFill(Color.TRANSPARENT);
+                    stage.setMaximized(true);
                     stage.initModality(Modality.APPLICATION_MODAL);
-                    stage.initOwner(parent1.getScene().getWindow());
-                    stage.setScene(scene1);
-                    stage.initStyle(StageStyle.UNDECORATED);
-                    stage.resizableProperty().setValue(false);
-                    stage.showAndWait();
+                    stage.initOwner(parent.getScene().getWindow());
+                    stage.setScene(scene);
+                    stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.show();
                 } catch (IOException ex) {
                     Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -506,7 +507,7 @@ public class AddItemsController implements Initializable {
         initialStream = new FileInputStream(ifile);
         String dbpath = new File(".").getCanonicalPath();
         if (!ifile.getName().equals("DEFAULT.png")) {
-            System.out.println("Image File: "+".\\img" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+            System.out.println("Image File: " + ".\\img" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
 //            cat.setItemImg(dbpath + "\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
             cat.setItemImg(".\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
         } else {
@@ -515,7 +516,7 @@ public class AddItemsController implements Initializable {
         }
         int result = new InsertUpdateBL().insertData(cat);
         if (!ifile.getName().equals("DEFAULT.png")) {
-            ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File(".\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName())+"\\"));
+            ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File(".\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()) + "\\"));
         }
 
         return result;
@@ -527,17 +528,16 @@ public class AddItemsController implements Initializable {
     }
 
     private void duplicateMTD() {
-            Items value = new ItemsBL().getImageItembyCode(barcodetxt.getText());
-            if (value != null) {
-                save.setDisable(true);
-                displayinfo.setText(MainAppController.DUPLICATE_MESSAGE);
-                duplicatelock.setVisible(true);
-            } else if (value == null) {
-                save.setDisable(false);
-                displayinfo.setText(null);
-                duplicatelock.setVisible(false);
-            }
+        Items value = new ItemsBL().getImageItembyCode(barcodetxt.getText());
+        if (value != null) {
             save.setDisable(true);
+            displayinfo.setText(MainAppController.DUPLICATE_MESSAGE);
+            duplicatelock.setVisible(true);
+        } else if (value == null) {
+            save.setDisable(false);
+            displayinfo.setText(null);
+            duplicatelock.setVisible(false);
+        }
     }
 
 }
