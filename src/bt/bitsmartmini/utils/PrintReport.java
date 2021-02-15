@@ -59,12 +59,13 @@ public class PrintReport extends JFrame {
     public void showReceiptReport(String id) throws JRException, ClassNotFoundException, SQLException, IOException {
         ReceiptBL rbl = new ReceiptBL();
         CustomerBL cb = new CustomerBL();
-        ReturnBL rb = new ReturnBL();
+//        ReturnBL rb = new ReturnBL();
         Receipt r = rbl.getReciptbyCode(Integer.parseInt(id));
         param = setBasiParam();
         Customers c = cb.getCustomersBySales(r.getSalesId().getSalesId());
         InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/TerminalReceiptReport.jasper");
-        BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/bt/resources/logo.png"));
+        BufferedImage image = ImageIO.read(getClass().getResourceAsStream(MainAppController.B.getBLogo()));
+//        MainAppController.B.getBLogo();
         BufferedImage imageback = ImageIO.read(getClass().getResourceAsStream("/bt/resources/logoback.png"));
         param.put("LOGO", image);
         param.put("LOGO1", imageback);

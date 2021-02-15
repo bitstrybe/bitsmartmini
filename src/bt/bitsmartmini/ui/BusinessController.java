@@ -32,7 +32,15 @@ import javafx.util.Duration;
 import bt.bitsmartmini.bl.InsertUpdateBL;
 import bt.bitsmartmini.entity.Business;
 import bt.bitsmartmini.entity.Licensing;
+import bt.bitsmartmini.utils.Utilities;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javax.imageio.ImageIO;
 import lxe.utility.encryptor.UrlEncryptor;
+import org.apache.commons.io.FilenameUtils;
 import org.joda.time.DateTime;
 
 /**
@@ -54,17 +62,28 @@ public class BusinessController implements Initializable {
     private JFXTextField bemailtextfield;
     @FXML
     private ComboBox<String> countrychoicebox;
-    public JFXButton save;
-    public Label displayinfo;
-    public FontAwesomeIcon check;
-    public FontAwesomeIcon duplicatelock;
-    public JFXSpinner spinner;
     @FXML
     private Label currencylabel;
     @FXML
     private Hyperlink hyperlink;
-    Image icon = new Image(getClass().getResourceAsStream("/resources/meds_logo.png"));
+//    Image icon = new Image(getClass().getResourceAsStream("/resources/meds_logo.png"));
     String Key;
+    @FXML
+    private ImageView logoviewer;
+    @FXML
+    private Button browse;
+
+    final FileChooser fileChooser = new FileChooser();
+    File ifile;
+    BufferedImage resizeImage;
+    @FXML
+    private Label displayinfo;
+    @FXML
+    private FontAwesomeIcon check;
+    @FXML
+    private FontAwesomeIcon duplicatelock;
+    @FXML
+    private JFXSpinner spinner;
 
     /**
      * Initializes the controller class.
@@ -106,15 +125,15 @@ public class BusinessController implements Initializable {
     private void closeTransition() {
 //        save.setDisable(true);
         clearAllForms();
-        displayinfo.setText("SUCCESSFULLY SAVED");
-        spinner.setVisible(false);
-        check.setVisible(true);
+//        displayinfo.setText("SUCCESSFULLY SAVED");
+//        spinner.setVisible(false);
+//        check.setVisible(true);
 //        TableData();
         PauseTransition delay = new PauseTransition(Duration.seconds(3));
         delay.setOnFinished(closevnt -> {
-            displayinfo.setText("");
-            spinner.setVisible(false);
-            check.setVisible(false);
+//            displayinfo.setText("");
+//            spinner.setVisible(false);
+//            check.setVisible(false);
         });
         delay.play();
     }
@@ -137,7 +156,7 @@ public class BusinessController implements Initializable {
                 bemailtextfield.setText(pt[1]);
                 bemailtextfield.setDisable(true);
             }
-            displayinfo.textProperty().unbind();
+//            displayinfo.textProperty().unbind();
             //Collection bc = new ArrayList();            
         } catch (Exception ex) {
             Logger.getLogger(BusinessController.class.getName()).log(Level.SEVERE, null, ex);
@@ -149,8 +168,43 @@ public class BusinessController implements Initializable {
         countrychoicebox.getSelectionModel().select("Ghana");
     }
 
+    public void getMainApp() {
+        try {
+            //Stage st = (Stage) login.getScene().getWindow();
+            Parent root;
+            root = FXMLLoader.load(getClass().getResource("MainApp.fxml"));
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.resizableProperty().setValue(false);
+//            stage.getIcons().add(icon);
+            stage.setTitle("Pharmabits");
+            stage.setMaximized(true);
+            stage.setScene(new Scene(root));
+            stage.show();
+            //st.hide();
+//
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     @FXML
-    private void saveAction(ActionEvent event) {
+    private void previousAction(ActionEvent event) throws IOException {
+        closeform();
+        Parent root;
+        root = FXMLLoader.load(getClass().getResource("VerifyLicense.fxml"));
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.resizableProperty().setValue(false);
+//            stage.getIcons().add(icon);
+//            stage.setTitle("Pharmabits");
+//            stage.setMaximized(true);
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    @FXML
+    private void nextAction(ActionEvent event) {
 
         Task<Void> task = new Task<Void>() {
             @Override
@@ -162,9 +216,9 @@ public class BusinessController implements Initializable {
             }
         };
 
-        displayinfo.textProperty().bind(task.messageProperty());
+//        displayinfo.textProperty().bind(task.messageProperty());
         task.setOnSucceeded(s -> {
-            displayinfo.textProperty().unbind();
+            //            displayinfo.textProperty().unbind();
             Business bus = new Business();
             bus.setBName(bnametextfield.getText());
             bus.setBAddr(baddtextfield.getText());
@@ -172,7 +226,24 @@ public class BusinessController implements Initializable {
             bus.setBCountry(countrychoicebox.getSelectionModel().getSelectedItem());
             bus.setBCurrency(currencylabel.getText());
             bus.setBMobile(bmobtextfield.getText());
-            bus.setBLogo(null);
+            String dbpath = new File("src/bt/resources/").getPath();
+            if (!ifile.getName().equals("logo-default.png")) {
+                System.out.println("Image File: " + "/bt/resources/" + bnametextfield.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+//            cat.setItemImg(dbpath + "\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+                bus.setBLogo("/bt/resources/" + bnametextfield.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+            } else {
+
+                bus.setBLogo("/bt/resources/logo-default.png");
+            }
+            //            int result = new InsertUpdateBL().insertData(cat);
+            if (!ifile.getName().equals("DEFAULT.png")) {
+                try {
+                    ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File(dbpath +"/"+ bnametextfield.getText() + "." + FilenameUtils.getExtension(ifile.getName())));
+                } catch (IOException ex) {
+                    Logger.getLogger(BusinessController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
             Licensing l = new Licensing();
             DateTime sd = new DateTime(new Date());
             DateTime ed;
@@ -191,9 +262,9 @@ public class BusinessController implements Initializable {
                     getMainApp();
                     break;
                 default:
-                    displayinfo.setText("NOTICE! AN ERROR OCCURED");
-                    spinner.setVisible(false);
-                    check.setVisible(false);
+//                    displayinfo.setText("NOTICE! AN ERROR OCCURED");
+//                    spinner.setVisible(false);
+//                    check.setVisible(false);
                     break;
             }
             if (result == 1) {
@@ -203,25 +274,29 @@ public class BusinessController implements Initializable {
         Thread d = new Thread(task);
         d.setDaemon(true);
         d.start();
+
     }
 
-    public void getMainApp() {
-        try {
-            //Stage st = (Stage) login.getScene().getWindow();
-            Parent root;
-            root = FXMLLoader.load(getClass().getResource("MainApp.fxml"));
-            Stage stage = new Stage();
-            stage.initStyle(StageStyle.TRANSPARENT);
-            stage.resizableProperty().setValue(false);
-            stage.getIcons().add(icon);
-            stage.setTitle("Pharmabits");
-            stage.setMaximized(true);
-            stage.setScene(new Scene(root));
-            stage.show();
-            //st.hide();
-//
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    @FXML
+    private void browseAction(ActionEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        //Set extension filter
+        FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+        fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+        //Show open file dialog
+        ifile = fileChooser.showOpenDialog(null);
+        //File ofile = new File
+        BufferedImage bufferedImage = ImageIO.read(ifile);
+        int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
+        resizeImage = Utilities.resizeImage(bufferedImage, type, 100, 100);
+
+        Image image = SwingFXUtils.toFXImage(resizeImage, null);
+        logoviewer.setImage(image);
+        logoviewer.setPreserveRatio(true);
+        logoviewer.scaleXProperty();
+        logoviewer.scaleYProperty();
+        logoviewer.setSmooth(true);
+        logoviewer.setCache(true);
     }
 }

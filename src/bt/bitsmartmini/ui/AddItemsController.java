@@ -101,8 +101,6 @@ public class AddItemsController implements Initializable {
     private TableColumn<ItemTableModel, Number> salespricetb;
     @FXML
     private TableColumn<ItemTableModel, Boolean> action;
-    private JFXTextField costtextfield;
-    private JFXTextField selltextfield;
     @FXML
     private Button closebtn;
     @FXML
@@ -505,7 +503,6 @@ public class AddItemsController implements Initializable {
         cat.setSp(Double.parseDouble(sptxt.getText()));
         //adding image file to directory
         initialStream = new FileInputStream(ifile);
-        String dbpath = new File(".").getCanonicalPath();
         if (!ifile.getName().equals("DEFAULT.png")) {
             System.out.println("Image File: " + ".\\img" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
 //            cat.setItemImg(dbpath + "\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
