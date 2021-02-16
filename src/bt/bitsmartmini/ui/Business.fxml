@@ -185,23 +185,21 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </VBox.margin>
       </HBox>
-      <HBox alignment="CENTER_LEFT">
+      <HBox alignment="CENTER_LEFT" spacing="5.0">
          <children>
-            <Label fx:id="displayinfo" prefHeight="26.0" prefWidth="266.0">
-               <graphic>
-                  <StackPane>
-                     <children>
-                        <FontAwesomeIcon fx:id="check" fill="#389751" glyphName="CHECK" size="2em" visible="false" />
-                        <FontAwesomeIcon fx:id="duplicatelock" glyphName="LOCK" size="2em" visible="false" />
-                        <JFXSpinner fx:id="spinner" prefHeight="5.0" prefWidth="5.0" visible="false" />
-                     </children>
-                  </StackPane>
-               </graphic>
+            <StackPane>
+               <children>
+                  <FontAwesomeIcon fx:id="check" fill="#389751" glyphName="CHECK" size="2em" visible="false" />
+                  <FontAwesomeIcon fx:id="duplicatelock" glyphName="LOCK" size="2em" visible="false" />
+                  <JFXSpinner fx:id="spinner" prefHeight="5.0" prefWidth="5.0" visible="false" />
+               </children>
+            </StackPane>
+            <Label fx:id="displayinfo">
                <font>
                   <Font size="13.0" />
                </font>
                <HBox.margin>
-                  <Insets left="30.0" />
+                  <Insets />
                </HBox.margin>
             </Label>
          </children>

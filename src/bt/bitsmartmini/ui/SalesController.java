@@ -62,6 +62,8 @@ import static bt.bitsmartmini.ui.MainAppController.static_label;
 import bt.bitsmartmini.utils.PrintReport;
 import bt.bitsmartmini.utils.Utilities;
 import com.jfoenix.controls.JFXTextField;
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import lxe.utility.date.DateUtil;
 import lxe.utility.math.DecimalUtil;
 import net.sf.jasperreports.engine.JRException;
@@ -386,9 +388,9 @@ public class SalesController implements Initializable {
 
     @FXML
     private void salesbtnAction(ActionEvent event) {
-         Utilities.repeatFocus(salesbtn);
+        Utilities.repeatFocus(salesbtn);
         salesbtn.selectAll();
-        
+
     }
 
     public class AddPersonCellPayment extends TableCell<SalesTableModel, Boolean> {
@@ -512,7 +514,8 @@ public class SalesController implements Initializable {
     public class AddPersonCellPreview extends TableCell<SalesTableModel, Boolean> {
 
         //Image img = new Image(getClass().getResourceAsStream("edit.png"));
-        Image preview = new Image(getClass().getResourceAsStream("/bt/resources/eye.png"));
+//thumbsUpIcon.setStyleClass("thumbs-up-icon");
+//        Image preview = new Image(getClass().getResourceAsStream("/bt/resources/eye.png"));
         // a button for adding a new person.
 //        JFXButton addButton = new JFXButton();
         // pads and centers the add button in the cell.
@@ -533,28 +536,22 @@ public class SalesController implements Initializable {
 //            delButton.setGraphic(new ImageView(img2));
 //            delButton.setRipplerFill(Paint.valueOf("#D8E1DC"));
             btn.setRipplerFill(Paint.valueOf("#6699ff"));
-            btn.setGraphic(new ImageView(preview));
-            btn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-
-                public void handle(ActionEvent event) {
-                    int selectdIndex = getTableRow().getIndex();
-                    //Create a new table show details of the selected item
-                    ReceiptTableModel selectedRecord = (ReceiptTableModel) paymenttable.getItems().get(selectdIndex);
-                    try {
-                        new PrintReport().showReceiptReport(selectedRecord.getReceiptId());
-                    } catch (JRException ex) {
-                        Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IOException ex) {
-                        Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
+            btn.setGraphic(GlyphsDude.createIcon(FontAwesomeIcons.DESKTOP));
+            btn.setOnAction((ActionEvent event) -> {
+                int selectdIndex = getTableRow().getIndex();
+                //Create a new table show details of the selected item
+                ReceiptTableModel selectedRecord = (ReceiptTableModel) paymenttable.getItems().get(selectdIndex);
+                try {
+                    new PrintReport().showReceiptReport(selectedRecord.getReceiptId());
+                } catch (JRException ex) {
+                    Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
             });
 
         }

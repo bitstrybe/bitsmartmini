@@ -155,9 +155,10 @@ public class BusinessController implements Initializable {
                 bnametextfield.setDisable(true);
                 bemailtextfield.setText(pt[1]);
                 bemailtextfield.setDisable(true);
+            } else {
+
             }
-//            displayinfo.textProperty().unbind();
-            //Collection bc = new ArrayList();            
+
         } catch (Exception ex) {
             Logger.getLogger(BusinessController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -196,9 +197,6 @@ public class BusinessController implements Initializable {
         Stage stage = new Stage();
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.resizableProperty().setValue(false);
-//            stage.getIcons().add(icon);
-//            stage.setTitle("Pharmabits");
-//            stage.setMaximized(true);
         stage.setScene(new Scene(root));
         stage.show();
     }
@@ -206,70 +204,25 @@ public class BusinessController implements Initializable {
     @FXML
     private void nextAction(ActionEvent event) {
 
-        Task<Void> task = new Task<Void>() {
+        Task<Integer> task = new Task<Integer>() {
             @Override
-            protected Void call() throws Exception {
-                //childController.spinner.setVisible(true);
+            protected Integer call() throws Exception {
+                spinner.setVisible(true);
                 updateMessage(MainAppController.PROCESS_MESSAGE);
                 Thread.sleep(500);
-                return null;
+                return saveTemplate();
             }
         };
 
-//        displayinfo.textProperty().bind(task.messageProperty());
+        displayinfo.textProperty().bind(task.messageProperty());
         task.setOnSucceeded(s -> {
-            //            displayinfo.textProperty().unbind();
-            Business bus = new Business();
-            bus.setBName(bnametextfield.getText());
-            bus.setBAddr(baddtextfield.getText());
-            bus.setBEmail(bemailtextfield.getText());
-            bus.setBCountry(countrychoicebox.getSelectionModel().getSelectedItem());
-            bus.setBCurrency(currencylabel.getText());
-            bus.setBMobile(bmobtextfield.getText());
-            String dbpath = new File("src/bt/resources/").getPath();
-            if (!ifile.getName().equals("logo-default.png")) {
-                System.out.println("Image File: " + "/bt/resources/" + bnametextfield.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
-//            cat.setItemImg(dbpath + "\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
-                bus.setBLogo("/bt/resources/" + bnametextfield.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+            displayinfo.textProperty().unbind();
+            if (task.getValue() == 1) {
+                saveTrans();
             } else {
+                errorTrans();
+            }
 
-                bus.setBLogo("/bt/resources/logo-default.png");
-            }
-            //            int result = new InsertUpdateBL().insertData(cat);
-            if (!ifile.getName().equals("DEFAULT.png")) {
-                try {
-                    ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File(dbpath +"/"+ bnametextfield.getText() + "." + FilenameUtils.getExtension(ifile.getName())));
-                } catch (IOException ex) {
-                    Logger.getLogger(BusinessController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-            Licensing l = new Licensing();
-            DateTime sd = new DateTime(new Date());
-            DateTime ed;
-            ed = sd.plusDays(31);
-            UrlEncryptor enc = new UrlEncryptor();
-            //                String key = LicensingUtil.cookDesktopKey(bnametextfield.getText().replace(' ', '-'), bemailtextfield.getText(), sd.toDate(), ed.toDate());
-//                Key = enc.doEncrypt(key);
-//            System.out.println(enc.doEncrypt(Key));
-            l.setLicenseKey(Key);
-            l.setBusiness(bus);
-            bus.setLicenseKey(l);
-            int result = new InsertUpdateBL().insertUpdate(bus, l);
-            switch (result) {
-                case 1:
-                    closeTransition();
-                    getMainApp();
-                    break;
-                default:
-//                    displayinfo.setText("NOTICE! AN ERROR OCCURED");
-//                    spinner.setVisible(false);
-//                    check.setVisible(false);
-                    break;
-            }
-            if (result == 1) {
-                closeform();
-            }
         });
         Thread d = new Thread(task);
         d.setDaemon(true);
@@ -298,5 +251,92 @@ public class BusinessController implements Initializable {
         logoviewer.scaleYProperty();
         logoviewer.setSmooth(true);
         logoviewer.setCache(true);
+    }
+
+    private void saveTrans() {
+        displayinfo.setText(MainAppController.SUCCESS_MESSAGE);
+        clearAllForms();
+        spinner.setVisible(false);
+        check.setVisible(true);
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+        delay.setOnFinished(closevnt -> {
+            displayinfo.setText("");
+            spinner.setVisible(false);
+            check.setVisible(false);
+            closeform();
+        });
+        delay.play();
+
+    }
+
+    private void errorTrans() {
+        displayinfo.setText(MainAppController.ERROR_MESSAGE);
+        spinner.setVisible(false);
+        check.setVisible(false);
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(closevnt -> {
+            displayinfo.setText("");
+            spinner.setVisible(false);
+            check.setVisible(false);
+        });
+        delay.play();
+
+    }
+
+    public int saveTemplate() {
+
+        Business bus = new Business();
+        bus.setBName(bnametextfield.getText());
+        bus.setBAddr(baddtextfield.getText());
+        bus.setBEmail(bemailtextfield.getText());
+        bus.setBCountry(countrychoicebox.getSelectionModel().getSelectedItem());
+        bus.setBCurrency(currencylabel.getText());
+        bus.setBMobile(bmobtextfield.getText());
+        String dbpath = new File("src/bt/resources/").getPath();
+        if (!ifile.getName().equals("logo-default.png")) {
+            System.out.println("Image File: " + "/bt/resources/" + bnametextfield.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+//            cat.setItemImg(dbpath + "\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+            bus.setBLogo("/bt/resources/" + bnametextfield.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+        } else {
+
+            bus.setBLogo("/bt/resources/logo-default.png");
+        }
+        //            int result = new InsertUpdateBL().insertData(cat);
+        if (!ifile.getName().equals("DEFAULT.png")) {
+            try {
+                ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File(dbpath + "/" + bnametextfield.getText() + "." + FilenameUtils.getExtension(ifile.getName())));
+            } catch (IOException ex) {
+                Logger.getLogger(BusinessController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        Licensing l = new Licensing();
+        DateTime sd = new DateTime(new Date());
+        DateTime ed;
+        ed = sd.plusDays(31);
+        UrlEncryptor enc = new UrlEncryptor();
+        //                String key = LicensingUtil.cookDesktopKey(bnametextfield.getText().replace(' ', '-'), bemailtextfield.getText(), sd.toDate(), ed.toDate());
+//                Key = enc.doEncrypt(key);
+//            System.out.println(enc.doEncrypt(Key));
+        l.setLicenseKey(Key);
+        l.setBusiness(bus);
+        bus.setLicenseKey(l);
+        int result = new InsertUpdateBL().insertUpdate(bus, l);
+//        switch (result) {
+//            case 1:
+//                closeTransition();
+//                getMainApp();
+//                break;
+//            default:
+////                    displayinfo.setText("NOTICE! AN ERROR OCCURED");
+////                    spinner.setVisible(false);
+////                    check.setVisible(false);
+//                break;
+//        }
+//        if (result == 1) {
+//            closeform();
+//        }
+        return result;
+
     }
 }

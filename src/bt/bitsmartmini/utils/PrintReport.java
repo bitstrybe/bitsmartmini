@@ -64,7 +64,13 @@ public class PrintReport extends JFrame {
         param = setBasiParam();
         Customers c = cb.getCustomersBySales(r.getSalesId().getSalesId());
         InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/TerminalReceiptReport.jasper");
-        BufferedImage image = ImageIO.read(getClass().getResourceAsStream(MainAppController.B.getBLogo()));
+        String logo = MainAppController.B.getBLogo();
+        BufferedImage image;
+        if(logo != null){
+            image = ImageIO.read(getClass().getResourceAsStream(logo));
+        }else{
+            image = ImageIO.read(getClass().getResourceAsStream("/bt/resources/logo.png"));
+        }
 //        MainAppController.B.getBLogo();
         BufferedImage imageback = ImageIO.read(getClass().getResourceAsStream("/bt/resources/logoback.png"));
         param.put("LOGO", image);
