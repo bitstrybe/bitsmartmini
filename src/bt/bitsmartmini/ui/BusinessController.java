@@ -264,6 +264,7 @@ public class BusinessController implements Initializable {
             spinner.setVisible(false);
             check.setVisible(false);
             closeform();
+            getMainApp();
         });
         delay.play();
 

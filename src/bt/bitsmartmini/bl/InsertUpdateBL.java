@@ -9,6 +9,7 @@ import javax.persistence.RollbackException;
  * @author JScare
  */
 public class InsertUpdateBL extends DdsBL {
+
     @Override
     public int insertData(Object object) {
         try {
@@ -27,10 +28,15 @@ public class InsertUpdateBL extends DdsBL {
 
     @Override
     public int updateData(Object object) {
-        em.getTransaction().begin();
-        em.merge(object);
-        em.getTransaction().commit();
-        return 1;
+        try {
+            em.getTransaction().begin();
+            em.merge(object);
+            em.getTransaction().commit();
+            return 1;
+        } catch (RollbackException ex) {
+            Logger.getLogger(InsertUpdateBL.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
     }
 
     public int insertUpdate(Object o, Object a) {

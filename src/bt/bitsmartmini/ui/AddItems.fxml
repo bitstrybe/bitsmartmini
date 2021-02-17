@@ -215,7 +215,7 @@
                         <TableColumn fx:id="costpricetb" prefWidth="62.0" text="Cost Price" />
                         <TableColumn fx:id="salespricetb" prefWidth="62.0" text="Sales Price" />
                         <TableColumn fx:id="rol" prefWidth="62.0" text="ROL" />
-                        <TableColumn fx:id="action" prefWidth="55.0" resizable="false" text="Action" />
+                        <TableColumn fx:id="action" resizable="false" text="Action" />
                      </columns>
                      <HBox.margin>
                         <Insets />

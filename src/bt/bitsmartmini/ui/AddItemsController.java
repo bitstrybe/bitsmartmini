@@ -63,6 +63,8 @@ import bt.bitsmartmini.entity.Users;
 import bt.bitsmartmini.tablemodel.ItemTableModel;
 import bt.bitsmartmini.utils.FilterComboBox;
 import bt.bitsmartmini.utils.Utilities;
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import java.io.FileNotFoundException;
 import javafx.scene.paint.Color;
 import org.apache.commons.io.FilenameUtils;
@@ -169,13 +171,14 @@ public class AddItemsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         barcodetxt.selectAll();
         Utilities.repeatFocus(barcodetxt);
-        barcodetxt.textProperty().addListener(e -> {
-            //  System.out.println(cattextfield.getText());
-//            check.setVisible(false);
-            duplicateMTD();
 
-        });
-
+//        barcodetxt.textProperty().addListener(e -> {
+//            try {
+//                duplicateMTD();
+//            } catch (FileNotFoundException ex) {
+//                Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        });
         categorycombo.setOnShown(e -> {
             getCategory();
         });
@@ -278,7 +281,7 @@ public class AddItemsController implements Initializable {
                 imageitems.scaleYProperty();
                 imageitems.setSmooth(true);
                 imageitems.setCache(true);
-                data.add(new ItemTableModel(item.getUpc(), item.getItemDesc(), item.getCategory().getCategoryName(), item.getBrand().getBrandName(), item.getRol(), item.getCp(), item.getSp(), imageitems));
+                data.add(new ItemTableModel(item.getUpc(), item.getItemDesc(), item.getCategory().getCategoryName(), item.getBrand().getBrandName(), item.getRol(), item.getCp(), item.getSp(), imageitems, item.getItemImg()));
             } catch (Exception ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -347,11 +350,10 @@ public class AddItemsController implements Initializable {
 
     public class ItemDeleteCell extends TableCell<ItemTableModel, Boolean> {
 
-        //Image img = new Image(getClass().getResourceAsStream("edit.png"));
         Image img2 = new Image(getClass().getResourceAsStream("delete.png"));
 
         // a button for adding a new person.
-        JFXButton addButton = new JFXButton();
+        JFXButton editbtn = new JFXButton();
 
         // pads and centers the add button in the cell.
         HBox paddedButton = new HBox();
@@ -367,14 +369,46 @@ public class AddItemsController implements Initializable {
          * @param table the table to which a new person can be added.
          */
         ItemDeleteCell() {
-            paddedButton.setStyle("-fx-alignment: CENTER;");
-            paddedButton.getChildren().add(delButton);
+            paddedButton.setStyle("-fx-alignment: CENTER");
+            paddedButton.getChildren().addAll(editbtn, delButton);
             delButton.setGraphic(new ImageView(img2));
+            editbtn.setGraphic(GlyphsDude.createIcon(FontAwesomeIcons.EDIT));
             delButton.setRipplerFill(Paint.valueOf("#D8E1DC"));
+//            int selectdIndex = getTableRow().getIndex();
+//            ItemTableModel selectedRecord = (ItemTableModel) itemtableview.getItems().get(selectdIndex);
+
+            editbtn.setOnAction(v -> {
+                InputStream stream = null;
+                try {
+                    int selectdIndex = getTableRow().getIndex();
+                    ItemTableModel selectedRecord = (ItemTableModel) itemtableview.getItems().get(selectdIndex);
+                    barcodetxt.setText(selectedRecord.getBarcode());
+                    itemdesctxt.setText(selectedRecord.getItemName());
+                    brandscombo.getSelectionModel().select(selectedRecord.getBrand());
+                    categorycombo.getSelectionModel().select(selectedRecord.getCategory());
+                    cptxt.setText(String.valueOf(selectedRecord.getCostPrice()));
+                    sptxt.setText(String.valueOf(selectedRecord.getSalePrice()));
+                    roltxt.setText(String.valueOf(selectedRecord.getRol()));
+                    stream = new FileInputStream(selectedRecord.getItemImage());
+                    Image image = new Image(stream);
+                    itemimages.setImage(image);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
+                } finally {
+                    try {
+                        stream.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+            });
+
             delButton.setOnAction((ActionEvent event) -> {
                 int selectdIndex = getTableRow().getIndex();
-                //Create a new table show details of the selected item
                 ItemTableModel selectedRecord = (ItemTableModel) itemtableview.getItems().get(selectdIndex);
+
+                //Create a new table show details of the selected item
                 try {
                     Stage stage = new Stage();
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Delete.fxml"));
@@ -401,7 +435,6 @@ public class AddItemsController implements Initializable {
                             if (task.getValue() == 1) {
                                 childController.displayinfo.setText(MainAppController.DELETE_MESSAGE);
                                 childController.deleteTrans();
-                                duplicateMTD();
                                 TableData("");
                             } else {
                                 childController.errorTrans();
@@ -511,7 +544,7 @@ public class AddItemsController implements Initializable {
 
             cat.setItemImg(".\\img\\DEFAULT.png");
         }
-        int result = new InsertUpdateBL().insertData(cat);
+        int result = new InsertUpdateBL().updateData(cat);
         if (!ifile.getName().equals("DEFAULT.png")) {
             ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File(".\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()) + "\\"));
         }
@@ -524,17 +557,24 @@ public class AddItemsController implements Initializable {
         return result;
     }
 
-    private void duplicateMTD() {
-        Items value = new ItemsBL().getImageItembyCode(barcodetxt.getText());
-        if (value != null) {
-            save.setDisable(true);
-            displayinfo.setText(MainAppController.DUPLICATE_MESSAGE);
-            duplicatelock.setVisible(true);
-        } else if (value == null) {
-            save.setDisable(false);
-            displayinfo.setText(null);
-            duplicatelock.setVisible(false);
-        }
-    }
-
+//    private void duplicateMTD() throws FileNotFoundException {
+//        InputStream stream = null;
+//        Items value = new ItemsBL().getImageItembyCode(barcodetxt.getText());
+//        if (value != null) {
+//            barcodetxt.setText(value.getUpc());
+//            itemdesctxt.setText(value.getItemDesc());
+//            brandscombo.getSelectionModel().select(value.getBrand().getBrandName());
+//            categorycombo.getSelectionModel().select(value.getCategory().getCategoryName());
+//            cptxt.setText(String.valueOf(value.getCp()));
+//            sptxt.setText(String.valueOf(value.getSp()));
+//            roltxt.setText(String.valueOf(value.getRol()));
+//            stream = new FileInputStream(value.getItemImg());
+//            Image image = new Image(stream);
+//            itemimages.setImage(image);
+//        } else if (value == null) {
+//            save.setDisable(false);
+//            displayinfo.setText(null);
+//            duplicatelock.setVisible(false);
+//        }
+//    }
 }

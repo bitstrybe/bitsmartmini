@@ -24,13 +24,14 @@ public class ItemTableModel {
     private SimpleLongProperty rol;
     private SimpleDoubleProperty costprice;
     private SimpleDoubleProperty saleprice;
+    private SimpleStringProperty itemimage;
     
     private ImageView image;
 
     public ItemTableModel() {
     }
 
-    public ItemTableModel(String barcode, String itemName, String category, String brand, long rol,Double costprice, Double saleprice, ImageView img) {
+    public ItemTableModel(String barcode, String itemName, String category, String brand, long rol,Double costprice, Double saleprice, ImageView img, String itemimage) {
         this.barcode = new SimpleStringProperty(barcode);
         this.itemName = new SimpleStringProperty(itemName);
         this.category = new SimpleStringProperty(category);
@@ -39,6 +40,7 @@ public class ItemTableModel {
         this.costprice = new SimpleDoubleProperty(costprice);
         this.saleprice = new SimpleDoubleProperty(saleprice);
         this.image = img;
+        this.itemimage = new SimpleStringProperty(itemimage);
 
     }
 
@@ -168,5 +170,16 @@ public class ItemTableModel {
 
     public ImageView getImage() {
         return image;
+    }
+      public String getItemImage() {
+        return itemimage.get();
+    }
+
+    public SimpleStringProperty getItemImageProperty() {
+        return itemimage;
+    }
+
+    public void setItemImageProperty(String saleprice) {
+        this.itemimage = new SimpleStringProperty(saleprice);
     }
 }
