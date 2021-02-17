@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="206" pageHeight="504" whenNoDataType="BlankPage" columnWidth="192" leftMargin="7" rightMargin="7" topMargin="7" bottomMargin="7" isIgnorePagination="true" uuid="eca1266b-c5c3-49a6-99eb-a3da2e599c35">
 	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="1103"/>
+	<property name="ireport.y" value="706"/>
 	<style name="balance">
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$V{BAL} < 0.00]]></conditionExpression>
@@ -70,14 +70,6 @@
 	<variable name="TOTALDISC" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{COLUMN_12}]]></variableExpression>
 	</variable>
-	<background>
-		<band height="473">
-			<image scaleImage="FillFrame">
-				<reportElement mode="Transparent" x="1" y="108" width="191" height="246" uuid="5ffe6685-1e84-4d7f-b3f4-c18e862d1651"/>
-				<imageExpression><![CDATA[$P{LOGO1}]]></imageExpression>
-			</image>
-		</band>
-	</background>
 	<title>
 		<band height="85" splitType="Stretch">
 			<staticText>
@@ -95,7 +87,7 @@
 				<textFieldExpression><![CDATA[$P{BADDR}]]></textFieldExpression>
 			</textField>
 			<image scaleImage="RealSize">
-				<reportElement x="78" y="0" width="45" height="45" uuid="82c9465c-bc7b-423f-ab07-23afb4ac798b"/>
+				<reportElement x="73" y="0" width="45" height="45" uuid="82c9465c-bc7b-423f-ab07-23afb4ac798b"/>
 				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
 			</image>
 			<textField>
@@ -123,7 +115,7 @@
 				<text><![CDATA[Receipt #:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="56" y="1" width="72" height="12" uuid="93ad7e2b-a1f4-4db5-a9c5-0d6876bc4208"/>
+				<reportElement x="56" y="1" width="59" height="12" uuid="93ad7e2b-a1f4-4db5-a9c5-0d6876bc4208"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="6" isBold="true"/>
 					<paragraph leftIndent="5"/>
@@ -131,7 +123,7 @@
 				<textFieldExpression><![CDATA[$P{RECEIPTCODE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="150" y="1" width="42" height="12" uuid="78dee0a0-84b4-4b00-8404-02fd2de0d9a7"/>
+				<reportElement x="131" y="1" width="61" height="12" uuid="78dee0a0-84b4-4b00-8404-02fd2de0d9a7"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="6" isStrikeThrough="false"/>
 					<paragraph leftIndent="5"/>
@@ -139,7 +131,7 @@
 				<textFieldExpression><![CDATA[$P{RECEIPTDATE}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="128" y="1" width="22" height="12" forecolor="#000000" uuid="e4e00529-b54d-4b71-be0c-c8aac74728f1"/>
+				<reportElement x="115" y="1" width="16" height="12" forecolor="#000000" uuid="e4e00529-b54d-4b71-be0c-c8aac74728f1"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="6" isBold="true"/>
 				</textElement>
@@ -372,7 +364,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
 					<font size="6"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Sold By :"+$P{SOLDBY}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Served By :"+$P{SOLDBY}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="499" y="103" width="47" height="0" uuid="b24a0b73-5e16-4e16-87b3-65bf05ddd139"/>

@@ -34,6 +34,23 @@
     -fx-background-color: transparent;
 }
 
+.jfx-text-field
+{
+    -jfx-focus-color: #0495d5;
+    /*-jfx-unfocus-color: #fffd8c; doesn't work*/
+}
+
+.text-field{
+    -fx-prompt-text-fill: #9c9c9d;
+    -fx-text-fill: #303031; 
+    -fx-highlight-fill: #4c4a4a;
+}
+
+.text-field .input-line
+{
+    -fx-background-color: #d6d6d8; /*Yellow - bottom bar*/
+}
+
 .closeform:hover{
     -fx-background-color: #666666;
 }
@@ -181,25 +198,30 @@
 
 #action-btn {
     -fx-background-color: #090a0c;
-    -fx-text-fill: white;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-text-fill: #f2f3f3;
+    /*-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );*/
     -fx-font-family: "Open Sans";
-    -fx-text-fill: linear-gradient(white, #d0d0d0);
-    -fx-font-size: 11px;
-    -fx-padding: 10 15 10 15;
-    -fx-pref-width:100px;
-    -fx-pref-height:40px;
+/*    -fx-text-fill: linear-gradient(white, #d0d0d0);*/
+    -fx-font-size: 13px;
+    /*-fx-font-weight:1;*/
+    -fx-padding: 5 5 5 5;
+    -fx-min-width :60px;
+    -fx-min-height:43px;
+}
+
+#action-btn Text {
+    /*-fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );*/
 }
 
 #clear-btn {
     -fx-background-color: #cccccc;
-    -fx-text-fill: white;
+    -fx-text-fill: #808283;
     -fx-font-family: "Open Sans";
-    -fx-text-fill: linear-gradient(#666666, #000000);
-    -fx-font-size: 11px;
+/*    -fx-text-fill: linear-gradient(#666666, #000000);*/
+    -fx-font-size: 13px;
     -fx-padding: 10 15 10 15;
-    -fx-pref-width: 100px;
-    -fx-pref-height:40px;
+    -fx-min-width :60px;
+    -fx-min-height:43px;
 }
 
 #cart-btn {
@@ -212,9 +234,7 @@
     -fx-border-width:1;
 }
 
-#action-btn Text {
-    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
-}
+
 
 #acart-btn Text {
     -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
@@ -238,7 +258,7 @@
 }
 
 .alldefaultbtn {
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0, 0, 0);
+    /*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0, 0, 0);*/
     -fx-background-color: #ff3333;
     -fx-padding: 5;
 }
@@ -375,6 +395,7 @@ add-to-cart-btn{
 
 .login-text-fill{
     -fx-text-fill: #F0F0F0;
+    -jfx-focus-color:#fff;
 }
 .sidemenu-text-color{
     -fx-text-fill: #000000;
@@ -420,7 +441,7 @@ VBox .hoverVboxActive{
 
 /* focused cell (keyboard navigation) */
 .table-view:focused:row-selection > .virtual-flow > .clipped-container > .sheet > .table-row-cell:focused {
-    -fx-background-color: #026ab5;
+    -fx-background-color: #0495d5;
     /*-fx-background-insets: 1, 0, 1;*/
 }
 
@@ -486,3 +507,10 @@ VBox .hoverVboxActive{
     -fx-background-insets: 2, 0, 0;
     -fx-background-radius: 2em;
 }
+
+.separator *.line { 
+    -fx-border-style: none;
+    -fx-border-width: 0.3px;
+    -fx-background-radius: 0.3em;
+}
+

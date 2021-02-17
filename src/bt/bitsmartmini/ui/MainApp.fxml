@@ -8,6 +8,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,7 +16,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -141,7 +141,7 @@
                   </VBox>
                   <VBox minHeight="-Infinity" prefHeight="79.0" prefWidth="1.0" HBox.hgrow="NEVER">
                      <children>
-                        <Line endX="1.1715726852416992" endY="78.29289245605469" opacity="0.45" stroke="#3f3f3f" styleClass="linecolor-dark" />
+                        <Separator orientation="VERTICAL" prefHeight="79.0" prefWidth="0.0" />
                      </children>
                   </VBox>
                   <VBox fx:id="dashboard" alignment="CENTER" maxWidth="-Infinity" prefWidth="120.0" spacing="1.0" HBox.hgrow="NEVER">
@@ -176,7 +176,7 @@
                   </VBox>
                   <VBox layoutX="268.0" layoutY="9.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="1.0">
                      <children>
-                        <Line opacity="0.45" startX="0.2928932309150696" startY="78.29287719726562" stroke="#3f3f3f" styleClass="linecolor" />
+                        <Separator orientation="VERTICAL" prefHeight="200.0" />
                      </children>
                   </VBox>
                   <VBox fx:id="cartbox" alignment="CENTER" maxWidth="-Infinity" prefWidth="120.0" spacing="1.0" HBox.hgrow="NEVER">

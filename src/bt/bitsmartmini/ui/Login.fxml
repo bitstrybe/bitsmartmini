@@ -40,18 +40,18 @@
       </HBox>
       <VBox alignment="CENTER" spacing="5.0">
          <children>
-            <ImageView fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../resources/bitsmart-logo-small.png" />
-               </image>
-            </ImageView>
-            <VBox alignment="CENTER" prefHeight="44.0" prefWidth="573.0">
+            <VBox alignment="CENTER">
                <children>
+                  <ImageView fitHeight="50.0" fitWidth="70.0" opacity="0.91" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../resources/bitsmart-logo-small.png" />
+                     </image>
+                  </ImageView>
                   <HBox alignment="CENTER">
                      <children>
-                        <Text fill="#f5f4f4" strokeType="OUTSIDE" strokeWidth="0.0" text="BitsMart">
+                        <Text fill="#f5f4f4" opacity="0.85" strokeType="OUTSIDE" strokeWidth="0.0" text="BitsMart">
                            <font>
-                              <Font name="Open Sans" size="28.0" />
+                              <Font name="Open Sans" size="25.0" />
                            </font>
                         </Text>
                      </children>
@@ -60,12 +60,15 @@
                      <children>
                           <Label alignment="CENTER" contentDisplay="CENTER" opacity="0.66" prefHeight="16.0" prefWidth="107.0" text="Mini Mart" textFill="#f7e905">
                               <font>
-                                  <Font name="Open Sans" size="11.0" />
+                                  <Font name="Open Sans" size="10.0" />
                               </font>
                           </Label>
                      </children>
                   </HBox>
                </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
             </VBox>
               <JFXTextField fx:id="username" focusColor="WHITE" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#resetElem" prefHeight="28.0" prefWidth="200.0" promptText="Username" styleClass="login-text-fill" unFocusColor="#3f3f3f">
                   <font>

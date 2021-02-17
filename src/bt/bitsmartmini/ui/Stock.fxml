@@ -4,7 +4,6 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
@@ -13,33 +12,56 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <VBox id="homebackground" alignment="TOP_CENTER" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.StockController">
    <children>
-      <HBox alignment="CENTER" styleClass="window-title" VBox.vgrow="ALWAYS">
+      <HBox alignment="CENTER" spacing="10.0" styleClass="window-title" VBox.vgrow="ALWAYS">
          <children>
-            <JFXTextField fx:id="stocksearch" focusColor="#656568" labelFloat="true" onAction="#stocksearchAction" promptText="Search Stock" unFocusColor="#b5b2b2" HBox.hgrow="ALWAYS">
-               <font>
-                  <Font name="Open Sans" size="14.0" />
-               </font>
-            </JFXTextField>
-            <ButtonBar buttonMinWidth="0.0" prefHeight="48.0" prefWidth="185.0" HBox.hgrow="NEVER">
-               <buttons>
-                  <JFXButton id="action-btn" fx:id="stockinbtn" buttonType="RAISED" minWidth="36.0" onAction="#addstockinpopup" prefHeight="48.0" prefWidth="50.0" styleClass="alldefaultbtn">
-                     <graphic>
-                        <FontAwesomeIcon fill="#fcfcfc" glyphName="PLUS" size="2.5em" />
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton id="action-btn" fx:id="stockoutbtn" buttonType="RAISED" minWidth="28.0" onAction="#addstockoutpopup" prefHeight="48.0" prefWidth="50.0">
+            <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets left="10.0" right="50.0" />
+               </HBox.margin>
+               <children>
+                  <JFXTextField fx:id="stocksearch" focusColor="#656568" labelFloat="true" onAction="#stocksearchAction" promptText="Search Stock" unFocusColor="#b5b2b2" HBox.hgrow="ALWAYS">
                      <font>
-                        <Font size="10.0" />
+                        <Font name="Open Sans" size="14.0" />
                      </font>
-                     <graphic>
-                        <FontAwesomeIcon fill="WHITE" glyphName="MINUS" size="2.5em" />
-                     </graphic>
-                  </JFXButton>
-               </buttons>
-            </ButtonBar>
+                  </JFXTextField>
+               </children>
+            </HBox>
+            <VBox alignment="CENTER" spacing="5.0" HBox.hgrow="NEVER">
+               <children>
+                  <HBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <JFXButton id="action-btn" fx:id="stockinbtn" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" onAction="#addstockinpopup" styleClass="alldefaultbtn" textAlignment="CENTER">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="PLUS" size="2.5em" textAlignment="CENTER" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton id="action-btn" fx:id="stockoutbtn" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" onAction="#addstockoutpopup" textAlignment="CENTER">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="MINUS" size="2.5em" textAlignment="CENTER" />
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+                  <Text fill="#8a8888" strokeType="OUTSIDE" strokeWidth="0.0" text="Stock Control">
+                     <font>
+                        <Font name="Open Sans" size="12.0" />
+                     </font>
+                  </Text>
+               </children>
+               <HBox.margin>
+                  <Insets right="50.0" />
+               </HBox.margin>
+            </VBox>
          </children>
          <VBox.margin>
             <Insets />
@@ -74,7 +96,7 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox alignment="TOP_CENTER" VBox.vgrow="NEVER">
+                        <HBox alignment="CENTER_LEFT" VBox.vgrow="NEVER">
                            <children>
                               <TableView fx:id="stock" prefHeight="250.0" style="-fx-background-color: white;">
                                  <columns>
@@ -92,50 +114,9 @@
                               </TableView>
                            </children>
                         </HBox>
-                        <HBox>
+                        <HBox alignment="CENTER_LEFT">
                            <children>
                               <Label prefHeight="21.0" prefWidth="553.0" text="Stock In Details">
-                                 <font>
-                                    <Font name="Open Sans" size="15.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <Label contentDisplay="CENTER" prefHeight="21.0" prefWidth="460.0" text="Stock Out Details" textAlignment="CENTER">
-                                 <font>
-                                    <Font name="Open Sans" size="15.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="200.0" spacing="10.0">
-                           <children>
-                              <TableView fx:id="stockin" style="-fx-background-color: white;" styleClass="table-background">
-                                 <columns>
-                                    <TableColumn fx:id="stkinitems" minWidth="50.0" prefWidth="240.0" resizable="false" styleClass="align_table_left" text="Items" />
-                                    <TableColumn fx:id="stkqty" minWidth="0.0" resizable="false" text="Qty" />
-                                    <TableColumn fx:id="stkindate" minWidth="5.0" resizable="false" text=" Date" />
-                                    <TableColumn fx:id="expirydate" minWidth="5.0" resizable="false" text="Expiry date" />
-                                    <TableColumn fx:id="stkaction" maxWidth="99.0" minWidth="0.0" resizable="false" text="Actions" />
-                                 </columns>
-                              </TableView>
-                              <TableView fx:id="stockout" style="-fx-background-color: white;" styleClass="table-background">
-                                 <columns>
-                                    <TableColumn fx:id="stkoutitems" prefWidth="230.0" resizable="false" styleClass="align_table_left" text="Items" />
-                                    <TableColumn fx:id="stkoutqtytb" resizable="false" text="Qty" />
-                                    <TableColumn fx:id="stkoutdate" minWidth="5.0" prefWidth="100.0" resizable="false" text=" Date" />
-                                    <TableColumn fx:id="stkoutaction" maxWidth="132.0" minWidth="0.0" resizable="false" text="Action" />
-                                 </columns>
-                              </TableView>
-                           </children>
-                        </HBox>
-                        <HBox>
-                           <children>
-                              <Label contentDisplay="CENTER" prefHeight="21.0" prefWidth="568.0" text="Returns Details" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Open Sans" size="15.0" />
                                  </font>
@@ -153,27 +134,61 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox alignment="TOP_CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" spacing="10.0">
+                        <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="200.0" spacing="10.0">
                            <children>
-                              <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <TableView fx:id="returnstable" style="-fx-background-color: transparent;" styleClass="table-background">
-                                       <columns>
-                                          <TableColumn fx:id="returnitemstb" prefWidth="270.0" resizable="false" styleClass="align_table_left" text="Items" />
-                                          <TableColumn fx:id="returnqtytb" prefWidth="100.0" resizable="false" text="Qty" />
-                                          <TableColumn fx:id="returndatetb" minWidth="5.0" prefWidth="100.0" resizable="false" text="Return date" />
-                                          <TableColumn fx:id="returnaction" maxWidth="132.0" minWidth="0.0" prefWidth="78.0" resizable="false" text="Action" />
-                                       </columns>
-                                    </TableView>
-                                 </children>
-                              </VBox>
+                              <TableView fx:id="stockin" style="-fx-background-color: white;" styleClass="table-background">
+                                 <columns>
+                                    <TableColumn fx:id="stkinitems" minWidth="50.0" prefWidth="220.0" resizable="false" styleClass="align_table_left" text="Items" />
+                                    <TableColumn fx:id="stkqty" minWidth="0.0" resizable="false" text="Qty" />
+                                    <TableColumn fx:id="stkindate" minWidth="5.0" resizable="false" text=" Date" />
+                                    <TableColumn fx:id="expirydate" minWidth="5.0" resizable="false" text="Expiry date" />
+                                    <TableColumn fx:id="stkaction" maxWidth="99.0" minWidth="0.0" resizable="false" text="Actions" />
+                                 </columns>
+                              </TableView>
                               <TableView fx:id="salestable" style="-fx-background-color: white;" styleClass="table-background">
                                 <columns>
-                                  <TableColumn fx:id="salesitemstb" prefWidth="200.0" text="Items" />
-                                  <TableColumn fx:id="salesqyttb" text="Qyt" />
+                                  <TableColumn fx:id="salesitemstb" prefWidth="220.0" text="Items" />
+                                  <TableColumn fx:id="salesqyttb" prefWidth="100.0" text="Qyt" />
                                     <TableColumn fx:id="salesdatetb" prefWidth="120.0" text="Sales date" />
                                     <TableColumn prefWidth="75.0" text="Action" />
                                 </columns>
+                              </TableView>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <Label contentDisplay="CENTER" prefHeight="21.0" prefWidth="509.0" text="Stock Out Details" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Open Sans" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label contentDisplay="CENTER" prefHeight="21.0" prefWidth="459.0" text="Returns Details" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Open Sans" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="200.0" spacing="10.0">
+                           <children>
+                              <TableView fx:id="stockout" style="-fx-background-color: white;" styleClass="table-background">
+                                 <columns>
+                                    <TableColumn fx:id="stkoutitems" prefWidth="220.0" resizable="false" styleClass="align_table_left" text="Items" />
+                                    <TableColumn fx:id="stkoutqtytb" prefWidth="100.0" resizable="false" text="Qty" />
+                                    <TableColumn fx:id="stkoutdate" minWidth="5.0" prefWidth="100.0" resizable="false" text=" Date" />
+                                    <TableColumn fx:id="stkoutaction" maxWidth="132.0" minWidth="0.0" resizable="false" text="Action" />
+                                 </columns>
+                              </TableView>
+                              <TableView fx:id="returnstable" style="-fx-background-color: transparent;" styleClass="table-background">
+                                 <columns>
+                                    <TableColumn fx:id="returnitemstb" prefWidth="220.0" resizable="false" styleClass="align_table_left" text="Items" />
+                                    <TableColumn fx:id="returnqtytb" prefWidth="100.0" resizable="false" text="Qty" />
+                                    <TableColumn fx:id="returndatetb" minWidth="5.0" prefWidth="100.0" resizable="false" text="Return date" />
+                                    <TableColumn fx:id="returnaction" maxWidth="132.0" minWidth="0.0" prefWidth="78.0" resizable="false" text="Action" />
+                                 </columns>
                               </TableView>
                            </children>
                         </HBox>

@@ -143,17 +143,17 @@
                               <Font name="Open Sans Italic" size="14.0" />
                            </font>
                         </Text>
-                        <Text layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restoring from a backup will result in">
+                        <Text layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restoring from a backup may result in">
                            <font>
                               <Font name="Open Sans" size="14.0" />
                            </font>
                         </Text>
-                        <Text layoutX="72.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" loss of data not backed up ">
+                        <Text layoutX="72.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" loss of data ">
                            <font>
                               <Font name="Open Sans Bold Italic" size="14.0" />
                            </font>
                         </Text>
-                        <Text layoutX="396.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="since your last backup time.">
+                        <Text layoutX="396.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="not backed up since your last backup time.">
                            <font>
                               <Font name="Open Sans" size="14.0" />
                            </font>
