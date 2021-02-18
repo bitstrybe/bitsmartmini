@@ -29,6 +29,7 @@ import javax.persistence.UniqueConstraint;
     , @NamedQuery(name = "Business.findByBName", query = "SELECT b FROM Business b WHERE b.bName = :bName")
     , @NamedQuery(name = "Business.findByBAddr", query = "SELECT b FROM Business b WHERE b.bAddr = :bAddr")
     , @NamedQuery(name = "Business.findByBMobile", query = "SELECT b FROM Business b WHERE b.bMobile = :bMobile")
+    , @NamedQuery(name = "Business.findByBMobile1", query = "SELECT b FROM Business b WHERE b.bMobile1 = :bMobile1")
     , @NamedQuery(name = "Business.findByBEmail", query = "SELECT b FROM Business b WHERE b.bEmail = :bEmail")
     , @NamedQuery(name = "Business.findByBLogo", query = "SELECT b FROM Business b WHERE b.bLogo = :bLogo")
     , @NamedQuery(name = "Business.findByBCountry", query = "SELECT b FROM Business b WHERE b.bCountry = :bCountry")
@@ -46,6 +47,8 @@ public class Business implements Serializable {
     @Basic(optional = false)
     @Column(name = "b_mobile", nullable = false, length = 45)
     private String bMobile;
+    @Column(name = "b_mobile_1", length = 45)
+    private String bMobile1;
     @Basic(optional = false)
     @Column(name = "b_email", nullable = false, length = 45)
     private String bEmail;
@@ -99,6 +102,14 @@ public class Business implements Serializable {
 
     public void setBMobile(String bMobile) {
         this.bMobile = bMobile;
+    }
+
+    public String getBMobile1() {
+        return bMobile1;
+    }
+
+    public void setBMobile1(String bMobile1) {
+        this.bMobile1 = bMobile1;
     }
 
     public String getBEmail() {

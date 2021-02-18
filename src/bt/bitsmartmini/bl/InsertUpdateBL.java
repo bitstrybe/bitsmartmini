@@ -41,6 +41,7 @@ public class InsertUpdateBL extends DdsBL {
 
     public int insertUpdate(Object o, Object a) {
         try {
+            //System.out.println("inserting B");
             em.getTransaction().begin();
             em.merge(o);
             em.merge(a);

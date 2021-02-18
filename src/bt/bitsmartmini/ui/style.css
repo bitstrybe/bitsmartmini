@@ -288,8 +288,8 @@
 }
 
 .dashboard-card .dashboard-amnt{
-    -fx-font-size: 30px;
-    -fx-margin: 20px;
+    -fx-font-size:27px;
+    -fx-margin: 15px;
 }
 
 .dashboard-card .dashboard-status{

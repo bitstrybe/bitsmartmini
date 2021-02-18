@@ -68,7 +68,7 @@
                                                       <children>
                                                           <Text fx:id="dailysales" fill="#a6f5b4" opacity="0.89" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-amnt" text="0">
                                                               <font>
-                                                                  <Font name="Open Sans" size="14.0" />
+                                                                  <Font name="Open Sans" size="9.0" />
                                                               </font>
                                                    <HBox.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -112,7 +112,7 @@
                                                       <children>
                                                           <Text fx:id="weeklysales" fill="#b4e0f5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-amnt" text="0">
                                                               <font>
-                                                                  <Font name="Open Sans" size="14.0" />
+                                                                  <Font name="Open Sans" size="9.0" />
                                                               </font>
                                                    <HBox.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -156,7 +156,7 @@
                                                       <children>
                                                           <Text fx:id="monthlysales" fill="#8ea4f5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-amnt" text="0" HBox.hgrow="ALWAYS">
                                                               <font>
-                                                                  <Font name="Open Sans" size="14.0" />
+                                                                  <Font name="Open Sans" size="9.0" />
                                                               </font>
                                                    <HBox.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -200,7 +200,7 @@
                                                       <children>
                                                           <Text fx:id="quaterlysales" fill="#fcdb03" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-amnt" text="0">
                                                               <font>
-                                                                  <Font name="Open Sans" size="14.0" />
+                                                                  <Font name="Open Sans" size="9.0" />
                                                               </font>
                                                    <HBox.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -244,7 +244,7 @@
                                              <children>
                                                 <Text fx:id="refunds" fill="#e8081a" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-amnt" text="0">
                                                    <font>
-                                                      <Font name="Open Sans" size="14.0" />
+                                                      <Font name="Open Sans" size="9.0" />
                                                    </font>
                                                    <HBox.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -288,7 +288,7 @@
                                              <children>
                                                 <Text fx:id="credits" fill="#d603fc" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-amnt" text="0">
                                                    <font>
-                                                      <Font name="Open Sans" size="14.0" />
+                                                      <Font name="Open Sans" size="9.0" />
                                                    </font>
                                                    <HBox.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -332,7 +332,7 @@
                                              <children>
                                                 <Text fx:id="actualsales" fill="#969595" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dashboard-amnt" text="0">
                                                    <font>
-                                                      <Font name="Open Sans" size="14.0" />
+                                                      <Font name="Open Sans" size="9.0" />
                                                    </font>
                                                    <HBox.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

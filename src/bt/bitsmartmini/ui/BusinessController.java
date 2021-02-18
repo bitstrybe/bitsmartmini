@@ -41,6 +41,7 @@ import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 import lxe.utility.encryptor.UrlEncryptor;
 import lxe.utility.string.LicensingUtil;
+import org.apache.commons.io.FilenameUtils;
 import org.joda.time.DateTime;
 
 /**
@@ -66,6 +67,7 @@ public class BusinessController implements Initializable {
     private Label currencylabel;
 //    Image icon = new Image(getClass().getResourceAsStream("/resources/meds_logo.png"));
     String Key;
+    @FXML
     private ImageView logoviewer;
 
     final FileChooser fileChooser = new FileChooser();
@@ -81,6 +83,10 @@ public class BusinessController implements Initializable {
     private JFXSpinner spinner;
     @FXML
     private Hyperlink hyperlink;
+    @FXML
+    private Button browse;
+    @FXML
+    private JFXTextField bmobtextfield1;
 
     /**
      * Initializes the controller class.
@@ -104,9 +110,7 @@ public class BusinessController implements Initializable {
                 }
             }
         });
-        //checkLicenseKey(Key);
-
-        //saveTemplate(k);
+        ifile = new File("."+File.separator+"img"+File.separator+"DEFAULT.png");
     }
 
     @FXML
@@ -222,6 +226,7 @@ public class BusinessController implements Initializable {
 
     }
 
+    @FXML
     private void browseAction(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
         //Set extension filter
@@ -233,8 +238,7 @@ public class BusinessController implements Initializable {
         //File ofile = new File
         BufferedImage bufferedImage = ImageIO.read(ifile);
         int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
-        resizeImage = Utilities.resizeImage(bufferedImage, type, 100, 100);
-
+        resizeImage = Utilities.resizeImage(bufferedImage, type, 85, 85);
         Image image = SwingFXUtils.toFXImage(resizeImage, null);
         logoviewer.setImage(image);
         logoviewer.setPreserveRatio(true);
@@ -284,22 +288,17 @@ public class BusinessController implements Initializable {
             bus.setBCountry(countrychoicebox.getSelectionModel().getSelectedItem());
             bus.setBCurrency(currencylabel.getText());
             bus.setBMobile(bmobtextfield.getText());
-            //String dbpath = new File("/bt/resources/").getPath();
-//            if (!ifile.getName().equals("logo-default.png")) {
-//                System.out.println("Image File: " + "/bt/resources/" + bnametextfield.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
-////            cat.setItemImg(dbpath + "\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
-//                bus.setBLogo("/bt/resources/" + bnametextfield.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
-//            } else {
-//                bus.setBLogo("/bt/resources/logo-default.png");
-//            }
-//            //            int result = new InsertUpdateBL().insertData(cat);
-//            if (!ifile.getName().equals("DEFAULT.png")) {
-//                try {
-//                    ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File(dbpath + "/" + bnametextfield.getText() + "." + FilenameUtils.getExtension(ifile.getName())));
-//                } catch (IOException ex) {
-//                    Logger.getLogger(BusinessController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
+            bus.setBMobile1(bmobtextfield1.getText());
+            if (ifile != null && !ifile.getName().equals("DEFAULT.png")) {
+               // String FILEPATH = File.separator;
+                bus.setBLogo("."+File.separator+"img"+File.separator+"LOGO." + FilenameUtils.getExtension(ifile.getName()));
+                //MainAppController.B.setBLogo(bus.getBLogo());
+                ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File("."+File.separator+"img"+File.separator+"LOGO." + FilenameUtils.getExtension(ifile.getName())));
+            } else {
+                bus.setBLogo("."+File.separator+"img"+File.separator+"LOGO.png");
+               // MainAppController.B.setBLogo(bus.getBLogo());
+                ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File("."+File.separator+"img"+File.separator+"LOGO." + FilenameUtils.getExtension(ifile.getName())));
+            }
             Licensing l = new Licensing();
             DateTime sd = new DateTime(new Date());
             DateTime ed;
@@ -307,7 +306,6 @@ public class BusinessController implements Initializable {
             UrlEncryptor enc = new UrlEncryptor();
             String key = LicensingUtil.cookDesktopKey(bnametextfield.getText().replace(' ', '-'), bemailtextfield.getText(), sd.toDate(), ed.toDate());
             Key = enc.doEncrypt(key);
-//            System.out.println(enc.doEncrypt(Key));
             l.setLicenseKey(Key);
             l.setBusiness(bus);
             bus.setLicenseKey(l);
@@ -316,8 +314,10 @@ public class BusinessController implements Initializable {
         } catch (SocketException ex) {
             Logger.getLogger(BusinessController.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
+        } catch (IOException ex) {
+            Logger.getLogger(BusinessController.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
         }
-
     }
 
 }

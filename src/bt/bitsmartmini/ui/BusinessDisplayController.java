@@ -1,4 +1,3 @@
-
 package bt.bitsmartmini.ui;
 
 import java.net.URL;
@@ -7,10 +6,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import bt.bitsmartmini.bl.BusinessBL;
 import bt.bitsmartmini.entity.Business;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -22,17 +21,17 @@ public class BusinessDisplayController implements Initializable {
     @FXML
     private Button closebtn;
     @FXML
-    private Label bnametextfield;
+    private Text bnametextfield;
     @FXML
-    private Label baddtextfield;
+    private Text baddtextfield;
     @FXML
-    private Label bmobtextfield;
+    private Text bmobtextfield;
     @FXML
-    private Label bemailtextfield;
+    private Text bemailtextfield;
     @FXML
-    private Label country;
+    private Text country;
     @FXML
-    private Label currency;
+    private Text currency;
 
     /**
      * Initializes the controller class.
@@ -42,17 +41,21 @@ public class BusinessDisplayController implements Initializable {
         // TODO
         Business bb = new BusinessBL().findBusiness();
         bnametextfield.setText(bb.getBName());
-        baddtextfield.setText(bb.getBAddr());
-        bmobtextfield.setText(bb.getBMobile());
+        baddtextfield.setText(bb.getBAddr() + ", ");
+        if (bb.getBMobile1() != null) {
+            bmobtextfield.setText(bb.getBMobile() + " / " + bb.getBMobile1());
+        } else {
+            bmobtextfield.setText(bb.getBMobile());
+        }
         bemailtextfield.setText(bb.getBEmail());
         country.setText(bb.getBCountry());
         currency.setText(bb.getBCurrency());
-    }    
+    }
 
     @FXML
     private void closefrom(ActionEvent event) {
-         Stage stage = (Stage) closebtn.getScene().getWindow();
+        Stage stage = (Stage) closebtn.getScene().getWindow();
         stage.close();
     }
-    
+
 }
