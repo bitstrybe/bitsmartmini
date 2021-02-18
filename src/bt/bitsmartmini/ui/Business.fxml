@@ -9,6 +9,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -17,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox id="rootPane" alignment="CENTER" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.BusinessController">
+<VBox id="rootPane" alignment="CENTER" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.BusinessController">
    <children>
       <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
          <children>
@@ -44,64 +45,41 @@
             <Insets />
          </VBox.margin>
       </HBox>
+      <VBox alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" opacity="0.63" prefHeight="28.0" prefWidth="203.0" text="BitsMarts" textFill="#f6f6f6">
+               <font>
+                  <Font name="Open Sans" size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" opacity="0.72" prefHeight="17.0" prefWidth="146.0" text="Mini Retail" textFill="#e0eb38">
+               <font>
+                  <Font name="Open Sans" size="10.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
       <HBox>
          <children>
-            <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
-               <children>
-                  <Label alignment="CENTER" opacity="0.63" prefHeight="28.0" prefWidth="203.0" text="BitsMarts" textFill="#f6f6f6">
-                     <font>
-                        <Font name="Open Sans" size="20.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" opacity="0.72" prefHeight="17.0" prefWidth="146.0" text="Mini Retail" textFill="#e0eb38">
-                     <font>
-                        <Font name="Open Sans" size="10.0" />
-                     </font>
-                  </Label>
-               </children>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </VBox>
-         </children>
-      </HBox>
-      <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="140.0">
-         <children>
-            <VBox alignment="CENTER_LEFT" spacing="5.0" HBox.hgrow="ALWAYS">
-               <children>
-                  <Label text="Business Details" textFill="#f6f6f6">
-                     <font>
-                        <Font name="Open Sans" size="20.0" />
-                     </font>
-                  </Label>
-                  <HBox alignment="CENTER_LEFT" spacing="10.0">
-                     <children>
-                        <HBox alignment="CENTER" style="-fx-border-color: #333333;">
-                           <children>
-                              <ImageView fx:id="logoviewer" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../resources/bitsmart-logo-small.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <Button fx:id="browse" mnemonicParsing="false" onAction="#browseAction" text="Browse" />
-                     </children>
-                  </HBox>
-               </children>
-               <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </HBox.margin>
-            </VBox>
+            <Separator prefWidth="200.0" HBox.hgrow="ALWAYS" />
          </children>
          <VBox.margin>
-            <Insets />
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </VBox.margin>
       </HBox>
-      <VBox spacing="40.0">
+      <HBox alignment="CENTER" layoutX="30.0" layoutY="140.0">
+         <children>
+            <Label text="Business Details" textFill="#f6f6f6">
+               <font>
+                  <Font name="Open Sans" size="14.0" />
+               </font>
+            </Label>
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" />
+         </VBox.margin>
+      </HBox>
+      <VBox alignment="TOP_CENTER" spacing="40.0">
          <children>
             <HBox spacing="10.0">
                <children>
@@ -143,14 +121,14 @@
                   </JFXTextField>
                </children>
             </HBox>
-            <HBox>
+            <HBox spacing="10.0">
                <children>
                   <ComboBox fx:id="countrychoicebox" prefHeight="29.0" prefWidth="250.0" promptText="Country" style="-fx-background-color: transparent;">
                      <HBox.margin>
                         <Insets right="5.0" />
                      </HBox.margin>
                   </ComboBox>
-                  <Label fx:id="currencylabel" disable="true" prefHeight="29.0" prefWidth="250.0" text="Label" textFill="WHITE">
+                  <Label fx:id="currencylabel" disable="true" prefHeight="29.0" prefWidth="250.0" text="Label" textFill="#f5f0f0">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
@@ -165,7 +143,7 @@
             </HBox>
          </children>
          <VBox.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </VBox.margin>
       </VBox>
       <HBox alignment="CENTER" spacing="10.0">
@@ -182,7 +160,7 @@
             </JFXButton>
          </children>
          <VBox.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
          </VBox.margin>
       </HBox>
       <HBox alignment="CENTER_LEFT" spacing="5.0">

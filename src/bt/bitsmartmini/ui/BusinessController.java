@@ -1,6 +1,5 @@
 package bt.bitsmartmini.ui;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
@@ -35,12 +34,13 @@ import bt.bitsmartmini.entity.Licensing;
 import bt.bitsmartmini.utils.Utilities;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.SocketException;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 import lxe.utility.encryptor.UrlEncryptor;
-import org.apache.commons.io.FilenameUtils;
+import lxe.utility.string.LicensingUtil;
 import org.joda.time.DateTime;
 
 /**
@@ -64,14 +64,9 @@ public class BusinessController implements Initializable {
     private ComboBox<String> countrychoicebox;
     @FXML
     private Label currencylabel;
-    @FXML
-    private Hyperlink hyperlink;
 //    Image icon = new Image(getClass().getResourceAsStream("/resources/meds_logo.png"));
     String Key;
-    @FXML
     private ImageView logoviewer;
-    @FXML
-    private Button browse;
 
     final FileChooser fileChooser = new FileChooser();
     File ifile;
@@ -84,6 +79,8 @@ public class BusinessController implements Initializable {
     private FontAwesomeIcon duplicatelock;
     @FXML
     private JFXSpinner spinner;
+    @FXML
+    private Hyperlink hyperlink;
 
     /**
      * Initializes the controller class.
@@ -149,7 +146,6 @@ public class BusinessController implements Initializable {
                 //System.out.println(l);
                 Key = k;
                 String etext = enc.doDecrypt(Key);
-                //System.out.println("d: " + etext);
                 String[] pt = etext.split(":");
                 bnametextfield.setText(pt[0].replace('-', ' '));
                 bnametextfield.setDisable(true);
@@ -171,19 +167,15 @@ public class BusinessController implements Initializable {
 
     public void getMainApp() {
         try {
-            //Stage st = (Stage) login.getScene().getWindow();
             Parent root;
             root = FXMLLoader.load(getClass().getResource("MainApp.fxml"));
             Stage stage = new Stage();
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.resizableProperty().setValue(false);
-//            stage.getIcons().add(icon);
             stage.setTitle("Pharmabits");
             stage.setMaximized(true);
             stage.setScene(new Scene(root));
             stage.show();
-            //st.hide();
-//
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -230,7 +222,6 @@ public class BusinessController implements Initializable {
 
     }
 
-    @FXML
     private void browseAction(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
         //Set extension filter
@@ -285,59 +276,48 @@ public class BusinessController implements Initializable {
     }
 
     public int saveTemplate() {
-
-        Business bus = new Business();
-        bus.setBName(bnametextfield.getText());
-        bus.setBAddr(baddtextfield.getText());
-        bus.setBEmail(bemailtextfield.getText());
-        bus.setBCountry(countrychoicebox.getSelectionModel().getSelectedItem());
-        bus.setBCurrency(currencylabel.getText());
-        bus.setBMobile(bmobtextfield.getText());
-        String dbpath = new File("src/bt/resources/").getPath();
-        if (!ifile.getName().equals("logo-default.png")) {
-            System.out.println("Image File: " + "/bt/resources/" + bnametextfield.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
-//            cat.setItemImg(dbpath + "\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
-            bus.setBLogo("/bt/resources/" + bnametextfield.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
-        } else {
-
-            bus.setBLogo("/bt/resources/logo-default.png");
-        }
-        //            int result = new InsertUpdateBL().insertData(cat);
-        if (!ifile.getName().equals("DEFAULT.png")) {
-            try {
-                ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File(dbpath + "/" + bnametextfield.getText() + "." + FilenameUtils.getExtension(ifile.getName())));
-            } catch (IOException ex) {
-                Logger.getLogger(BusinessController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
-        Licensing l = new Licensing();
-        DateTime sd = new DateTime(new Date());
-        DateTime ed;
-        ed = sd.plusDays(31);
-        UrlEncryptor enc = new UrlEncryptor();
-        //                String key = LicensingUtil.cookDesktopKey(bnametextfield.getText().replace(' ', '-'), bemailtextfield.getText(), sd.toDate(), ed.toDate());
-//                Key = enc.doEncrypt(key);
+        try {
+            Business bus = new Business();
+            bus.setBName(bnametextfield.getText());
+            bus.setBAddr(baddtextfield.getText());
+            bus.setBEmail(bemailtextfield.getText());
+            bus.setBCountry(countrychoicebox.getSelectionModel().getSelectedItem());
+            bus.setBCurrency(currencylabel.getText());
+            bus.setBMobile(bmobtextfield.getText());
+            //String dbpath = new File("/bt/resources/").getPath();
+//            if (!ifile.getName().equals("logo-default.png")) {
+//                System.out.println("Image File: " + "/bt/resources/" + bnametextfield.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+////            cat.setItemImg(dbpath + "\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+//                bus.setBLogo("/bt/resources/" + bnametextfield.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+//            } else {
+//                bus.setBLogo("/bt/resources/logo-default.png");
+//            }
+//            //            int result = new InsertUpdateBL().insertData(cat);
+//            if (!ifile.getName().equals("DEFAULT.png")) {
+//                try {
+//                    ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File(dbpath + "/" + bnametextfield.getText() + "." + FilenameUtils.getExtension(ifile.getName())));
+//                } catch (IOException ex) {
+//                    Logger.getLogger(BusinessController.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+            Licensing l = new Licensing();
+            DateTime sd = new DateTime(new Date());
+            DateTime ed;
+            ed = sd.plusDays(31);
+            UrlEncryptor enc = new UrlEncryptor();
+            String key = LicensingUtil.cookDesktopKey(bnametextfield.getText().replace(' ', '-'), bemailtextfield.getText(), sd.toDate(), ed.toDate());
+            Key = enc.doEncrypt(key);
 //            System.out.println(enc.doEncrypt(Key));
-        l.setLicenseKey(Key);
-        l.setBusiness(bus);
-        bus.setLicenseKey(l);
-        int result = new InsertUpdateBL().insertUpdate(bus, l);
-//        switch (result) {
-//            case 1:
-//                closeTransition();
-//                getMainApp();
-//                break;
-//            default:
-////                    displayinfo.setText("NOTICE! AN ERROR OCCURED");
-////                    spinner.setVisible(false);
-////                    check.setVisible(false);
-//                break;
-//        }
-//        if (result == 1) {
-//            closeform();
-//        }
-        return result;
+            l.setLicenseKey(Key);
+            l.setBusiness(bus);
+            bus.setLicenseKey(l);
+            int result = new InsertUpdateBL().insertUpdate(bus, l);
+            return result;
+        } catch (SocketException ex) {
+            Logger.getLogger(BusinessController.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
 
     }
+
 }

@@ -109,7 +109,7 @@ public class MainAppController implements Initializable {
     public static final String SUCCESS_MESSAGE = "Saved";
     public static final String DELETE_MESSAGE = "Deleted";
     public static final String PROCESS_MESSAGE = "Processing please wait";
-     public static final String DUPLICATE_MESSAGE = "Duplicate found";
+    public static final String DUPLICATE_MESSAGE = "Duplicate found";
     public static final String EMPTY_FIELD = "This field can not be empty";
     public static final String INUSE_MESSAGE = "Sorry record is in use try again";
     public static final String ERROR_MESSAGE = "There was an error try again...";
@@ -726,6 +726,21 @@ public class MainAppController implements Initializable {
     private void getbusiness(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BusinessDisplay.fxml"));
+        Parent parent = (Parent) fxmlLoader.load();
+        Scene scene = new Scene(parent);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setMaximized(true);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(parent.getScene().getWindow());
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.show();
+    }
+
+    @FXML
+    private void addBusinessLogo(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddBusinessLogo.fxml"));
         Parent parent = (Parent) fxmlLoader.load();
         Scene scene = new Scene(parent);
         scene.setFill(Color.TRANSPARENT);

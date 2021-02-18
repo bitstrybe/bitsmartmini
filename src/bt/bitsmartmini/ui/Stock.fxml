@@ -176,10 +176,10 @@
                            <children>
                               <TableView fx:id="stockout" style="-fx-background-color: white;" styleClass="table-background">
                                  <columns>
-                                    <TableColumn fx:id="stkoutitems" prefWidth="220.0" resizable="false" styleClass="align_table_left" text="Items" />
+                                    <TableColumn fx:id="stkoutitems" prefWidth="230.0" resizable="false" styleClass="align_table_left" text="Items" />
                                     <TableColumn fx:id="stkoutqtytb" prefWidth="100.0" resizable="false" text="Qty" />
                                     <TableColumn fx:id="stkoutdate" minWidth="5.0" prefWidth="100.0" resizable="false" text=" Date" />
-                                    <TableColumn fx:id="stkoutaction" maxWidth="132.0" minWidth="0.0" resizable="false" text="Action" />
+                                    <TableColumn fx:id="stkoutaction" maxWidth="132.0" minWidth="0.0" prefWidth="100.0" resizable="false" text="Action" />
                                  </columns>
                               </TableView>
                               <TableView fx:id="returnstable" style="-fx-background-color: transparent;" styleClass="table-background">
@@ -187,7 +187,7 @@
                                     <TableColumn fx:id="returnitemstb" prefWidth="220.0" resizable="false" styleClass="align_table_left" text="Items" />
                                     <TableColumn fx:id="returnqtytb" prefWidth="100.0" resizable="false" text="Qty" />
                                     <TableColumn fx:id="returndatetb" minWidth="5.0" prefWidth="100.0" resizable="false" text="Return date" />
-                                    <TableColumn fx:id="returnaction" maxWidth="132.0" minWidth="0.0" prefWidth="78.0" resizable="false" text="Action" />
+                                    <TableColumn fx:id="returnaction" maxWidth="132.0" minWidth="0.0" prefWidth="100.0" resizable="false" text="Action" />
                                  </columns>
                               </TableView>
                            </children>

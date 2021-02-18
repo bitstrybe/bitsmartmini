@@ -26,8 +26,10 @@ import bt.bitsmartmini.reportmodel.StockReorderReportModel;
 import bt.bitsmartmini.reportmodel.StockReportModel;
 import bt.bitsmartmini.ui.LoginController;
 import bt.bitsmartmini.ui.MainAppController;
+import java.io.FileInputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.image.Image;
 import lxe.utility.date.DateUtil;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -60,18 +62,22 @@ public class PrintReport extends JFrame {
         ReceiptBL rbl = new ReceiptBL();
         CustomerBL cb = new CustomerBL();
 //        ReturnBL rb = new ReturnBL();
+        String logo = MainAppController.B.getBLogo();
         Receipt r = rbl.getReciptbyCode(Integer.parseInt(id));
         param = setBasiParam();
         Customers c = cb.getCustomersBySales(r.getSalesId().getSalesId());
         InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/TerminalReceiptReport.jasper");
-        String logo = MainAppController.B.getBLogo();
+        // System.out.println("LOGO: " + logo);
         BufferedImage image;
-        if(logo != null){
-            image = ImageIO.read(getClass().getResourceAsStream(logo));
-        }else{
-            image = ImageIO.read(getClass().getResourceAsStream("/bt/resources/logo.png"));
+        FileInputStream ifile = new FileInputStream(logo);
+        //BufferedImage image = ImageIO.read(getClass().getResourceAsStream(logo));
+        if (logo != null) {
+            image = ImageIO.read(ifile);
+        } else {
+            image = ImageIO.read(ifile);
+            image = ImageIO.read(getClass().getResourceAsStream(MainAppController.B.getBLogo()));
         }
-//        MainAppController.B.getBLogo();
+        System.out.println("IMG: " + MainAppController.B.getBLogo());
         BufferedImage imageback = ImageIO.read(getClass().getResourceAsStream("/bt/resources/logoback.png"));
         param.put("LOGO", image);
         param.put("LOGO1", imageback);
@@ -81,7 +87,7 @@ public class PrintReport extends JFrame {
         param.put("MODE", r.getPayMode());
         param.put("CUSTOMER", c.getFullname());
         param.put("CUSTMOBILE", c.getMobile());
-        param.put("CUSTMOBILE", c.getMobile());
+        //param.put("CUSTMOBILE", c.getMobile());
         param.put("REFUND_POLICY", r.getReturnPolicy());
         param.put("SOLDBY", r.getUsers().getUserid().toString());
         ReceiptReportModel sm = new ReceiptReportModel(r.getSalesId().getSalesId());

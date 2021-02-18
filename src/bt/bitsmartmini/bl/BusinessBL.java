@@ -39,6 +39,15 @@ public class BusinessBL extends DdsBL {
         }catch(Exception ex){
             return null;
         }
-
+    }
+    
+    public Business findBusiness(String name) {
+        try{
+        TypedQuery<Business> q = em.createQuery("SELECT b FROM Business b WHERE b.bName = :name", Business.class);
+        q.setParameter("name", name);
+        return q.getSingleResult();
+        }catch(Exception ex){
+            return null;
+        }
     }
 }

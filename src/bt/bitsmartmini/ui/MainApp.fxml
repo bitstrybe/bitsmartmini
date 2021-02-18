@@ -29,6 +29,7 @@
                      <menus>
                         <Menu fx:id="pharmabits" mnemonicParsing="false" text="BitsmartMini">
                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#addBusinessLogo" text="Add Logo" />
                             <MenuItem mnemonicParsing="false" onAction="#getbusiness" text="License" />
                           </items>
                         </Menu>

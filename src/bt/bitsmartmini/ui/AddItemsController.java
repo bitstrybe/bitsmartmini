@@ -171,14 +171,6 @@ public class AddItemsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         barcodetxt.selectAll();
         Utilities.repeatFocus(barcodetxt);
-
-//        barcodetxt.textProperty().addListener(e -> {
-//            try {
-//                duplicateMTD();
-//            } catch (FileNotFoundException ex) {
-//                Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        });
         categorycombo.setOnShown(e -> {
             getCategory();
         });
@@ -187,22 +179,12 @@ public class AddItemsController implements Initializable {
         });
         ifile = new File("./img/DEFAULT.png");
         TableData("");
-//        searchbtn.textProperty().addListener((e, oldValue, newValue) -> {
-//            TableData(searchbtn.getText());
-//        });
         brandscombo.setOnKeyReleased((KeyEvent event) -> {
             String s = FilterComboBox.jumpTo(event.getText(), brandscombo.getValue(), brandscombo.getItems());
             if (s != null) {
                 brandscombo.setValue(s);
             }
         });
-
-//        categorycombo.setOnKeyReleased((KeyEvent event) -> {
-//            String s = FilterComboBox.jumpTo(event.getText(), categorycombo.getValue(), categorycombo.getItems());
-//            if (s != null) {
-//                categorycombo.setValue(s);
-//            }
-//        });
         browse.setOnAction(new EventHandler<ActionEvent>() {
             Stage st = new Stage();
 
@@ -219,8 +201,7 @@ public class AddItemsController implements Initializable {
                 try {
                     BufferedImage bufferedImage = ImageIO.read(ifile);
                     int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
-                    resizeImage = Utilities.resizeImage(bufferedImage, type, 450, 340);
-
+                    resizeImage = Utilities.resizeImage(bufferedImage, type, 180, 150);
                     Image image = SwingFXUtils.toFXImage(resizeImage, null);
                     itemimages.setImage(image);
                     itemimages.setPreserveRatio(true);
@@ -252,7 +233,6 @@ public class AddItemsController implements Initializable {
                 saveTrans();
             } else {
                 errorTrans();
-
             }
         });
         Thread d = new Thread(task);
@@ -296,12 +276,10 @@ public class AddItemsController implements Initializable {
         itemimage.setCellValueFactory(new PropertyValueFactory<>("image"));
         itemimage.setPrefWidth(65);
         action.setSortable(false);
-
         action.setCellValueFactory((TableColumn.CellDataFeatures<ItemTableModel, Boolean> features) -> new SimpleBooleanProperty(features.getValue() != null));
         action.setCellFactory((TableColumn<ItemTableModel, Boolean> personBooleanTableColumn) -> new ItemDeleteCell());
         itemtableview.setItems(data);
         itemtableview.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
-
     }
 
     @FXML
@@ -537,11 +515,9 @@ public class AddItemsController implements Initializable {
         //adding image file to directory
         initialStream = new FileInputStream(ifile);
         if (!ifile.getName().equals("DEFAULT.png")) {
-            System.out.println("Image File: " + ".\\img" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
-//            cat.setItemImg(dbpath + "\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+            //System.out.println("Image File: " + ".\\img" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
             cat.setItemImg(".\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
         } else {
-
             cat.setItemImg(".\\img\\DEFAULT.png");
         }
         int result = new InsertUpdateBL().updateData(cat);
@@ -556,25 +532,4 @@ public class AddItemsController implements Initializable {
         int result = new ItemsBL().removeData(value);
         return result;
     }
-
-//    private void duplicateMTD() throws FileNotFoundException {
-//        InputStream stream = null;
-//        Items value = new ItemsBL().getImageItembyCode(barcodetxt.getText());
-//        if (value != null) {
-//            barcodetxt.setText(value.getUpc());
-//            itemdesctxt.setText(value.getItemDesc());
-//            brandscombo.getSelectionModel().select(value.getBrand().getBrandName());
-//            categorycombo.getSelectionModel().select(value.getCategory().getCategoryName());
-//            cptxt.setText(String.valueOf(value.getCp()));
-//            sptxt.setText(String.valueOf(value.getSp()));
-//            roltxt.setText(String.valueOf(value.getRol()));
-//            stream = new FileInputStream(value.getItemImg());
-//            Image image = new Image(stream);
-//            itemimages.setImage(image);
-//        } else if (value == null) {
-//            save.setDisable(false);
-//            displayinfo.setText(null);
-//            duplicatelock.setVisible(false);
-//        }
-//    }
 }

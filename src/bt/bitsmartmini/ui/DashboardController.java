@@ -208,7 +208,7 @@ public class DashboardController implements Initializable {
                     DateTime today = new DateTime(System.currentTimeMillis());
                     DateTime sd = new DateTime().withYear(year).withDayOfWeek(DateTimeConstants.MONDAY);
                     double val = rc.getDurationSalesReceipt(sd.toDate(), today.toDate());
-                    System.out.println("wks: "+val);
+                    //System.out.println("wks: "+val);
                     weeklySalesCurr.setText(MainAppController.B.getBCurrency());
                     if (val > 0) {
                         weeklysales.setText(String.valueOf(df.format(val)));
@@ -229,7 +229,6 @@ public class DashboardController implements Initializable {
                     monthlySalesCurr.setText(MainAppController.B.getBCurrency());
                     if (val > 0) {
                         monthlysales.setText(String.valueOf(df.format(val)));
-//                        monthlysales.setFill(Paint.valueOf("#5a4c97"));
                     } else {
                         monthlysales.setText("0");
                     }
@@ -246,7 +245,6 @@ public class DashboardController implements Initializable {
                     yearlySalesCurr.setText(MainAppController.B.getBCurrency());
                     if (val > 0) {
                         quaterlysales.setText(String.valueOf(df.format(val)));
-//                        quaterlysales.setFill(Paint.valueOf("#a1a187"));
                     } else {
                         quaterlysales.setText("0");
                     }
@@ -331,7 +329,7 @@ public class DashboardController implements Initializable {
         for (XYChart.Series<String, Number> s : linechartB.getData()) {
             for (XYChart.Data<String, Number> d : s.getData()) {
                 Tooltip.install(d.getNode(), new Tooltip(
-                        "Month : " + d.getXValue().toString() + "\n"
+                        "Month : " + d.getXValue() + "\n"
                         + "Stock : " + df.format(d.getYValue())));
                 //Adding class on hover
                 d.getNode().setOnMouseEntered(event -> d.getNode().setStyle("-fx-background-color:  #000"));
