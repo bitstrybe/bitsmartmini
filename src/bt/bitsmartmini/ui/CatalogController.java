@@ -115,7 +115,7 @@ public class CatalogController extends MainAppController implements Initializabl
                             FileInputStream ifile = new FileInputStream(items.getItemImg());
                             Image image = new Image(ifile);
                             childController.itemsimage.setImage(image);
-                            childController.itemsimage.setFitHeight(100);
+                            childController.itemsimage.setFitHeight(90);
                             childController.itemsimage.setFitWidth(85);
                             if (bal > 0) {
                                 childController.outofstockbackground.setVisible(false);

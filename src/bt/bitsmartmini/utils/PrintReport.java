@@ -12,7 +12,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import bt.bitsmartmini.bl.CustomerBL;
 import bt.bitsmartmini.bl.ReceiptBL;
-import bt.bitsmartmini.bl.ReturnBL;
 import bt.bitsmartmini.entity.Customers;
 import bt.bitsmartmini.entity.Receipt;
 import bt.bitsmartmini.reportmodel.DebtorsByCustomerReportModel;
@@ -29,7 +28,6 @@ import bt.bitsmartmini.ui.MainAppController;
 import java.io.FileInputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.image.Image;
 import lxe.utility.date.DateUtil;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -77,7 +75,7 @@ public class PrintReport extends JFrame {
             image = ImageIO.read(ifile);
             image = ImageIO.read(getClass().getResourceAsStream(MainAppController.B.getBLogo()));
         }
-        System.out.println("IMG: " + MainAppController.B.getBLogo());
+        //System.out.println("IMG: " + MainAppController.B.getBLogo());
         BufferedImage imageback = ImageIO.read(getClass().getResourceAsStream("/bt/resources/logoback.png"));
         param.put("LOGO", image);
         param.put("LOGO1", imageback);

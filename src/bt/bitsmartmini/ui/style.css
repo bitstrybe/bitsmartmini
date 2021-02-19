@@ -305,7 +305,6 @@
 .dashboard-card-title{
     -fx-font-family: "Open Sans"; 
     font-size: 18px;
-
 }
 
 add-to-cart-btn{
@@ -346,7 +345,6 @@ add-to-cart-btn{
 .sidepane-background{
     -fx-background-color:#cbd0d4;
 }
-
 
 .window-title{
     -fx-text-fill: #38424b;
