@@ -26,8 +26,6 @@ import bt.bitsmartmini.reportmodel.StockReportModel;
 import bt.bitsmartmini.ui.LoginController;
 import bt.bitsmartmini.ui.MainAppController;
 import java.io.File;
-import java.io.FileInputStream;
-import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import lxe.utility.date.DateUtil;
