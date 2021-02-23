@@ -201,11 +201,7 @@ public class PrintReport extends JFrame {
     }
 
     public void showItemListReport() throws JRException, ClassNotFoundException, SQLException, IOException {
-
-        //String reportSrcFile = "data/Blank_A4.jrxml";
-        // First, compile jrxml file.
         InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/ItemListReport.jasper");
-        // Fields for report
         param = setBasiParam();
         ItemListReportModel im = new ItemListReportModel();
         JRTableModelDataSource jrtmds = new JRTableModelDataSource(im);
@@ -220,10 +216,7 @@ public class PrintReport extends JFrame {
     }
 
     public void showDebtorsByCustomerReport(String c) throws JRException, ClassNotFoundException, SQLException, IOException {
-        //String reportSrcFile = "data/Blank_A4.jrxml";
-        // First, compile jrxml file.
         InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/DebtorsReport.jasper");
-        // Fields for report
         param = setBasiParam();
         File f = new File(MainAppController.B.getBLogo());
         BufferedImage image = ImageIO.read(f);
@@ -241,7 +234,6 @@ public class PrintReport extends JFrame {
 
     public void showDebtorsBySalesReport() throws JRException, ClassNotFoundException, SQLException, IOException {
         InputStream inputStream = getClass().getResourceAsStream("/bt/bitsmartmini/reports/DebtorsReport.jasper");
-        // Fields for report
         param = setBasiParam();
         File f = new File(MainAppController.B.getBLogo());
         BufferedImage image = ImageIO.read(f);

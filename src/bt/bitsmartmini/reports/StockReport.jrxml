@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4878c760-466e-47da-a970-5839a57c75c7">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="312"/>
+	<property name="ireport.x" value="52"/>
 	<property name="ireport.y" value="0"/>
 	<style name="TableHeader" mode="Opaque" backcolor="#CCCCCC"/>
 	<style name="linecolorlight"/>
@@ -73,7 +73,7 @@
 	<columnHeader>
 		<band height="22" splitType="Stretch">
 			<staticText>
-				<reportElement style="tableHead" x="36" y="1" width="356" height="20" uuid="deff6e2d-06e9-466c-a5de-06c723d57636"/>
+				<reportElement style="tableHead" x="113" y="1" width="279" height="20" uuid="deff6e2d-06e9-466c-a5de-06c723d57636"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8" isBold="false"/>
 				</textElement>
@@ -142,17 +142,30 @@
 					<pen lineWidth="0.5" lineColor="#CCCCCC"/>
 				</graphicElement>
 			</line>
+			<line>
+				<reportElement x="112" y="1" width="1" height="20" uuid="80665e2c-f9ef-4437-bd16-104495b74dcd"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="tableHead" x="36" y="1" width="76" height="20" uuid="18cf3afd-be6d-4ab3-b1f6-281fd6f71256"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Barcode]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="16" splitType="Stretch">
 			<textField isBlankWhenNull="true">
-				<reportElement x="36" y="0" width="356" height="15" uuid="20f9e283-4bda-4bd2-8e6b-4085c988e87c"/>
+				<reportElement x="113" y="0" width="279" height="15" uuid="20f9e283-4bda-4bd2-8e6b-4085c988e87c"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="7"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{COLUMN_0}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{COLUMN_1}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement style="TableHeader" x="0" y="0" width="1" height="15" uuid="2270be06-3c1d-4003-a451-c59f7e42a538"/>
@@ -211,6 +224,20 @@
 					<pen lineWidth="0.5" lineColor="#CCCCCC"/>
 				</graphicElement>
 			</line>
+			<line>
+				<reportElement style="TableHeader" x="112" y="0" width="1" height="15" uuid="ae4d5d11-c77d-4c94-8895-1523124ff626"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="36" y="0" width="76" height="15" uuid="5586c13b-6ab2-4d51-b367-3f1e62202750"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COLUMN_0}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
