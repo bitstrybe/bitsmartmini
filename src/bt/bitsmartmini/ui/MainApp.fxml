@@ -96,7 +96,7 @@
                            </graphic>
                         </MenuItem>
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Profile" />
+                        <MenuItem mnemonicParsing="false" onAction="#profileAction" text="Profile" />
                         <MenuItem mnemonicParsing="false" text="Settings" />
                         <MenuItem mnemonicParsing="false" onAction="#signOut" text="Sign out" />
                      </items>

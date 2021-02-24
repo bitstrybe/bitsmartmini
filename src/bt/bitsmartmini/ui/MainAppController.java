@@ -497,7 +497,7 @@ public class MainAppController implements Initializable {
                 Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
-                Image icon = new Image(getClass().getResourceAsStream("/bt/resources/meds_logo.png"));
+                Image icon = new Image(getClass().getResourceAsStream("/bt/resources/bitsmart-logo-black.jpg"));
                 stage.getIcons().add(icon);
                 stage.initStyle(StageStyle.UNDECORATED);
                 stage.show();
@@ -780,6 +780,11 @@ public class MainAppController implements Initializable {
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
+    }
+
+    @FXML
+    private void profileAction(ActionEvent event) throws IOException {
+        setScene("Userprofile.fxml");
     }
 
 }

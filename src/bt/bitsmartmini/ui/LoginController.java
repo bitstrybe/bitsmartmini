@@ -54,7 +54,7 @@ public class LoginController implements Initializable {
     @FXML
     private Button login;
 
-    Image icon = new Image(getClass().getResourceAsStream("/bt/resources/meds_logo.png"));
+    Image icon = new Image(getClass().getResourceAsStream("/bt/resources/bitsmart-logo-black.jpg"));
 
     @FXML
     private Hyperlink hyperlink;
