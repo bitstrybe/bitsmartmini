@@ -717,7 +717,7 @@ public class SalesController implements Initializable {
             paddedButton.getChildren().add(btn);
             btn.setRipplerFill(Paint.valueOf("#6699ff"));
             btn.setGraphic(new ImageView(preview));
-            //if (!b) {
+            //if (!BS) {
             System.out.println("b: " + b);
             paddedButton.setDisable(b);
             //}

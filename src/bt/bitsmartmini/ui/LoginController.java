@@ -66,12 +66,14 @@ public class LoginController implements Initializable {
     private Label statusL;
 
     int i = 0;
+    
+    Business BS = new BusinessBL().findBusiness();
 
     //Stage st;
     //Stage st = (Stage) login.getScene().getWindow();
     @FXML
     public void dolog() throws InterruptedException {
-
+        
         //statusL.setText("Validating...");
         Task<Void> task = new Task<Void>() {
             @Override
@@ -92,11 +94,17 @@ public class LoginController implements Initializable {
                     getChangePassword();
 //                    st.show();
                 } else {
-                    if (u.getRoles().equals("Administrator")) {
-                        validateLicense();
-                    } else {
+                    if (BS == null && u.getRoles().equals("Administrator")) {
+                        validateLicense(BS);
+                    }else if (BS != null && u.getRoles().equals("Administrator")) {
+                        getMainApp();
+                    }
+                    if (BS == null && (u.getRoles().equals("Supervisor") || u.getRoles().equals("Sales"))) {
                         statusL.getStyleClass().add("error-label");//setTextFill(Paint.valueOf("#ff3333"));
                         statusL.setText("Your account is not allowed to perform this operation, Contact Admin!!!");
+                        //getMainApp();
+                    } else if (BS != null && (u.getRoles().equals("Supervisor") || u.getRoles().equals("Sales"))) {
+                        getMainApp();
                     }
                 }
             } else {
@@ -236,7 +244,7 @@ public class LoginController implements Initializable {
                         childController.login.setText("Password Changed");
                     }
                     stage.close();
-                    validateLicense();
+                    validateLicense(BS);
 
                     //dolog();
                 });
@@ -251,9 +259,9 @@ public class LoginController implements Initializable {
 
     }
 
-    public void validateLicense() {
+    public void validateLicense(Business b) {
         try {
-            Business b = new BusinessBL().findBusiness();
+            //Business BS = new BusinessBL().findBusiness();
             if (u.getRoles().equals("Administrator")) {
                 if (b != null) {
                     int v = checkLicenseExpiry(b.getLicenseKey().getLicenseKey());
