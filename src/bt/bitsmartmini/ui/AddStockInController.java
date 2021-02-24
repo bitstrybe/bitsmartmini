@@ -36,7 +36,9 @@ import bt.bitsmartmini.entity.Items;
 import bt.bitsmartmini.entity.Stockin;
 import bt.bitsmartmini.entity.Users;
 import bt.bitsmartmini.utils.Utilities;
+import java.time.LocalDate;
 import java.util.concurrent.atomic.AtomicInteger;
+import javafx.scene.control.DatePicker;
 
 /**
  * FXML Controller class
@@ -81,6 +83,8 @@ public class AddStockInController implements Initializable {
 
     ItemsBL ib = new ItemsBL();
     StockinBL sb = new StockinBL();
+    @FXML
+    private DatePicker expirydate;
 
     public void getItemList(String p) {
         List<String> item = new ItemsBL().getAllItemsForList();
@@ -191,7 +195,7 @@ public class AddStockInController implements Initializable {
         cat.setUpc(new Items(itembarcode.getText()));
         cat.setQuantity(Integer.parseInt(qnttextfield.getText()));
         cat.setStockinDate(new Date());
-        cat.setExpiryDate(new Date());
+        cat.setExpiryDate(Utilities.convertToDateViaSqlDate(expirydate.getValue()));
         cat.setUsers(new Users(LoginController.u.getUserid()));
         cat.setEntryLog(new Date());
         cat.setLastModified(new Date());
