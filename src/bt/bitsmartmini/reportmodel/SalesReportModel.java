@@ -2,15 +2,12 @@ package bt.bitsmartmini.reportmodel;
 
 import java.util.Date;
 import java.util.List;
-import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javax.swing.table.AbstractTableModel;
 import bt.bitsmartmini.bl.ReceiptBL;
 import bt.bitsmartmini.bl.ReturnBL;
 import bt.bitsmartmini.bl.SalesBL;
 import bt.bitsmartmini.entity.Sales;
 import bt.bitsmartmini.utils.Utilities;
-import lxe.utility.math.DecimalUtil;
 
 /**
  *

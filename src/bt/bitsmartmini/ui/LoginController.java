@@ -92,17 +92,16 @@ public class LoginController implements Initializable {
                     getChangePassword();
 //                    st.show();
                 } else {
-                    // if (u.getRoles().equals("Administrator")) {
-                    validateLicense();
-//                    } else {
-//                        statusL.getStyleClass().add("error-label");//setTextFill(Paint.valueOf("#ff3333"));
-//                        statusL.setText("Your account is not allowed to perform this operation, Contact Admin!!!");
-//                    }
+                    if (u.getRoles().equals("Administrator")) {
+                        validateLicense();
+                    } else {
+                        statusL.getStyleClass().add("error-label");//setTextFill(Paint.valueOf("#ff3333"));
+                        statusL.setText("Your account is not allowed to perform this operation, Contact Admin!!!");
+                    }
                 }
             } else {
                 statusL.getStyleClass().add("error-label");//setTextFill(Paint.valueOf("#ff3333"));
                 statusL.setText("Login failed, please check your username or password and try again");
-                //login.setDisable(false);
             }
         });
 
