@@ -1,4 +1,3 @@
-
 package bt.bitsmartmini.ui;
 
 import com.jfoenix.controls.JFXButton;
@@ -45,10 +44,14 @@ import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import bt.bitsmartmini.bl.InsertUpdateBL;
+import bt.bitsmartmini.bl.LoginBL;
 import bt.bitsmartmini.bl.SalesBL;
 import bt.bitsmartmini.bl.UsersBL;
 import bt.bitsmartmini.entity.Users;
 import bt.bitsmartmini.tablemodel.UsersTableModel;
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
+import javafx.scene.paint.Color;
 import org.apache.commons.codec.digest.DigestUtils;
 
 /**
@@ -188,7 +191,7 @@ public class UsersController implements Initializable {
                 }
             }
             String fullname = users.getTitle() + " " + users.getFname() + " " + users.getLname();
-            data.add(new UsersTableModel(users.getUserid(), fullname, users.getMobile(), users.getEmail(), users.getUsername(), users.getRoles(), strstatus, straccount));
+            data.add(new UsersTableModel(users.getUserid(), users.getTitle(), fullname, users.getFname(), users.getLname(), users.getMobile(), users.getEmail(), users.getUsername(), users.getRoles(), strstatus, straccount));
         });
         fullnametb.setCellValueFactory(cell -> cell.getValue().getFullnameProperty());
         mobiletb.setCellValueFactory(cell -> cell.getValue().getMobileProperty());
@@ -219,15 +222,14 @@ public class UsersController implements Initializable {
 
     public class AddPersonCell extends TableCell<UsersTableModel, Boolean> {
 
-        //Image img = new Image(getClass().getResourceAsStream("edit.png"));
+//        Image img = new Image(getClass().getResourceAsStream("edit.png"));
         Image img2 = new Image(getClass().getResourceAsStream("delete.png"));
-
-
 
         // pads and centers the add button in the cell.
         HBox paddedButton = new HBox();
 
         JFXButton delButton = new JFXButton();
+        JFXButton reset = new JFXButton();
         // records the y pos of the last button press so that the add person dialog can be shown next to the cell.
         final DoubleProperty buttonY = new SimpleDoubleProperty();
 
@@ -239,16 +241,81 @@ public class UsersController implements Initializable {
          */
         AddPersonCell() {
             paddedButton.setStyle("-fx-alignment: CENTER;");
-            paddedButton.getChildren().add(delButton);
+            paddedButton.getChildren().addAll(reset, delButton);
+            reset.setGraphic(GlyphsDude.createIcon(FontAwesomeIcons.REPEAT));
             delButton.setGraphic(new ImageView(img2));
             delButton.setRipplerFill(Paint.valueOf("#D8E1DC"));
+
+            reset.setOnAction(value -> {
+                try {
+                    int selectdIndex = getTableRow().getIndex();
+                    //Create a new table show details of the selected item
+                    UsersTableModel selectedRecord = (UsersTableModel) userstable.getItems().get(selectdIndex);
+
+                    Stage stage = new Stage();
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ChangePassword.fxml"));
+                    Parent parent = (Parent) fxmlLoader.load();
+                    Scene scene = new Scene(parent);
+                    scene.setFill(Color.TRANSPARENT);
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.setScene(scene);
+                    stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.show();
+                    ChangePasswordController childController = fxmlLoader.getController();
+//            System.out.println("Reached");
+                    childController.login.addEventHandler(MouseEvent.MOUSE_CLICKED, v -> {
+                        Task<Void> task = new Task<Void>() {
+                            @Override
+                            protected Void call() throws Exception {
+//                        childController.spinner.setVisible(true);
+                                updateMessage("Data Processing...");
+                                Thread.sleep(1000);
+                                return null;
+                            }
+                        };
+                        childController.login.textProperty().bind(task.messageProperty());
+                        task.setOnSucceeded(s -> {
+                            childController.login.textProperty().unbind();
+                            if (!childController.repassword.getText().equals(childController.password.getText())) {
+                                //System.out.println("Password does match");
+                            } else {
+                                Users user = new Users();
+                                user.setUserid(selectedRecord.getUserId());
+                                user.setTitle(selectedRecord.getTitle());
+                                user.setFname(selectedRecord.getFname());
+                                user.setLname(selectedRecord.getLname());
+                                user.setMobile(selectedRecord.getMobile());
+                                user.setEmail(childController.emailaddress.getText());
+                                user.setUsername(selectedRecord.getUsername());
+                                user.setPwd(DigestUtils.md5Hex(new StringBuilder().append(childController.password.getText()).append(LoginBL.DKEY).toString()));
+                                user.setRoles(selectedRecord.getRoles());
+                                user.setDateCreated(new Date());
+                                user.setModifiedDate(new Date());
+                                user.setPwdStatus(1);
+                                user.setActive(1);
+                                int result = new InsertUpdateBL().updateData(user);
+                                System.out.println("match");
+                                childController.login.setText("Password Changed");
+                                TableData();
+                            }
+                            stage.close();
+
+                            //dolog();
+                        });
+                        Thread d = new Thread(task);
+                        d.setDaemon(true);
+                        d.start();
+                    });
+                } catch (IOException ex) {
+                    Logger.getLogger(UsersController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            });
             delButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
 
                 public void handle(ActionEvent event) {
-
                     try {
-
                         int selectdIndex = getTableRow().getIndex();
                         //Create a new table show details of the selected item
                         UsersTableModel selectedRecord = (UsersTableModel) userstable.getItems().get(selectdIndex);
@@ -316,8 +383,6 @@ public class UsersController implements Initializable {
             });
 
         }
-        
-        
 
         /**
          * places an add button in the row only if the row is not empty.
@@ -397,6 +462,9 @@ public class UsersController implements Initializable {
 
         }
 
+    }
+
+    public void getChangePasswordTemplate() throws IOException {
     }
 
 }

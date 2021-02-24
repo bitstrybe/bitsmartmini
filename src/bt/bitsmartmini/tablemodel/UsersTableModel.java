@@ -13,8 +13,12 @@ import javafx.beans.property.SimpleStringProperty;
  * @author JScare
  */
 public class UsersTableModel {
-private SimpleIntegerProperty usersid;
+
+    private SimpleIntegerProperty usersid;
     private SimpleStringProperty fullname;
+    private SimpleStringProperty title;
+    private SimpleStringProperty fname;
+    private SimpleStringProperty lname;
     private SimpleStringProperty mobile;
     private SimpleStringProperty email;
     private SimpleStringProperty username;
@@ -22,9 +26,12 @@ private SimpleIntegerProperty usersid;
     private SimpleStringProperty status;
     private SimpleStringProperty account;
 
-    public UsersTableModel(Integer usersid,String fullname, String mobile, String email, String username, String roles, String status, String account) {
+    public UsersTableModel(Integer usersid, String title, String fullname,String fname, String lname ,String mobile, String email, String username, String roles, String status, String account) {
         this.usersid = new SimpleIntegerProperty(usersid);
+        this.title = new SimpleStringProperty(title);
         this.fullname = new SimpleStringProperty(fullname);
+        this.fname = new SimpleStringProperty(fname);
+        this.lname = new SimpleStringProperty(lname);
         this.mobile = new SimpleStringProperty(mobile);
         this.email = new SimpleStringProperty(email);
         this.username = new SimpleStringProperty(username);
@@ -33,7 +40,7 @@ private SimpleIntegerProperty usersid;
         this.account = new SimpleStringProperty(account);
     }
 
-      public Integer getUserId() {
+    public Integer getUserId() {
         return usersid.get();
     }
 
@@ -45,6 +52,18 @@ private SimpleIntegerProperty usersid;
         this.usersid = new SimpleIntegerProperty(usersid);
     }
     
+    public String getTitle() {
+        return title.get();
+    }
+
+    public SimpleStringProperty getTitleProperty() {
+        return title;
+    }
+
+    public void setTitleProperty(String title) {
+        this.title = new SimpleStringProperty(title);
+    }
+
     public String getFullname() {
         return fullname.get();
     }
@@ -56,7 +75,31 @@ private SimpleIntegerProperty usersid;
     public void setFullnameProperty(String fullname) {
         this.fullname = new SimpleStringProperty(fullname);
     }
+    public String getFname() {
+        return fname.get();
+    }
+
+    public SimpleStringProperty getFnameProperty() {
+        return fname;
+    }
+
+    public void setFnameProperty(String fname) {
+        this.fname = new SimpleStringProperty(fname);
+    }
     
+    public String getLname() {
+        return lname.get();
+    }
+
+    public SimpleStringProperty getLnameProperty() {
+        return lname;
+    }
+
+    public void setLnameProperty(String lname) {
+        this.lname = new SimpleStringProperty(lname);
+    }
+    
+
     public String getMobile() {
         return mobile.get();
     }
@@ -68,7 +111,8 @@ private SimpleIntegerProperty usersid;
     public void setMobileProperty(String mobile) {
         this.mobile = new SimpleStringProperty(mobile);
     }
-      public String getEmail() {
+
+    public String getEmail() {
         return email.get();
     }
 
@@ -79,7 +123,8 @@ private SimpleIntegerProperty usersid;
     public void setEmailProperty(String email) {
         this.email = new SimpleStringProperty(email);
     }
-     public String getUsername() {
+
+    public String getUsername() {
         return username.get();
     }
 
@@ -90,7 +135,8 @@ private SimpleIntegerProperty usersid;
     public void setUsernameProperty(String username) {
         this.username = new SimpleStringProperty(username);
     }
-      public String getRoles() {
+
+    public String getRoles() {
         return roles.get();
     }
 
@@ -101,7 +147,8 @@ private SimpleIntegerProperty usersid;
     public void setRolesProperty(String roles) {
         this.roles = new SimpleStringProperty(roles);
     }
-       public String getStatus() {
+
+    public String getStatus() {
         return status.get();
     }
 
@@ -112,7 +159,8 @@ private SimpleIntegerProperty usersid;
     public void setStatusProperty(String status) {
         this.status = new SimpleStringProperty(status);
     }
-       public String getAccount() {
+
+    public String getAccount() {
         return account.get();
     }
 

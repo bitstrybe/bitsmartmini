@@ -22,7 +22,9 @@ import bt.bitsmartmini.bl.StockinBL;
 import bt.bitsmartmini.entity.Items;
 import bt.bitsmartmini.entity.Stockin;
 import bt.bitsmartmini.entity.Users;
+import bt.bitsmartmini.utils.Utilities;
 import java.util.concurrent.atomic.AtomicInteger;
+import javafx.scene.control.DatePicker;
 import javafx.scene.text.Text;
 
 /**
@@ -61,6 +63,8 @@ public class AdminStockinController implements Initializable {
     public Label displayinfo;
 
     AtomicInteger rowCounter = new AtomicInteger(1);
+    @FXML
+    private DatePicker expirydate;
 
     /**
      * Initializes the controller class.
@@ -142,7 +146,7 @@ public class AdminStockinController implements Initializable {
         cat.setUpc(new Items(itembarcode.getText()));
         cat.setQuantity(Integer.parseInt(qnttextfield.getText()));
         cat.setStockinDate(new Date());
-        cat.setExpiryDate(new Date());
+        cat.setExpiryDate(Utilities.convertToDateViaSqlDate(expirydate.getValue()));
         cat.setUsers(new Users(LoginController.u.getUserid()));
         cat.setEntryLog(new Date());
         cat.setLastModified(new Date());
