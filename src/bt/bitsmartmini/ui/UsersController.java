@@ -243,7 +243,7 @@ public class UsersController implements Initializable {
         AddPersonCell() {
             paddedButton.setStyle("-fx-alignment: CENTER;");
             paddedButton.getChildren().addAll(reset, delButton);
-            reset.setGraphic(GlyphsDude.createIcon(FontAwesomeIcons.REPEAT));
+            reset.setGraphic(GlyphsDude.createIcon(FontAwesomeIcons.EDIT));
             delButton.setGraphic(new ImageView(img2));
             delButton.setRipplerFill(Paint.valueOf("#D8E1DC"));
 
@@ -292,7 +292,7 @@ public class UsersController implements Initializable {
                                 user.setRoles(selectedRecord.getRoles());
                                 user.setDateCreated(new Date());
                                 user.setModifiedDate(new Date());
-                                user.setPwdStatus(1);
+                                user.setPwdStatus(0);
                                 user.setActive(1);
                                 int result = new InsertUpdateBL().updateData(user);
                                 System.out.println("match");
