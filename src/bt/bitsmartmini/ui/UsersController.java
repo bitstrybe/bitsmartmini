@@ -119,8 +119,9 @@ public class UsersController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         TableData();
-        roleschoicebox.getItems().add("Sales personnel");
-        roleschoicebox.getSelectionModel().select("Sales personnel");
+        roleschoicebox.getItems().add("Sales");
+        roleschoicebox.getSelectionModel().select("Sales");
+        roleschoicebox.getSelectionModel().select("Supervisor");
 
         accstuchoicebox.getItems().add("Active");
         accstuchoicebox.getItems().add("Inactive");
