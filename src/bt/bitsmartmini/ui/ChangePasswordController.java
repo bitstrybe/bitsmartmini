@@ -13,6 +13,9 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import org.apache.commons.validator.EmailValidator;
 
@@ -33,12 +36,17 @@ public class ChangePasswordController implements Initializable {
     public JFXButton login;
 
     public EmailValidator validattor;
+    @FXML
+    public Label statusL;
+    @FXML
+    private Hyperlink hyperlink;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        statusL.setVisible(false);
         // TODO
 //        doEmailValidate();
 //        RegexValidator valid = new RegexValidator();
@@ -71,6 +79,10 @@ public class ChangePasswordController implements Initializable {
     private void exit(ActionEvent event) {
         Stage stage = (Stage) login.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    private void resetElem(KeyEvent event) {
     }
 
 }
