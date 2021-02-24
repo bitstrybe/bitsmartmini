@@ -147,6 +147,7 @@ public class ItemCartController extends MainAppController implements Initializab
     @FXML
     private Button checkoutbtn;
 
+    Double CP;
     /**
      * Initializes the controller class.
      */
@@ -184,7 +185,7 @@ public class ItemCartController extends MainAppController implements Initializab
                         if (Long.valueOf(qnttextfield.getText()) <= qntfield) {
                             double totalqnt = Long.valueOf(qnttextfield.getText()) * Double.valueOf(itemsp.getText());
                             double price = Double.valueOf(itemsp.getText());
-                            SelectItemSaleTableModel item = new SelectItemSaleTableModel(itembarcode.getText(), itemname.getText(), qnttextfield.getText(), "0", DecimalUtil.format2(price), DecimalUtil.format2(totalqnt), "0");
+                            SelectItemSaleTableModel item = new SelectItemSaleTableModel(itembarcode.getText(), itemname.getText(), qnttextfield.getText(), CP.toString(), DecimalUtil.format2(price), DecimalUtil.format2(totalqnt), "0");
                             cart.put(itembarcode.getText(), item);
                             static_label.setText(String.valueOf(cart.size()));
                             addtocartinfo.setText("Added to cart");
@@ -430,7 +431,7 @@ public class ItemCartController extends MainAppController implements Initializab
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddCheckoutPayment.fxml"));
         Parent parent = (Parent) fxmlLoader.load();
         AddCheckoutPaymentController childController = fxmlLoader.getController();
-        String customerid = customerdroplist.getSelectionModel().getSelectedItem();
+       // String customerid = customerdroplist.getSelectionModel().getSelectedItem();
         String cus[] = customerdroplist.getSelectionModel().getSelectedItem().split("[->]");
         List<String> spiltedval = Arrays.asList(cus);
         String cusid = spiltedval.get(0).trim();
@@ -659,6 +660,7 @@ public class ItemCartController extends MainAppController implements Initializab
         //System.out.println("cod: " + itembarcode.getText());
         Items item = new ItemsBL().getImageItembyCode(itembarcode.getText());
         if (item != null) {
+            CP = item.getCp();
             itembarcode.setText(item.getUpc());
             itemcartname.setText(item.getItemDesc());
             itembrand.setText(item.getBrand().getBrandName());

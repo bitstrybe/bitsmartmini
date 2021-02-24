@@ -129,6 +129,7 @@ public class ReturnBL extends DdsBL {
             q.setParameter("salecode", salecode);
             return q.getSingleResult();
         } catch (NullPointerException e) {
+           // Logger.getLogger(ReturnBL.class.getName()).log(Level.SEVERE, null, e);
             return 0.00;
         }
     }

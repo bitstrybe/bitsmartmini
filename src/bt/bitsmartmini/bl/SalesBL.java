@@ -70,9 +70,14 @@ public class SalesBL extends DdsBL {
     }
 
     public Double getTotalCost(Integer salesid) {
-        TypedQuery<Double> q = em.createQuery("SELECT SUM(s.quantity * s.costPrice) FROM SalesDetails s WHERE s.saleId.salesId = :salesid", Double.class);
-        q.setParameter("salesid", salesid);
-        return q.getSingleResult();
+        try {
+            TypedQuery<Double> q = em.createQuery("SELECT SUM(s.quantity * s.costPrice) FROM SalesDetails s WHERE s.saleId.salesId = :salesid", Double.class);
+            q.setParameter("salesid", salesid);
+            return q.getSingleResult();
+        } catch (Exception ex) {
+            Logger.getLogger(SalesBL.class.getName()).log(Level.SEVERE, null, ex);
+            return 0.00;
+        }
     }
 
     public Double getTotalSalesByCustomer(Integer c) {
@@ -85,7 +90,7 @@ public class SalesBL extends DdsBL {
             return 0.00;
         }
     }
-    
+
     public Double getTotalSales() {
         try {
             TypedQuery<Double> q = em.createQuery("SELECT SUM(s.salesPrice * s.quantity) FROM SalesDetails s", double.class);
@@ -105,7 +110,7 @@ public class SalesBL extends DdsBL {
             return 0.00;
         }
     }
-    
+
     public long getSalesTotal(String u) {
         try {
             TypedQuery<Long> q = em.createQuery("SELECT SUM(s.quantity) FROM SalesDetails s WHERE s.upc.upc = :u", Long.class);
@@ -115,7 +120,7 @@ public class SalesBL extends DdsBL {
             return 0l;
         }
     }
-    
+
     public long getSalesTotal(Date s, Date e) {
         try {
             TypedQuery<Long> q = em.createQuery("SELECT SUM(s.quantity) FROM SalesDetails s WHERE s.entryDate BETWEEN :s AND :e ", Long.class);
@@ -161,9 +166,9 @@ public class SalesBL extends DdsBL {
                 if (d.getDiscount() > 0) {
                     tsales = d.getSalesPrice() * d.getQuantity();
                     discount = 100 - d.getDiscount();
-                    discsales += d.getQuantity() * (discount * d.getSalesPrice()) / 100;                    
+                    discsales += d.getQuantity() * (discount * d.getSalesPrice()) / 100;
                     tsales -= discsales;
-                }else{
+                } else {
                     tsales = 0;
                 }
                 //System.out.println(tsales);
@@ -175,7 +180,7 @@ public class SalesBL extends DdsBL {
             return 0.00;
         }
     }
-    
+
     public Double getActualTotalSales(Integer salecode) {
         try {
             double atsales = 0.00;
@@ -203,13 +208,13 @@ public class SalesBL extends DdsBL {
             return 0.00;
         }
     }
-    
+
     public Double getOutStandingSales(Integer salescode) {
         try {
             ReceiptBL rb = new ReceiptBL();
-            double bal= 0.00;
+            double bal = 0.00;
             List<Sales> ss = getAllSales();
-            
+
             for (Sales s : ss) {
                 //List<SalesDetails> sd = getAllSalesDetailsbySalesCode(s.getSalesId());
                 double as = getActualTotalSales(s.getSalesId());
@@ -221,7 +226,6 @@ public class SalesBL extends DdsBL {
             return 0.00;
         }
     }
-    
 
     public List<Sales> getSalesDateRange(Date startdate, Date enddate) {
         TypedQuery q = em.createQuery("SELECT s FROM Sales s WHERE s.salesDate BETWEEN :date1 AND :date2", Sales.class);
@@ -254,6 +258,7 @@ public class SalesBL extends DdsBL {
         q.setParameter("i", salesid);
         return q.getSingleResult();
     }
+
     public List getUsersFromSales(int userscode) {
         TypedQuery<Sales> q = em.createQuery("SELECT s FROM Sales s WHERE s.users.userid = :userid", Sales.class);
         q.setParameter("userid", userscode);
@@ -267,7 +272,7 @@ public class SalesBL extends DdsBL {
         q.setMaxResults(page);
         return q.getResultList();
     }
-    
+
     public List<SalesDetails> getAllSalesDetailsbyBarcode(String u, int page) {
         TypedQuery<SalesDetails> q = em.createQuery("SELECT s FROM SalesDetails s WHERE s.upc.upc = :u", SalesDetails.class);
         q.setParameter("u", u);

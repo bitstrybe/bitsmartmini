@@ -39,6 +39,8 @@ public class SalesReportModel extends AbstractTableModel implements Runnable {
             data[x][1] = c.getCustomers().getFullname(); //Utilities.convertDateToString(start);
             double totalcost = Utilities.roundToTwoDecimalPlace(sb.getTotalCost(c.getSalesId()), 2);
             double totalCPR = Utilities.roundToTwoDecimalPlace(rd.getTotalOfCostPriceRtdBySalesCode(c.getSalesId()), 2);
+            System.out.println("tc: "+c.getSalesId()+ " = "+totalcost);
+            System.out.println("tr: "+c.getSalesId()+ " = "+totalCPR);
             data[x][2] = totalcost - totalCPR;//Utilities.convertDateToString(end);
             double totalsales = Utilities.roundToTwoDecimalPlace(sb.getActualTotalDiscountedSales(c.getSalesId()), 2);
             data[x][3] = totalsales;
