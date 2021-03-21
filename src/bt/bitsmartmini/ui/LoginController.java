@@ -96,7 +96,7 @@ public class LoginController implements Initializable {
                 } else {
                     if (BS == null && u.getRoles().equals("Administrator")) {
                         validateLicense(BS);
-                    }else if (BS != null && u.getRoles().equals("Administrator")) {
+                    } else if (BS != null && u.getRoles().equals("Administrator")) {
                         getMainApp();
                     }
                     if (BS == null && (u.getRoles().equals("Supervisor") || u.getRoles().equals("Sales"))) {

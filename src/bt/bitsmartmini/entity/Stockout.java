@@ -28,13 +28,13 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "stockout")
 @NamedQueries({
-    @NamedQuery(name = "Stockout.findAll", query = "SELECT s FROM Stockout s")
-    , @NamedQuery(name = "Stockout.findByStockoutId", query = "SELECT s FROM Stockout s WHERE s.stockoutId = :stockoutId")
-    , @NamedQuery(name = "Stockout.findByStkDate", query = "SELECT s FROM Stockout s WHERE s.stkDate = :stkDate")
-    , @NamedQuery(name = "Stockout.findByQuantity", query = "SELECT s FROM Stockout s WHERE s.quantity = :quantity")
-    , @NamedQuery(name = "Stockout.findByRemarks", query = "SELECT s FROM Stockout s WHERE s.remarks = :remarks")
-    , @NamedQuery(name = "Stockout.findByEntryLog", query = "SELECT s FROM Stockout s WHERE s.entryLog = :entryLog")
-    , @NamedQuery(name = "Stockout.findByModifiedDate", query = "SELECT s FROM Stockout s WHERE s.modifiedDate = :modifiedDate")})
+    @NamedQuery(name = "Stockout.findAll", query = "SELECT s FROM Stockout s"),
+    @NamedQuery(name = "Stockout.findByStockoutId", query = "SELECT s FROM Stockout s WHERE s.stockoutId = :stockoutId"),
+    @NamedQuery(name = "Stockout.findByStkDate", query = "SELECT s FROM Stockout s WHERE s.stkDate = :stkDate"),
+    @NamedQuery(name = "Stockout.findByQuantity", query = "SELECT s FROM Stockout s WHERE s.quantity = :quantity"),
+    @NamedQuery(name = "Stockout.findByRemarks", query = "SELECT s FROM Stockout s WHERE s.remarks = :remarks"),
+    @NamedQuery(name = "Stockout.findByEntryLog", query = "SELECT s FROM Stockout s WHERE s.entryLog = :entryLog"),
+    @NamedQuery(name = "Stockout.findByModifiedDate", query = "SELECT s FROM Stockout s WHERE s.modifiedDate = :modifiedDate")})
 public class Stockout implements Serializable {
 
     private static final long serialVersionUID = 1L;

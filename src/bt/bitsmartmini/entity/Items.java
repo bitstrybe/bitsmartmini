@@ -29,15 +29,15 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "items")
 @NamedQueries({
-    @NamedQuery(name = "Items.findAll", query = "SELECT i FROM Items i")
-    , @NamedQuery(name = "Items.findByUpc", query = "SELECT i FROM Items i WHERE i.upc = :upc")
-    , @NamedQuery(name = "Items.findByItemDesc", query = "SELECT i FROM Items i WHERE i.itemDesc = :itemDesc")
-    , @NamedQuery(name = "Items.findByItemImg", query = "SELECT i FROM Items i WHERE i.itemImg = :itemImg")
-    , @NamedQuery(name = "Items.findByRol", query = "SELECT i FROM Items i WHERE i.rol = :rol")
-    , @NamedQuery(name = "Items.findByCp", query = "SELECT i FROM Items i WHERE i.cp = :cp")
-    , @NamedQuery(name = "Items.findBySp", query = "SELECT i FROM Items i WHERE i.sp = :sp")
-    , @NamedQuery(name = "Items.findByEntryLog", query = "SELECT i FROM Items i WHERE i.entryLog = :entryLog")
-    , @NamedQuery(name = "Items.findByLastModified", query = "SELECT i FROM Items i WHERE i.lastModified = :lastModified")})
+    @NamedQuery(name = "Items.findAll", query = "SELECT i FROM Items i"),
+    @NamedQuery(name = "Items.findByUpc", query = "SELECT i FROM Items i WHERE i.upc = :upc"),
+    @NamedQuery(name = "Items.findByItemDesc", query = "SELECT i FROM Items i WHERE i.itemDesc = :itemDesc"),
+    @NamedQuery(name = "Items.findByItemImg", query = "SELECT i FROM Items i WHERE i.itemImg = :itemImg"),
+    @NamedQuery(name = "Items.findByRol", query = "SELECT i FROM Items i WHERE i.rol = :rol"),
+    @NamedQuery(name = "Items.findByCp", query = "SELECT i FROM Items i WHERE i.cp = :cp"),
+    @NamedQuery(name = "Items.findBySp", query = "SELECT i FROM Items i WHERE i.sp = :sp"),
+    @NamedQuery(name = "Items.findByEntryLog", query = "SELECT i FROM Items i WHERE i.entryLog = :entryLog"),
+    @NamedQuery(name = "Items.findByLastModified", query = "SELECT i FROM Items i WHERE i.lastModified = :lastModified")})
 public class Items implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -80,6 +80,9 @@ public class Items implements Serializable {
     @JoinColumn(name = "category", referencedColumnName = "category_name", nullable = false)
     @ManyToOne(optional = false)
     private Category category;
+    @JoinColumn(name = "uomset", referencedColumnName = "uom_set_code")
+    @ManyToOne
+    private UomSet uomset;
     @JoinColumn(name = "users", referencedColumnName = "userid", nullable = false)
     @ManyToOne(optional = false)
     private Users users;
@@ -204,6 +207,14 @@ public class Items implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public UomSet getUomset() {
+        return uomset;
+    }
+
+    public void setUomset(UomSet uomset) {
+        this.uomset = uomset;
     }
 
     public Users getUsers() {

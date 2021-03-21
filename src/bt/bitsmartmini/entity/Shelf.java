@@ -21,8 +21,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "shelf")
 @NamedQueries({
-    @NamedQuery(name = "Shelf.findAll", query = "SELECT s FROM Shelf s")
-    , @NamedQuery(name = "Shelf.findByShelfDesc", query = "SELECT s FROM Shelf s WHERE s.shelfDesc = :shelfDesc")})
+    @NamedQuery(name = "Shelf.findAll", query = "SELECT s FROM Shelf s"),
+    @NamedQuery(name = "Shelf.findByShelfDesc", query = "SELECT s FROM Shelf s WHERE s.shelfDesc = :shelfDesc")})
 public class Shelf implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -26,10 +26,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "customers")
 @NamedQueries({
-    @NamedQuery(name = "Customers.findAll", query = "SELECT c FROM Customers c")
-    , @NamedQuery(name = "Customers.findByCustomerId", query = "SELECT c FROM Customers c WHERE c.customerId = :customerId")
-    , @NamedQuery(name = "Customers.findByFullname", query = "SELECT c FROM Customers c WHERE c.fullname = :fullname")
-    , @NamedQuery(name = "Customers.findByMobile", query = "SELECT c FROM Customers c WHERE c.mobile = :mobile")})
+    @NamedQuery(name = "Customers.findAll", query = "SELECT c FROM Customers c"),
+    @NamedQuery(name = "Customers.findByCustomerId", query = "SELECT c FROM Customers c WHERE c.customerId = :customerId"),
+    @NamedQuery(name = "Customers.findByFullname", query = "SELECT c FROM Customers c WHERE c.fullname = :fullname"),
+    @NamedQuery(name = "Customers.findByMobile", query = "SELECT c FROM Customers c WHERE c.mobile = :mobile")})
 public class Customers implements Serializable {
 
     private static final long serialVersionUID = 1L;

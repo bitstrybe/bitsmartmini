@@ -75,8 +75,6 @@ public class AddBrandController implements Initializable {
     @FXML
     private Button closebtn;
     @FXML
-    private HBox statushbox;
-    @FXML
     private FontAwesomeIcon check;
     @FXML
     private JFXSpinner spinner;

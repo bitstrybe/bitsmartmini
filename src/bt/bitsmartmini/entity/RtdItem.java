@@ -27,14 +27,14 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "rtd_item")
 @NamedQueries({
-    @NamedQuery(name = "RtdItem.findAll", query = "SELECT r FROM RtdItem r")
-    , @NamedQuery(name = "RtdItem.findBySalescode", query = "SELECT r FROM RtdItem r WHERE r.salescode = :salescode")
-    , @NamedQuery(name = "RtdItem.findByRtdDate", query = "SELECT r FROM RtdItem r WHERE r.rtdDate = :rtdDate")
-    , @NamedQuery(name = "RtdItem.findByRtdTime", query = "SELECT r FROM RtdItem r WHERE r.rtdTime = :rtdTime")
-    , @NamedQuery(name = "RtdItem.findByRtdQty", query = "SELECT r FROM RtdItem r WHERE r.rtdQty = :rtdQty")
-    , @NamedQuery(name = "RtdItem.findByRemarks", query = "SELECT r FROM RtdItem r WHERE r.remarks = :remarks")
-    , @NamedQuery(name = "RtdItem.findByEntryLog", query = "SELECT r FROM RtdItem r WHERE r.entryLog = :entryLog")
-    , @NamedQuery(name = "RtdItem.findByLastModified", query = "SELECT r FROM RtdItem r WHERE r.lastModified = :lastModified")})
+    @NamedQuery(name = "RtdItem.findAll", query = "SELECT r FROM RtdItem r"),
+    @NamedQuery(name = "RtdItem.findBySalescode", query = "SELECT r FROM RtdItem r WHERE r.salescode = :salescode"),
+    @NamedQuery(name = "RtdItem.findByRtdDate", query = "SELECT r FROM RtdItem r WHERE r.rtdDate = :rtdDate"),
+    @NamedQuery(name = "RtdItem.findByRtdTime", query = "SELECT r FROM RtdItem r WHERE r.rtdTime = :rtdTime"),
+    @NamedQuery(name = "RtdItem.findByRtdQty", query = "SELECT r FROM RtdItem r WHERE r.rtdQty = :rtdQty"),
+    @NamedQuery(name = "RtdItem.findByRemarks", query = "SELECT r FROM RtdItem r WHERE r.remarks = :remarks"),
+    @NamedQuery(name = "RtdItem.findByEntryLog", query = "SELECT r FROM RtdItem r WHERE r.entryLog = :entryLog"),
+    @NamedQuery(name = "RtdItem.findByLastModified", query = "SELECT r FROM RtdItem r WHERE r.lastModified = :lastModified")})
 public class RtdItem implements Serializable {
 
     private static final long serialVersionUID = 1L;

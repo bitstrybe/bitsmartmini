@@ -26,13 +26,13 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "stockin")
 @NamedQueries({
-    @NamedQuery(name = "Stockin.findAll", query = "SELECT s FROM Stockin s")
-    , @NamedQuery(name = "Stockin.findByStockinId", query = "SELECT s FROM Stockin s WHERE s.stockinId = :stockinId")
-    , @NamedQuery(name = "Stockin.findByStockinDate", query = "SELECT s FROM Stockin s WHERE s.stockinDate = :stockinDate")
-    , @NamedQuery(name = "Stockin.findByQuantity", query = "SELECT s FROM Stockin s WHERE s.quantity = :quantity")
-    , @NamedQuery(name = "Stockin.findByExpiryDate", query = "SELECT s FROM Stockin s WHERE s.expiryDate = :expiryDate")
-    , @NamedQuery(name = "Stockin.findByEntryLog", query = "SELECT s FROM Stockin s WHERE s.entryLog = :entryLog")
-    , @NamedQuery(name = "Stockin.findByLastModified", query = "SELECT s FROM Stockin s WHERE s.lastModified = :lastModified")})
+    @NamedQuery(name = "Stockin.findAll", query = "SELECT s FROM Stockin s"),
+    @NamedQuery(name = "Stockin.findByStockinId", query = "SELECT s FROM Stockin s WHERE s.stockinId = :stockinId"),
+    @NamedQuery(name = "Stockin.findByStockinDate", query = "SELECT s FROM Stockin s WHERE s.stockinDate = :stockinDate"),
+    @NamedQuery(name = "Stockin.findByQuantity", query = "SELECT s FROM Stockin s WHERE s.quantity = :quantity"),
+    @NamedQuery(name = "Stockin.findByExpiryDate", query = "SELECT s FROM Stockin s WHERE s.expiryDate = :expiryDate"),
+    @NamedQuery(name = "Stockin.findByEntryLog", query = "SELECT s FROM Stockin s WHERE s.entryLog = :entryLog"),
+    @NamedQuery(name = "Stockin.findByLastModified", query = "SELECT s FROM Stockin s WHERE s.lastModified = :lastModified")})
 public class Stockin implements Serializable {
 
     private static final long serialVersionUID = 1L;

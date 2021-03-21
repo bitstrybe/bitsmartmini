@@ -25,9 +25,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "licensing")
 @NamedQueries({
-    @NamedQuery(name = "Licensing.findAll", query = "SELECT l FROM Licensing l")
-    , @NamedQuery(name = "Licensing.findByLicenseId", query = "SELECT l FROM Licensing l WHERE l.licenseId = :licenseId")
-    , @NamedQuery(name = "Licensing.findByLicenseKey", query = "SELECT l FROM Licensing l WHERE l.licenseKey = :licenseKey")})
+    @NamedQuery(name = "Licensing.findAll", query = "SELECT l FROM Licensing l"),
+    @NamedQuery(name = "Licensing.findByLicenseId", query = "SELECT l FROM Licensing l WHERE l.licenseId = :licenseId"),
+    @NamedQuery(name = "Licensing.findByLicenseKey", query = "SELECT l FROM Licensing l WHERE l.licenseKey = :licenseKey")})
 public class Licensing implements Serializable {
 
     private static final long serialVersionUID = 1L;

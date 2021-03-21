@@ -21,8 +21,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "uom")
 @NamedQueries({
-    @NamedQuery(name = "Uom.findAll", query = "SELECT u FROM Uom u")
-    , @NamedQuery(name = "Uom.findByUomDesc", query = "SELECT u FROM Uom u WHERE u.uomDesc = :uomDesc")})
+    @NamedQuery(name = "Uom.findAll", query = "SELECT u FROM Uom u"),
+    @NamedQuery(name = "Uom.findByUomDesc", query = "SELECT u FROM Uom u WHERE u.uomDesc = :uomDesc")})
 public class Uom implements Serializable {
 
     private static final long serialVersionUID = 1L;

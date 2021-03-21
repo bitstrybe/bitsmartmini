@@ -76,8 +76,6 @@ public class AddCategoryController implements Initializable {
     private FontAwesomeIcon check;
     @FXML
     private JFXSpinner spinner;
-    @FXML
-    private HBox statushbox;
 
     /**
      * Initializes the controller class.

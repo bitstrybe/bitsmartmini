@@ -21,8 +21,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "manufacturer")
 @NamedQueries({
-    @NamedQuery(name = "Manufacturer.findAll", query = "SELECT m FROM Manufacturer m")
-    , @NamedQuery(name = "Manufacturer.findByManufacturer", query = "SELECT m FROM Manufacturer m WHERE m.manufacturer = :manufacturer")})
+    @NamedQuery(name = "Manufacturer.findAll", query = "SELECT m FROM Manufacturer m"),
+    @NamedQuery(name = "Manufacturer.findByManufacturer", query = "SELECT m FROM Manufacturer m WHERE m.manufacturer = :manufacturer")})
 public class Manufacturer implements Serializable {
 
     private static final long serialVersionUID = 1L;

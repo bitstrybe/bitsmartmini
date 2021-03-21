@@ -21,8 +21,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "generic")
 @NamedQueries({
-    @NamedQuery(name = "Generic.findAll", query = "SELECT g FROM Generic g")
-    , @NamedQuery(name = "Generic.findByGeneName", query = "SELECT g FROM Generic g WHERE g.geneName = :geneName")})
+    @NamedQuery(name = "Generic.findAll", query = "SELECT g FROM Generic g"),
+    @NamedQuery(name = "Generic.findByGeneName", query = "SELECT g FROM Generic g WHERE g.geneName = :geneName")})
 public class Generic implements Serializable {
 
     private static final long serialVersionUID = 1L;

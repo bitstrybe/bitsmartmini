@@ -24,6 +24,8 @@
     <class>bt.bitsmartmini.entity.Category</class>
     <class>bt.bitsmartmini.entity.Brands</class>
     <class>bt.bitsmartmini.entity.BackupLog</class>
+    <class>bt.bitsmartmini.entity.UsersInfo</class>
+    <class>bt.bitsmartmini.entity.UomSet</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bitsmartmini?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <!--property name="javax.persistence.jdbc.user" value="root"/-->

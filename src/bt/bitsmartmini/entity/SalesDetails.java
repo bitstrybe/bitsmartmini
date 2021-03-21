@@ -30,14 +30,14 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "sales_details")
 @NamedQueries({
-    @NamedQuery(name = "SalesDetails.findAll", query = "SELECT s FROM SalesDetails s")
-    , @NamedQuery(name = "SalesDetails.findBySalesDetailsId", query = "SELECT s FROM SalesDetails s WHERE s.salesDetailsId = :salesDetailsId")
-    , @NamedQuery(name = "SalesDetails.findByQuantity", query = "SELECT s FROM SalesDetails s WHERE s.quantity = :quantity")
-    , @NamedQuery(name = "SalesDetails.findByCostPrice", query = "SELECT s FROM SalesDetails s WHERE s.costPrice = :costPrice")
-    , @NamedQuery(name = "SalesDetails.findBySalesPrice", query = "SELECT s FROM SalesDetails s WHERE s.salesPrice = :salesPrice")
-    , @NamedQuery(name = "SalesDetails.findByDiscount", query = "SELECT s FROM SalesDetails s WHERE s.discount = :discount")
-    , @NamedQuery(name = "SalesDetails.findByEntryDate", query = "SELECT s FROM SalesDetails s WHERE s.entryDate = :entryDate")
-    , @NamedQuery(name = "SalesDetails.findByModifiedDate", query = "SELECT s FROM SalesDetails s WHERE s.modifiedDate = :modifiedDate")})
+    @NamedQuery(name = "SalesDetails.findAll", query = "SELECT s FROM SalesDetails s"),
+    @NamedQuery(name = "SalesDetails.findBySalesDetailsId", query = "SELECT s FROM SalesDetails s WHERE s.salesDetailsId = :salesDetailsId"),
+    @NamedQuery(name = "SalesDetails.findByQuantity", query = "SELECT s FROM SalesDetails s WHERE s.quantity = :quantity"),
+    @NamedQuery(name = "SalesDetails.findByCostPrice", query = "SELECT s FROM SalesDetails s WHERE s.costPrice = :costPrice"),
+    @NamedQuery(name = "SalesDetails.findBySalesPrice", query = "SELECT s FROM SalesDetails s WHERE s.salesPrice = :salesPrice"),
+    @NamedQuery(name = "SalesDetails.findByDiscount", query = "SELECT s FROM SalesDetails s WHERE s.discount = :discount"),
+    @NamedQuery(name = "SalesDetails.findByEntryDate", query = "SELECT s FROM SalesDetails s WHERE s.entryDate = :entryDate"),
+    @NamedQuery(name = "SalesDetails.findByModifiedDate", query = "SELECT s FROM SalesDetails s WHERE s.modifiedDate = :modifiedDate")})
 public class SalesDetails implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -26,9 +26,9 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "backup_log")
 @NamedQueries({
-    @NamedQuery(name = "BackupLog.findAll", query = "SELECT b FROM BackupLog b")
-    , @NamedQuery(name = "BackupLog.findByBackupLogId", query = "SELECT b FROM BackupLog b WHERE b.backupLogId = :backupLogId")
-    , @NamedQuery(name = "BackupLog.findByBackupLogStamp", query = "SELECT b FROM BackupLog b WHERE b.backupLogStamp = :backupLogStamp")})
+    @NamedQuery(name = "BackupLog.findAll", query = "SELECT b FROM BackupLog b"),
+    @NamedQuery(name = "BackupLog.findByBackupLogId", query = "SELECT b FROM BackupLog b WHERE b.backupLogId = :backupLogId"),
+    @NamedQuery(name = "BackupLog.findByBackupLogStamp", query = "SELECT b FROM BackupLog b WHERE b.backupLogStamp = :backupLogStamp")})
 public class BackupLog implements Serializable {
 
     private static final long serialVersionUID = 1L;

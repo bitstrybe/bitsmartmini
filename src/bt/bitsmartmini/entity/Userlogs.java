@@ -28,10 +28,10 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "userlogs")
 @NamedQueries({
-    @NamedQuery(name = "Userlogs.findAll", query = "SELECT u FROM Userlogs u")
-    , @NamedQuery(name = "Userlogs.findByLogsid", query = "SELECT u FROM Userlogs u WHERE u.logsid = :logsid")
-    , @NamedQuery(name = "Userlogs.findByLoginDatetime", query = "SELECT u FROM Userlogs u WHERE u.loginDatetime = :loginDatetime")
-    , @NamedQuery(name = "Userlogs.findByLogoutDatetime", query = "SELECT u FROM Userlogs u WHERE u.logoutDatetime = :logoutDatetime")})
+    @NamedQuery(name = "Userlogs.findAll", query = "SELECT u FROM Userlogs u"),
+    @NamedQuery(name = "Userlogs.findByLogsid", query = "SELECT u FROM Userlogs u WHERE u.logsid = :logsid"),
+    @NamedQuery(name = "Userlogs.findByLoginDatetime", query = "SELECT u FROM Userlogs u WHERE u.loginDatetime = :loginDatetime"),
+    @NamedQuery(name = "Userlogs.findByLogoutDatetime", query = "SELECT u FROM Userlogs u WHERE u.logoutDatetime = :logoutDatetime")})
 public class Userlogs implements Serializable {
 
     private static final long serialVersionUID = 1L;

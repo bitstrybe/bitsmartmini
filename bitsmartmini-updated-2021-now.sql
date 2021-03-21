@@ -28,7 +28,7 @@ CREATE TABLE `backup_log` (
   `backup_log_id` int(11) NOT NULL AUTO_INCREMENT,
   `backup_log_stamp` datetime NOT NULL,
   PRIMARY KEY (`backup_log_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,6 +37,7 @@ CREATE TABLE `backup_log` (
 
 LOCK TABLES `backup_log` WRITE;
 /*!40000 ALTER TABLE `backup_log` DISABLE KEYS */;
+INSERT INTO `backup_log` VALUES (1,'2021-02-24 18:01:52'),(2,'2021-02-24 20:29:22'),(3,'2021-02-26 15:51:21');
 /*!40000 ALTER TABLE `backup_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,7 +60,7 @@ CREATE TABLE `brands` (
 
 LOCK TABLES `brands` WRITE;
 /*!40000 ALTER TABLE `brands` DISABLE KEYS */;
-INSERT INTO `brands` VALUES ('Air Wick'),('Bounty'),('Cadbury'),('Clorox'),('Colgate'),('Famous Amos'),('Goya'),('Heaven'),('Hunts'),('Lipton'),('Martinellis '),('Nabisco'),('Ocean Spray'),('Pepsodent'),('Pringles'),('Quaker'),('Suavitel'),('Welchs');
+INSERT INTO `brands` VALUES ('Air Wick'),('Bounty'),('Cadbury'),('Clorox'),('Colgate'),('Famous Amos'),('Goya'),('Heaven'),('Hunts'),('Lipton'),('Martinellis '),('Member\'s Mark'),('N\'joy'),('Nabisco'),('Ocean Spray'),('Pepsodent'),('Pringles'),('Quaker'),('Suavitel'),('Welchs');
 /*!40000 ALTER TABLE `brands` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,7 +93,7 @@ CREATE TABLE `business` (
 
 LOCK TABLES `business` WRITE;
 /*!40000 ALTER TABLE `business` DISABLE KEYS */;
-INSERT INTO `business` VALUES ('Bitstrybe Ventures','P.O Box MP2580, Accra','0246002100','','info@bitstrybe.com','./img/LOGO.png','Ghana','GH¢',1);
+INSERT INTO `business` VALUES ('Kardy Ventures','P.O.Box AF1944 Adenta-Accra','0544133196','0208129348','stephanieofancher@gmail.com','.\\img\\LOGO.jpg','Ghana','GH¢',1);
 /*!40000 ALTER TABLE `business` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,7 +116,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES ('Beauty & Personal Care'),('Grocery'),('Grocery & Gourmet Food'),('Health and Beauty');
+INSERT INTO `category` VALUES ('Beauty & Personal Care'),('Dairy'),('Grocery'),('Grocery & Gourmet Food'),('Health and Beauty'),('Health and Beautyz');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -189,9 +190,9 @@ CREATE TABLE `items` (
   KEY `FK_ITEM_BRAND_idx` (`brand`),
   KEY `FK_ITEM_CAT_idx` (`category`),
   KEY `FK_ITEM_USER_idx` (`users`),
-  CONSTRAINT `FK_ITEM_BRAND` FOREIGN KEY (`brand`) REFERENCES `brands` (`brand_name`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_ITEM_CAT` FOREIGN KEY (`category`) REFERENCES `category` (`category_name`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_ITEM_USER` FOREIGN KEY (`users`) REFERENCES `users` (`userid`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK_ITEM_BRAND` FOREIGN KEY (`brand`) REFERENCES `brands` (`brand_name`),
+  CONSTRAINT `FK_ITEM_CAT` FOREIGN KEY (`category`) REFERENCES `category` (`category_name`),
+  CONSTRAINT `FK_ITEM_USER` FOREIGN KEY (`users`) REFERENCES `users` (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -201,7 +202,7 @@ CREATE TABLE `items` (
 
 LOCK TABLES `items` WRITE;
 /*!40000 ALTER TABLE `items` DISABLE KEYS */;
-INSERT INTO `items` VALUES ('027000380116','Hunts Whole Tomatoes, 28 Ounce','./img/027000380116.jpg','Grocery & Gourmet Food','Hunts',10,83.78,108,1,'2021-02-05 02:37:00','2021-02-05 12:43:41'),('030000315828','Quaker Quick 1-Minute Oats','./img/030000315828.jpg','Grocery & Gourmet Food','Quaker',10,28.63,35.2,1,'2021-02-05 02:37:00','2021-02-05 12:15:15'),('031200203007','Ocean Spray Cranberry Juice Cocktail','./img/031200203007.jpg','Grocery & Gourmet Food','Goya',10,24.56,30,1,'2021-02-05 02:37:00','2021-02-05 12:14:55'),('033200000921','Pepsodent Complete Care Anticavity Flouride Toothpaste','./img/033200000921.jpg','Health and Beauty','Pepsodent',10,73.62,83.5,1,'2021-02-05 02:37:00','2021-02-05 11:20:29'),('035000393685','Suavitel Fast Dry Fabric Conditioner, Fabulous Field Flowers','./img/035000393685.jpg','Beauty & Personal Care','Suavitel',10,196.65,215,1,'2021-02-05 02:37:00','2021-02-05 12:39:26'),('035000783318','Colgate Kids Toothpaste Cavity Protection, Bubble Fruit','./img/035000783318.jpg','Beauty & Personal Care','Colgate',10,9.63,13.5,1,'2021-02-05 02:37:00','2021-02-06 16:39:29'),('038000182525','Pringles Potato Crisps Chips Variety Pack','./img/038000182525.jpg','Grocery & Gourmet Food','Pringles',10,71.76,85.5,1,'2021-02-05 02:37:00','2021-02-05 11:00:23'),('041000002878','Lipton Regular Tea Bag','./img/041000002878.jpg','Grocery & Gourmet Food','Lipton',10,4.43,5.6,1,'2021-02-05 12:01:41','2021-02-05 12:01:41'),('041244102334','Martinelli\'s Gold Medal® Organic Apple 100% Juice 10 Fl','./img/041244102334.jpg','Grocery & Gourmet Food','Martinellis ',10,7.63,9.65,1,'2021-02-05 11:47:56','2021-02-05 11:47:56'),('041331038270','Goya Adobo with Pepper 16.5 OZ','./img/041331038270.jpg','Grocery & Gourmet Food','Goya',10,40.1,55,1,'2021-02-05 02:37:00','2021-02-05 02:46:18'),('041800301959','Welchs Cranberry Cocktail Juice, 16 Fluid Ounce','./img/041800301959.jpg','Beauty & Personal Care','Welchs',10,156.74,204.63,1,'2021-02-05 02:37:00','2021-02-05 12:36:28'),('044600309668','Clorox Concentrated Germicidal Bleach','./img/044600309668.jpg','Health and Beauty','Clorox',10,51.74,56,1,'2021-02-05 02:37:00','2021-02-05 10:43:19'),('074305001321','Bragg Organic Raw Unfiltered Apple Cider Vinegar','./img/074305001321.jpg','Grocery & Gourmet Food','Famous Amos',10,150,157,1,'2021-02-05 02:37:00','2021-02-05 02:46:18'),('3574669909129','Johnsons Baby Oil 300ml','./img/3574669909129.jpg','Health And Beauty','Goya',10,14.72,17,1,'2021-02-10 21:34:26','2021-02-10 21:34:26'),('5059001001368','Air Wick Room Spray 250ml - Soft Cotton PMP','./img/5059001001368.jpg','Health And Beauty','Air Wick',5,18.09,22,1,'2021-02-10 21:29:22','2021-02-10 21:30:55'),('6034000053623','Heaven Insecticide Spray Plus','./img/6034000053623.jpg','Health And Beauty','Lipton',25,7.85,12,1,'2021-02-10 20:25:19','2021-02-10 20:25:19'),('7622010000790','Cadbury Hot Chocolate Drink 3 in 1','./img/7622010000790.jpg','Grocery & Gourmet Food','Cadbury',50,6.5,1,1,'2021-02-10 20:14:41','2021-02-10 20:24:59'),('786173965055','Famous Amos Chocolate Chip Cookies','./img/786173965055.jpg','Grocery & Gourmet Food','Famous Amos',10,150,157,1,'2021-02-05 02:37:00','2021-02-05 02:46:18');
+INSERT INTO `items` VALUES ('027000380116','Hunts Whole Tomatoes, 28 Ounce','./img/027000380116.jpg','Grocery & Gourmet Food','Hunts',10,83.78,108,1,'2021-02-05 02:37:00','2021-02-05 12:43:41'),('030000315828','Quaker Quick 1-Minute Oats','./img/030000315828.jpg','Grocery & Gourmet Food','Quaker',10,28.63,35.2,1,'2021-02-05 02:37:00','2021-02-05 12:15:15'),('031200203007','Ocean Spray Cranberry Juice Cocktail','./img/031200203007.jpg','Grocery & Gourmet Food','Goya',10,24.56,30,1,'2021-02-05 02:37:00','2021-02-05 12:14:55'),('033200000921','Pepsodent Complete Care Anticavity Flouride Toothpaste','./img/033200000921.jpg','Health and Beauty','Pepsodent',10,73.62,83.5,1,'2021-02-05 02:37:00','2021-02-05 11:20:29'),('035000393685','Suavitel Fast Dry Fabric Conditioner, Fabulous Field Flowers','./img/035000393685.jpg','Beauty & Personal Care','Suavitel',10,196.65,215,1,'2021-02-05 02:37:00','2021-02-05 12:39:26'),('035000783318','Colgate Kids Toothpaste Cavity Protection, Bubble Fruit','./img/035000783318.jpg','Beauty & Personal Care','Colgate',10,9.63,13.5,1,'2021-02-05 02:37:00','2021-02-06 16:39:29'),('038000182525','Pringles Potato Crisps Chips Variety Pack','./img/038000182525.jpg','Grocery & Gourmet Food','Pringles',10,71.76,85.5,1,'2021-02-05 02:37:00','2021-02-05 11:00:23'),('041000002878','Lipton Regular Tea Bag','./img/041000002878.jpg','Grocery & Gourmet Food','Lipton',10,4.43,5.6,1,'2021-02-05 12:01:41','2021-02-05 12:01:41'),('041244102334','Martinelli\'s Gold Medal® Organic Apple 100% Juice 10 Fl','./img/041244102334.jpg','Grocery & Gourmet Food','Martinellis ',10,7.63,9.65,1,'2021-02-05 11:47:56','2021-02-05 11:47:56'),('041331038270','Goya Adobo with Pepper 16.5 OZ','./img/041331038270.jpg','Grocery & Gourmet Food','Goya',10,40.1,55,1,'2021-02-05 02:37:00','2021-02-05 02:46:18'),('041800301959','Welchs Cranberry Cocktail Juice, 16 Fluid Ounce','./img/041800301959.jpg','Beauty & Personal Care','Welchs',10,156.74,204.63,1,'2021-02-05 02:37:00','2021-02-05 12:36:28'),('044600309668','Clorox Concentrated Germicidal Bleach','./img/044600309668.jpg','Health and Beauty','Clorox',10,51.74,56,1,'2021-02-05 02:37:00','2021-02-05 10:43:19'),('074305001321','Bragg Organic Raw Unfiltered Apple Cider Vinegar','./img/074305001321.jpg','Grocery & Gourmet Food','Famous Amos',10,150,157,1,'2021-02-05 02:37:00','2021-02-05 02:46:18'),('078742292984','Member\'s Mark Thai Jasmine Rice (25 lb.)','.\\img\\078742292984.png','Grocery & Gourmet Food','Member\'s Mark',3,145,170,1,'2021-02-24 20:07:41','2021-02-24 20:07:41'),('086631008493','N\'joy Coffee Creamer','.\\img\\086631008493.jpg','Dairy','N\'joy',8,9,16,1,'2021-02-24 20:25:49','2021-02-24 20:25:49'),('3574669909129','Johnsons Baby Oil 300ml','./img/3574669909129.jpg','Health And Beauty','Goya',10,14.72,17,1,'2021-02-10 21:34:26','2021-02-10 21:34:26'),('5059001001368','Air Wick Room Spray 250ml - Soft Cotton PMP','./img/5059001001368.jpg','Health And Beauty','Air Wick',5,18.09,22,1,'2021-02-10 21:29:22','2021-02-10 21:30:55'),('6034000053623','Heaven Insecticide Spray Plus','./img/6034000053623.jpg','Health And Beauty','Lipton',25,7.85,12,1,'2021-02-10 20:25:19','2021-02-10 20:25:19'),('7622010000790','Cadbury Hot Chocolate Drink 3 in 1','./img/7622010000790.jpg','Grocery & Gourmet Food','Cadbury',50,6.5,1,1,'2021-02-10 20:14:41','2021-02-10 20:24:59'),('786173965055','Famous Amos Chocolate Chip Cookies','./img/786173965055.jpg','Grocery & Gourmet Food','Famous Amos',10,150,157,1,'2021-02-05 02:37:00','2021-02-05 02:46:18');
 /*!40000 ALTER TABLE `items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -225,7 +226,7 @@ CREATE TABLE `licensing` (
 
 LOCK TABLES `licensing` WRITE;
 /*!40000 ALTER TABLE `licensing` DISABLE KEYS */;
-INSERT INTO `licensing` VALUES (1,'nO19kub5Wy7xrpiMLreagucr1TTNz5mHPAkQtP9XtaJ7C7V17Ds-rQ9WlIKbf7Kp0Iou7z38bj6BPkMqVV1lEg');
+INSERT INTO `licensing` VALUES (1,'6rNt4vUJpfzrLXF3NVfiAqsPqlyErGL3F4kPgDEVOWaDNBFbhjFJufutpSx_if07OaybRZ85hDzJeypCyOTLrw');
 /*!40000 ALTER TABLE `licensing` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -285,7 +286,6 @@ CREATE TABLE `receipt` (
 
 LOCK TABLES `receipt` WRITE;
 /*!40000 ALTER TABLE `receipt` DISABLE KEYS */;
-INSERT INTO `receipt` VALUES (1,'2021-02-24','19:10:55',1,216,'Cash','Based on our return policy, we only allow items to be returned within 24 hour of purchase. So we strongly advise to check the items before leaving. Thank you.',NULL,1,'2021-02-24 19:10:56','2021-02-24 19:10:56'),(2,'2021-02-24','19:31:30',2,130.4,'Cash','Based on our return policy, we only allow items to be returned within 24 hour of purchase. So we strongly advise to check the items before leaving. Thank you.',NULL,1,'2021-02-24 19:31:31','2021-02-24 19:31:31');
 /*!40000 ALTER TABLE `receipt` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -304,7 +304,7 @@ CREATE TABLE `refund_policy` (
   `user` int(11) NOT NULL,
   PRIMARY KEY (`refund_period`),
   KEY `FK_REFUND_USER_idx` (`user`),
-  CONSTRAINT `FK_REFUND_USER` FOREIGN KEY (`user`) REFERENCES `users` (`userid`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK_REFUND_USER` FOREIGN KEY (`user`) REFERENCES `users` (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -377,7 +377,6 @@ CREATE TABLE `sales` (
 
 LOCK TABLES `sales` WRITE;
 /*!40000 ALTER TABLE `sales` DISABLE KEYS */;
-INSERT INTO `sales` VALUES (1,'2021-02-24',1,1,'2021-02-24'),(2,'2021-02-24',1,1,'2021-02-24');
 /*!40000 ALTER TABLE `sales` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -401,9 +400,9 @@ CREATE TABLE `sales_details` (
   PRIMARY KEY (`sales_details_id`),
   KEY `sale_id` (`sale_id`),
   KEY `FK_SLD_ITEM_idx` (`upc`),
-  CONSTRAINT `FK_SLD_ITEM` FOREIGN KEY (`upc`) REFERENCES `items` (`upc`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_SLD_ITEM` FOREIGN KEY (`upc`) REFERENCES `items` (`upc`),
   CONSTRAINT `FK_SLD_SL` FOREIGN KEY (`sale_id`) REFERENCES `sales` (`sales_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -412,7 +411,6 @@ CREATE TABLE `sales_details` (
 
 LOCK TABLES `sales_details` WRITE;
 /*!40000 ALTER TABLE `sales_details` DISABLE KEYS */;
-INSERT INTO `sales_details` VALUES (1,1,'027000380116',2,83.78,108,0,'2021-02-24 19:10:56','2021-02-24 19:10:56'),(2,2,'030000315828',2,28.63,35.2,0,'2021-02-24 19:31:31','2021-02-24 19:31:31'),(3,2,'031200203007',2,24.56,30,0,'2021-02-24 19:31:31','2021-02-24 19:31:31');
 /*!40000 ALTER TABLE `sales_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -457,7 +455,7 @@ CREATE TABLE `stockin` (
   PRIMARY KEY (`stockin_id`),
   KEY `users` (`users`),
   KEY `FK_STKIN_ITEM_idx` (`upc`),
-  CONSTRAINT `FK_STKIN_ITEM` FOREIGN KEY (`upc`) REFERENCES `items` (`upc`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_STKIN_ITEM` FOREIGN KEY (`upc`) REFERENCES `items` (`upc`),
   CONSTRAINT `FK_STKIN_USER` FOREIGN KEY (`users`) REFERENCES `users` (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -468,7 +466,6 @@ CREATE TABLE `stockin` (
 
 LOCK TABLES `stockin` WRITE;
 /*!40000 ALTER TABLE `stockin` DISABLE KEYS */;
-INSERT INTO `stockin` VALUES (1,'2021-02-24','027000380116',5,'2021-02-24',1,'2021-02-24 19:09:59','2021-02-24 19:09:59'),(2,'2021-02-24','030000315828',8,'2021-02-24',1,'2021-02-24 19:10:06','2021-02-24 19:10:06'),(3,'2021-02-24','031200203007',10,'2021-02-24',1,'2021-02-24 19:10:14','2021-02-24 19:10:14'),(4,'2021-02-24','035000393685',4,'2021-02-24',1,'2021-02-24 19:10:18','2021-02-24 19:10:18'),(5,'2021-02-24','035000783318',4,'2021-02-24',1,'2021-02-24 19:10:24','2021-02-24 19:10:24');
 /*!40000 ALTER TABLE `stockin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -491,7 +488,7 @@ CREATE TABLE `stockout` (
   PRIMARY KEY (`stockout_id`),
   KEY `users` (`users`),
   KEY `FK_STKOUT_ITEM_idx` (`upc`),
-  CONSTRAINT `FK_STKOUT_ITEM` FOREIGN KEY (`upc`) REFERENCES `items` (`upc`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_STKOUT_ITEM` FOREIGN KEY (`upc`) REFERENCES `items` (`upc`),
   CONSTRAINT `FK_STKOUT_USER` FOREIGN KEY (`users`) REFERENCES `users` (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -543,7 +540,7 @@ CREATE TABLE `userlogs` (
   PRIMARY KEY (`logsid`),
   KEY `username` (`username`),
   CONSTRAINT `userlogs_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`userid`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -552,7 +549,7 @@ CREATE TABLE `userlogs` (
 
 LOCK TABLES `userlogs` WRITE;
 /*!40000 ALTER TABLE `userlogs` DISABLE KEYS */;
-INSERT INTO `userlogs` VALUES (1,3,'2021-02-24 18:42:36','2021-02-24 18:50:45'),(2,1,'2021-02-24 18:50:51',NULL),(3,1,'2021-02-24 18:51:49',NULL),(4,3,'2021-02-24 18:52:13',NULL),(5,1,'2021-02-24 18:54:51',NULL),(6,1,'2021-02-24 18:55:05',NULL),(7,1,'2021-02-24 19:09:35',NULL),(8,1,'2021-02-24 19:11:47',NULL),(9,1,'2021-02-24 19:13:13',NULL),(10,1,'2021-02-24 19:16:16',NULL),(11,1,'2021-02-24 19:20:10',NULL),(12,1,'2021-02-24 19:21:36',NULL),(13,1,'2021-02-24 19:29:31',NULL),(14,3,'2021-02-24 21:20:52',NULL),(15,1,'2021-02-24 21:20:55','2021-02-24 21:21:28'),(16,4,'2021-02-24 21:21:45',NULL),(17,4,'2021-02-24 21:31:48','2021-02-24 21:32:00');
+INSERT INTO `userlogs` VALUES (1,1,'2021-02-24 17:38:03','2021-02-24 21:53:41'),(3,1,'2021-02-24 20:05:51',NULL),(5,1,'2021-02-24 21:54:19',NULL),(6,1,'2021-02-25 07:43:22',NULL),(7,1,'2021-02-25 20:21:28',NULL),(8,1,'2021-02-26 15:43:40','2021-02-26 15:48:05'),(9,6,'2021-02-26 15:48:21',NULL);
 /*!40000 ALTER TABLE `userlogs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -578,7 +575,7 @@ CREATE TABLE `users` (
   `pwd_status` int(11) NOT NULL,
   `active` int(11) DEFAULT NULL,
   PRIMARY KEY (`userid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -587,7 +584,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Mr','Kofi','Moses','0246002100','kofim@gmail.com','kofi','ab55a9ef5cdd19db785e11794c9c7b9c','Administrator','2020-02-11','2020-05-05 07:18:19',1,1),(2,'Mr','Andrews','Phil','0270900032','andrews@gmail.com','andrews','ab55a9ef5cdd19db785e11794c9c7b9c','Supervisor','2020-02-11','2020-11-24 08:15:22',1,1),(3,'Miss','Venessa','Blue','0000000000','jb@gmail.com','vanesa','ab55a9ef5cdd19db785e11794c9c7b9c','Sales','2020-02-11','2020-11-24 10:18:31',1,1),(4,'Miss','Sarah','Jay','0000000000','mary@gmail.com','saraj','d5d357adfb5837512f8ccc9450951c69','Sales','2021-02-24','2021-02-24 21:21:25',1,1);
+INSERT INTO `users` VALUES (1,'Mr','Kofi','Moses','0246002100','kofim@gmail.com','kofi','ab55a9ef5cdd19db785e11794c9c7b9c','Administrator','2020-02-11','2020-05-05 07:18:19',1,1),(6,'Mr','mark','simpini','0248815514','marxpszalez5009@gmail.com','mark','9aa04a351cba882fdd4ad734a0ca533d','Sales','2021-02-26','2021-02-26 15:49:42',1,1),(7,'Miss','Stephanie','Ofancher','0544133196','stephanieofancher@gmail.com','steph','ab55a9ef5cdd19db785e11794c9c7b9c','Administrator','2021-02-26','2021-02-26 15:49:42',0,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -604,4 +601,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-26 15:55:51
+-- Dump completed on 2021-02-26 16:03:26

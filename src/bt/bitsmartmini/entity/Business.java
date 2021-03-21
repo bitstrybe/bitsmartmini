@@ -25,15 +25,15 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "business", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"license_key"})})
 @NamedQueries({
-    @NamedQuery(name = "Business.findAll", query = "SELECT b FROM Business b")
-    , @NamedQuery(name = "Business.findByBName", query = "SELECT b FROM Business b WHERE b.bName = :bName")
-    , @NamedQuery(name = "Business.findByBAddr", query = "SELECT b FROM Business b WHERE b.bAddr = :bAddr")
-    , @NamedQuery(name = "Business.findByBMobile", query = "SELECT b FROM Business b WHERE b.bMobile = :bMobile")
-    , @NamedQuery(name = "Business.findByBMobile1", query = "SELECT b FROM Business b WHERE b.bMobile1 = :bMobile1")
-    , @NamedQuery(name = "Business.findByBEmail", query = "SELECT b FROM Business b WHERE b.bEmail = :bEmail")
-    , @NamedQuery(name = "Business.findByBLogo", query = "SELECT b FROM Business b WHERE b.bLogo = :bLogo")
-    , @NamedQuery(name = "Business.findByBCountry", query = "SELECT b FROM Business b WHERE b.bCountry = :bCountry")
-    , @NamedQuery(name = "Business.findByBCurrency", query = "SELECT b FROM Business b WHERE b.bCurrency = :bCurrency")})
+    @NamedQuery(name = "Business.findAll", query = "SELECT b FROM Business b"),
+    @NamedQuery(name = "Business.findByBName", query = "SELECT b FROM Business b WHERE b.bName = :bName"),
+    @NamedQuery(name = "Business.findByBAddr", query = "SELECT b FROM Business b WHERE b.bAddr = :bAddr"),
+    @NamedQuery(name = "Business.findByBMobile", query = "SELECT b FROM Business b WHERE b.bMobile = :bMobile"),
+    @NamedQuery(name = "Business.findByBMobile1", query = "SELECT b FROM Business b WHERE b.bMobile1 = :bMobile1"),
+    @NamedQuery(name = "Business.findByBEmail", query = "SELECT b FROM Business b WHERE b.bEmail = :bEmail"),
+    @NamedQuery(name = "Business.findByBLogo", query = "SELECT b FROM Business b WHERE b.bLogo = :bLogo"),
+    @NamedQuery(name = "Business.findByBCountry", query = "SELECT b FROM Business b WHERE b.bCountry = :bCountry"),
+    @NamedQuery(name = "Business.findByBCurrency", query = "SELECT b FROM Business b WHERE b.bCurrency = :bCurrency")})
 public class Business implements Serializable {
 
     private static final long serialVersionUID = 1L;

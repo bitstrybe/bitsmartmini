@@ -29,10 +29,10 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "sales")
 @NamedQueries({
-    @NamedQuery(name = "Sales.findAll", query = "SELECT s FROM Sales s")
-    , @NamedQuery(name = "Sales.findBySalesId", query = "SELECT s FROM Sales s WHERE s.salesId = :salesId")
-    , @NamedQuery(name = "Sales.findBySalesDate", query = "SELECT s FROM Sales s WHERE s.salesDate = :salesDate")
-    , @NamedQuery(name = "Sales.findByEntryDate", query = "SELECT s FROM Sales s WHERE s.entryDate = :entryDate")})
+    @NamedQuery(name = "Sales.findAll", query = "SELECT s FROM Sales s"),
+    @NamedQuery(name = "Sales.findBySalesId", query = "SELECT s FROM Sales s WHERE s.salesId = :salesId"),
+    @NamedQuery(name = "Sales.findBySalesDate", query = "SELECT s FROM Sales s WHERE s.salesDate = :salesDate"),
+    @NamedQuery(name = "Sales.findByEntryDate", query = "SELECT s FROM Sales s WHERE s.entryDate = :entryDate")})
 public class Sales implements Serializable {
 
     private static final long serialVersionUID = 1L;

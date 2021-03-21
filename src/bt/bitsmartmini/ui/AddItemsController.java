@@ -122,10 +122,7 @@ public class AddItemsController implements Initializable {
     private Label displayinfo;
     @FXML
     private JFXSpinner spinner;
-    @FXML
     private FontAwesomeIcon check;
-    @FXML
-    private FontAwesomeIcon duplicatelock;
     @FXML
     private TableColumn<ItemTableModel, String> brand;
     @FXML

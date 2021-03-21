@@ -30,13 +30,11 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import bt.bitsmartmini.bl.InsertUpdateBL;
 import bt.bitsmartmini.bl.ItemsBL;
-import bt.bitsmartmini.bl.SalesBL;
 import bt.bitsmartmini.bl.StockinBL;
 import bt.bitsmartmini.entity.Items;
 import bt.bitsmartmini.entity.Stockin;
 import bt.bitsmartmini.entity.Users;
 import bt.bitsmartmini.utils.Utilities;
-import java.time.LocalDate;
 import java.util.concurrent.atomic.AtomicInteger;
 import javafx.scene.control.DatePicker;
 

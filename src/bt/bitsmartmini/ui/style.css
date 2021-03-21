@@ -44,6 +44,7 @@
     -fx-prompt-text-fill: #9c9c9d;
     -fx-text-fill: #303031; 
     -fx-highlight-fill: #4c4a4a;
+    -fx-padding: 5px;
 }
 
 .text-field .input-line

@@ -26,11 +26,11 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "refund_policy")
 @NamedQueries({
-    @NamedQuery(name = "RefundPolicy.findAll", query = "SELECT r FROM RefundPolicy r")
-    , @NamedQuery(name = "RefundPolicy.findByRefundPeriod", query = "SELECT r FROM RefundPolicy r WHERE r.refundPeriod = :refundPeriod")
-    , @NamedQuery(name = "RefundPolicy.findByRefundPeriodVal", query = "SELECT r FROM RefundPolicy r WHERE r.refundPeriodVal = :refundPeriodVal")
-    , @NamedQuery(name = "RefundPolicy.findByRefundCustomMsg", query = "SELECT r FROM RefundPolicy r WHERE r.refundCustomMsg = :refundCustomMsg")
-    , @NamedQuery(name = "RefundPolicy.findByRefundElog", query = "SELECT r FROM RefundPolicy r WHERE r.refundElog = :refundElog")})
+    @NamedQuery(name = "RefundPolicy.findAll", query = "SELECT r FROM RefundPolicy r"),
+    @NamedQuery(name = "RefundPolicy.findByRefundPeriod", query = "SELECT r FROM RefundPolicy r WHERE r.refundPeriod = :refundPeriod"),
+    @NamedQuery(name = "RefundPolicy.findByRefundPeriodVal", query = "SELECT r FROM RefundPolicy r WHERE r.refundPeriodVal = :refundPeriodVal"),
+    @NamedQuery(name = "RefundPolicy.findByRefundCustomMsg", query = "SELECT r FROM RefundPolicy r WHERE r.refundCustomMsg = :refundCustomMsg"),
+    @NamedQuery(name = "RefundPolicy.findByRefundElog", query = "SELECT r FROM RefundPolicy r WHERE r.refundElog = :refundElog")})
 public class RefundPolicy implements Serializable {
 
     private static final long serialVersionUID = 1L;

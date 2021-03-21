@@ -26,16 +26,16 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "receipt")
 @NamedQueries({
-    @NamedQuery(name = "Receipt.findAll", query = "SELECT r FROM Receipt r")
-    , @NamedQuery(name = "Receipt.findByReceiptId", query = "SELECT r FROM Receipt r WHERE r.receiptId = :receiptId")
-    , @NamedQuery(name = "Receipt.findByReceiptDate", query = "SELECT r FROM Receipt r WHERE r.receiptDate = :receiptDate")
-    , @NamedQuery(name = "Receipt.findByReceiptTime", query = "SELECT r FROM Receipt r WHERE r.receiptTime = :receiptTime")
-    , @NamedQuery(name = "Receipt.findByAmountPaid", query = "SELECT r FROM Receipt r WHERE r.amountPaid = :amountPaid")
-    , @NamedQuery(name = "Receipt.findByPayMode", query = "SELECT r FROM Receipt r WHERE r.payMode = :payMode")
-    , @NamedQuery(name = "Receipt.findByReturnPolicy", query = "SELECT r FROM Receipt r WHERE r.returnPolicy = :returnPolicy")
-    , @NamedQuery(name = "Receipt.findByRemarks", query = "SELECT r FROM Receipt r WHERE r.remarks = :remarks")
-    , @NamedQuery(name = "Receipt.findByEntryLog", query = "SELECT r FROM Receipt r WHERE r.entryLog = :entryLog")
-    , @NamedQuery(name = "Receipt.findByModifiedDate", query = "SELECT r FROM Receipt r WHERE r.modifiedDate = :modifiedDate")})
+    @NamedQuery(name = "Receipt.findAll", query = "SELECT r FROM Receipt r"),
+    @NamedQuery(name = "Receipt.findByReceiptId", query = "SELECT r FROM Receipt r WHERE r.receiptId = :receiptId"),
+    @NamedQuery(name = "Receipt.findByReceiptDate", query = "SELECT r FROM Receipt r WHERE r.receiptDate = :receiptDate"),
+    @NamedQuery(name = "Receipt.findByReceiptTime", query = "SELECT r FROM Receipt r WHERE r.receiptTime = :receiptTime"),
+    @NamedQuery(name = "Receipt.findByAmountPaid", query = "SELECT r FROM Receipt r WHERE r.amountPaid = :amountPaid"),
+    @NamedQuery(name = "Receipt.findByPayMode", query = "SELECT r FROM Receipt r WHERE r.payMode = :payMode"),
+    @NamedQuery(name = "Receipt.findByReturnPolicy", query = "SELECT r FROM Receipt r WHERE r.returnPolicy = :returnPolicy"),
+    @NamedQuery(name = "Receipt.findByRemarks", query = "SELECT r FROM Receipt r WHERE r.remarks = :remarks"),
+    @NamedQuery(name = "Receipt.findByEntryLog", query = "SELECT r FROM Receipt r WHERE r.entryLog = :entryLog"),
+    @NamedQuery(name = "Receipt.findByModifiedDate", query = "SELECT r FROM Receipt r WHERE r.modifiedDate = :modifiedDate")})
 public class Receipt implements Serializable {
 
     private static final long serialVersionUID = 1L;
