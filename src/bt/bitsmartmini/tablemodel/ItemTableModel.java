@@ -18,7 +18,7 @@ public class ItemTableModel {
     private SimpleStringProperty category;
     private SimpleStringProperty brand;
     private SimpleStringProperty uom;
-    //private SimpleIntegerProperty uomitem;
+    private SimpleStringProperty uomset;
     private SimpleStringProperty vom_val;
     private SimpleStringProperty dose_val;
     private SimpleLongProperty rol;
@@ -31,9 +31,10 @@ public class ItemTableModel {
     public ItemTableModel() {
     }
 
-    public ItemTableModel(String barcode, String itemName, String category, String brand, long rol,Double costprice, Double saleprice, ImageView img, String itemimage) {
+    public ItemTableModel(String barcode, String itemName, String uomset, String category, String brand, long rol,Double costprice, Double saleprice, ImageView img, String itemimage) {
         this.barcode = new SimpleStringProperty(barcode);
         this.itemName = new SimpleStringProperty(itemName);
+        this.uomset = new SimpleStringProperty(uomset);
         this.category = new SimpleStringProperty(category);
         this.brand = new SimpleStringProperty(brand);
         this.rol = new SimpleLongProperty(rol);
@@ -66,6 +67,18 @@ public class ItemTableModel {
 
     public void setItemNameProperty(String itemName) {
         this.itemName = new SimpleStringProperty(itemName);
+    }
+    
+    public String getUomset() {
+        return uomset.get();
+    }
+
+    public SimpleStringProperty getUomsetProperty() {
+        return uomset;
+    }
+
+    public void setUomsetProperty(String itemName) {
+        this.uomset = new SimpleStringProperty(itemName);
     }
 
     public String getCategory() {

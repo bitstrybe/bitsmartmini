@@ -31,13 +31,17 @@ import javafx.util.Duration;
 import bt.bitsmartmini.bl.InsertUpdateBL;
 import bt.bitsmartmini.bl.ItemsBL;
 import bt.bitsmartmini.bl.StockinBL;
+import bt.bitsmartmini.bl.UomBL;
 import bt.bitsmartmini.entity.Items;
 import bt.bitsmartmini.entity.Stockin;
+import bt.bitsmartmini.entity.UomSet;
 import bt.bitsmartmini.entity.Users;
 import bt.bitsmartmini.utils.Utilities;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import org.apache.commons.text.WordUtils;
 
 /**
  * FXML Controller class
@@ -85,7 +89,7 @@ public class AddStockInController implements Initializable {
     @FXML
     private DatePicker expirydate;
     @FXML
-    private ComboBox<?> brandscombo;
+    private ComboBox<String> uomcombo;
 
     public void getItemList(String p) {
         List<String> item = new ItemsBL().getAllItemsForList();
@@ -97,6 +101,18 @@ public class AddStockInController implements Initializable {
         ObservableList<String> result = FXCollections.observableArrayList(item);
         itemlist.getItems().clear();
         itemlist.setItems(result);
+    }
+
+    public void getUomsets(String s) {
+        uomcombo.getItems().clear();
+        UomSet uoms = new UomBL().getUomSets(s);
+        List uomsets = new ArrayList<>();
+        uomsets.add(uoms.getMeasure1());
+        uomsets.add(uoms.getMeasure2());
+        ObservableList<String> result = FXCollections.observableArrayList(uomsets);
+        result.forEach((man) -> {
+            uomcombo.getItems().add(WordUtils.capitalizeFully(man));
+        });
     }
 
     /**
@@ -115,7 +131,7 @@ public class AddStockInController implements Initializable {
             itemname.setText(itemlist.getSelectionModel().getSelectedItem().split(":")[1]);
             itembrand.setText(itemlist.getSelectionModel().getSelectedItem().split(":")[2]);
             long qty = sb.getStockBalance(itemlist.getSelectionModel().getSelectedItem().split(":")[0]);
-            itemqty.setText(Long.valueOf(qty).toString() + " Remaining");
+            itemqty.setText(Long.toString(qty) + " Remaining");
             itemsp.setText(MainAppController.B.getBCurrency() + " " + itemlist.getSelectionModel().getSelectedItem().split(":")[4]);
             Items its = new ItemsBL().getImageItembyCode(itemlist.getSelectionModel().getSelectedItem().split(":")[0]);
             FileInputStream input;
@@ -127,6 +143,7 @@ public class AddStockInController implements Initializable {
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(AddStockInController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            getUomsets(itemlist.getSelectionModel().getSelectedItem().split(":")[0]);
         });
         qnttextfield.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -136,6 +153,8 @@ public class AddStockInController implements Initializable {
                 }
             }
         });
+
+        
     }
 
     @FXML

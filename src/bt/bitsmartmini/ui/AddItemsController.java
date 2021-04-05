@@ -59,6 +59,8 @@ import bt.bitsmartmini.bl.UomBL;
 import bt.bitsmartmini.entity.Brands;
 import bt.bitsmartmini.entity.Category;
 import bt.bitsmartmini.entity.Items;
+import bt.bitsmartmini.entity.Uom;
+import bt.bitsmartmini.entity.UomSet;
 import bt.bitsmartmini.entity.Users;
 import bt.bitsmartmini.tablemodel.ItemTableModel;
 import bt.bitsmartmini.utils.FilterComboBox;
@@ -102,6 +104,9 @@ public class AddItemsController implements Initializable {
     @FXML
     private TableColumn<ItemTableModel, Number> salespricetb;
     @FXML
+    private TableColumn<ItemTableModel, String> uomsetcol;
+
+    @FXML
     private TableColumn<ItemTableModel, Boolean> action;
     @FXML
     private Button closebtn;
@@ -122,6 +127,7 @@ public class AddItemsController implements Initializable {
     private Label displayinfo;
     @FXML
     private JFXSpinner spinner;
+    @FXML
     private FontAwesomeIcon check;
     @FXML
     private TableColumn<ItemTableModel, String> brand;
@@ -139,7 +145,11 @@ public class AddItemsController implements Initializable {
     private JFXTextField itemdesctxt;
     @FXML
     private JFXButton save;
-
+    @FXML
+    private ComboBox<String> uomcombo;
+    @FXML
+    private FontAwesomeIcon duplicatelock;
+    
     public void getBrands() {
         brandscombo.getItems().clear();
         List<Brands> list = new BrandBL().getAllBrands();
@@ -155,6 +165,15 @@ public class AddItemsController implements Initializable {
         ObservableList<Category> result = FXCollections.observableArrayList(list);
         result.forEach(e -> {
             categorycombo.getItems().add(WordUtils.capitalizeFully(e.getCategoryName()));
+        });
+    }
+    
+    public void getUomSet() {
+        uomcombo.getItems().clear();
+        List<UomSet> list = new UomBL().getUomSets();
+        ObservableList<UomSet> result = FXCollections.observableArrayList(list);
+        result.forEach(e -> {
+            uomcombo.getItems().add(WordUtils.capitalizeFully(e.getUomSetCode()));
         });
     }
 
@@ -174,6 +193,10 @@ public class AddItemsController implements Initializable {
         brandscombo.setOnShown(v -> {
             getBrands();
         });
+        uomcombo.setOnShown(e -> {
+            getUomSet();
+        });
+        
         ifile = new File("./img/DEFAULT.png");
         TableData("");
         brandscombo.setOnKeyReleased((KeyEvent event) -> {
@@ -258,7 +281,13 @@ public class AddItemsController implements Initializable {
                 imageitems.scaleYProperty();
                 imageitems.setSmooth(true);
                 imageitems.setCache(true);
-                data.add(new ItemTableModel(item.getUpc(), item.getItemDesc(), item.getCategory().getCategoryName(), item.getBrand().getBrandName(), item.getRol(), item.getCp(), item.getSp(), imageitems, item.getItemImg()));
+                String uomsetting;
+                if(item.getUomset() == null){
+                    uomsetting = " ";
+                }else{
+                    uomsetting = item.getUomset().getUomSetCode();
+                }
+                data.add(new ItemTableModel(item.getUpc(), item.getItemDesc(), uomsetting, item.getCategory().getCategoryName(), item.getBrand().getBrandName(), item.getRol(), item.getCp(), item.getSp(), imageitems, item.getItemImg()));
             } catch (Exception ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -270,6 +299,7 @@ public class AddItemsController implements Initializable {
         rol.setCellValueFactory(cell -> cell.getValue().getRolProperty());
         costpricetb.setCellValueFactory(cell -> cell.getValue().getCostPriceProperty());
         salespricetb.setCellValueFactory(cell -> cell.getValue().getSalePriceProperty());
+        uomsetcol.setCellValueFactory(cell -> cell.getValue().getUomsetProperty());
         itemimage.setCellValueFactory(new PropertyValueFactory<>("image"));
         itemimage.setPrefWidth(65);
         action.setSortable(false);
@@ -360,6 +390,7 @@ public class AddItemsController implements Initializable {
                     barcodetxt.setText(selectedRecord.getBarcode());
                     itemdesctxt.setText(selectedRecord.getItemName());
                     brandscombo.getSelectionModel().select(selectedRecord.getBrand());
+                    uomcombo.getSelectionModel().select(selectedRecord.getUomset());
                     categorycombo.getSelectionModel().select(selectedRecord.getCategory());
                     cptxt.setText(String.valueOf(selectedRecord.getCostPrice()));
                     sptxt.setText(String.valueOf(selectedRecord.getSalePrice()));
@@ -509,6 +540,7 @@ public class AddItemsController implements Initializable {
         cat.setLastModified(new Date());
         cat.setCp(Double.parseDouble(cptxt.getText()));
         cat.setSp(Double.parseDouble(sptxt.getText()));
+        cat.setUomset(new UomSet(uomcombo.getValue()));
         //adding image file to directory
         initialStream = new FileInputStream(ifile);
         if (!ifile.getName().equals("DEFAULT.png")) {

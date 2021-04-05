@@ -19,11 +19,14 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import bt.bitsmartmini.bl.InsertUpdateBL;
 import bt.bitsmartmini.bl.StockinBL;
+import bt.bitsmartmini.bl.UomBL;
 import bt.bitsmartmini.entity.Items;
 import bt.bitsmartmini.entity.Stockin;
+import bt.bitsmartmini.entity.UomSet;
 import bt.bitsmartmini.entity.Users;
 import bt.bitsmartmini.utils.Utilities;
 import java.util.concurrent.atomic.AtomicInteger;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.text.Text;
 
@@ -65,6 +68,18 @@ public class AdminStockinController implements Initializable {
     AtomicInteger rowCounter = new AtomicInteger(1);
     @FXML
     private DatePicker expirydate;
+    @FXML
+    private ComboBox<String> uomcombo;
+    
+    
+//    public void getUomsets() {
+//        uomcombo.getItems().clear();
+//        List<UomSet> list = new UomBL().getUomSets();
+//        ObservableList<Brands> result = FXCollections.observableArrayList(list);
+//        result.forEach((man) -> {
+//            brandscombo.getItems().add(WordUtils.capitalizeFully(man.getBrandName()));
+//        });
+//    }
 
     /**
      * Initializes the controller class.

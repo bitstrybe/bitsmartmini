@@ -65,8 +65,19 @@ public class UomBL extends DdsBL {
         return null;
     }
     
+    public UomSet getUomSets(String s) {
+        try {
+            TypedQuery<UomSet> q = em.createQuery("SELECT u FROM UomSet u WHERE u.uomSetCode = :s ", UomSet.class);
+            q.setParameter("s", s);
+            return q.getSingleResult();
+        } catch (Exception ex) {
+            Logger.getLogger(UomBL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
 
-    public List getUomSets(String s) {
+    public List getUomSet(String s) {
         try {
             TypedQuery<UomSet> q = em.createQuery("SELECT u FROM UomSet u WHERE u.uomSetCode LIKE :param OR u.measure1.uomDesc LIKE :param1 OR u.measure2.uomDesc LIKE :param2  OR u.unit1 LIKE :param3 OR u.unit2 LIKE :param4 ", UomSet.class);
             q.setParameter("param", s);

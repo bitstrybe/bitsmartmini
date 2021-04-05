@@ -204,7 +204,7 @@ public class AddUomSetController implements Initializable {
     public void TableData(String p) {
         List<UomSet> c;
         if (p.length() > 0) {
-            c = uomb.getUomSets(p);
+            c = uomb.getUomSet(p);
         } else {
             c = uomb.getUomSets();
         }
