@@ -36,6 +36,7 @@ import bt.bitsmartmini.entity.Stockin;
 import bt.bitsmartmini.entity.Users;
 import bt.bitsmartmini.utils.Utilities;
 import java.util.concurrent.atomic.AtomicInteger;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 
 /**
@@ -83,6 +84,8 @@ public class AddStockInController implements Initializable {
     StockinBL sb = new StockinBL();
     @FXML
     private DatePicker expirydate;
+    @FXML
+    private ComboBox<?> brandscombo;
 
     public void getItemList(String p) {
         List<String> item = new ItemsBL().getAllItemsForList();
