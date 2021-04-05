@@ -357,7 +357,7 @@ public class SalesController implements Initializable {
         List<Receipt> receipt = rec.getAllReciptbySalescode(salescode);
         receiptdata = FXCollections.observableArrayList();
         receipt.forEach(r -> {
-            System.out.println("r: " + r.getReceiptId().toString());
+            //System.out.println("r: " + r.getReceiptId().toString());
             receiptdata.add(new ReceiptTableModel(r.getReceiptId().toString(), r.getSalesId().getSalesId().toString(), r.getPayMode(), DecimalUtil.format2(r.getAmountPaid()), Utilities.convertDateToString(r.getReceiptDate())));
         });
         receiptno.setCellValueFactory(cell -> cell.getValue().getReceiptIdProperty());

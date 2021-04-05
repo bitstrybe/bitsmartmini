@@ -435,12 +435,12 @@ public class ItemCartController extends MainAppController implements Initializab
         String cus[] = customerdroplist.getSelectionModel().getSelectedItem().split("[->]");
         List<String> spiltedval = Arrays.asList(cus);
         String cusid = spiltedval.get(0).trim();
-        if ("1".equals(cusid)) {
-            childController.checkoutpaytextfield.setText(DecimalUtil.format2(totalp));
-            childController.checkoutpaytextfield.setDisable(true);
-        } else {
-            childController.checkoutpaytextfield.setDisable(false);
-        }
+//        if ("1".equals(cusid)) {
+//            childController.checkoutpaytextfield.setText(DecimalUtil.format2(totalp));
+//            childController.checkoutpaytextfield.setDisable(true);
+//        } else {
+//            childController.checkoutpaytextfield.setDisable(false);
+//        }
         childController.chekoutpaybtn.setOnAction(eventcheckout -> {
             Task<Void> task = new Task<Void>() {
                 @Override
@@ -460,7 +460,7 @@ public class ItemCartController extends MainAppController implements Initializab
                     Sales sale = new Sales();
                     List<Integer> salescount = sb.getSalesCount();
                     if (salescount.isEmpty()) {
-                        int slc = 1;
+                        //int slc = 1;
                         sale.setSalesId(1);
                     } else {
                         int slc = salescount.get(0);
