@@ -149,7 +149,7 @@ public class AddItemsController implements Initializable {
     private ComboBox<String> uomcombo;
     @FXML
     private FontAwesomeIcon duplicatelock;
-    
+
     public void getBrands() {
         brandscombo.getItems().clear();
         List<Brands> list = new BrandBL().getAllBrands();
@@ -167,7 +167,7 @@ public class AddItemsController implements Initializable {
             categorycombo.getItems().add(WordUtils.capitalizeFully(e.getCategoryName()));
         });
     }
-    
+
     public void getUomSet() {
         uomcombo.getItems().clear();
         List<UomSet> list = new UomBL().getUomSets();
@@ -196,7 +196,7 @@ public class AddItemsController implements Initializable {
         uomcombo.setOnShown(e -> {
             getUomSet();
         });
-        
+
         ifile = new File("./img/DEFAULT.png");
         TableData("");
         brandscombo.setOnKeyReleased((KeyEvent event) -> {
@@ -282,9 +282,9 @@ public class AddItemsController implements Initializable {
                 imageitems.setSmooth(true);
                 imageitems.setCache(true);
                 String uomsetting;
-                if(item.getUomset() == null){
+                if (item.getUomset() == null) {
                     uomsetting = " ";
-                }else{
+                } else {
                     uomsetting = item.getUomset().getUomSetCode();
                 }
                 data.add(new ItemTableModel(item.getUpc(), item.getItemDesc(), uomsetting, item.getCategory().getCategoryName(), item.getBrand().getBrandName(), item.getRol(), item.getCp(), item.getSp(), imageitems, item.getItemImg()));
@@ -381,9 +381,8 @@ public class AddItemsController implements Initializable {
             delButton.setRipplerFill(Paint.valueOf("#D8E1DC"));
 //            int selectdIndex = getTableRow().getIndex();
 //            ItemTableModel selectedRecord = (ItemTableModel) itemtableview.getItems().get(selectdIndex);
-
             editbtn.setOnAction(v -> {
-                InputStream stream = null;
+//                InputStream stream = null;
                 try {
                     int selectdIndex = getTableRow().getIndex();
                     ItemTableModel selectedRecord = (ItemTableModel) itemtableview.getItems().get(selectdIndex);
@@ -395,25 +394,23 @@ public class AddItemsController implements Initializable {
                     cptxt.setText(String.valueOf(selectedRecord.getCostPrice()));
                     sptxt.setText(String.valueOf(selectedRecord.getSalePrice()));
                     roltxt.setText(String.valueOf(selectedRecord.getRol()));
-                    stream = new FileInputStream(selectedRecord.getItemImage());
-                    Image image = new Image(stream);
+                    initialStream = new FileInputStream(selectedRecord.getItemImage());
+                    Image image = new Image(initialStream);
                     itemimages.setImage(image);
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
                 } finally {
                     try {
-                        stream.close();
+                        initialStream.close();
                     } catch (IOException ex) {
                         Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-
             });
 
             delButton.setOnAction((ActionEvent event) -> {
                 int selectdIndex = getTableRow().getIndex();
                 ItemTableModel selectedRecord = (ItemTableModel) itemtableview.getItems().get(selectdIndex);
-
                 //Create a new table show details of the selected item
                 try {
                     Stage stage = new Stage();

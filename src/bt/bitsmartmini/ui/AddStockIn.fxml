@@ -201,7 +201,7 @@
             </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <JFXTextField fx:id="search1" promptText="Search Items" HBox.hgrow="ALWAYS" />
+                  <JFXTextField fx:id="search" promptText="Search Items" HBox.hgrow="ALWAYS" />
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -211,7 +211,7 @@
                <children>
                   <VBox prefHeight="413.0" prefWidth="352.0" styleClass="form_background">
                      <children>
-                        <JFXListView fx:id="itemlist1" prefHeight="385.0" prefWidth="199.0" VBox.vgrow="ALWAYS">
+                        <JFXListView fx:id="itemlist" prefHeight="385.0" prefWidth="199.0" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
@@ -227,16 +227,16 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="234.0" prefWidth="195.0">
                                  <children>
-                                    <ImageView fx:id="itemimage1" fitHeight="208.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS" />
+                                    <ImageView fx:id="itemimage" fitHeight="208.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS" />
                                  </children>
                               </HBox>
                               <VBox alignment="CENTER" prefHeight="234.0" prefWidth="250.0" spacing="2.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label fx:id="itembarcode1" layoutX="20.0" layoutY="32.0" prefHeight="30.0" prefWidth="300.0" VBox.vgrow="ALWAYS" />
-                                    <Label fx:id="itemname1" prefHeight="55.0" prefWidth="300.0" wrapText="true" VBox.vgrow="ALWAYS" />
-                                    <Label fx:id="itembrand1" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="300.0" />
-                                    <Label fx:id="itemqty1" layoutX="20.0" layoutY="49.0" prefHeight="27.0" prefWidth="300.0" />
-                                    <Label fx:id="itemsp1" layoutX="20.0" layoutY="66.0" prefHeight="27.0" prefWidth="300.0" textFill="#f20404" />
+                                    <Label fx:id="itembarcode" layoutX="20.0" layoutY="32.0" prefHeight="30.0" prefWidth="300.0" VBox.vgrow="ALWAYS" />
+                                    <Label fx:id="itemname" prefHeight="55.0" prefWidth="300.0" wrapText="true" VBox.vgrow="ALWAYS" />
+                                    <Label fx:id="itembrand" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="300.0" />
+                                    <Label fx:id="itemqty" layoutX="20.0" layoutY="49.0" prefHeight="27.0" prefWidth="300.0" />
+                                    <Label fx:id="itemsp" layoutX="20.0" layoutY="66.0" prefHeight="27.0" prefWidth="300.0" textFill="#f20404" />
                                  </children>
                               </VBox>
                            </children>
@@ -246,7 +246,7 @@
                         </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <DatePicker fx:id="expirydate1" prefHeight="25.0" prefWidth="450.0" promptText="Expiry date" />
+                              <DatePicker fx:id="expirydate" prefHeight="25.0" prefWidth="450.0" promptText="Expiry date" />
                            </children>
                         </HBox>
                         <HBox layoutX="15.0" layoutY="238.0" prefHeight="100.0" prefWidth="200.0">
@@ -261,7 +261,7 @@
                                     <FontAwesomeIcon glyphName="MINUS" />
                                  </graphic>
                               </Button>
-                              <JFXTextField fx:id="qnttextfield1" alignment="CENTER" focusColor="#4d4c4c" prefHeight="77.0" prefWidth="201.0" promptText="0" styleClass="form_field" text="1" unFocusColor="#838181">
+                              <JFXTextField fx:id="qnttextfield" alignment="CENTER" focusColor="#4d4c4c" prefHeight="77.0" prefWidth="201.0" promptText="0" styleClass="form_field" text="1" unFocusColor="#838181">
                                  <font>
                                     <Font size="34.0" />
                                  </font>
@@ -278,7 +278,7 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="51.0" prefWidth="442.0">
                            <children>
-                              <JFXButton id="action-btn" fx:id="save1" onAction="#saveAction" prefHeight="30.0" prefWidth="110.0" stylesheets="@style.css" text="Save" textFill="#323232">
+                              <JFXButton id="action-btn" fx:id="save" onAction="#saveAction" prefHeight="30.0" prefWidth="110.0" stylesheets="@style.css" text="Save" textFill="#323232">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>

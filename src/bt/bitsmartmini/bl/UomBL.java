@@ -71,9 +71,10 @@ public class UomBL extends DdsBL {
             q.setParameter("s", s);
             return q.getSingleResult();
         } catch (Exception ex) {
-            Logger.getLogger(UomBL.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(UomBL.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-        return null;
+        //return null;
     }
     
 

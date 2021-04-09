@@ -90,8 +90,10 @@ public class AddStockInController implements Initializable {
     private DatePicker expirydate;
     @FXML
     private ComboBox<String> uomcombo;
+   
 
     public void getItemList(String p) {
+        
         List<String> item = new ItemsBL().getAllItemsForList();
         if (p != null && p.length() > 0) {
             item = new ItemsBL().searchItemsForList(p);
@@ -104,14 +106,17 @@ public class AddStockInController implements Initializable {
     }
 
     public void getUomsets(String s) {
+        //System.out.println("sosket: "+s);
         uomcombo.getItems().clear();
         UomSet uoms = new UomBL().getUomSets(s);
+        //System.out.println("UOM"+uoms. );
         List uomsets = new ArrayList<>();
-        uomsets.add(uoms.getMeasure1());
-        uomsets.add(uoms.getMeasure2());
+        uomsets.add(uoms.getMeasure1().getUomDesc()+" of "+ uoms.getUnit1());
+        uomsets.add(uoms.getMeasure2().getUomDesc()+" of "+ uoms.getUnit2());
         ObservableList<String> result = FXCollections.observableArrayList(uomsets);
         result.forEach((man) -> {
-            uomcombo.getItems().add(WordUtils.capitalizeFully(man));
+           System.out.println("man:"+man);
+            uomcombo.getItems().add(WordUtils.capitalize(man));
         });
     }
 
@@ -136,6 +141,7 @@ public class AddStockInController implements Initializable {
             Items its = new ItemsBL().getImageItembyCode(itemlist.getSelectionModel().getSelectedItem().split(":")[0]);
             FileInputStream input;
             try {
+                System.out.println("URL:"+its.getItemImg());
                 input = new FileInputStream(its.getItemImg());
                 Image image = new Image(input);
                 itemimage.setImage(image);
@@ -143,7 +149,7 @@ public class AddStockInController implements Initializable {
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(AddStockInController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            getUomsets(itemlist.getSelectionModel().getSelectedItem().split(":")[0]);
+            getUomsets(itemlist.getSelectionModel().getSelectedItem().split(":")[5]);
         });
         qnttextfield.textProperty().addListener(new ChangeListener<String>() {
             @Override
