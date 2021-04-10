@@ -6,6 +6,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -17,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox id="homebackground" alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.ItemCartController">
+<VBox id="homebackground" alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.ItemCartController">
    <children>
       <HBox alignment="TOP_CENTER" spacing="15.0">
          <children>
@@ -97,6 +98,20 @@
                                           </Text>
                                        </children>
                                     </HBox>
+                                    <HBox alignment="CENTER" layoutX="10.0" layoutY="91.0" prefHeight="25.0" prefWidth="174.0" visible="false">
+                                       <children>
+                                          <Text fx:id="m1" fill="#797878" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="50.0">
+                                             <font>
+                                                <Font name="Open Sans" size="13.0" />
+                                             </font>
+                                          </Text>
+                                          <Text fx:id="u1" fill="#797878" layoutX="25.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="50.0">
+                                             <font>
+                                                <Font name="Open Sans" size="13.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
                                  </children>
                               </VBox>
                            </children>
@@ -106,6 +121,15 @@
                         </HBox>
                      </children>
                   </VBox>
+                  <HBox alignment="TOP_CENTER" prefHeight="63.0" prefWidth="533.0">
+                     <children>
+                        <ComboBox fx:id="uomcombo" prefHeight="57.0" prefWidth="277.0" promptText="Units of Measurements" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ComboBox>
+                     </children>
+                  </HBox>
                   <HBox alignment="TOP_CENTER" prefHeight="87.0" prefWidth="551.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#minusqnty" prefHeight="75.0" prefWidth="85.0">
@@ -128,7 +152,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="TOP_CENTER" prefHeight="63.0" prefWidth="533.0">
+                  <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="281.0" prefHeight="63.0" prefWidth="533.0">
                      <children>
                         <JFXButton id="action-btn" fx:id="addtocartbtn" onAction="#addItemToCart" prefHeight="54.0" prefWidth="250.0" stylesheets="@style.css" text="Add &gt;&gt;" textFill="#323232">
                            <HBox.margin>
@@ -219,11 +243,12 @@
                            <columns>
                               <TableColumn fx:id="itemimage" resizable="false" text="Item Image" />
                               <TableColumn fx:id="itemcode" minWidth="0.0" prefWidth="100.0" resizable="false" text="Barcode" />
-                              <TableColumn fx:id="itemname" minWidth="0.0" prefWidth="250.0" resizable="false" text="Items" />
-                              <TableColumn fx:id="quantity" resizable="false" styleClass="align-table" text="Quantity" />
-                              <TableColumn fx:id="itemprice" resizable="false" styleClass="align-table" text="Item Price" />
-                              <TableColumn fx:id="total" resizable="false" text="Total" />
-                              <TableColumn fx:id="Discount" prefWidth="77.0" resizable="false" text="Discount" />
+                              <TableColumn fx:id="itemname" minWidth="0.0" prefWidth="268.0" resizable="false" text="Items" />
+                              <TableColumn fx:id="measure" minWidth="0.0" prefWidth="109.0" resizable="false" text="Measure" />
+                              <TableColumn fx:id="quantity" prefWidth="106.0" resizable="false" styleClass="align-table" text="Quantity" />
+                              <TableColumn fx:id="itemprice" prefWidth="120.0" resizable="false" styleClass="align-table" text="Item Price" />
+                              <TableColumn fx:id="total" prefWidth="117.0" resizable="false" text="Total" />
+                              <TableColumn fx:id="Discount" prefWidth="97.0" resizable="false" text="Discount" />
                               <TableColumn fx:id="Discountcent" resizable="false" text="Discount(%)" />
                               <TableColumn fx:id="action" resizable="false" text="Action" />
                            </columns>

@@ -49,12 +49,14 @@ import bt.bitsmartmini.bl.ReceiptBL;
 import bt.bitsmartmini.bl.ReturnBL;
 import bt.bitsmartmini.bl.SalesBL;
 import bt.bitsmartmini.bl.StockinBL;
+import bt.bitsmartmini.bl.UomBL;
 import bt.bitsmartmini.entity.Customers;
 import bt.bitsmartmini.entity.Items;
 import bt.bitsmartmini.entity.Receipt;
 import bt.bitsmartmini.entity.RefundPolicy;
 import bt.bitsmartmini.entity.Sales;
 import bt.bitsmartmini.entity.SalesDetails;
+import bt.bitsmartmini.entity.UomSet;
 import bt.bitsmartmini.entity.Users;
 import bt.bitsmartmini.tablemodel.SelectItemSaleTableModel;
 import static bt.bitsmartmini.ui.MainAppController.cart;
@@ -68,6 +70,7 @@ import java.io.FileNotFoundException;
 import java.util.concurrent.atomic.AtomicInteger;
 import javafx.application.Platform;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import lxe.utility.math.DecimalUtil;
@@ -148,6 +151,15 @@ public class ItemCartController extends MainAppController implements Initializab
     private Button checkoutbtn;
 
     Double CP;
+    @FXML
+    private ComboBox<String> uomcombo;
+    @FXML
+    private Text m1;
+    @FXML
+    private Text u1;
+    @FXML
+    private TableColumn<SelectItemSaleTableModel, String> measure;
+
     /**
      * Initializes the controller class.
      */
@@ -171,6 +183,21 @@ public class ItemCartController extends MainAppController implements Initializab
         } else {
             checkoutbtn.setDisable(true);
         }
+    }
+
+    public void getUomsets(String s) {
+        //System.out.println("sosket: "+s);
+        uomcombo.getItems().clear();
+        UomSet uoms = new UomBL().getUomSets(s);
+        //System.out.println("UOM"+uoms. );
+        List uomsets = new ArrayList<>();
+        uomsets.add(uoms.getMeasure1().getUomDesc() + " - " + uoms.getUnit1());
+        uomsets.add(uoms.getMeasure2().getUomDesc() + " - " + uoms.getUnit2());
+        ObservableList<String> result = FXCollections.observableArrayList(uomsets);
+        result.forEach((man) -> {
+            //System.out.println("man:" + man);
+            uomcombo.getItems().add(WordUtils.capitalize(man));
+        });
     }
 
     @FXML
@@ -235,9 +262,10 @@ public class ItemCartController extends MainAppController implements Initializab
             imageitems.scaleYProperty();
             imageitems.setSmooth(true);
             imageitems.setCache(true);
-            data.add(new SelectItemSaleTableModel(item.getUpc(), item.getItemDesc(), c.getQuantity(), c.getCost(), c.getPrice(), c.getTotal(), c.getDiscountValue(), imageitems));
+            data.add(new SelectItemSaleTableModel(item.getUpc(), item.getItemDesc(), uomcombo.getValue(), c.getQuantity(), c.getCost(), c.getPrice(), c.getTotal(), c.getDiscountValue(), imageitems));
             itemcode.setCellValueFactory(cell -> cell.getValue().getItemCodeProperty());
             itemname.setCellValueFactory(cell -> cell.getValue().getItemNameProperty());
+            measure.setCellValueFactory(cell -> cell.getValue().getMeasureProperty());
             quantity.setCellValueFactory(cell -> cell.getValue().getQuantityProperty());
             itemprice.setCellValueFactory(cell -> cell.getValue().getPriceProperty());
             Discountcent.setCellValueFactory(cell -> cell.getValue().getDiscountValueProperty());
@@ -304,7 +332,6 @@ public class ItemCartController extends MainAppController implements Initializab
     }
 
     public class AddPersonDiscountCell extends TableCell<SelectItemSaleTableModel, Boolean> {
-
         //Image img = new Image(getClass().getResourceAsStream("edit.png"));
         Image img2 = new Image(getClass().getResourceAsStream("/bt/resources/discount.png"));
         // a button for adding a new person.
@@ -313,7 +340,6 @@ public class ItemCartController extends MainAppController implements Initializab
         HBox paddedButton = new HBox();
         // records the y pos of the last button press so that the add person dialog can be shown next to the cell.
         final DoubleProperty buttonY = new SimpleDoubleProperty();
-
         /**
          * AddPersonCell constructor
          *
@@ -431,7 +457,7 @@ public class ItemCartController extends MainAppController implements Initializab
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddCheckoutPayment.fxml"));
         Parent parent = (Parent) fxmlLoader.load();
         AddCheckoutPaymentController childController = fxmlLoader.getController();
-       // String customerid = customerdroplist.getSelectionModel().getSelectedItem();
+        // String customerid = customerdroplist.getSelectionModel().getSelectedItem();
         String cus[] = customerdroplist.getSelectionModel().getSelectedItem().split("[->]");
         List<String> spiltedval = Arrays.asList(cus);
         String cusid = spiltedval.get(0).trim();
@@ -685,9 +711,13 @@ public class ItemCartController extends MainAppController implements Initializab
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(AddStockInController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            getUomsets(item.getUomset().getUomSetCode());
         } else {
             resetItemDisplay();
         }
         itembarcode.selectAll();
     }
+
+    
 }

@@ -90,11 +90,10 @@ public class AddStockInController implements Initializable {
     private DatePicker expirydate;
     @FXML
     private ComboBox<String> uomcombo;
-   
 
     public void getItemList(String p) {
-        
-        List<String> item = new ItemsBL().getAllItemsForList();
+        ItemsBL ib = new ItemsBL();
+        List<String> item = ib.getAllItemsForList();
         if (p != null && p.length() > 0) {
             item = new ItemsBL().searchItemsForList(p);
         } else {
@@ -111,11 +110,11 @@ public class AddStockInController implements Initializable {
         UomSet uoms = new UomBL().getUomSets(s);
         //System.out.println("UOM"+uoms. );
         List uomsets = new ArrayList<>();
-        uomsets.add(uoms.getMeasure1().getUomDesc()+" of "+ uoms.getUnit1());
-        uomsets.add(uoms.getMeasure2().getUomDesc()+" of "+ uoms.getUnit2());
+        uomsets.add(uoms.getMeasure1().getUomDesc() + " - " + uoms.getUnit1());
+        uomsets.add(uoms.getMeasure2().getUomDesc() + " - " + uoms.getUnit2());
         ObservableList<String> result = FXCollections.observableArrayList(uomsets);
         result.forEach((man) -> {
-           System.out.println("man:"+man);
+            //System.out.println("man:" + man);
             uomcombo.getItems().add(WordUtils.capitalize(man));
         });
     }
@@ -141,7 +140,7 @@ public class AddStockInController implements Initializable {
             Items its = new ItemsBL().getImageItembyCode(itemlist.getSelectionModel().getSelectedItem().split(":")[0]);
             FileInputStream input;
             try {
-                System.out.println("URL:"+its.getItemImg());
+                //System.out.println("URL:" + its.getItemImg());
                 input = new FileInputStream(its.getItemImg());
                 Image image = new Image(input);
                 itemimage.setImage(image);
@@ -160,7 +159,6 @@ public class AddStockInController implements Initializable {
             }
         });
 
-        
     }
 
     @FXML
@@ -210,22 +208,33 @@ public class AddStockInController implements Initializable {
     public int saveTemplate() {
         displayinfo.textProperty().unbind();
         Stockin cat = new Stockin();
-        List<Integer> stcinid = new StockinBL().getStockinCount();
-        if (stcinid.isEmpty()) {
-            int stkval = 1;
-            cat.setStockinId(stkval);
+        int stkc = new StockinBL().getStockinCount();
+        if (stkc <= 0) {
+            //int stkval = 1;
+            cat.setStockinId(1);
         } else {
-            int stkval = stcinid.get(0);
-            cat.setStockinId(++stkval);
+            //int stkval = stkc;
+            cat.setStockinId(++stkc);
         }
+        
         cat.setUpc(new Items(itembarcode.getText()));
-        cat.setQuantity(Integer.parseInt(qnttextfield.getText()));
+        int qty = Integer.parseInt(qnttextfield.getText());
+        int unit = Integer.parseInt(uomcombo.getValue().split("-")[1].trim());
+       //System.out.println("saving stockin0..."+qty+" : "+cat.getQuantity()+"U: "+unit);
+        cat.setMeasure(uomcombo.getValue().split("-")[0].trim());
+        //System.out.println("saving stockin1..."+qty+" : "+cat.getQuantity());
+        cat.setMeasureqty(qty);
+        cat.setUnitmeasure(qty);
+        cat.setQuantity((qty * unit));
+        //System.out.println("saving stockin1..."+qty+" : "+cat.getQuantity());
         cat.setStockinDate(new Date());
+        //System.out.println("saving stockin2..."+qty+" : "+cat.getQuantity());
         cat.setExpiryDate(Utilities.convertToDateViaSqlDate(expirydate.getValue()));
         cat.setUsers(new Users(LoginController.u.getUserid()));
         cat.setEntryLog(new Date());
         cat.setLastModified(new Date());
         int result = new InsertUpdateBL().insertData(cat);
+        
         return result;
 //        switch (result) {
 //            case 1:

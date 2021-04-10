@@ -70,8 +70,7 @@ public class AdminStockinController implements Initializable {
     private DatePicker expirydate;
     @FXML
     private ComboBox<String> uomcombo;
-    
-    
+
 //    public void getUomsets() {
 //        uomcombo.getItems().clear();
 //        List<UomSet> list = new UomBL().getUomSets();
@@ -80,7 +79,6 @@ public class AdminStockinController implements Initializable {
 //            brandscombo.getItems().add(WordUtils.capitalizeFully(man.getBrandName()));
 //        });
 //    }
-
     /**
      * Initializes the controller class.
      */
@@ -150,13 +148,13 @@ public class AdminStockinController implements Initializable {
     public int saveTemplate() {
         displayinfo.textProperty().unbind();
         Stockin cat = new Stockin();
-        List<Integer> stcinid = new StockinBL().getStockinCount();
-        if (stcinid.isEmpty()) {
-            int stkval = 1;
-            cat.setStockinId(stkval);
+        int stkc = new StockinBL().getStockinCount();
+        if (stkc <= 0) {
+            //int stkval = 1;
+            cat.setStockinId(1);
         } else {
-            int stkval = stcinid.get(0);
-            cat.setStockinId(++stkval);
+            //int stkval = stkc;
+            cat.setStockinId(++stkc);
         }
         cat.setUpc(new Items(itembarcode.getText()));
         cat.setQuantity(Integer.parseInt(qnttextfield.getText()));

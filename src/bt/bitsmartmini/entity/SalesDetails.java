@@ -32,6 +32,9 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "SalesDetails.findAll", query = "SELECT s FROM SalesDetails s"),
     @NamedQuery(name = "SalesDetails.findBySalesDetailsId", query = "SELECT s FROM SalesDetails s WHERE s.salesDetailsId = :salesDetailsId"),
+    @NamedQuery(name = "SalesDetails.findByMeasure", query = "SELECT s FROM SalesDetails s WHERE s.measure = :measure"),
+    @NamedQuery(name = "SalesDetails.findByMunit", query = "SELECT s FROM SalesDetails s WHERE s.munit = :munit"),
+    @NamedQuery(name = "SalesDetails.findByMqty", query = "SELECT s FROM SalesDetails s WHERE s.mqty = :mqty"),
     @NamedQuery(name = "SalesDetails.findByQuantity", query = "SELECT s FROM SalesDetails s WHERE s.quantity = :quantity"),
     @NamedQuery(name = "SalesDetails.findByCostPrice", query = "SELECT s FROM SalesDetails s WHERE s.costPrice = :costPrice"),
     @NamedQuery(name = "SalesDetails.findBySalesPrice", query = "SELECT s FROM SalesDetails s WHERE s.salesPrice = :salesPrice"),
@@ -46,6 +49,12 @@ public class SalesDetails implements Serializable {
     @Basic(optional = false)
     @Column(name = "sales_details_id", nullable = false)
     private Integer salesDetailsId;
+    @Column(name = "measure", length = 45)
+    private String measure;
+    @Column(name = "munit")
+    private Integer munit;
+    @Column(name = "mqty")
+    private Integer mqty;
     @Basic(optional = false)
     @Column(name = "quantity", nullable = false)
     private int quantity;
@@ -94,6 +103,30 @@ public class SalesDetails implements Serializable {
 
     public void setSalesDetailsId(Integer salesDetailsId) {
         this.salesDetailsId = salesDetailsId;
+    }
+
+    public String getMeasure() {
+        return measure;
+    }
+
+    public void setMeasure(String measure) {
+        this.measure = measure;
+    }
+
+    public Integer getMunit() {
+        return munit;
+    }
+
+    public void setMunit(Integer munit) {
+        this.munit = munit;
+    }
+
+    public Integer getMqty() {
+        return mqty;
+    }
+
+    public void setMqty(Integer mqty) {
+        this.mqty = mqty;
     }
 
     public int getQuantity() {

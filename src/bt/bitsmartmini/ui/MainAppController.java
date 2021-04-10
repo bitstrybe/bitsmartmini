@@ -132,9 +132,9 @@ public class MainAppController implements Initializable {
         cart = new HashMap<>();
         BusinessBL bl = new BusinessBL();
         B = bl.findBusiness();
-        if (B != null) {
-
-        }
+//        if (B != null) {
+//
+//        }
 //         cartnum.setText(String.valueOf(cart.size()));
         // TODO
         //init image directory

@@ -11,6 +11,7 @@ public class SelectItemSaleTableModel {
 
     private SimpleStringProperty itemCode;
     private SimpleStringProperty itemName;
+    private SimpleStringProperty measure;
     private SimpleStringProperty quantity;
     private SimpleStringProperty cost;
     private SimpleStringProperty price;
@@ -22,7 +23,7 @@ public class SelectItemSaleTableModel {
     public SelectItemSaleTableModel() {
     }
 
-    public SelectItemSaleTableModel(String itemCode, String itemName, String quantity, String cost, String price, String total, String discountval, ImageView img) {
+    public SelectItemSaleTableModel(String itemCode, String itemName, String measure, String quantity, String cost, String price, String total, String discountval, ImageView img) {
         this.itemCode = new SimpleStringProperty(itemCode);
         this.itemName = new SimpleStringProperty(itemName);
         this.quantity = new SimpleStringProperty(quantity);
@@ -30,6 +31,7 @@ public class SelectItemSaleTableModel {
         this.price = new SimpleStringProperty(price);
         this.total = new SimpleStringProperty(total);
         this.discountval = new SimpleStringProperty(discountval);
+        this.measure = new SimpleStringProperty(measure);
         //this.uom = new SimpleStringProperty(uom);
         this.image = img;
 
@@ -69,6 +71,18 @@ public class SelectItemSaleTableModel {
 
     public void setItemNameProperty(String itemName) {
         this.itemName = new SimpleStringProperty(itemName);
+    }
+    
+     public String getMeasure() {
+        return measure.get();
+    }
+
+    public SimpleStringProperty getMeasureProperty() {
+        return measure;
+    }
+
+    public void setMeasureProperty(String m) {
+        this.measure = new SimpleStringProperty(m);
     }
 
     public String getQuantity() {

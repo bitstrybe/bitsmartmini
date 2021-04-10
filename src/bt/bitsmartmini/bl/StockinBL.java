@@ -1,4 +1,3 @@
-
 package bt.bitsmartmini.bl;
 
 import java.util.Date;
@@ -12,7 +11,6 @@ import lxe.utility.date.DateUtil;
  * @author JScare
  */
 public class StockinBL extends DdsBL {
-    
 
     @Override
     public int insertData(Object object) {
@@ -36,7 +34,7 @@ public class StockinBL extends DdsBL {
             return 0;
         }
     }
-    
+
     public List<Stockin> getAllStockinBarcode(String u, int Page) {
         TypedQuery q = em.createQuery("SELECT s FROM Stockin s Where s.upc.upc = :u", Stockin.class);
         q.setParameter("u", u);
@@ -78,7 +76,6 @@ public class StockinBL extends DdsBL {
 //        //q.setParameter("p2", "%" + p + "%");
 //        return q.getResultList();
 //    }
-
     public List<String> getAllStockinGroupCode() {
         TypedQuery<String> q = em.createQuery("SELECT CONCAT(s.upc.itemDesc,SUM(s.quantity))AS title FROM Stockin s GROUP BY s.upc.itemDesc", String.class);
         return q.getResultList();
@@ -90,7 +87,6 @@ public class StockinBL extends DdsBL {
         return q.getResultList();
     }
 
-    
     public List<Stockin> getItemStockinByUpc(String u) {
         TypedQuery<Stockin> q = em.createQuery("SELECT i FROM Stockin i WHERE i.upc.upc = :u", Stockin.class);
         q.setParameter("u", u);
@@ -102,7 +98,6 @@ public class StockinBL extends DdsBL {
         q.setParameter("u", u);
         return q.getResultList();
     }
-
 
 //    public float getStockBalance(){
 //        
@@ -116,7 +111,7 @@ public class StockinBL extends DdsBL {
             return 0l;
         }
     }
-    
+
     public long getStockInTotal(Date s, Date e) {
         try {
             TypedQuery<Long> q = em.createQuery("SELECT SUM(s.quantity) FROM Stockin s WHERE s.stockinDate BETWEEN :s AND :e", Long.class);
@@ -137,8 +132,8 @@ public class StockinBL extends DdsBL {
             return 0l;
         }
     }
-    
-    public long getStockOutTotal(Date s,Date e) {
+
+    public long getStockOutTotal(Date s, Date e) {
         try {
             TypedQuery<Long> q = em.createQuery("SELECT SUM(s.quantity) FROM Stockout s WHERE s.stkDate BETWEEN :s AND :e ", Long.class);
             q.setParameter("s", s);
@@ -164,7 +159,6 @@ public class StockinBL extends DdsBL {
         return q.getResultList();
     }
 
-    
     public long getTotalReturns(String u) {
         try {
             TypedQuery<Long> q = em.createQuery("SELECT SUM(s.rtdQty) FROM RtdItem s WHERE s.salesDetails.upc.upc = :u", Long.class);
@@ -174,7 +168,7 @@ public class StockinBL extends DdsBL {
             return 0l;
         }
     }
-    
+
     public long getTotalReturns(Date s, Date e) {
         try {
             TypedQuery<Long> q = em.createQuery("SELECT SUM(s.rtdQty) FROM RtdItem s WHERE s.rtdDate BETWEEN :s AND :e", Long.class);
@@ -196,7 +190,7 @@ public class StockinBL extends DdsBL {
         //long stockafreturns = stocks + retruns;
         return stocks;
     }
-    
+
     public long getStockBalance(Date s, Date e) {
         SalesBL sb = new SalesBL();
         long stockin = getStockInTotal(s, e);
@@ -207,7 +201,6 @@ public class StockinBL extends DdsBL {
         //long stockafreturns = stocks + retruns;
         return stocks;
     }
-   
 
     public String getBachnobyItemname(String itemname) {
         TypedQuery<String> q = em.createQuery("SELECT s.batchNo FROM Stockin s WHERE s.items.itemDesc = :itemDesc", String.class);
@@ -215,10 +208,14 @@ public class StockinBL extends DdsBL {
         return q.getSingleResult();
     }
 
-    public List<Integer> getStockinCount() {
-        TypedQuery<Integer> q = em.createQuery("SELECT s.stockinId FROM Stockin s ORDER BY s.stockinId DESC", Integer.class);
-        q.setMaxResults(1);
-        return q.getResultList();
+    public int getStockinCount() {
+        try {
+            TypedQuery<Integer> q = em.createQuery("SELECT COUNT(s) FROM Stockin s ORDER BY s.stockinId DESC", Integer.class);
+            q.setMaxResults(1);
+            return q.getSingleResult();
+        } catch (Exception ex) {
+            return 0;
+        }
     }
 
 //    public List<Stockin> getStockinReOrder() {
@@ -260,11 +257,10 @@ public class StockinBL extends DdsBL {
             return null;
         }
     }
-    
+
 // public Stockin getFirstStockbyDate() {
 //        TypedQuery<Stockin> q = em.createQuery("SELECT s FROM Stockin s WHERE s.stockinDate GROUP BY desc", Stockin.class);
 //        q.setMaxResults(1);
 //        return q.getSingleResult();
 //    }
-    
 }

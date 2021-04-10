@@ -174,6 +174,7 @@ public class AddStockOutController implements Initializable {
     }
 
     public int saveTemplate() {
+        System.out.println("Calling save mtd");
         displayinfo.textProperty().unbind();
         Stockout cat = new Stockout();
         cat.setUpc(new Items(itembarcode.getText()));

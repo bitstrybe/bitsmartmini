@@ -184,7 +184,7 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Button fx:id="closebtn1" mnemonicParsing="false" onAction="#closefrom" styleClass="closeform">
+                  <Button fx:id="closebtn" mnemonicParsing="false" onAction="#closefrom" styleClass="closeform">
                      <graphic>
                         <FontAwesomeIcon glyphName="CLOSE" />
                      </graphic>
@@ -251,7 +251,7 @@
                         </HBox>
                         <HBox layoutX="15.0" layoutY="238.0" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <ComboBox fx:id="uomcombo1" prefHeight="50.0" prefWidth="470.0" promptText="Units of Measurements" />
+                              <ComboBox fx:id="uomcombo" prefHeight="50.0" prefWidth="470.0" promptText="Units of Measurements" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="89.0" prefWidth="459.0" spacing="10.0">
@@ -278,7 +278,7 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="51.0" prefWidth="442.0">
                            <children>
-                              <JFXButton id="action-btn" fx:id="save" onAction="#saveAction" prefHeight="30.0" prefWidth="110.0" stylesheets="@style.css" text="Save" textFill="#323232">
+                              <JFXButton id="action-btn" fx:id="save" prefHeight="30.0" prefWidth="110.0" stylesheets="@style.css" text="Save" textFill="#323232">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
@@ -312,12 +312,12 @@
                <children>
                   <StackPane>
                      <children>
-                        <FontAwesomeIcon fx:id="check1" fill="#389751" glyphName="CHECK" size="2em" visible="false" />
-                        <FontAwesomeIcon fx:id="duplicatelock1" glyphName="LOCK" size="2em" visible="false" />
-                        <JFXSpinner fx:id="spinner1" prefHeight="5.0" prefWidth="5.0" visible="false" />
+                        <FontAwesomeIcon fx:id="check" fill="#389751" glyphName="CHECK" size="2em" visible="false" />
+                        <FontAwesomeIcon fx:id="duplicatelock" glyphName="LOCK" size="2em" visible="false" />
+                        <JFXSpinner fx:id="spinner" prefHeight="5.0" prefWidth="5.0" visible="false" />
                      </children>
                   </StackPane>
-                  <Label fx:id="displayinfo1">
+                  <Label fx:id="displayinfo">
                      <font>
                         <Font size="13.0" />
                      </font>
