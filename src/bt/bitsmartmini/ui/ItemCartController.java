@@ -198,6 +198,7 @@ public class ItemCartController extends MainAppController implements Initializab
             //System.out.println("man:" + man);
             uomcombo.getItems().add(WordUtils.capitalize(man));
         });
+        uomcombo.getSelectionModel().selectFirst();
     }
 
     @FXML
@@ -210,7 +211,7 @@ public class ItemCartController extends MainAppController implements Initializab
                         long stockinqty = new StockinBL().getStockInTotal(itembarcode.getText());
                         long qntfield = Long.valueOf(itemqty.getText());
                         if (Long.valueOf(qnttextfield.getText()) <= qntfield) {
-                            double totalqnt = Long.valueOf(qnttextfield.getText()) * Double.valueOf(itemsp.getText());
+                            double totalqnt = Long.valueOf(qnttextfield.getText()) * Double.valueOf(itemsp.getText()) * Long.valueOf(uomcombo.getValue().split("-")[1].trim());
                             double price = Double.valueOf(itemsp.getText());
                             SelectItemSaleTableModel item = new SelectItemSaleTableModel(itembarcode.getText(), itemname.getText(), qnttextfield.getText(), CP.toString(), DecimalUtil.format2(price), DecimalUtil.format2(totalqnt), "0");
                             cart.put(itembarcode.getText(), item);
@@ -332,6 +333,7 @@ public class ItemCartController extends MainAppController implements Initializab
     }
 
     public class AddPersonDiscountCell extends TableCell<SelectItemSaleTableModel, Boolean> {
+
         //Image img = new Image(getClass().getResourceAsStream("edit.png"));
         Image img2 = new Image(getClass().getResourceAsStream("/bt/resources/discount.png"));
         // a button for adding a new person.
@@ -340,6 +342,7 @@ public class ItemCartController extends MainAppController implements Initializab
         HBox paddedButton = new HBox();
         // records the y pos of the last button press so that the add person dialog can be shown next to the cell.
         final DoubleProperty buttonY = new SimpleDoubleProperty();
+
         /**
          * AddPersonCell constructor
          *
@@ -461,12 +464,12 @@ public class ItemCartController extends MainAppController implements Initializab
         String cus[] = customerdroplist.getSelectionModel().getSelectedItem().split("[->]");
         List<String> spiltedval = Arrays.asList(cus);
         String cusid = spiltedval.get(0).trim();
-//        if ("1".equals(cusid)) {
-//            childController.checkoutpaytextfield.setText(DecimalUtil.format2(totalp));
-//            childController.checkoutpaytextfield.setDisable(true);
-//        } else {
-//            childController.checkoutpaytextfield.setDisable(false);
-//        }
+        if ("1".equals(cusid)) {
+            childController.checkoutpaytextfield.setText(DecimalUtil.format2(totalp));
+            childController.checkoutpaytextfield.setDisable(true);
+        } else {
+            childController.checkoutpaytextfield.setDisable(false);
+        }
         childController.chekoutpaybtn.setOnAction(eventcheckout -> {
             Task<Void> task = new Task<Void>() {
                 @Override
@@ -634,16 +637,19 @@ public class ItemCartController extends MainAppController implements Initializab
     public List getPrice() {
         List<Number> columnData = new ArrayList<>();
         for (SelectItemSaleTableModel item : carttable.getItems()) {
-            //String qunt = quantity.getCellObservableValue(item).getValue();
-            double actualprice = Integer.valueOf(quantity.getCellObservableValue(item).getValue()) * Double.valueOf(itemprice.getCellObservableValue(item).getValue());
-            double discount = Double.valueOf(Discountcent.getCellObservableValue(item).getValue());
-            if (discount > 0) {
-                double discountval2 = discount / 100;
-                double disactval = actualprice * discountval2;
-                columnData.add(actualprice - disactval);
-            } else {
-                columnData.add(actualprice);
+            if (measure.getCellObservableValue(item).getValue() != null) {
+                String unit = measure.getCellObservableValue(item).getValue().split("-")[1].trim();
+                double actualprice = Integer.valueOf(quantity.getCellObservableValue(item).getValue()) * Double.valueOf(itemprice.getCellObservableValue(item).getValue()) * Integer.valueOf(measure.getCellObservableValue(item).getValue());
+                double discount = Double.valueOf(Discountcent.getCellObservableValue(item).getValue());
+                if (discount > 0) {
+                    double discountval2 = discount / 100;
+                    double disactval = actualprice * discountval2;
+                    columnData.add(actualprice - disactval);
+                } else {
+                    columnData.add(actualprice);
+                }
             }
+
         }
 
         return columnData;
@@ -673,6 +679,7 @@ public class ItemCartController extends MainAppController implements Initializab
         curry.setText(null);
         itemimage1.setImage(null);
         qtyrem.setText(null);
+        uomcombo.getItems().clear();
         qtyHbox.setStyle("-fx-background-color:#fff");
         qnttextfield.setText("1");
         repeatFocus(itembarcode);
@@ -711,7 +718,7 @@ public class ItemCartController extends MainAppController implements Initializab
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(AddStockInController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             getUomsets(item.getUomset().getUomSetCode());
         } else {
             resetItemDisplay();
@@ -719,5 +726,4 @@ public class ItemCartController extends MainAppController implements Initializab
         itembarcode.selectAll();
     }
 
-    
 }

@@ -14,7 +14,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -123,7 +122,7 @@
                   </VBox>
                   <HBox alignment="TOP_CENTER" prefHeight="63.0" prefWidth="533.0">
                      <children>
-                        <ComboBox fx:id="uomcombo" prefHeight="57.0" prefWidth="277.0" promptText="Units of Measurements" HBox.hgrow="ALWAYS">
+                        <ComboBox fx:id="uomcombo" prefHeight="57.0" prefWidth="277.0" promptText="Units of Measurements">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -234,7 +233,7 @@
                   </HBox>
                   <HBox alignment="CENTER">
                      <children>
-                        <Line startX="-486.9931335449219" styleClass="linecolor" HBox.hgrow="ALWAYS" />
+                        <Separator prefWidth="200.0" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER">
@@ -242,15 +241,15 @@
                         <TableView fx:id="carttable" styleClass="table-cell" stylesheets="@style.css" HBox.hgrow="ALWAYS">
                            <columns>
                               <TableColumn fx:id="itemimage" resizable="false" text="Item Image" />
-                              <TableColumn fx:id="itemcode" minWidth="0.0" prefWidth="100.0" resizable="false" text="Barcode" />
-                              <TableColumn fx:id="itemname" minWidth="0.0" prefWidth="268.0" resizable="false" text="Items" />
-                              <TableColumn fx:id="measure" minWidth="0.0" prefWidth="109.0" resizable="false" text="Measure" />
-                              <TableColumn fx:id="quantity" prefWidth="106.0" resizable="false" styleClass="align-table" text="Quantity" />
-                              <TableColumn fx:id="itemprice" prefWidth="120.0" resizable="false" styleClass="align-table" text="Item Price" />
+                              <TableColumn fx:id="itemcode" minWidth="0.0" prefWidth="125.0" resizable="false" text="Barcode" />
+                              <TableColumn fx:id="itemname" minWidth="0.0" prefWidth="243.0" resizable="false" text="Items" />
+                              <TableColumn fx:id="measure" minWidth="0.0" prefWidth="94.0" resizable="false" text="Measure" />
+                              <TableColumn fx:id="quantity" prefWidth="66.0" resizable="false" styleClass="align-table" text="Qty" />
+                              <TableColumn fx:id="itemprice" prefWidth="121.0" resizable="false" styleClass="align-table" text="unit Cost" />
                               <TableColumn fx:id="total" prefWidth="117.0" resizable="false" text="Total" />
-                              <TableColumn fx:id="Discount" prefWidth="97.0" resizable="false" text="Discount" />
-                              <TableColumn fx:id="Discountcent" resizable="false" text="Discount(%)" />
-                              <TableColumn fx:id="action" resizable="false" text="Action" />
+                              <TableColumn fx:id="Discount" prefWidth="111.0" resizable="false" text="Discount" />
+                              <TableColumn fx:id="Discountcent" prefWidth="104.0" resizable="false" text="Discount(%)" />
+                              <TableColumn fx:id="action" prefWidth="96.0" resizable="false" text="Action" />
                            </columns>
                         </TableView>
                      </children>
