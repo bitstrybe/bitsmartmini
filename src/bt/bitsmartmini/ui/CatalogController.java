@@ -34,6 +34,7 @@ import bt.bitsmartmini.tablemodel.SalesTableModel;
 import bt.bitsmartmini.tablemodel.SelectItemSaleTableModel;
 import static bt.bitsmartmini.ui.MainAppController.cart;
 import static bt.bitsmartmini.ui.MainAppController.static_label;
+import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.stage.Modality;
@@ -67,6 +68,8 @@ public class CatalogController extends MainAppController implements Initializabl
     String lsv;
     @FXML
     private FlowPane displaypane;
+    
+    static String IMGDIR = new java.io.File("./img/").getPath();
 
     public void getStockingItemList(String p) {
         Task<Void> longRunningTask = new Task<Void>() {
@@ -112,7 +115,7 @@ public class CatalogController extends MainAppController implements Initializabl
                             double prices = items.getSp();
                             childController.exp.setText(DecimalUtil.format2(prices));
                             childController.curr.setText(MainAppController.B.getBCurrency());
-                            FileInputStream ifile = new FileInputStream(items.getItemImg());
+                            FileInputStream ifile = new FileInputStream(IMGDIR+"/"+items.getItemImg());
                             Image image = new Image(ifile);
                             childController.itemsimage.setImage(image);
                             childController.itemsimage.setFitHeight(90);

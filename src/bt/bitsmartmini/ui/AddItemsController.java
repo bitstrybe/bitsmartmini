@@ -59,7 +59,6 @@ import bt.bitsmartmini.bl.UomBL;
 import bt.bitsmartmini.entity.Brands;
 import bt.bitsmartmini.entity.Category;
 import bt.bitsmartmini.entity.Items;
-import bt.bitsmartmini.entity.Uom;
 import bt.bitsmartmini.entity.UomSet;
 import bt.bitsmartmini.entity.Users;
 import bt.bitsmartmini.tablemodel.ItemTableModel;
@@ -539,39 +538,39 @@ public class AddItemsController implements Initializable {
             initialStream = new FileInputStream(ifile);
             if (!ifile.getName().equals("DEFAULT.png")) {
                 //System.out.println("Image File: " + ".\\img" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
-                cat.setItemImg(".\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+                cat.setItemImg(barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
             } else {
-                cat.setItemImg(".\\img\\DEFAULT.png");
+                cat.setItemImg("DEFAULT.png");
             }
             int result = new InsertUpdateBL().updateData(cat);
             if (!ifile.getName().equals("DEFAULT.png") && ifile.getName() == null) {
-                ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File(".\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()) + "\\"));
+                ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File("./img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName())));
             }
-            displayinfo.textProperty().unbind();
-            cat = new Items();
-            cat.setUpc(barcodetxt.getText().trim());
-            cat.setItemDesc(itemdesctxt.getText().trim());
-            cat.setCategory(new Category(categorycombo.getValue()));
-            cat.setBrand(new Brands(brandscombo.getValue()));
-            cat.setRol(Integer.parseInt(roltxt.getText()));
-            cat.setUsers(new Users(LoginController.u.getUserid()));
-            cat.setEntryLog(new Date());
-            cat.setLastModified(new Date());
-            cat.setCp(Double.parseDouble(cptxt.getText().trim()));
-            cat.setSp(Double.parseDouble(sptxt.getText().trim()));
-            cat.setUomset(new UomSet(uomcombo.getValue()));
-            //adding image file to directory
-            initialStream = new FileInputStream(ifile);
-            if (!ifile.getName().equals("DEFAULT.png")) {
-                //System.out.println("Image File: " + ".\\img" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
-                cat.setItemImg(".\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
-            } else {
-                cat.setItemImg(".\\img\\DEFAULT.png");
-            }
-            result = new InsertUpdateBL().updateData(cat);
-            if (!ifile.getName().equals("DEFAULT.png")) {
-                ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File(".\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()) + "\\"));
-            }
+        displayinfo.textProperty().unbind();
+        cat = new Items();
+        cat.setUpc(barcodetxt.getText().trim());
+        cat.setItemDesc(itemdesctxt.getText().trim());
+        cat.setCategory(new Category(categorycombo.getValue()));
+        cat.setBrand(new Brands(brandscombo.getValue()));
+        cat.setRol(Integer.parseInt(roltxt.getText()));
+        cat.setUsers(new Users(LoginController.u.getUserid()));
+        cat.setEntryLog(new Date());
+        cat.setLastModified(new Date());
+        cat.setCp(Double.parseDouble(cptxt.getText().trim()));
+        cat.setSp(Double.parseDouble(sptxt.getText().trim()));
+        cat.setUomset(new UomSet(uomcombo.getValue()));
+        //adding image file to directory
+        initialStream = new FileInputStream(ifile);
+        if (!ifile.getName().equals("DEFAULT.png")) {
+            //System.out.println("Image File: " + ".\\img" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+            cat.setItemImg(barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+        } else {
+            cat.setItemImg("DEFAULT.png");
+        }
+        result = new InsertUpdateBL().updateData(cat);
+        if (!ifile.getName().equals("DEFAULT.png")) {
+            ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File("./img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName())));
+        }
 
             return result;
         } catch (IOException | IllegalArgumentException ex) {
