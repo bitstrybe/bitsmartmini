@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.TypedQuery;
 import bt.bitsmartmini.entity.Stockin;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lxe.utility.date.DateUtil;
 
 /**
@@ -202,19 +204,43 @@ public class StockinBL extends DdsBL {
         return stocks;
     }
 
-    public String getBachnobyItemname(String itemname) {
-        TypedQuery<String> q = em.createQuery("SELECT s.batchNo FROM Stockin s WHERE s.items.itemDesc = :itemDesc", String.class);
-        q.setParameter("itemDesc", itemname);
-        return q.getSingleResult();
-    }
+//    public String getBachnobyItemname(String itemname) {
+//        TypedQuery<String> q = em.createQuery("SELECT s.batchNo FROM Stockin s WHERE s.items.itemDesc = :itemDesc", String.class);
+//        q.setParameter("itemDesc", itemname);
+//        return q.getSingleResult();
+//    }
 
-    public int getStockinCount() {
+    public Long getStockinCount() {
         try {
-            TypedQuery<Integer> q = em.createQuery("SELECT COUNT(s) FROM Stockin s ORDER BY s.stockinId DESC", Integer.class);
+            TypedQuery<Long> q = em.createQuery("SELECT COUNT(s) FROM Stockin s ORDER BY s.stockinId DESC", Long.class);
             q.setMaxResults(1);
             return q.getSingleResult();
         } catch (Exception ex) {
-            return 0;
+            Logger.getLogger(StockinBL.class.getName()).log(Level.SEVERE, "Error Updating Security DB", ex);
+            return 0L;
+        }
+    }
+    
+    public Long getStockinCountByUPC(String u) {
+        try {
+            TypedQuery<Long> q = em.createQuery("SELECT COUNT(s) FROM Stockin s WHERE s.upc = :u", Long.class);
+            q.setParameter("u", u);
+            q.setMaxResults(1);
+            return q.getSingleResult();
+        } catch (Exception ex) {
+            Logger.getLogger(StockinBL.class.getName()).log(Level.SEVERE, "Error Updating Security DB", ex);
+            return 0L;
+        }
+    }
+    
+    public Long getStockinMax() {
+        try {
+            TypedQuery<Long> q = em.createQuery("SELECT MAX(s.stockinId) FROM Stockin s ORDER BY s.stockinId DESC", Long.class);
+            q.setMaxResults(1);
+            return q.getSingleResult();
+        } catch (Exception ex) {
+            Logger.getLogger(StockinBL.class.getName()).log(Level.SEVERE, "Error Updating Security DB", ex);
+            return 0L;
         }
     }
 

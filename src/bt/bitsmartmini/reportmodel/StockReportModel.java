@@ -35,7 +35,8 @@ public class StockReportModel extends AbstractTableModel implements Runnable{
             data[x][0] = e.getUpc().getUpc();
             data[x][1] = e.getUpc().getItemDesc();
             data[x][2] = e.getUpc().getRol();
-            data[x][3] = balv;
+            data[x][3] = e.getUpc().getRol() / e.getUpc().getUomset().getUnit2();
+            data[x][4] = balv;
         }
     }
     

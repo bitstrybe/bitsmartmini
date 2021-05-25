@@ -208,7 +208,8 @@ public class AddStockInController implements Initializable {
     public int saveTemplate() {
         displayinfo.textProperty().unbind();
         Stockin cat = new Stockin();
-        int stkc = new StockinBL().getStockinCount();
+        int stkc = new StockinBL().getStockinMax().intValue();
+        System.out.println("stk: "+ stkc);
         if (stkc <= 0) {
             //int stkval = 1;
             cat.setStockinId(1);
@@ -216,11 +217,11 @@ public class AddStockInController implements Initializable {
             //int stkval = stkc;
             cat.setStockinId(++stkc);
         }
-        
+
         cat.setUpc(new Items(itembarcode.getText()));
         int qty = Integer.parseInt(qnttextfield.getText());
         int unit = Integer.parseInt(uomcombo.getValue().split("-")[1].trim());
-       //System.out.println("saving stockin0..."+qty+" : "+cat.getQuantity()+"U: "+unit);
+        //System.out.println("saving stockin0..."+qty+" : "+cat.getQuantity()+"U: "+unit);
         cat.setMeasure(uomcombo.getValue().split("-")[0].trim());
         //System.out.println("saving stockin1..."+qty+" : "+cat.getQuantity());
         cat.setMeasureqty(qty);
@@ -234,7 +235,7 @@ public class AddStockInController implements Initializable {
         cat.setEntryLog(new Date());
         cat.setLastModified(new Date());
         int result = new InsertUpdateBL().insertData(cat);
-        
+
         return result;
 //        switch (result) {
 //            case 1:

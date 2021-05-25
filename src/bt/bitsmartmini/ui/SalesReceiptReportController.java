@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Spinner;
 import javafx.stage.Stage;
 import bt.bitsmartmini.utils.PrintReport;
 import bt.bitsmartmini.utils.Utilities;

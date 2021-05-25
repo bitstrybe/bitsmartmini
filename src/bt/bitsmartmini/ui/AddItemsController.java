@@ -527,16 +527,16 @@ public class AddItemsController implements Initializable {
     private int saveTemplate() throws FileNotFoundException, IOException {
         displayinfo.textProperty().unbind();
         Items cat = new Items();
-        cat.setUpc(barcodetxt.getText());
-        cat.setItemDesc(itemdesctxt.getText());
+        cat.setUpc(barcodetxt.getText().trim());
+        cat.setItemDesc(itemdesctxt.getText().trim());
         cat.setCategory(new Category(categorycombo.getValue()));
         cat.setBrand(new Brands(brandscombo.getValue()));
         cat.setRol(Integer.parseInt(roltxt.getText()));
         cat.setUsers(new Users(LoginController.u.getUserid()));
         cat.setEntryLog(new Date());
         cat.setLastModified(new Date());
-        cat.setCp(Double.parseDouble(cptxt.getText()));
-        cat.setSp(Double.parseDouble(sptxt.getText()));
+        cat.setCp(Double.parseDouble(cptxt.getText().trim()));
+        cat.setSp(Double.parseDouble(sptxt.getText().trim()));
         cat.setUomset(new UomSet(uomcombo.getValue()));
         //adding image file to directory
         initialStream = new FileInputStream(ifile);

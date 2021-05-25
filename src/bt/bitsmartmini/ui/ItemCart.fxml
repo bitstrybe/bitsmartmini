@@ -219,7 +219,7 @@
                                     <Font name="Open Sans" size="12.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton id="action-btn" buttonType="RAISED" contentDisplay="TOP" minWidth="-Infinity" onAction="#clearAllCart" prefHeight="59.0" prefWidth="74.0" style="-fx-font-size: 9;" styleClass="alldefaultbtn" text="Clear Cart">
+                              <JFXButton id="action-btn" buttonType="RAISED" contentDisplay="TOP" minWidth="-Infinity" onAction="#clearAllCart" prefHeight="54.0" prefWidth="71.0" style="-fx-font-size: 9;" styleClass="alldefaultbtn" text="Clear Cart">
                                  <graphic>
                                     <FontAwesomeIcon fill="#fcfcfc" glyphName="BITBUCKET" size="2.5em" />
                                  </graphic>

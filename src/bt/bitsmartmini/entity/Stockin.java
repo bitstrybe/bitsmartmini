@@ -29,10 +29,10 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Stockin.findAll", query = "SELECT s FROM Stockin s"),
     @NamedQuery(name = "Stockin.findByStockinId", query = "SELECT s FROM Stockin s WHERE s.stockinId = :stockinId"),
     @NamedQuery(name = "Stockin.findByStockinDate", query = "SELECT s FROM Stockin s WHERE s.stockinDate = :stockinDate"),
+    @NamedQuery(name = "Stockin.findByQuantity", query = "SELECT s FROM Stockin s WHERE s.quantity = :quantity"),
     @NamedQuery(name = "Stockin.findByMeasure", query = "SELECT s FROM Stockin s WHERE s.measure = :measure"),
     @NamedQuery(name = "Stockin.findByUnitmeasure", query = "SELECT s FROM Stockin s WHERE s.unitmeasure = :unitmeasure"),
     @NamedQuery(name = "Stockin.findByMeasureqty", query = "SELECT s FROM Stockin s WHERE s.measureqty = :measureqty"),
-    @NamedQuery(name = "Stockin.findByQuantity", query = "SELECT s FROM Stockin s WHERE s.quantity = :quantity"),
     @NamedQuery(name = "Stockin.findByExpiryDate", query = "SELECT s FROM Stockin s WHERE s.expiryDate = :expiryDate"),
     @NamedQuery(name = "Stockin.findByEntryLog", query = "SELECT s FROM Stockin s WHERE s.entryLog = :entryLog"),
     @NamedQuery(name = "Stockin.findByLastModified", query = "SELECT s FROM Stockin s WHERE s.lastModified = :lastModified")})
@@ -47,15 +47,15 @@ public class Stockin implements Serializable {
     @Column(name = "stockin_date", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date stockinDate;
+    @Basic(optional = false)
+    @Column(name = "quantity", nullable = false)
+    private int quantity;
     @Column(name = "measure", length = 45)
     private String measure;
     @Column(name = "unitmeasure")
     private Integer unitmeasure;
     @Column(name = "measureqty")
     private Integer measureqty;
-    @Basic(optional = false)
-    @Column(name = "quantity", nullable = false)
-    private int quantity;
     @Column(name = "expiry_date")
     @Temporal(TemporalType.DATE)
     private Date expiryDate;
@@ -105,6 +105,14 @@ public class Stockin implements Serializable {
         this.stockinDate = stockinDate;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public String getMeasure() {
         return measure;
     }
@@ -127,14 +135,6 @@ public class Stockin implements Serializable {
 
     public void setMeasureqty(Integer measureqty) {
         this.measureqty = measureqty;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public Date getExpiryDate() {

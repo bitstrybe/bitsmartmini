@@ -148,7 +148,7 @@ public class AdminStockinController implements Initializable {
     public int saveTemplate() {
         displayinfo.textProperty().unbind();
         Stockin cat = new Stockin();
-        int stkc = new StockinBL().getStockinCount();
+        int stkc = new StockinBL().getStockinCountByUPC(itembarcode.getText().trim()).intValue();
         if (stkc <= 0) {
             //int stkval = 1;
             cat.setStockinId(1);
