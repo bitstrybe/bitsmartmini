@@ -382,7 +382,7 @@ public class AddItemsController implements Initializable {
 //            int selectdIndex = getTableRow().getIndex();
 //            ItemTableModel selectedRecord = (ItemTableModel) itemtableview.getItems().get(selectdIndex);
             editbtn.setOnAction(v -> {
-//                InputStream stream = null;
+                InputStream stream = null;
                 try {
                     int selectdIndex = getTableRow().getIndex();
                     ItemTableModel selectedRecord = (ItemTableModel) itemtableview.getItems().get(selectdIndex);
@@ -394,17 +394,13 @@ public class AddItemsController implements Initializable {
                     cptxt.setText(String.valueOf(selectedRecord.getCostPrice()));
                     sptxt.setText(String.valueOf(selectedRecord.getSalePrice()));
                     roltxt.setText(String.valueOf(selectedRecord.getRol()));
-                    initialStream = new FileInputStream(selectedRecord.getItemImage());
-                    Image image = new Image(initialStream);
+                    ifile = new File(selectedRecord.getItemImage());
+                    stream = new FileInputStream(ifile);
+                    Image image = new Image(stream);
                     itemimages.setImage(image);
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
-                } finally {
-                    try {
-                        initialStream.close();
-                    } catch (IOException ex) {
-                        Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+
                 }
             });
 
@@ -495,7 +491,6 @@ public class AddItemsController implements Initializable {
 
     private void saveTrans() {
         displayinfo.setText(MainAppController.SUCCESS_MESSAGE);
-        clearAllForms();
         spinner.setVisible(false);
         check.setVisible(true);
         TableData("");
@@ -504,6 +499,7 @@ public class AddItemsController implements Initializable {
             displayinfo.setText("");
             spinner.setVisible(false);
             check.setVisible(false);
+            clearAllForms();
         });
         delay.play();
 
@@ -525,33 +521,63 @@ public class AddItemsController implements Initializable {
     }
 
     private int saveTemplate() throws FileNotFoundException, IOException {
-        displayinfo.textProperty().unbind();
-        Items cat = new Items();
-        cat.setUpc(barcodetxt.getText().trim());
-        cat.setItemDesc(itemdesctxt.getText().trim());
-        cat.setCategory(new Category(categorycombo.getValue()));
-        cat.setBrand(new Brands(brandscombo.getValue()));
-        cat.setRol(Integer.parseInt(roltxt.getText()));
-        cat.setUsers(new Users(LoginController.u.getUserid()));
-        cat.setEntryLog(new Date());
-        cat.setLastModified(new Date());
-        cat.setCp(Double.parseDouble(cptxt.getText().trim()));
-        cat.setSp(Double.parseDouble(sptxt.getText().trim()));
-        cat.setUomset(new UomSet(uomcombo.getValue()));
-        //adding image file to directory
-        initialStream = new FileInputStream(ifile);
-        if (!ifile.getName().equals("DEFAULT.png")) {
-            //System.out.println("Image File: " + ".\\img" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
-            cat.setItemImg(".\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
-        } else {
-            cat.setItemImg(".\\img\\DEFAULT.png");
-        }
-        int result = new InsertUpdateBL().updateData(cat);
-        if (!ifile.getName().equals("DEFAULT.png")) {
-            ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File(".\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()) + "\\"));
-        }
+        try {
+            displayinfo.textProperty().unbind();
+            Items cat = new Items();
+            cat.setUpc(barcodetxt.getText());
+            cat.setItemDesc(itemdesctxt.getText());
+            cat.setCategory(new Category(categorycombo.getValue()));
+            cat.setBrand(new Brands(brandscombo.getValue()));
+            cat.setRol(Integer.parseInt(roltxt.getText()));
+            cat.setUsers(new Users(LoginController.u.getUserid()));
+            cat.setEntryLog(new Date());
+            cat.setLastModified(new Date());
+            cat.setCp(Double.parseDouble(cptxt.getText()));
+            cat.setSp(Double.parseDouble(sptxt.getText()));
+            cat.setUomset(new UomSet(uomcombo.getValue()));
+            //adding image file to directory
+            initialStream = new FileInputStream(ifile);
+            if (!ifile.getName().equals("DEFAULT.png")) {
+                //System.out.println("Image File: " + ".\\img" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+                cat.setItemImg(".\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+            } else {
+                cat.setItemImg(".\\img\\DEFAULT.png");
+            }
+            int result = new InsertUpdateBL().updateData(cat);
+            if (!ifile.getName().equals("DEFAULT.png") && ifile.getName() == null) {
+                ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File(".\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()) + "\\"));
+            }
+            displayinfo.textProperty().unbind();
+            cat = new Items();
+            cat.setUpc(barcodetxt.getText().trim());
+            cat.setItemDesc(itemdesctxt.getText().trim());
+            cat.setCategory(new Category(categorycombo.getValue()));
+            cat.setBrand(new Brands(brandscombo.getValue()));
+            cat.setRol(Integer.parseInt(roltxt.getText()));
+            cat.setUsers(new Users(LoginController.u.getUserid()));
+            cat.setEntryLog(new Date());
+            cat.setLastModified(new Date());
+            cat.setCp(Double.parseDouble(cptxt.getText().trim()));
+            cat.setSp(Double.parseDouble(sptxt.getText().trim()));
+            cat.setUomset(new UomSet(uomcombo.getValue()));
+            //adding image file to directory
+            initialStream = new FileInputStream(ifile);
+            if (!ifile.getName().equals("DEFAULT.png")) {
+                //System.out.println("Image File: " + ".\\img" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+                cat.setItemImg(".\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
+            } else {
+                cat.setItemImg(".\\img\\DEFAULT.png");
+            }
+            result = new InsertUpdateBL().updateData(cat);
+            if (!ifile.getName().equals("DEFAULT.png")) {
+                ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File(".\\img\\" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()) + "\\"));
+            }
 
-        return result;
+            return result;
+        } catch (IOException | IllegalArgumentException ex) {
+            Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
 
     public int deleteTemplate(String value) {
