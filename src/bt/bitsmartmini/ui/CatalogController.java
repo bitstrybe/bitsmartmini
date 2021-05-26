@@ -68,7 +68,7 @@ public class CatalogController extends MainAppController implements Initializabl
     String lsv;
     @FXML
     private FlowPane displaypane;
-    
+
     static String IMGDIR = new java.io.File("./img/").getPath();
 
     public void getStockingItemList(String p) {
@@ -115,7 +115,7 @@ public class CatalogController extends MainAppController implements Initializabl
                             double prices = items.getSp();
                             childController.exp.setText(DecimalUtil.format2(prices));
                             childController.curr.setText(MainAppController.B.getBCurrency());
-                            FileInputStream ifile = new FileInputStream(IMGDIR+"/"+items.getItemImg());
+                            FileInputStream ifile = new FileInputStream(IMGDIR + "/" + items.getItemImg());
                             Image image = new Image(ifile);
                             childController.itemsimage.setImage(image);
                             childController.itemsimage.setFitHeight(90);
@@ -140,7 +140,7 @@ public class CatalogController extends MainAppController implements Initializabl
                                     childControllersk.itemsp.setText(MainAppController.B.getBCurrency() + " " + childController.exp.getText());
                                     Items its = new ItemsBL().getImageItembyCode(childController.itembcode.getText());
                                     FileInputStream input;
-                                    input = new FileInputStream(its.getItemImg());
+                                    input = new FileInputStream(IMGDIR + "/" + its.getItemImg());
                                     Image imagesk = new Image(input);
                                     childControllersk.itemimage.setImage(image);
                                     childControllersk.save.setDisable(false);

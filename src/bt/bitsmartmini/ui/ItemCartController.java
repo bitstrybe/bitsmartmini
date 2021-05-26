@@ -63,6 +63,7 @@ import static bt.bitsmartmini.ui.MainAppController.cart;
 import static bt.bitsmartmini.ui.MainAppController.static_label;
 import bt.bitsmartmini.utils.PrintReport;
 import bt.bitsmartmini.utils.Utilities;
+import com.fazecast.jSerialComm.SerialPort;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.io.FileInputStream;
@@ -175,6 +176,7 @@ public class ItemCartController extends MainAppController implements Initializab
         //System.out.println("cart size: " + cart);
         controlbtn();
         addtocartbtn.setDisable(true);
+        VFD();
     }
 
     public void controlbtn() {
@@ -726,4 +728,11 @@ public class ItemCartController extends MainAppController implements Initializab
         itembarcode.selectAll();
     }
 
+    public void VFD() {
+        SerialPort comPort = SerialPort.getCommPort("COM4");
+        comPort.setComPortParameters(9600, 8, 1, SerialPort.NO_PARITY);
+        comPort.setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
+        String tp = totalprice.getText();
+        comPort.writeBytes(tp.getBytes(), tp.length());
+    }
 }

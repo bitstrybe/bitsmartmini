@@ -149,6 +149,8 @@ public class AddItemsController implements Initializable {
     @FXML
     private FontAwesomeIcon duplicatelock;
 
+    static String IMGDIR = new java.io.File("./img/").getPath();
+
     public void getBrands() {
         brandscombo.getItems().clear();
         List<Brands> list = new BrandBL().getAllBrands();
@@ -196,7 +198,7 @@ public class AddItemsController implements Initializable {
             getUomSet();
         });
 
-        ifile = new File("./img/DEFAULT.png");
+        ifile = new File(IMGDIR + "/DEFAULT.png");
         TableData("");
         brandscombo.setOnKeyReleased((KeyEvent event) -> {
             String s = FilterComboBox.jumpTo(event.getText(), brandscombo.getValue(), brandscombo.getItems());
@@ -219,6 +221,7 @@ public class AddItemsController implements Initializable {
                 //File ofile = new File
                 try {
                     BufferedImage bufferedImage = ImageIO.read(ifile);
+                    System.out.println("Select Ifile "+ ifile);
                     int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
                     resizeImage = Utilities.resizeImage(bufferedImage, type, 180, 150);
                     Image image = SwingFXUtils.toFXImage(resizeImage, null);
@@ -270,7 +273,7 @@ public class AddItemsController implements Initializable {
         c.forEach((item) -> {
             try {
                 ImageView imageitems = new ImageView();
-                File file = new File(item.getItemImg());
+                File file = new File(IMGDIR + "/" + item.getItemImg());
                 Image image = new Image(file.toURI().toString());
                 imageitems.setImage(image);
                 imageitems.setFitWidth(70);
@@ -286,7 +289,7 @@ public class AddItemsController implements Initializable {
                 } else {
                     uomsetting = item.getUomset().getUomSetCode();
                 }
-                data.add(new ItemTableModel(item.getUpc(), item.getItemDesc(), uomsetting, item.getCategory().getCategoryName(), item.getBrand().getBrandName(), item.getRol(), item.getCp(), item.getSp(), imageitems, item.getItemImg()));
+                data.add(new ItemTableModel(item.getUpc(), item.getItemDesc(), uomsetting, item.getCategory().getCategoryName(), item.getBrand().getBrandName(), item.getRol(), item.getCp(), item.getSp(), imageitems, IMGDIR + "/" + item.getItemImg()));
             } catch (Exception ex) {
                 Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -303,7 +306,7 @@ public class AddItemsController implements Initializable {
         itemimage.setPrefWidth(65);
         action.setSortable(false);
         action.setCellValueFactory((TableColumn.CellDataFeatures<ItemTableModel, Boolean> features) -> new SimpleBooleanProperty(features.getValue() != null));
-        action.setCellFactory((TableColumn<ItemTableModel, Boolean> personBooleanTableColumn) -> new ItemDeleteCell());
+        action.setCellFactory((TableColumn<ItemTableModel, Boolean> personBooleanTableColumn) -> new ActionCell());
         itemtableview.setItems(data);
         itemtableview.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
     }
@@ -352,7 +355,7 @@ public class AddItemsController implements Initializable {
         TableData(searchbtn.getText());
     }
 
-    public class ItemDeleteCell extends TableCell<ItemTableModel, Boolean> {
+    public class ActionCell extends TableCell<ItemTableModel, Boolean> {
 
         Image img2 = new Image(getClass().getResourceAsStream("delete.png"));
 
@@ -372,7 +375,7 @@ public class AddItemsController implements Initializable {
          * @param stage the stage in which the table is placed.
          * @param table the table to which a new person can be added.
          */
-        ItemDeleteCell() {
+        ActionCell() {
             paddedButton.setStyle("-fx-alignment: CENTER");
             paddedButton.getChildren().addAll(editbtn, delButton);
             delButton.setGraphic(new ImageView(img2));
@@ -381,7 +384,6 @@ public class AddItemsController implements Initializable {
 //            int selectdIndex = getTableRow().getIndex();
 //            ItemTableModel selectedRecord = (ItemTableModel) itemtableview.getItems().get(selectdIndex);
             editbtn.setOnAction(v -> {
-                InputStream stream = null;
                 try {
                     int selectdIndex = getTableRow().getIndex();
                     ItemTableModel selectedRecord = (ItemTableModel) itemtableview.getItems().get(selectdIndex);
@@ -393,9 +395,9 @@ public class AddItemsController implements Initializable {
                     cptxt.setText(String.valueOf(selectedRecord.getCostPrice()));
                     sptxt.setText(String.valueOf(selectedRecord.getSalePrice()));
                     roltxt.setText(String.valueOf(selectedRecord.getRol()));
-                    ifile = new File(selectedRecord.getItemImage());
-                    stream = new FileInputStream(ifile);
-                    Image image = new Image(stream);
+                    ifile = new File(selectedRecord.getItemImage().trim());
+                    InputStream initialStreams = new FileInputStream(ifile);
+                    Image image = new Image(initialStreams);
                     itemimages.setImage(image);
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -536,42 +538,18 @@ public class AddItemsController implements Initializable {
             cat.setUomset(new UomSet(uomcombo.getValue()));
             //adding image file to directory
             initialStream = new FileInputStream(ifile);
+            
+            System.out.println("ifile "+ ifile);
             if (!ifile.getName().equals("DEFAULT.png")) {
-                //System.out.println("Image File: " + ".\\img" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
                 cat.setItemImg(barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
             } else {
                 cat.setItemImg("DEFAULT.png");
             }
             int result = new InsertUpdateBL().updateData(cat);
             if (!ifile.getName().equals("DEFAULT.png") && ifile.getName() == null) {
+                System.out.println("Save Template");
                 ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File("./img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName())));
             }
-        displayinfo.textProperty().unbind();
-        cat = new Items();
-        cat.setUpc(barcodetxt.getText().trim());
-        cat.setItemDesc(itemdesctxt.getText().trim());
-        cat.setCategory(new Category(categorycombo.getValue()));
-        cat.setBrand(new Brands(brandscombo.getValue()));
-        cat.setRol(Integer.parseInt(roltxt.getText()));
-        cat.setUsers(new Users(LoginController.u.getUserid()));
-        cat.setEntryLog(new Date());
-        cat.setLastModified(new Date());
-        cat.setCp(Double.parseDouble(cptxt.getText().trim()));
-        cat.setSp(Double.parseDouble(sptxt.getText().trim()));
-        cat.setUomset(new UomSet(uomcombo.getValue()));
-        //adding image file to directory
-        initialStream = new FileInputStream(ifile);
-        if (!ifile.getName().equals("DEFAULT.png")) {
-            //System.out.println("Image File: " + ".\\img" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
-            cat.setItemImg(barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
-        } else {
-            cat.setItemImg("DEFAULT.png");
-        }
-        result = new InsertUpdateBL().updateData(cat);
-        if (!ifile.getName().equals("DEFAULT.png")) {
-            ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File("./img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName())));
-        }
-
             return result;
         } catch (IOException | IllegalArgumentException ex) {
             Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
