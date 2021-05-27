@@ -221,34 +221,17 @@ public class AddStockInController implements Initializable {
         cat.setUpc(new Items(itembarcode.getText()));
         int qty = Integer.parseInt(qnttextfield.getText());
         int unit = Integer.parseInt(uomcombo.getValue().split("-")[1].trim());
-        //System.out.println("saving stockin0..."+qty+" : "+cat.getQuantity()+"U: "+unit);
         cat.setMeasure(uomcombo.getValue().split("-")[0].trim());
-        //System.out.println("saving stockin1..."+qty+" : "+cat.getQuantity());
         cat.setMeasureqty(qty);
         cat.setUnitmeasure(qty);
         cat.setQuantity((qty * unit));
-        //System.out.println("saving stockin1..."+qty+" : "+cat.getQuantity());
         cat.setStockinDate(new Date());
-        //System.out.println("saving stockin2..."+qty+" : "+cat.getQuantity());
         cat.setExpiryDate(Utilities.convertToDateViaSqlDate(expirydate.getValue()));
         cat.setUsers(new Users(LoginController.u.getUserid()));
         cat.setEntryLog(new Date());
         cat.setLastModified(new Date());
         int result = new InsertUpdateBL().insertData(cat);
-
         return result;
-//        switch (result) {
-//            case 1:
-//                if (result == 1) {
-//                    closeTransition();
-//                }
-//                break;
-//            default:
-//                displayinfo.setText("There was an error, check and try again.");
-//                spinner.setVisible(false);
-//                check.setVisible(false);
-//                break;
-//        }
     }
 
     public void saveTrans() {

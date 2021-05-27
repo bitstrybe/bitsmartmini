@@ -93,6 +93,8 @@ public class ItemCartController extends MainAppController implements Initializab
     @FXML
     private TableView<SelectItemSaleTableModel> carttable;
     @FXML
+    private TableColumn<SelectItemSaleTableModel, ImageView> itemimageview;
+    @FXML
     private TableColumn<SelectItemSaleTableModel, String> itemname;
     @FXML
     private TableColumn<SelectItemSaleTableModel, String> quantity;
@@ -119,8 +121,6 @@ public class ItemCartController extends MainAppController implements Initializab
 
     InsertUpdateBL insert = new InsertUpdateBL();
     @FXML
-    private TableColumn<?, ?> itemimage;
-    @FXML
     private Label curr;
     @FXML
     private TableColumn<SelectItemSaleTableModel, String> itemcode;
@@ -136,8 +136,6 @@ public class ItemCartController extends MainAppController implements Initializab
     private Text itemsp;
     @FXML
     private JFXTextField qnttextfield;
-    @FXML
-    private ImageView itemimage1;
     @FXML
     private Text curry;
     @FXML
@@ -160,6 +158,10 @@ public class ItemCartController extends MainAppController implements Initializab
     private Text u1;
     @FXML
     private TableColumn<SelectItemSaleTableModel, String> measure;
+    @FXML
+    private ImageView itemimage;
+
+    static String IMGDIR = new java.io.File("./img/").getPath();
 
     /**
      * Initializes the controller class.
@@ -273,8 +275,8 @@ public class ItemCartController extends MainAppController implements Initializab
             itemprice.setCellValueFactory(cell -> cell.getValue().getPriceProperty());
             Discountcent.setCellValueFactory(cell -> cell.getValue().getDiscountValueProperty());
             total.setCellValueFactory(cell -> cell.getValue().getTotalProperty());
-            itemimage.setCellValueFactory(new PropertyValueFactory<>("image"));
-            itemimage.setPrefWidth(80);
+            itemimageview.setCellValueFactory(new PropertyValueFactory<>("image"));
+            itemimageview.setPrefWidth(80);
             Discount.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SelectItemSaleTableModel, Boolean>, ObservableValue<Boolean>>() {
                 @Override
                 public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<SelectItemSaleTableModel, Boolean> features) {
@@ -679,7 +681,7 @@ public class ItemCartController extends MainAppController implements Initializab
         itemqty.setText(null);
         itemsp.setText(null);
         curry.setText(null);
-        itemimage1.setImage(null);
+        itemimage.setImage(null);
         qtyrem.setText(null);
         uomcombo.getItems().clear();
         qtyHbox.setStyle("-fx-background-color:#fff");
@@ -714,9 +716,9 @@ public class ItemCartController extends MainAppController implements Initializab
             curry.setText(MainAppController.B.getBCurrency());
             FileInputStream input;
             try {
-                input = new FileInputStream(item.getItemImg());
+                input = new FileInputStream(IMGDIR + "/" + item.getItemImg());
                 Image image = new Image(input);
-                itemimage1.setImage(image);
+                itemimage.setImage(image);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(AddStockInController.class.getName()).log(Level.SEVERE, null, ex);
             }

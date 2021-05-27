@@ -105,6 +105,17 @@ public class ItemsBL extends DdsBL {
         }
     }
     
+    public Items getUomsetbyItems(String u) {
+        try{
+        TypedQuery<Items> q = em.createQuery("SELECT i FROM Items i WHERE i.uomset.uomSetCode = :u", Items.class);
+        q.setParameter("u", u);
+        return q.getSingleResult();
+        }catch(Exception ex){
+            return null;
+        }
+    }
+    
+    
 //    public ItemsPrice getItemsPriceByItemDesc(String itemdesc){
 //        TypedQuery<ItemsPrice> q = em.createQuery("SELECT i FROM ItemsPrice i WHERE i.itemDesc = :itemDesc", ItemsPrice.class);
 //        q.setParameter("itemDesc", itemdesc);

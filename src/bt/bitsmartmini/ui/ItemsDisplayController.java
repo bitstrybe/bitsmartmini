@@ -23,12 +23,8 @@ public class ItemsDisplayController implements Initializable {
     public Text exp;
     @FXML
     public Button addtocart;
-    public ImageView outofstockshape;
-    public Label outofstocklabel;
-    public Label curr;
     @FXML
     public Button adminstockin;
-    //public Button returns;
     @FXML
     public Button adminstockout;
     @FXML
@@ -43,6 +39,10 @@ public class ItemsDisplayController implements Initializable {
     public Text itembcode;
     @FXML
     public Text itemsdesc;
+    @FXML
+    public Label outofstocklabel;
+    @FXML
+    public Label curr;
 
     /**
      * Initializes the controller class.

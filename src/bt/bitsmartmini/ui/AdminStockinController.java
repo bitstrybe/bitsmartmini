@@ -6,7 +6,6 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.net.URL;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -18,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import bt.bitsmartmini.bl.InsertUpdateBL;
+import bt.bitsmartmini.bl.ItemsBL;
 import bt.bitsmartmini.bl.StockinBL;
 import bt.bitsmartmini.bl.UomBL;
 import bt.bitsmartmini.entity.Items;
@@ -25,10 +25,15 @@ import bt.bitsmartmini.entity.Stockin;
 import bt.bitsmartmini.entity.UomSet;
 import bt.bitsmartmini.entity.Users;
 import bt.bitsmartmini.utils.Utilities;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.text.Text;
+import org.apache.commons.text.WordUtils;
 
 /**
  * FXML Controller class
@@ -69,22 +74,27 @@ public class AdminStockinController implements Initializable {
     @FXML
     private DatePicker expirydate;
     @FXML
-    private ComboBox<String> uomcombo;
+    public ComboBox<String> uomcombo;
 
-//    public void getUomsets() {
-//        uomcombo.getItems().clear();
-//        List<UomSet> list = new UomBL().getUomSets();
-//        ObservableList<Brands> result = FXCollections.observableArrayList(list);
-//        result.forEach((man) -> {
-//            brandscombo.getItems().add(WordUtils.capitalizeFully(man.getBrandName()));
-//        });
-//    }
-    /**
-     * Initializes the controller class.
-     */
+    public void getUomsets(String s) {
+        //System.out.println("sosket: "+s);
+        uomcombo.getItems().clear();
+        UomSet uoms = new UomBL().getUomSets(s);
+        //System.out.println("UOM"+uoms. );
+        List uomsets = new ArrayList<>();
+        uomsets.add(uoms.getMeasure1().getUomDesc() + " - " + uoms.getUnit1());
+        uomsets.add(uoms.getMeasure2().getUomDesc() + " - " + uoms.getUnit2());
+        ObservableList<String> result = FXCollections.observableArrayList(uomsets);
+        result.forEach((man) -> {
+            //System.out.println("man:" + man);
+            uomcombo.getItems().add(WordUtils.capitalize(man));
+        });
+    }
+ 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         qnttextfield.setText("1");
+//        getUomsets(itembarcode.getText());
     }
 
     @FXML
@@ -148,16 +158,20 @@ public class AdminStockinController implements Initializable {
     public int saveTemplate() {
         displayinfo.textProperty().unbind();
         Stockin cat = new Stockin();
-        int stkc = new StockinBL().getStockinCountByUPC(itembarcode.getText().trim()).intValue();
+        int stkc = new StockinBL().getStockinCount().intValue();
         if (stkc <= 0) {
-            //int stkval = 1;
             cat.setStockinId(1);
         } else {
-            //int stkval = stkc;
             cat.setStockinId(++stkc);
         }
+//        System.out.println("Stockin ID : "+stkc);
         cat.setUpc(new Items(itembarcode.getText()));
-        cat.setQuantity(Integer.parseInt(qnttextfield.getText()));
+        int qty = Integer.parseInt(qnttextfield.getText());
+        int unit = Integer.parseInt(uomcombo.getValue().split("-")[1].trim());
+        cat.setMeasure(uomcombo.getValue().split("-")[0].trim());
+        cat.setMeasureqty(qty);
+        cat.setUnitmeasure(qty);
+        cat.setQuantity((qty * unit));
         cat.setStockinDate(new Date());
         cat.setExpiryDate(Utilities.convertToDateViaSqlDate(expirydate.getValue()));
         cat.setUsers(new Users(LoginController.u.getUserid()));

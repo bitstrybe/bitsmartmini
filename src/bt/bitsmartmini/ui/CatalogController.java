@@ -136,6 +136,7 @@ public class CatalogController extends MainAppController implements Initializabl
                                     childControllersk.itemname.setText(childController.itemsdesc.getText());
                                     childControllersk.itembrand.setText(childController.brand.getText());
                                     long qty = st.getStockBalance(childController.itembcode.getText());
+                                    childControllersk.getUomsets(items.getUomset().getUomSetCode());
                                     childControllersk.itemqty.setText(Long.toString(qty) + " Remaining");
                                     childControllersk.itemsp.setText(MainAppController.B.getBCurrency() + " " + childController.exp.getText());
                                     Items its = new ItemsBL().getImageItembyCode(childController.itembcode.getText());

@@ -1,4 +1,3 @@
-
 package bt.bitsmartmini.ui;
 
 import com.jfoenix.controls.JFXRadioButton;
@@ -29,9 +28,7 @@ public class AddCheckoutPaymentController implements Initializable {
     public Button chekoutpaybtn;
     @FXML
     public TextField checkoutpaytextfield;
-
     public ToggleGroup tg;
-    
     @FXML
     private JFXTextArea receiptremarks;
     @FXML
@@ -62,7 +59,7 @@ public class AddCheckoutPaymentController implements Initializable {
         cash.setToggleGroup(tg);
         momo.setToggleGroup(tg);
         cc.setToggleGroup(tg);
-        titletext.setText("Confirm Cash Out In "+MainAppController.B.getBCurrency());
+        titletext.setText("Confirm Cash Out In " + MainAppController.B.getBCurrency());
     }
 
     @FXML
