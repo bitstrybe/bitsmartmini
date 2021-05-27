@@ -67,6 +67,8 @@ import bt.bitsmartmini.utils.Utilities;
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import javafx.scene.paint.Color;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.text.WordUtils;
@@ -120,7 +122,7 @@ public class AddItemsController implements Initializable {
     ItemsBL itembl = new ItemsBL();
     UomBL uombl = new UomBL();
     File ifile;
-    BufferedImage resizeImage;
+    BufferedImage resizeImage = null;
     private JFXTextField itmtextfield;
     @FXML
     private Label displayinfo;
@@ -207,8 +209,7 @@ public class AddItemsController implements Initializable {
             }
         });
         browse.setOnAction(new EventHandler<ActionEvent>() {
-            Stage st = new Stage();
-
+//            Stage st = new Stage();
             @Override
             public void handle(ActionEvent event) {
                 FileChooser fileChooser = new FileChooser();
@@ -221,7 +222,6 @@ public class AddItemsController implements Initializable {
                 //File ofile = new File
                 try {
                     BufferedImage bufferedImage = ImageIO.read(ifile);
-                    System.out.println("Select Ifile "+ ifile);
                     int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
                     resizeImage = Utilities.resizeImage(bufferedImage, type, 180, 150);
                     Image image = SwingFXUtils.toFXImage(resizeImage, null);
@@ -396,13 +396,23 @@ public class AddItemsController implements Initializable {
                     sptxt.setText(String.valueOf(selectedRecord.getSalePrice()));
                     roltxt.setText(String.valueOf(selectedRecord.getRol()));
                     ifile = new File(selectedRecord.getItemImage().trim());
-                    InputStream initialStreams = new FileInputStream(ifile);
-                    Image image = new Image(initialStreams);
+                    System.out.println("Seleted Record" + selectedRecord.getItemImage().trim());
+                    BufferedImage bufferedImage = ImageIO.read(ifile);
+                    int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
+                    resizeImage = Utilities.resizeImage(bufferedImage, type, 180, 150);
+                    Image image = SwingFXUtils.toFXImage(resizeImage, null);
                     itemimages.setImage(image);
-                } catch (FileNotFoundException ex) {
+//                try {
+//                    initialStream = new FileInputStream(ifile);
+//                    Image image = new Image(initialStream);
+//                    itemimages.setImage(image);
+//                } catch (FileNotFoundException ex) {
+//                    Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+                } catch (IOException ex) {
                     Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
-
                 }
+
             });
 
             delButton.setOnAction((ActionEvent event) -> {
@@ -538,23 +548,23 @@ public class AddItemsController implements Initializable {
             cat.setUomset(new UomSet(uomcombo.getValue()));
             //adding image file to directory
             initialStream = new FileInputStream(ifile);
-            
-            System.out.println("ifile "+ ifile);
+
+            System.out.println("ifile " + ifile);
             if (!ifile.getName().equals("DEFAULT.png")) {
                 cat.setItemImg(barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName()));
             } else {
                 cat.setItemImg("DEFAULT.png");
             }
-            int result = new InsertUpdateBL().updateData(cat);
-            if (!ifile.getName().equals("DEFAULT.png") && ifile.getName() == null) {
-                System.out.println("Save Template");
+
+            if (!ifile.getName().equals("DEFAULT.png")) {
                 ImageIO.write(resizeImage, FilenameUtils.getExtension(ifile.getName()), new File("./img/" + barcodetxt.getText() + "." + FilenameUtils.getExtension(ifile.getName())));
             }
+            int result = new InsertUpdateBL().updateData(cat);
             return result;
-        } catch (IOException | IllegalArgumentException ex) {
+        } catch (IllegalArgumentException ex) {
             Logger.getLogger(AddItemsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return 0;
+        return 1;
     }
 
     public int deleteTemplate(String value) {
