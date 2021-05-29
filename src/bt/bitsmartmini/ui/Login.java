@@ -1,6 +1,7 @@
 
 package bt.bitsmartmini.ui;
 
+import com.fazecast.jSerialComm.SerialPort;
 import java.io.IOException;
 import java.net.ServerSocket;
 import javafx.application.Application;
@@ -18,6 +19,8 @@ import javafx.stage.StageStyle;
 public class Login extends Application {
 
     private static ServerSocket SERVER_SOCKET;
+    
+    public static SerialPort comport;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -36,6 +39,10 @@ public class Login extends Application {
      */
     public static void main(String[] args) throws IOException {
         SERVER_SOCKET = new ServerSocket(1334);
+        comport = SerialPort.getCommPort("COM4");
+        comport.setComPortParameters(9600, 8, 1, SerialPort.NO_PARITY);
+        comport.setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
+        comport.openPort();
         launch(args);
     }
 
