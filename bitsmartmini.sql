@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `bitsmartmini` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `bitsmartmini`;
 -- MySQL dump 10.13  Distrib 8.0.19, for macos10.15 (x86_64)
 --
 -- Host: localhost    Database: bitsmartmini
@@ -642,4 +644,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-27  8:58:29
+-- Dump completed on 2021-05-27  9:23:13
