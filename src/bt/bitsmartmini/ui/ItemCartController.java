@@ -163,12 +163,15 @@ public class ItemCartController extends MainAppController implements Initializab
 
     static String IMGDIR = new java.io.File("./img/").getPath();
 
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+        Login.comport.writeBytes(new byte[]{0x0C}, 0);
         qnttextfield.setText("1");
         AllCartToTable();
         getCustomer();
@@ -178,7 +181,7 @@ public class ItemCartController extends MainAppController implements Initializab
         //System.out.println("cart size: " + cart);
         controlbtn();
         addtocartbtn.setDisable(true);
-        VFD();
+        
     }
 
     public void controlbtn() {
@@ -224,6 +227,9 @@ public class ItemCartController extends MainAppController implements Initializab
                             AllCartToTable();
                             resetItemDisplay();
                             controlbtn();
+                            String totp = String.valueOf(totalp);
+                            Login.comport.writeBytes(totp.getBytes(), totp.length());
+                            System.out.println("Comport : " + totp);
                         } else {
                             addtocartinfo.setText("Not enough Quantity");
                         }
@@ -257,7 +263,7 @@ public class ItemCartController extends MainAppController implements Initializab
             //System.out.println("i: " + c.getItemCode());
             Items item = ib.getImageItembyCode(c.getItemCode());
             ImageView imageitems = new ImageView();
-            File file = new File(item.getItemImg());
+            File file = new File(IMGDIR + "/" + item.getItemImg());
             Image image = new Image(file.toURI().toString());
             imageitems.setImage(image);
             imageitems.setFitWidth(70);
@@ -643,7 +649,7 @@ public class ItemCartController extends MainAppController implements Initializab
         for (SelectItemSaleTableModel item : carttable.getItems()) {
             if (measure.getCellObservableValue(item).getValue() != null) {
                 String unit = measure.getCellObservableValue(item).getValue().split("-")[1].trim();
-                double actualprice = Integer.valueOf(quantity.getCellObservableValue(item).getValue()) * Double.valueOf(itemprice.getCellObservableValue(item).getValue()) * Integer.valueOf(measure.getCellObservableValue(item).getValue());
+                double actualprice = Integer.valueOf(quantity.getCellObservableValue(item).getValue()) * Double.valueOf(itemprice.getCellObservableValue(item).getValue()) * Integer.valueOf(unit);
                 double discount = Double.valueOf(Discountcent.getCellObservableValue(item).getValue());
                 if (discount > 0) {
                     double discountval2 = discount / 100;
@@ -730,11 +736,11 @@ public class ItemCartController extends MainAppController implements Initializab
         itembarcode.selectAll();
     }
 
-    public void VFD() {
-        SerialPort comPort = SerialPort.getCommPort("COM4");
-        comPort.setComPortParameters(9600, 8, 1, SerialPort.NO_PARITY);
-        comPort.setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
-        String tp = totalprice.getText();
-        comPort.writeBytes(tp.getBytes(), tp.length());
-    }
+//    public void VFD(String tp) {
+//        SerialPort comPort = SerialPort.getCommPort("COM4");
+//        comPort.setComPortParameters(9600, 8, 1, SerialPort.NO_PARITY);
+//        comPort.setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
+//        comPort.writeBytes(tp.getBytes(), tp.length());
+//        System.out.println("VFD " + comPort.bytesAvailable());
+//    }
 }
