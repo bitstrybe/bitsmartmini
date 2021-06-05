@@ -227,7 +227,7 @@ public class ItemCartController extends MainAppController implements Initializab
                             AllCartToTable();
                             resetItemDisplay();
                             controlbtn();
-                            String totp = String.valueOf(totalp);
+                            String totp = String.valueOf(totalp+"                                                                    ");
                             Login.comport.writeBytes(totp.getBytes(), totp.length());
                             System.out.println("Comport : " + totp);
                         } else {

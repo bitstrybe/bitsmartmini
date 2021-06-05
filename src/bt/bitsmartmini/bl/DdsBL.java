@@ -16,7 +16,7 @@ public abstract class DdsBL {
     public DdsBL() {
         Map connect = new HashMap<>();
         connect.put("javax.persistence.jdbc.user", "root");
-        connect.put("javax.persistence.jdbc.password", "1234");
+        connect.put("javax.persistence.jdbc.password", "bitstrybe@21");
         em = Persistence.createEntityManagerFactory("bitsmartminiPU", connect).createEntityManager();
     }
 
