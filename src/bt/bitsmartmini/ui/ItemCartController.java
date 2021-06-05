@@ -63,7 +63,6 @@ import static bt.bitsmartmini.ui.MainAppController.cart;
 import static bt.bitsmartmini.ui.MainAppController.static_label;
 import bt.bitsmartmini.utils.PrintReport;
 import bt.bitsmartmini.utils.Utilities;
-import com.fazecast.jSerialComm.SerialPort;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.io.FileInputStream;
@@ -163,14 +162,13 @@ public class ItemCartController extends MainAppController implements Initializab
 
     static String IMGDIR = new java.io.File("./img/").getPath();
 
-
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
+
         Login.comport.writeBytes(new byte[]{0x0C}, 0);
         qnttextfield.setText("1");
         AllCartToTable();
@@ -181,7 +179,7 @@ public class ItemCartController extends MainAppController implements Initializab
         //System.out.println("cart size: " + cart);
         controlbtn();
         addtocartbtn.setDisable(true);
-        
+
     }
 
     public void controlbtn() {
@@ -227,12 +225,14 @@ public class ItemCartController extends MainAppController implements Initializab
                             AllCartToTable();
                             resetItemDisplay();
                             controlbtn();
-                            String totp = String.valueOf(totalp+"                                                                    ");
+                            clearScreen();
+                            String totp = String.valueOf(totalp);
                             Login.comport.writeBytes(totp.getBytes(), totp.length());
                             System.out.println("Comport : " + totp);
                         } else {
                             addtocartinfo.setText("Not enough Quantity");
                         }
+
                     } catch (Exception ex) {
                         addtocartinfo.setText("Invalid Format");
                         Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
@@ -736,11 +736,8 @@ public class ItemCartController extends MainAppController implements Initializab
         itembarcode.selectAll();
     }
 
-//    public void VFD(String tp) {
-//        SerialPort comPort = SerialPort.getCommPort("COM4");
-//        comPort.setComPortParameters(9600, 8, 1, SerialPort.NO_PARITY);
-//        comPort.setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
-//        comPort.writeBytes(tp.getBytes(), tp.length());
-//        System.out.println("VFD " + comPort.bytesAvailable());
-//    }
+    public static void clearScreen() {
+        byte[] clear = new byte[]{0x0C};
+        Login.comport.writeBytes(clear, clear.length);
+    }
 }
