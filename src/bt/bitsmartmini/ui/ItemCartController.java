@@ -218,7 +218,7 @@ public class ItemCartController extends MainAppController implements Initializab
                         if (Long.valueOf(qnttextfield.getText()) <= qntfield) {
                             double totalqnt = Long.valueOf(qnttextfield.getText()) * Double.valueOf(itemsp.getText()) * Long.valueOf(uomcombo.getValue().split("-")[1].trim());
                             double price = Double.valueOf(itemsp.getText());
-                            SelectItemSaleTableModel item = new SelectItemSaleTableModel(itembarcode.getText(), itemname.getText(), qnttextfield.getText(), CP.toString(), DecimalUtil.format2(price), DecimalUtil.format2(totalqnt), "0");
+                            SelectItemSaleTableModel item = new SelectItemSaleTableModel(itembarcode.getText(), itemname.getText(), qnttextfield.getText(), CP.toString(), DecimalUtil.format2(price), DecimalUtil.format2(totalqnt), "0", uomcombo.getSelectionModel().getSelectedItem());
                             cart.put(itembarcode.getText(), item);
                             static_label.setText(String.valueOf(cart.size()));
                             addtocartinfo.setText("Added to cart");
@@ -226,7 +226,7 @@ public class ItemCartController extends MainAppController implements Initializab
                             resetItemDisplay();
                             controlbtn();
                             clearScreen();
-                            String totp = String.valueOf(totalp);
+                            String totp = String.valueOf("Pay : " + totalp);
                             Login.comport.writeBytes(totp.getBytes(), totp.length());
                             System.out.println("Comport : " + totp);
                         } else {
@@ -273,7 +273,7 @@ public class ItemCartController extends MainAppController implements Initializab
             imageitems.scaleYProperty();
             imageitems.setSmooth(true);
             imageitems.setCache(true);
-            data.add(new SelectItemSaleTableModel(item.getUpc(), item.getItemDesc(), uomcombo.getValue(), c.getQuantity(), c.getCost(), c.getPrice(), c.getTotal(), c.getDiscountValue(), imageitems));
+            data.add(new SelectItemSaleTableModel(item.getUpc(), item.getItemDesc(), c.getMeasure(), c.getQuantity(), c.getCost(), c.getPrice(), c.getTotal(), c.getDiscountValue(), imageitems));
             itemcode.setCellValueFactory(cell -> cell.getValue().getItemCodeProperty());
             itemname.setCellValueFactory(cell -> cell.getValue().getItemNameProperty());
             measure.setCellValueFactory(cell -> cell.getValue().getMeasureProperty());
@@ -444,6 +444,9 @@ public class ItemCartController extends MainAppController implements Initializab
                     carttable.getItems().remove(selectedRecord);
                     AllCartToTable();
                     getTotalprice();
+                    clearScreen();
+                    String totp = String.valueOf("Pay : " + totalp);
+                    Login.comport.writeBytes(totp.getBytes(), totp.length());
                 }
 
             });

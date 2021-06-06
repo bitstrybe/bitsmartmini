@@ -85,6 +85,7 @@ public class PrintReport extends JFrame {
         this.add(viewer);
         this.setSize(dim);
         this.setVisible(true);
+        this.setAlwaysOnTop(true);
     }
 
     public void showSalesReceipteport(Date start, Date end) throws JRException, ClassNotFoundException, SQLException, IOException {
@@ -107,6 +108,7 @@ public class PrintReport extends JFrame {
             this.add(viewer);
             this.setSize(dim);
             this.setVisible(true);
+            this.setAlwaysOnTop(true);
         } catch (Exception ex) {
             Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
 
@@ -133,6 +135,7 @@ public class PrintReport extends JFrame {
         this.add(viewer);
         this.setSize(dim);
         this.setVisible(true);
+        this.setAlwaysOnTop(true);
     }
 
     public void showUserSalesDateRangeReport(Date start, Date end) throws JRException, ClassNotFoundException, SQLException, IOException {
@@ -152,6 +155,7 @@ public class PrintReport extends JFrame {
         this.add(viewer);
         this.setSize(dim);
         this.setVisible(true);
+        this.setAlwaysOnTop(true);
     }
 
     public void showStockReorderReport() throws JRException, ClassNotFoundException, SQLException, IOException {
@@ -166,6 +170,7 @@ public class PrintReport extends JFrame {
         this.add(viewer);
         this.setSize(dim);
         this.setVisible(true);
+        this.setAlwaysOnTop(true);
 
     }
 
@@ -182,6 +187,7 @@ public class PrintReport extends JFrame {
         this.add(viewer);
         this.setSize(dim);
         this.setVisible(true);
+        this.setAlwaysOnTop(true);
     }
 
     public void showStocksDetailsReport() throws JRException, ClassNotFoundException, SQLException, IOException {
@@ -197,6 +203,7 @@ public class PrintReport extends JFrame {
         this.add(viewer);
         this.setSize(dim);
         this.setVisible(true);
+        this.setAlwaysOnTop(true);
 
     }
 
@@ -212,6 +219,7 @@ public class PrintReport extends JFrame {
         this.add(viewer);
         this.setSize(dim);
         this.setVisible(true);
+        this.setAlwaysOnTop(true);
 
     }
 
@@ -230,6 +238,7 @@ public class PrintReport extends JFrame {
         this.add(viewer);
         this.setSize(dim);
         this.setVisible(true);
+        this.setAlwaysOnTop(true);
     }
 
     public void showDebtorsBySalesReport() throws JRException, ClassNotFoundException, SQLException, IOException {
@@ -247,5 +256,6 @@ public class PrintReport extends JFrame {
         this.add(viewer);
         this.setSize(dim);
         this.setVisible(true);
+        this.setAlwaysOnTop(true);
     }
 }

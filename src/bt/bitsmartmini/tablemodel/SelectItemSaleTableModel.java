@@ -37,7 +37,7 @@ public class SelectItemSaleTableModel {
 
     }
     
-    public SelectItemSaleTableModel(String itemCode, String itemName, String quantity, String cost, String price, String total, String discountval) {
+    public SelectItemSaleTableModel(String itemCode, String itemName, String quantity, String cost, String price, String total, String discountval, String measure) {
         this.itemCode = new SimpleStringProperty(itemCode);
         this.itemName = new SimpleStringProperty(itemName);
         this.quantity = new SimpleStringProperty(quantity);
@@ -45,6 +45,7 @@ public class SelectItemSaleTableModel {
         this.price = new SimpleStringProperty(price);
         this.total = new SimpleStringProperty(total);
         this.discountval = new SimpleStringProperty(discountval);
+        this.measure = new SimpleStringProperty(measure);
         //this.uom = new SimpleStringProperty(uom);
 
     }
