@@ -253,7 +253,7 @@ public class CatalogController extends MainAppController implements Initializabl
                                                 long qntfield = Long.valueOf(childControllerQnt.qnttextfield.getText());
                                                 if (qntfield <= balance) {
                                                     double totalqnt = qntfield * items.getSp();
-                                                    SelectItemSaleTableModel item = new SelectItemSaleTableModel(items.getUpc(), items.getItemDesc(), childControllerQnt.qnttextfield.getText(), DecimalUtil.format2(items.getCp()), DecimalUtil.format2(items.getSp()), DecimalUtil.format2(totalqnt), "0");
+                                                    SelectItemSaleTableModel item = new SelectItemSaleTableModel(items.getUpc(), items.getItemDesc(), childControllerQnt.qnttextfield.getText(), DecimalUtil.format2(items.getCp()), DecimalUtil.format2(items.getSp()), DecimalUtil.format2(totalqnt), "0",null);
                                                     cart.put(items.getUpc(), item);
                                                     static_label.setText(String.valueOf(cart.size()));
                                                     childControllerQnt.addtocartinfo.setText("added to cart");
