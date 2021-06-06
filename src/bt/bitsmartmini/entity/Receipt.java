@@ -30,6 +30,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Receipt.findByReceiptId", query = "SELECT r FROM Receipt r WHERE r.receiptId = :receiptId"),
     @NamedQuery(name = "Receipt.findByReceiptDate", query = "SELECT r FROM Receipt r WHERE r.receiptDate = :receiptDate"),
     @NamedQuery(name = "Receipt.findByReceiptTime", query = "SELECT r FROM Receipt r WHERE r.receiptTime = :receiptTime"),
+    @NamedQuery(name = "Receipt.findByAmountDue", query = "SELECT r FROM Receipt r WHERE r.amountDue = :amountDue"),
     @NamedQuery(name = "Receipt.findByAmountPaid", query = "SELECT r FROM Receipt r WHERE r.amountPaid = :amountPaid"),
     @NamedQuery(name = "Receipt.findByPayMode", query = "SELECT r FROM Receipt r WHERE r.payMode = :payMode"),
     @NamedQuery(name = "Receipt.findByReturnPolicy", query = "SELECT r FROM Receipt r WHERE r.returnPolicy = :returnPolicy"),
@@ -51,6 +52,9 @@ public class Receipt implements Serializable {
     @Column(name = "receipt_time", nullable = false)
     @Temporal(TemporalType.TIME)
     private Date receiptTime;
+    @Basic(optional = false)
+    @Column(name = "amount_due", nullable = false)
+    private double amountDue;
     @Basic(optional = false)
     @Column(name = "amount_paid", nullable = false)
     private double amountPaid;
@@ -81,10 +85,11 @@ public class Receipt implements Serializable {
         this.receiptId = receiptId;
     }
 
-    public Receipt(Integer receiptId, Date receiptDate, Date receiptTime, double amountPaid, String payMode) {
+    public Receipt(Integer receiptId, Date receiptDate, Date receiptTime, double amountDue, double amountPaid, String payMode) {
         this.receiptId = receiptId;
         this.receiptDate = receiptDate;
         this.receiptTime = receiptTime;
+        this.amountDue = amountDue;
         this.amountPaid = amountPaid;
         this.payMode = payMode;
     }
@@ -111,6 +116,14 @@ public class Receipt implements Serializable {
 
     public void setReceiptTime(Date receiptTime) {
         this.receiptTime = receiptTime;
+    }
+
+    public double getAmountDue() {
+        return amountDue;
+    }
+
+    public void setAmountDue(double amountDue) {
+        this.amountDue = amountDue;
     }
 
     public double getAmountPaid() {
