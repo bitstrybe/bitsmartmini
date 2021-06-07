@@ -561,37 +561,36 @@ public class ItemCartController extends MainAppController implements Initializab
                         static_label.setText(String.valueOf(cart.size()));
                         carttable.getItems().clear();
                         totalprice.setText("");
+                        stage.close();
+                        //    Stage receiptStage = new Stage();
+//                            FXMLLoader fxmlLoaderReciptPopup = new FXMLLoader(getClass().getResource("ReceiptPopup.fxml"));
+//                            Parent parentReciptPopup = (Parent) fxmlLoaderReciptPopup.load();
+//                            ReceiptPopupController childControllerReciptPopup = fxmlLoaderReciptPopup.getController();
+                        clearScreen();
+                        String totp = String.valueOf("Pay : " + totalp);
+                        Login.comport.writeBytes(totp.getBytes(), totp.length());
+//                            childControllerReciptPopup.paidvalue.setText(childController.amountpaid.getText());
+//                            childControllerReciptPopup.preview.setOnAction(p -> {
+//                                receiptStage.close();
                         try {
-                            stage.close();
-                            Stage receiptStage = new Stage();
-                            FXMLLoader fxmlLoaderReciptPopup = new FXMLLoader(getClass().getResource("ReceiptPopup.fxml"));
-                            Parent parentReciptPopup = (Parent) fxmlLoaderReciptPopup.load();
-                            ReceiptPopupController childControllerReciptPopup = fxmlLoaderReciptPopup.getController();
-                            childControllerReciptPopup.paidvalue.setText(childController.checkoutpaytextfield.getText());
-                            childControllerReciptPopup.preview.setOnAction(p -> {
-                                receiptStage.close();
-                                try {
-                                    new PrintReport().showReceiptReport(sale.getSalesId().toString());
-                                } catch (JRException ex) {
-                                    Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
-                                } catch (ClassNotFoundException ex) {
-                                    Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
-                                } catch (SQLException ex) {
-                                    Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
-                                } catch (IOException ex) {
-                                    Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
-                                }
-                            });
-
-                            Scene scene = new Scene(parentReciptPopup);
-                            scene.setFill(Color.TRANSPARENT);
-                            receiptStage.setScene(scene);
-                            receiptStage.initStyle(StageStyle.TRANSPARENT);
-                            receiptStage.setMaximized(true);
-                            receiptStage.show();
+                            new PrintReport().showReceiptReport(sale.getSalesId().toString());
+                        } catch (JRException ex) {
+                            Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
                         } catch (IOException ex) {
-                            Logger.getLogger(ItemCartController.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
                         }
+//                            });
+
+//                            Scene scene = new Scene(parentReciptPopup);
+//                            scene.setFill(Color.TRANSPARENT);
+//                            receiptStage.setScene(scene);
+//                            receiptStage.initStyle(StageStyle.TRANSPARENT);
+//                            receiptStage.setMaximized(true);
+//                            receiptStage.show();
                     }
                 } else {
                     System.out.println("Unable to save");
