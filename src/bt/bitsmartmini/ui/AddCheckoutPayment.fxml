@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="312.0" prefWidth="399.0" styleClass="popupbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.AddCheckoutPaymentController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="312.0" prefWidth="399.0" styleClass="popupbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bt.bitsmartmini.ui.AddCheckoutPaymentController">
    <children>
       <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="318.0" prefWidth="399.0" styleClass="form_background">
          <children>
@@ -60,9 +60,14 @@
                   <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                </padding>
             </HBox>
-            <HBox prefHeight="65.0" prefWidth="378.0">
+            <HBox prefHeight="65.0" prefWidth="378.0" spacing="10.0">
                <children>
-                  <TextField fx:id="checkoutpaytextfield" alignment="CENTER" prefHeight="65.0" prefWidth="365.0" promptText="Enter amount" HBox.hgrow="ALWAYS">
+                  <TextField fx:id="checkoutpaytextfield" alignment="CENTER" prefHeight="65.0" prefWidth="365.0" promptText="Amount Due" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="amountpaid" alignment="CENTER" layoutX="15.0" layoutY="20.0" prefHeight="65.0" prefWidth="365.0" promptText="Enter amount">
                      <font>
                         <Font size="31.0" />
                      </font>

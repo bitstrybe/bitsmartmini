@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author scarface
+ * @author Jscar
  */
 @Entity
 @Table(name = "sales")
@@ -50,12 +50,12 @@ public class Sales implements Serializable {
     private Date entryDate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "saleId")
     private Collection<SalesDetails> salesDetailsCollection;
-    @JoinColumn(name = "users", referencedColumnName = "userid", nullable = false)
-    @ManyToOne(optional = false)
-    private Users users;
     @JoinColumn(name = "customers", referencedColumnName = "customer_id", nullable = false)
     @ManyToOne(optional = false)
     private Customers customers;
+    @JoinColumn(name = "users", referencedColumnName = "userid", nullable = false)
+    @ManyToOne(optional = false)
+    private Users users;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "salesId")
     private Collection<Receipt> receiptCollection;
 
@@ -104,20 +104,20 @@ public class Sales implements Serializable {
         this.salesDetailsCollection = salesDetailsCollection;
     }
 
-    public Users getUsers() {
-        return users;
-    }
-
-    public void setUsers(Users users) {
-        this.users = users;
-    }
-
     public Customers getCustomers() {
         return customers;
     }
 
     public void setCustomers(Customers customers) {
         this.customers = customers;
+    }
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
     }
 
     public Collection<Receipt> getReceiptCollection() {

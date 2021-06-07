@@ -498,6 +498,7 @@ public class ItemCartController extends MainAppController implements Initializab
             task.setOnSucceeded(e -> {
                 childController.displayinfo.textProperty().unbind();
                 double amount = Double.parseDouble(childController.checkoutpaytextfield.getText());
+                double actualpaid = Double.parseDouble(childController.amountpaid.getText());
                 if (amount > 0 && cart.size() > 0) {
                     Sales sale = new Sales();
                     List<Integer> salescount = sb.getSalesCount();
@@ -539,7 +540,8 @@ public class ItemCartController extends MainAppController implements Initializab
                         receipt.setReceiptId(++slc);
                     }
                     receipt.setSalesId(sale);
-                    receipt.setAmountPaid(amount);
+                    receipt.setAmountPaid(actualpaid);
+                    receipt.setAmountDue(amount);
                     receipt.setEntryLog(new Date());
                     receipt.setPayMode(jrb.getText());
                     receipt.setModifiedDate(new Date());

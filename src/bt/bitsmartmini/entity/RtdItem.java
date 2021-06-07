@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author scarface
+ * @author Jscar
  */
 @Entity
 @Table(name = "rtd_item")

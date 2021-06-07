@@ -47,6 +47,8 @@ public class AddCheckoutPaymentController implements Initializable {
     private JFXRadioButton momo;
     @FXML
     private JFXRadioButton cc;
+    @FXML
+    public TextField amountpaid;
 
     /**
      * Initializes the controller class.
